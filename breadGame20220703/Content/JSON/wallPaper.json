@@ -1,0 +1,51 @@
+[
+	//ingredient[1].name/sentence
+	{
+		"price": 100,
+		"name": "기본 벽지",
+		"image": "Content/images/syrup.png",
+		"sentence" : "스텐다드가 짱이다."
+	},
+	{
+		"price": 500,
+		"name": "심플 화이트 벽지",
+		"image": "Content/images/syrup.png",
+		"sentence" : "아이보리랑 헷갈릴 수 있지만 화이트파가 선호하는 벽지."
+	},
+	{
+		"price": 500,
+		"name": "심플 아이보리 벽지",
+		"image": "Content/images/syrup.png",
+		"sentence" : "화이트는 때가 탄다. 아이보리가 짱."
+	},	
+	{
+		"price": 600,
+		"name": "나무무늬 벽지",
+		"image": "Content/images/syrup.png",
+		"sentence" : "나무향이 나는 것 같다. 자작자작나무"
+	},
+	{
+		"price": 600,
+		"name": "고급 벽돌무늬 벽지",
+		"image": "Content/images/syrup.png",
+		"sentence" : "벽돌무늬는 요즘의 갬성카페를 연상시킨다. "
+	},	
+	{
+		"price": 1000,
+		"name": "목화 솜 벽지",
+		"image": "Content/images/syrup.png",
+		"sentence" : "동덕이 연상된다. . . . 갹"
+	},
+	{
+		"price": 1500,
+		"name": "화사한 민들레 벽지",
+		"image": "Content/images/syrup.png",
+		"sentence" : "민들레 . . 요즘 지하철에도 민들레씨앗이 돌아다닌다. "
+	},
+	{
+		"price": 1500,
+		"name": "사각 체크 벽지",
+		"image": "Content/images/syrup.png",
+		"sentence" : "체크 무늬 하면 공대생이 떠오른다..."
+	}
+]
