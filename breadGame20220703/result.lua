@@ -38,7 +38,7 @@ end]]
 
 --스크롤뷰
 local widget = require("widget")
-local scrollView = widget.newScrollView(
+--[[local scrollView = widget.newScrollView(
 {
     horizontalScrollDisabled=true,
     top = 1590,
@@ -47,7 +47,7 @@ local scrollView = widget.newScrollView(
     height = 300
     --hideBackground = true
     --0.949, 0.839, 0.776
-})
+})]]
 --
 
 ----------------------경험치/레벨업 보상 관련------------------
@@ -205,8 +205,8 @@ function scene:show( event )
 			expDisplay:setFillColor(0)
 		 	expDisplay.size = 50
 		end
-		displayExp()
-		]]
+		displayExp()]]
+		
 
 		print(fail.."인데 1이면 실패, 0이면 성공")
 		print("초코시럽 몇개냐면"..ingreCnt[2].."  딸기시럽 몇개냐면"..ingreCnt[3])
@@ -219,8 +219,6 @@ function scene:show( event )
 		-- new 빵은 new 그림--
 		if(breadsCnt[syrub+1][ingredient+1] == 0 and syrub >= 0 and ingredient >=0) then
 			newFlag = 1
-			--new = display.newImage("Content/images/new.png")
-			--new.x, new.y = display.contentWidth*0.3, display.contentHeight*0.4
 		end
 
 		-- 빵 Cnt 증가 --
@@ -269,9 +267,11 @@ function scene:show( event )
 		end
 		timer.performWithDelay(900, rock, 0) -- repeat forever
 
-		--[[if newflag == 1 then
-			new:toFront()
-		end]]
+		-- new 빵은 new 그림--
+		if(newFlag == 1) then
+			new = display.newImage("Content/images/new.png")
+			new.x, new.y = display.contentWidth*0.3, display.contentHeight*0.4
+		end
 
 		-- 빵그룹--
 		local tempBread = display.newImageRect("Content/images/"..image..".png", 500, 500)
@@ -291,13 +291,12 @@ function scene:show( event )
 		local textBox = native.newTextBox( 720, 1740, 1080, 300)
 		textBox.font = native.newFont( "Content/font/ONE Mobile POP.ttf", 16 )
 		textBox:setTextColor(0.5)
-		textBox.size = 70
+		textBox.size = 60
 
 		--textBox.hasBackground = false
 		textBox.text = sentence
-		--[[	
 
-		local showSentence = display.newText(sentence, display.contentWidth*0.5, display.contentHeight*0.68, "Content/font/ONE Mobile POP.ttf")
+		--[[local showSentence = display.newText(sentence, display.contentWidth*0.5, display.contentHeight*0.68, "Content/font/ONE Mobile POP.ttf")
 		showSentence:setFillColor(0)
 		showSentence.size = 50
 
@@ -322,21 +321,26 @@ function scene:show( event )
 
 		windowGroup:insert( tempBread )
 		windowGroup:insert( showName )
-		--windowGroup:insert( showSentence )
 		windowGroup:insert( textBox )
-		windowGroup:insert( scrollView )
+		--windowGroup:insert( scrollView )
+		--windowGroup:insert( showSentence )
 
 		windowGroup:insert( button )
 		windowGroup:insert( showCheck )
+
+		if( newFlag == 1) then
+			windowGroup:insert( new )
+		end
+
 		windowGroup:insert( close )
 
 	 	--------------------------------버튼, x 탭 (팝업창 내리기/new빵일 때 재화지급(ex) 1000)---------------------------------------------------
 	    local function tapListener(event)
 	    	print("탭탭탭")
 	    	windowGroup:removeSelf()
-	    	--if newFlag == 1 then
-	    	--new:removeSelf()
-	    	--end
+	    	if newFlag == 1 then
+	    	new:removeSelf()
+	    	end
 	    	darkening:removeSelf()
 
 	    	-- new일 때 코인 지급 -- 
