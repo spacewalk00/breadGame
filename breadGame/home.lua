@@ -10,6 +10,9 @@ local scene = composer.newScene()
 syrub = 0
 ingredient = 0
 
+composer.setVariable("s", syrub)
+composer.setVariable("m", ingredient)
+
 function moveToBook(event)
 	print("도감으로 이동")
 	------------showCoin관련 수정
@@ -197,6 +200,7 @@ function scene:create( event )
 	local function plus( event )
  
 	    if ( event.phase == "began" ) then
+			showCoin.isVisible = false
 	        composer.gotoScene("syrup")
 		end
 	end

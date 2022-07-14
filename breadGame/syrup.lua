@@ -8,7 +8,9 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 
 local m_image
+local m_text
 local syrup_image
+local syrup_text
 local box1 
 local choco
 local vanilla
@@ -16,15 +18,44 @@ local strawberry
 
 function scene:create( event )
 	local sceneGroup = self.view
-	
-	ingredient = 0 -- 선택안할때 대비
+	--ingredient = 0 -- 선택안할때 대비
 
 	-- 배경 --
 	local s_background = display.newImage("Content/image/syrup_choice.png", display.contentWidth, display.contentHeight)
 	s_background.x, s_background.y = display.contentWidth/2, display.contentHeight/2
 	local syrup_box =  display.newImage("Content/image/syrup_box.png", display.contentWidth*0.496, display.contentHeight*0.534)
 	local m = composer.getVariable("m")
-	m_image = display.newImage("m")
+	--m_image = display.newImage("m")
+	print(m)
+	if m == 1 then 
+		m_image = display.newImage("Content/image/glitter.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
+		m_text = display.newText("반짝이", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+		m_text:setFillColor(0)
+	elseif m == 2 then
+		m_image = display.newImage("Content/image/sausage.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
+		m_text = display.newText("소세지", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+		m_text:setFillColor(0)
+	elseif m == 3 then 
+		m_image = display.newImage("Content/image/bean.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
+		m_text = display.newText("팥", display.contentWidth * 0.765, display.contentHeight * 0.561, "font/ONE Mobile POP.ttf", 33.5)
+		m_text:setFillColor(0)
+	elseif m == 4 then 
+		m_image = display.newImage("Content/image/cheese.png", display.contentWidth * 0.76, display.contentHeight * 0.508)
+		m_text = display.newText("치즈", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+		m_text:setFillColor(0)
+	elseif m == 5 then 
+		m_image = display.newImage("Content/image/corn.png", display.contentWidth * 0.765, display.contentHeight * 0.51)
+		m_text = display.newText("옥수수", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+		m_text:setFillColor(0)
+	elseif m == 6 then 
+		m_image= display.newImage("Content/image/oreopowder.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
+		m_text = display.newText("오레오가루", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+		m_text:setFillColor(0)
+	elseif m == 7 then 
+		m_image= display.newImage("Content/image/sugarpowder.png", display.contentWidth * 0.764, display.contentHeight * 0.51)
+		m_text = display.newText("슈가파우더", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+		m_text:setFillColor(0)
+	end
 
 	box1 = display.newImage("Content/image/box1.png", display.contentWidth*0.492, display.contentHeight*0.651)
 
@@ -33,7 +64,9 @@ function scene:create( event )
 	local function myTouchListener( event )
  
 	    if ( event.phase == "began" ) then
-	    	composer.setVariable("s", syrup_image)
+	    	composer.setVariable("s", syrub)
+	    	ingredient = 0
+	    	composer.setVariable("m", ingredient)
 	        composer.gotoScene("material")
 		end
 	end
@@ -51,7 +84,10 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
 	   		syrup_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.49, display.contentHeight*0.52)
-	    	composer.setVariable("s", syrup_image)
+	    	display.remove(syrup_text)
+	    	syrup_text = display.newText("바닐라 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+			syrup_text:setFillColor(0)
+	    	composer.setVariable("s", syrub)
 			--syrup_image.x, syrup_image.y = display.contentWidth * 0.49, display.contentHeight * 0.55
 		end
 	end
@@ -67,7 +103,10 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
 	   		syrup_image = display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.51, display.contentHeight*0.52)
-	    	composer.setVariable("s", syrup_image)
+	    	display.remove(syrup_text)
+	    	syrup_text = display.newText("초코 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+			syrup_text:setFillColor(0)
+	    	composer.setVariable("s", syrub)
 			--syrup_image.x, syrup_image.y = display.contentWidth * 0.505, display.contentHeight * 0.78
 		end
 	end
@@ -83,7 +122,10 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
 	   		syrup_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.513)
-	    	composer.setVariable("s", syrup_image)
+	    	display.remove(syrup_text)
+	    	syrup_text = display.newText("딸기 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+			syrup_text:setFillColor(0)
+	    	composer.setVariable("s", syrub)
 			--syrup_image.x, syrup_image.y = display.contentWidth * 0.495, display.contentHeight * 0.65
 		end
 	end
@@ -96,6 +138,7 @@ function scene:create( event )
 	local function start( event )
  	
 	    if ( event.phase == "began" ) then
+	    	showCoin.isVisible = true
 	        composer.gotoScene("plus")
 		end
 	end
@@ -108,6 +151,11 @@ function scene:create( event )
 	local function close( event )
  
 	    if ( event.phase == "began" ) then
+	    	showCoin.isVisible = true
+			syrub = 0
+			ingredient = 0
+			composer.setVariable("m", syrub)
+			composer.setVariable("s", ingredient)
 	        composer.gotoScene("home")
 		end
 	end
@@ -126,14 +174,15 @@ function scene:create( event )
 	sceneGroup:insert(vanilla)
 	sceneGroup:insert(strawberry)
 	
-	if choco == 1 then
+	--[[
+	if syrub == 1 then
 		sceneGroup:insert( syrup_image )
-	elseif vanilla == 1 then 
+	elseif syrub == 2 then 
 		sceneGroup:insert( syrup_image )
-	elseif strawberry == 1 then
+	elseif syrub == 3 then
 		sceneGroup:insert( syrup_image )
 	end
-
+	]]
 
 	sceneGroup:insert( start_button )
 	sceneGroup:insert( close_button )
@@ -168,10 +217,20 @@ function scene:hide( event )
 		--forCoin()
 		--forLevel()
 		
-		if syrub ~= 0 then
+		composer.removeScene("syrup")
+		if m_image ~= nil then 
+			m_image:removeSelf()
+		end
+		if m_text ~= nil then 
+			m_text:removeSelf()
+		end
+		if syrup_image ~= nil then
 			syrup_image:removeSelf() 
 		end
-		composer.removeScene("syrup")
+		if syrup_text ~= nil then
+			syrup_text:removeSelf() 
+		end
+		
 
 		
 --[[	choco:removeSelf()

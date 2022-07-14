@@ -8,7 +8,9 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 
 local s_image
+local s_text
 local material_image
+local material_text
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -17,7 +19,7 @@ function scene:create( event )
 	local m_background = display.newImage("Content/image/material_choice.png", display.contentWidth, display.contentHeight)
 	m_background.x, m_background.y = display.contentWidth/2, display.contentHeight/2
 	local s = composer.getVariable("s")
-	s_image = display.newImage("s")
+	--s_image = display.newImage("s")
 	print(s)
 	local syrup_box
 --[[
@@ -31,6 +33,20 @@ function scene:create( event )
 	
 	
 ]]
+	--미리 정한 시럽 가져오기--
+	if s == 1 then 
+		s_image =  display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.51, display.contentHeight*0.52)
+		s_text = display.newText("초코 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+		s_text:setFillColor(0)
+	elseif s == 2 then 
+		s_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.513)
+		s_text = display.newText("딸기 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+		s_text:setFillColor(0)
+	elseif s == 3 then 
+		s_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.49, display.contentHeight*0.52)
+		s_text = display.newText("바닐라 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+		s_text:setFillColor(0)
+	end
 
 	local material_box =  display.newImage("Content/image/material_box.png", display.contentWidth*0.762, display.contentHeight*0.534)
 	--시럽 버튼 클릭시--
@@ -38,7 +54,9 @@ function scene:create( event )
 
 	local function myTouchListener( event )
 	    if ( event.phase == "began" ) then
-	    	composer.setVariable("m", material_image)
+	    	syrub = 0 
+	    	composer.setVariable("s", syrub)
+	    	composer.setVariable("m", ingredient)
 	        composer.gotoScene("syrup")
 		end
 	end
@@ -56,7 +74,10 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/cheese.png", display.contentWidth * 0.76, display.contentHeight * 0.508)
-	    	composer.setVariable("m", material_image)
+	    	display.remove(material_text)
+	    	material_text = display.newText("치즈", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+	    	material_text:setFillColor(0)
+	    	composer.setVariable("m", ingredient)
 			--material_image.x, material_image.y = display.contentWidth * 0.75, display.contentHeight * 0.61
 		end
 	end
@@ -72,7 +93,10 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/bean.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
-	    	composer.setVariable("m", material_image)
+	    	display.remove(material_text)
+	    	material_text = display.newText("팥", display.contentWidth * 0.765, display.contentHeight * 0.561, "font/ONE Mobile POP.ttf", 33.5)
+	    	material_text:setFillColor(0)
+	    	composer.setVariable("m", ingredient)
 			--material_image.x, material_image.y = display.contentWidth * 0.765, display.contentHeight * 0.61
 		end
 	end
@@ -88,7 +112,10 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/corn.png", display.contentWidth * 0.765, display.contentHeight * 0.51)
-	    	composer.setVariable("m", material_image)
+	    	display.remove(material_text)
+	    	material_text = display.newText("옥수수", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+	    	material_text:setFillColor(0)
+	    	composer.setVariable("m", ingredient)
 			--material_image.x, material_image.y = display.contentWidth * 0.765, display.contentHeight * 0.6
 		end
 	end
@@ -104,7 +131,10 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/sugarpowder.png", display.contentWidth * 0.764, display.contentHeight * 0.51)
-	    	composer.setVariable("m", material_image)
+	    	display.remove(material_text)
+	    	material_text = display.newText("슈가파우더", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+	    	material_text:setFillColor(0)
+	    	composer.setVariable("m", ingredient)
 			--material_image.x, material_image.y = display.contentWidth * 0.761, display.contentHeight * 0.62
 		end
 	end
@@ -121,7 +151,10 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/sausage.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
-	    	composer.setVariable("m", material_image)
+	    	display.remove(material_text)
+	    	material_text = display.newText("소세지", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+	    	material_text:setFillColor(0)
+	    	composer.setVariable("m", ingredient)
 			--material_image.x, material_image.y = display.contentWidth * 0.76, display.contentHeight * 0.65
 		end
 	end
@@ -138,7 +171,10 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/glitter.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
-	    	composer.setVariable("m", material_image)
+	    	display.remove(material_text)
+	    	material_text = display.newText("반짝이", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+	    	material_text:setFillColor(0)
+	    	composer.setVariable("m", ingredient)
 			--material_image.x, material_image.y = display.contentWidth * 0.76, display.contentHeight * 0.67
 		end
 	end
@@ -154,7 +190,10 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/oreopowder.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
-	    	composer.setVariable("m", material_image)
+	    	display.remove(material_text)
+	    	material_text = display.newText("오레오가루", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
+	    	material_text:setFillColor(0)
+	    	composer.setVariable("m", ingredient)
 			--material_image.x, material_image.y = display.contentWidth * 0.76, display.contentHeight * 0.62
 		end
 	end
@@ -166,6 +205,7 @@ function scene:create( event )
 
 	local function start( event )
 	    if ( event.phase == "began" ) then
+	    	showCoin.isVisible = true
 	        composer.gotoScene("plus")
 		end
 	end
@@ -179,6 +219,11 @@ function scene:create( event )
 	local function close( event )
  
 	    if ( event.phase == "began" ) then
+	    	showCoin.isVisible = true
+			syrub = 0
+			ingredient = 0
+			composer.setVariable("m", syrub)
+			composer.setVariable("s", ingredient)
 	        composer.gotoScene("home")
 		end
 	end
@@ -233,10 +278,20 @@ function scene:hide( event )
 	elseif phase == "did" then
 		-- Called when the scene is now off screen
 		composer.removeScene("material")
-		if material ~= 0 then
+		
+		if s_image ~= nil then 
+			s_image:removeSelf()
+		end
+		if s_text ~= nil then 
+			s_text:removeSelf()
+		end
 		--s_image:removeSelf()
-		material_image:removeSelf()
-		end 
+		if material_image ~= nil then
+			material_image:removeSelf()
+		end
+		if material_text ~= nil then 
+			material_text:removeSelf()
+		end
 	end
 end
 
