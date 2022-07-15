@@ -733,44 +733,6 @@ function scene:show( event )
 		--------------------------------버튼, x 탭시 팝업창 내리기---------------------------------------------------
 	    local function tapListener(event)
 	    	print("탭 화면사라짐")
-
-		---------------------에러 수정---------------------
-		--[[
-	    	background_room1:removeSelf()
-			background_room2:removeSelf()
-			background_carpet:removeSelf()
-			
-			homeIcon:removeSelf()
-			breadIcon:removeSelf() 
-			text_breadRoom:removeSelf() 
-			coinIcon:removeSelf() 
-			coinNum_text:removeSelf() 
-			gray_lowerLeft:removeSelf() 
-			gray_lowerRight:removeSelf() 
-			gray_upperLeft:removeSelf() 
-			gray_upperRight:removeSelf() 
-			bookIcon:removeSelf()
-			text_bookIcon:removeSelf()
-			store:removeSelf()
-		
-			text_storeIcon:removeSelf()
-			temp:removeSelf()
-			text_tempIcon:removeSelf()
-			breadRoom:removeSelf()
-			text_breadRoomIcon:removeSelf()
-			
-			pushIcon:removeSelf()
-			text_push:removeSelf()
-	    	breadGroup:removeSelf()
-
-			if(count > 0) then
-				for i=1, breadsCNT do
-					if(breadRoom_image[i] ~= nill) then
-						breadRoom_image[i]:toBack()
-					end
-				end
-			end
-			]]
 	    end
 	    --[[
 	    bookIcon:addEventListener("tap", tapListener)
