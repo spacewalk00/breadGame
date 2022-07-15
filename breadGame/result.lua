@@ -111,11 +111,15 @@ function scene:create( event )
 	book.x, book.y = display.contentWidth*0.75, display.contentHeight*0.04
 	local s_book = display.newImage("Content/images/shadow.png")
 	s_book.x, s_book.y = display.contentWidth*0.75, display.contentHeight*0.04
+	local text_book = display.newImage("Content/images/text_Book2.png")
+	text_book.x, text_book.y = display.contentWidth*0.75, display.contentHeight*0.065
 
 	local store = display.newImageRect("Content/images/store.png", 170, 170)
 	store.x, store.y = display.contentWidth*0.9, display.contentHeight*0.035
 	local s_store = display.newImage("Content/images/shadow.png")
 	s_store.x, s_store.y = display.contentWidth*0.9, display.contentHeight*0.04
+	local text_store = display.newImage("Content/images/text_store.png")
+	text_store.x, text_store.y = display.contentWidth*0.9, display.contentHeight*0.065
 
 	local coins = display.newImage("Content/images/coins.png")
 	coins.x, coins.y = display.contentWidth*0.3, display.contentHeight*0.04
@@ -130,11 +134,15 @@ function scene:create( event )
 	success.x, success.y = display.contentWidth*0.75, display.contentHeight*0.13
 	local s_success = display.newImage("Content/images/shadow.png")
 	s_success.x, s_success.y = display.contentWidth*0.75, display.contentHeight*0.13
+	local text_success = display.newImage("Content/images/text_acheivements.png")
+	text_success.x, text_success.y = display.contentWidth*0.75, display.contentHeight*0.155
 
 	local breadRoom = display.newImageRect("Content/images/breadRoom.png", 170, 170)
 	breadRoom.x, breadRoom.y = display.contentWidth*0.9, display.contentHeight*0.135
 	local s_breadRoom = display.newImage("Content/images/shadow.png")
 	s_breadRoom.x, s_breadRoom.y = display.contentWidth*0.9, display.contentHeight*0.13
+	local text_breadRoom = display.newImage("Content/images/text_breadRoom.png")
+	text_breadRoom.x, text_breadRoom.y = display.contentWidth*0.9, display.contentHeight*0.155
 	
 	book:addEventListener("tap", moveToBook)
 	breadRoom:addEventListener("tap", moveToBreadRoom)
@@ -149,10 +157,10 @@ function scene:create( event )
 	sceneGroup:insert( level )
 	sceneGroup:insert( showLevel )
 	sceneGroup:insert( coins ) 
-	sceneGroup:insert( s_book ) sceneGroup:insert( book ) 
-	sceneGroup:insert( s_store ) sceneGroup:insert( store ) 
-	sceneGroup:insert( s_success ) sceneGroup:insert( success ) 
-	sceneGroup:insert( s_breadRoom ) sceneGroup:insert( breadRoom ) 
+	sceneGroup:insert( s_book ) sceneGroup:insert( book ) sceneGroup:insert( text_book )
+	sceneGroup:insert( s_store ) sceneGroup:insert( store ) sceneGroup:insert( text_store )
+	sceneGroup:insert( s_success ) sceneGroup:insert( success ) sceneGroup:insert( text_success )
+	sceneGroup:insert( s_breadRoom ) sceneGroup:insert( breadRoom ) sceneGroup:insert( text_breadRoom )
 	sceneGroup:insert( darkening )
 
 end
@@ -253,16 +261,18 @@ function scene:show( event )
 
 		local sf, showsf
 		if fail == 0 then
-			sf = "빵 굽기 성공!"
+			sf = "Content/images/text_success.png"
 			audio.play( soundTable["breadSound"],  {channel=3} )
 		elseif fail == 1 then
-			sf = "빵 굽기 실패.."
+			sf = "Content/images/text_success.png"
 			audio.play( soundTable["bombSound"] ,  {channel=2})
 		end
 
-		showsf = display.newText(sf, display.contentWidth*0.5, display.contentHeight*0.27, "Content/font/ONE Mobile POP.ttf")
-		showsf:setFillColor(0)
-		showsf.size = 100
+		local text_success = display.newImage(windowGroup, sf)
+		text_success.x, text_success.y = display.contentWidth*0.5, display.contentHeight*0.27
+		--showsf = display.newText(sf, display.contentWidth*0.5, display.contentHeight*0.27, "Content/font/ONE Mobile POP.ttf")
+		--showsf:setFillColor(0)
+		--showsf.size = 100
 
 		-- 빵빠레 --
 		local halo = display.newImage("Content/images/halo.png")
@@ -297,7 +307,8 @@ function scene:show( event )
 		showName.size = 100	
 
 		fixedGroup:insert( window )
-		fixedGroup:insert( showsf )
+		--fixedGroup:insert( showsf )
+		fixedGroup:insert( text_success )
 		fixedGroup:insert( halo )
 		fixedGroup:insert( tempBread )
 		fixedGroup:insert( showName )
@@ -323,16 +334,20 @@ function scene:show( event )
 
 		local button = display.newImage("Content/images/button.png")
 		button.x, button.y = display.contentWidth*0.5, display.contentHeight*0.8
-		local check = "확인"
-		local showCheck = display.newText(check, display.contentWidth*0.5, display.contentHeight*0.8, "Content/font/ONE Mobile POP.ttf")
-		showCheck:setFillColor(0)
-		showCheck.size = 80
+		
+		local check = "Content/images/text_OK.png"
+		local showCheck = display.newImage(check)
+		showCheck.x, showCheck.y = display.contentWidth*0.5, display.contentHeight*0.8
+		--local showCheck = display.newText(check, display.contentWidth*0.5, display.contentHeight*0.8, "Content/font/ONE Mobile POP.ttf")
+		--showCheck:setFillColor(0)
+		--showCheck.size = 80
 
 		local close = display.newImage("Content/images/close.png")
 		close.x, close.y = display.contentWidth*0.9, display.contentHeight*0.25
 
 		windowGroup:insert( window )
-		windowGroup:insert( showsf )
+		windowGroup:insert( text_success )
+		--windowGroup:insert( showsf )
 		windowGroup:insert( halo )
 
 		windowGroup:insert( tempBread )

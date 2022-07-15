@@ -72,9 +72,11 @@ function scene:create( event )
 	
 	local store = display.newImageRect("Content/images/store.png", 200, 200)
 	store.x, store.y = display.contentWidth*0.15, display.contentHeight*0.04
-	local storeText = display.newText("상점", display.contentWidth*0.28, display.contentHeight*0.05, "Content/font/ONE Mobile POP.ttf")
-	storeText:setFillColor(0)
-	storeText.size = 70
+	--local storeText = display.newText("상점", display.contentWidth*0.28, display.contentHeight*0.05, "Content/font/ONE Mobile POP.ttf")
+	--storeText:setFillColor(0)
+	--storeText.size = 70
+	local storeText = display.newImage("Content/images/text_store2.png")
+	storeText.x, storeText.y = display.contentWidth*0.28, display.contentHeight*0.05
 
 	coins = display.newImage("Content/images/coins.png")	
 	coins.x, coins.y = display.contentWidth*0.5, display.contentHeight*0.05
