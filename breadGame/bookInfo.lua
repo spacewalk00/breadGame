@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- view2.lua
+-- bookInfo.lua
 --
 -----------------------------------------------------------------------------------------
 local composer = require( "composer" )
@@ -364,8 +364,8 @@ function scene:create( event )
 			upSetGroup:removeSelf()
 			breadLevel:removeSelf()	
 		end	
-		composer.removeScene("view2")
-		composer.gotoScene( "view1" )
+		composer.removeScene("bookInfo")
+		composer.gotoScene( "bookMain" )
 	end
 	
 	illuBook:addEventListener("tap", goBook)
@@ -389,7 +389,7 @@ function scene:create( event )
 	local function goHome(event)
 		audio.play(soundTable["clickSound"],  {channel=5})	
 		print("goHome!!")
-		composer.removeScene("view2")
+		composer.removeScene("bookInfo")
 		-------showCoin 관련 수정
 		showCoin.isVisible = true
 		showCoin.text = coinNum

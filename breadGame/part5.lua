@@ -630,7 +630,7 @@ function scene:create( event )
 					end
 				end
 			end
-		composer.gotoScene("view1")
+		composer.gotoScene("bookMain")
 	end
 
 	local function moveToStore(event)

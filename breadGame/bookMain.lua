@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- view1.lua
+-- bookMain.lua
 --
 -----------------------------------------------------------------------------------------
 --coinNum = 10000
@@ -31,7 +31,7 @@ end
 parseUBreadInfo()
 parse()
 
---[[-- 빵의 개수 --breadsCnt
+-- 빵의 개수 --breadsCnt
 breadsCnt = { {1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0}, 
 				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} 		}
 UbreadsCnt = { {1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0}, 
@@ -43,7 +43,7 @@ openUBread = { {1, 1, 1, 1, 1, 1, 1, 1}, {0, 0, 0, 0, 0, 0, 0, 0},
 				{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0} }		
 -- 빵레벨
 Bread_level = { {1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0}, 
-				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} }]]
+				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} }
 
 -- 폰트
 Font = { 	font_Bold = native.newFont("Content/font/ONE Mobile Bold.ttf"),
@@ -89,6 +89,7 @@ function scene:create( event )
 	 
 	    return true
 	end
+
 	local scrollView = widget.newScrollView(
 		{
 	        horizontalScrollDisabled=true,
@@ -117,8 +118,8 @@ function scene:create( event )
 		composer.setVariable("Id1", event.target.id1)
 		composer.setVariable("Id2", event.target.id2)
 		composer.setVariable("Id", event.target.id)
-		composer.removeScene("view1")		
-		composer.gotoScene( "view2" )
+		composer.removeScene("bookMain")		
+		composer.gotoScene( "bookInfo" )
 	end
 
 -- 도감 오브젝트 tap이벤트에 넣기	
@@ -189,8 +190,8 @@ function scene:create( event )
 				xy(allBread, i, jul)
 				BText[i]= display.newText(BreadGroup, Bname, allBread[i].x, BackGround.y*(jul+0.09), Font.font_POP, 35)
 				BText[i]:setFillColor(0)
-				BImage[i] = display.newImageRect(BreadGroup, "Content/images/"..Bimage..".png", 200, 200)
-				BImage[i].x, BImage[i].y = allBread[i].x, allBread[i].y
+				BImage[i] = display.newImageRect(BreadGroup, "Content/images/"..Bimage..".png", 210, 210)
+				BImage[i].x, BImage[i].y = allBread[i].x, allBread[i].y*0.98
 			else
 				allBread[i] = display.newImage(BreadGroup, "Content/images/illu_book_secret.png")
 				xy(allBread, i, jul)				
@@ -284,7 +285,7 @@ function scene:create( event )
 	local function goHome(event)
 		audio.play(soundTable["clickSound"],  {channel=5})	
 		print("goHome!!")
-		composer.removeScene("view1")
+		composer.removeScene("bookMain")
 		---------showCoin 관련 수정
 		showCoin.isVisible = true
 		showCoin.text = coinNum

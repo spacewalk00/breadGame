@@ -17,7 +17,7 @@ function moveToBook(event)
 	print("도감으로 이동")
 	------------showCoin관련 수정
 	showCoin.isVisible = false
-	composer.gotoScene("view1")
+	composer.gotoScene("bookMain")
 end
 
 function moveToBreadRoom(event)
