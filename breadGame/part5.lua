@@ -17,7 +17,6 @@ local bookIcon
 local breadIcon
 local text_breadRoom
 local coinIcon
-local coinNum_text
 local gray_upperLeft
 local gray_upperRight
 local gray_lowerLeft
@@ -118,10 +117,8 @@ function scene:create( event )
 
 	coinIcon = display.newImageRect("Content/images/coinIcon.png", display.contentWidth*0.2, display.contentHeight*0.035)
 	coinIcon.x, coinIcon.y = display.contentWidth*0.5, display.contentHeight*0.05
-
-	coinNum_text = display.newText(coinNum, display.contentWidth*0.5, display.contentHeight*0.5,"font/ONE Mobile Bold.ttf", 23)
-	coinNum_text:setFillColor(1)
-	coinNum_text.x, coinNum_text.y = display.contentWidth*0.54, display.contentHeight*0.05
+		
+	showCoin.isVisible = true
 
 	-- 다른 페이지 넘어가는 아이콘 및 회색 배경 --
 	gray_upperLeft = display.newImageRect("Content/images/gray.png", display.contentWidth*0.13, display.contentHeight*0.07)
@@ -283,48 +280,6 @@ function scene:create( event )
 			text_push2 = display.newText("넣기",display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile Bold.ttf", 45)
 			text_push2:setFillColor(1)
 			text_push2.x, text_push2.y = display.contentWidth*0.5, display.contentHeight*0.79
-
-			-- 빵목록 내에서만 스크롤 가능하게 하려 했으나 불가능
-			--[[local widget = require( "widget" )
-			local function scroll( event )
-				if ( event.phase == "began" ) then
-					display.getCurrentStage():setFocus( event.target )
-					event.target.isFocus = true
-					event.target.yStart = event.target.y
-
-				elseif ( event.phase == "moved" ) then
-					if ( event.target.isFocus) then
-					end
-				elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
-					if ( event.target.isFocus ) then
-					display.getCurrentStage():setFocus( nil )
-					event.target.isFocus = false
-					end
-					display.getCurrentStage():setFocus( nil )
-					event.target.isFocus = false
-					scrollS:removeSelf()
-				end	 
-				-- In the event a scroll limit is reached...
-				if ( event.limitReached ) then
-					if ( event.direction == "up" ) then print( "Reached bottom limit" )
-					elseif ( event.direction == "down" ) then print( "Reached top limit" )
-					end
-				end
-			
-				--breadGroup:toFront()
-				return true
-			end
-			local scrollView = widget.newScrollView(
-				{
-					horizontalScrollDisabled=true,
-					left = 160,
-					top = 790,
-					width = 1115,
-					height = 1150,
-					backgroundColor = { 0.894, 0.772, 0.713 }
-
-				}
-			)]]
 
 			index1, index2 = 1, 1
 			local jul = 0.15
@@ -669,6 +624,7 @@ function scene:create( event )
 		print("홈으로 이동")
 		------------------showCoin 관련 수정
 		showCoin.isVisible = true
+		showCoin.x, showCoin.y = display.contentWidth*0.35, display.contentHeight*0.04
 		-------수정	
 			if(count > 0) then
 				for i=1, breadsCNT do
@@ -697,7 +653,6 @@ function scene:create( event )
 			sceneGroup:insert(breadIcon) 
 			sceneGroup:insert(text_breadRoom) 
 			sceneGroup:insert(coinIcon) 
-			sceneGroup:insert(coinNum_text) 
 			sceneGroup:insert(gray_lowerLeft) 
 			sceneGroup:insert(gray_lowerRight) 
 			sceneGroup:insert(gray_upperLeft) 
