@@ -121,10 +121,11 @@ function scene:create( event )
 	local saleC, saleCGroup
 	local infoGroup, lvGroup
 
-	local function level()
+	local function level(js)
 		lvGroup = display.newGroup()
-		breadLevel = display.newText(lvGroup ,"Lv."..Bread_level[Index1][Index2], infoGround.x, infoGround.y*1.05, Font.font_POP, 80)
-		breadLevel:setFillColor(0)
+		breadLevel = display.newText(lvGroup, js[Index1].breads[Index2].name.."  Lv."..Bread_level[Index1][Index2], infoGround.x, infoGround.y*0.335, Font.font_POP, 70)
+		--breadLevel = display.newText(lvGroup ,"Lv."..Bread_level[Index1][Index2], infoGround.x, infoGround.y*0.335, Font.font_POP, 80)
+		--breadLevel:setFillColor(0)
 		sceneGroup:insert(lvGroup)
 	end
 
@@ -151,7 +152,7 @@ function scene:create( event )
 		makeCoin()
 		Bimage = js[Index1].breads[Index2].image
 		print(js[Index1].breads[Index2].name.."빵의 정보창")
-		breadName = display.newText(infoGroup, js[Index1].breads[Index2].name, infoGround.x, infoGround.y*0.335, Font.font_POP, 70)
+		--breadName = display.newText(infoGroup, js[Index1].breads[Index2].name, infoGround.x, infoGround.y*0.335, Font.font_POP, 70)
 		breadImage = display.newImageRect(infoGroup, "Content/images/"..Bimage..".png",900,900)
 		breadImage.x, breadImage.y = infoGround.x, infoGround.y*0.8
 		breadSentence = display.newText(infoGroup,js[Index1].breads[Index2].sentence, infoGround.x, infoGround.y*1.25, 950,350 ,Font.font_POP, 50)
@@ -160,7 +161,7 @@ function scene:create( event )
 		makeSalePrice()		
 		-- BreadJson이 Data일때
 		if js == Data then 	
-			level()
+			level(js)
 			UpSet()
 		end
 		if open[Index1][Index2] == -1 then
@@ -207,7 +208,7 @@ function scene:create( event )
 		audio.play(soundTable["clickSound"],  {channel=5})	
 		upGroup:removeSelf()
 		makeCoin()
-		level()	
+		level(BreadJson)	
 		saleCoin()
 	end
 
@@ -246,7 +247,7 @@ function scene:create( event )
 
 -- 레벨업 함수 
 	local function levelUp( event )
-		if coinNum >= levelPrice[lv] and Bread_level[Index1][Index2] < 10 then
+		if coinNum >= levelPrice[lv] and Bread_level[Index1][Index2] < 10 and cnt[Index1][Index2] > 0 then
 			audio.play(soundTable["levelUpSound"],  {channel=6})		
 			Bread_level[Index1][Index2] = Bread_level[Index1][Index2]+ 1
 			coinNum = coinNum - levelPrice[lv]
@@ -257,10 +258,10 @@ function scene:create( event )
 			makeLvPrice()
 			makeCoin()	
 			UpSet()				
-			level()			
+			level(BreadJson)			
 			saleCoin()
 			upKey:addEventListener("tap", levelUp)
-		elseif cnt[Index1][Index2] > 0 and Bread_level[Index1][Index2] == 10 then
+		elseif cnt[Index1][Index2] > 0 and Bread_level[Index1][Index2] == 10 and cnt[Index1][Index2] > 0 then
 			coinGroup:removeSelf()
 			upSetGroup:removeSelf()
 			breadLevel:removeSelf()
