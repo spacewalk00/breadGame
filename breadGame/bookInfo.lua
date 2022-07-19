@@ -96,6 +96,7 @@ function scene:create( event )
 		if Index1 == 1 and Index2 == 1 then 
 			salePrice = 300
 		end
+		
 	end
 
 -- [upSetGroup] Up키 셋팅
