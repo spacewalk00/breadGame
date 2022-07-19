@@ -17,7 +17,6 @@ local function onFirstView( event )
 
 	composer.gotoScene("opening")
 
-
 end
 
 onFirstView()	-- invoke first tab button's onPress event manually

@@ -30,6 +30,8 @@ local breadRoom
 local text_breadRoomIcon
 local pushIcon
 local text_push
+local text_deco
+local dia
 
 local icon
 local icon_inven = {}
@@ -108,15 +110,14 @@ function scene:create( event )
 	homeIcon = display.newImageRect("Content/images/home.png", display.contentWidth*0.07, display.contentHeight*0.04)
 	homeIcon.x, homeIcon.y = display.contentWidth*0.08, display.contentHeight*0.05
 
-	breadIcon = display.newImageRect("Content/images/breadIcon.png", display.contentWidth*0.1, display.contentHeight*0.05)
+	breadIcon = display.newImageRect("Content/images/breadRoom2.png", display.contentWidth*0.1, display.contentHeight*0.05)
 	breadIcon.x, breadIcon.y = display.contentWidth*0.2, display.contentHeight*0.054
 
-	text_breadRoom = display.newText("빵방", display.contentWidth*0.5, display.contentHeight*0.5,"font/ONE Mobile POP.ttf", 40)
-	text_breadRoom:setFillColor(1)
-	text_breadRoom.x, text_breadRoom.y = display.contentWidth*0.29, display.contentHeight*0.05
+	text_breadRoom = display.newImageRect("Content/images/text_breadRoom.png", display.contentWidth*0.46, display.contentHeight*0.27)
+	text_breadRoom.x, text_breadRoom.y = display.contentWidth*0.3, display.contentHeight*0.05
 
-	coinIcon = display.newImageRect("Content/images/coinIcon.png", display.contentWidth*0.2, display.contentHeight*0.035)
-	coinIcon.x, coinIcon.y = display.contentWidth*0.5, display.contentHeight*0.05
+	coinIcon = display.newImageRect("Content/images/coinIcon.png", display.contentWidth*0.22, display.contentHeight*0.035)
+	coinIcon.x, coinIcon.y = display.contentWidth*0.52, display.contentHeight*0.05
 		
 	showCoin.isVisible = true
 
@@ -136,37 +137,32 @@ function scene:create( event )
 	bookIcon = display.newImageRect("Content/images/book.png", display.contentWidth*0.11, display.contentHeight*0.06)
  	bookIcon.x, bookIcon.y = display.contentWidth*0.73, display.contentHeight*0.05
 
-	text_bookIcon = display.newText("도감",display.contentWidth*0.5, display.contentHeight*0.5,"font/ONE Mobile Bold.ttf", 23)
-    text_bookIcon:setFillColor(1)
+	text_bookIcon = display.newImage("Content/images/text_Book2.png")
 	text_bookIcon.x, text_bookIcon.y = display.contentWidth*0.73, display.contentHeight*0.081
 
 	store = display.newImageRect("Content/images/store.png", display.contentWidth*0.1, display.contentHeight*0.07)
- 	store.x, store.y = display.contentWidth*0.9, display.contentHeight*0.047
+ 	store.x, store.y = display.contentWidth*0.905, display.contentHeight*0.047
 
-	text_storeIcon = display.newText("상점",display.contentWidth*0.5, display.contentHeight*0.46,"font/ONE Mobile Bold.ttf", 23)
-	text_storeIcon:setFillColor(1)
-	text_storeIcon.x, text_storeIcon.y = display.contentWidth*0.9, display.contentHeight*0.081
-
-	temp = display.newImageRect("Content/images/temp.png", display.contentWidth*0.1, display.contentHeight*0.05)
+	text_storeIcon = display.newImage("Content/images/text_store.png")
+	text_storeIcon.x, text_storeIcon.y = display.contentWidth*0.9, display.contentHeight*0.08
+	
+	temp = display.newImageRect("Content/images/temp.png", display.contentWidth*0.08, display.contentHeight*0.05)
  	temp.x, temp.y = display.contentWidth*0.73, display.contentHeight*0.14
 
-	text_tempIcon = display.newText("업적",display.contentWidth*0.5, display.contentHeight*0.46,"font/ONE Mobile Bold.ttf", 23)
-	text_tempIcon:setFillColor(1)
+	text_tempIcon = display.newImage("Content/images/text_acheivements.png")
 	text_tempIcon.x, text_tempIcon.y = display.contentWidth*0.73, display.contentHeight*0.17
 
-	breadRoom = display.newImageRect("Content/images/breadRoom.png", display.contentWidth*0.09, display.contentHeight*0.04)
-	breadRoom.x, breadRoom.y = display.contentWidth*0.9, display.contentHeight*0.138
+	dia = display.newImageRect("Content/images/dia.png", display.contentWidth*0.09, display.contentHeight*0.04)
+	dia.x, dia.y = display.contentWidth*0.9, display.contentHeight*0.138
 
-	text_breadRoomIcon = display.newText("빵방",display.contentWidth*0.5, display.contentHeight*0.46,"font/ONE Mobile Bold.ttf", 23)
-	text_breadRoomIcon:setFillColor(1)
-	text_breadRoomIcon.x, text_breadRoomIcon.y = display.contentWidth*0.9, display.contentHeight*0.17
+	text_deco = display.newImage("Content/images/text_deco.png")
+	text_deco.x, text_deco.y = display.contentWidth*0.905, display.contentHeight*0.17
 	
 	-- 빵 넣기 아이콘 --
 	pushIcon = display.newImageRect("Content/images/push.png", display.contentWidth*0.25, display.contentHeight*0.05)
 	pushIcon.x, pushIcon.y = display.contentWidth*0.24, display.contentHeight*0.15
 
-	text_push = display.newText("빵 넣기",display.contentWidth*0.5, display.contentHeight*0.5,"font/ONE Mobile Bold.ttf", 40)
-    text_push:setFillColor(1)
+	text_push = display.newImage("Content/images/text_breadPush.png")
 	text_push.x, text_push.y = display.contentWidth*0.24, display.contentHeight*0.15
     text_push:toFront()
 
@@ -577,6 +573,8 @@ function scene:create( event )
 		print("도감으로 이동")
 		---------showCoin 관련 수정
 		showCoin.isVisible = false
+		showCoin.x, showCoin.y = display.contentWidth*0.35, display.contentHeight*0.04
+		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
 				for i=1, breadsCNT do
@@ -593,6 +591,7 @@ function scene:create( event )
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
 		showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
+		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
 				for i=1, breadsCNT do
@@ -609,6 +608,7 @@ function scene:create( event )
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
 		showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
+		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
 				for i=1, breadsCNT do
@@ -625,6 +625,7 @@ function scene:create( event )
 		------------------showCoin 관련 수정
 		showCoin.isVisible = true
 		showCoin.x, showCoin.y = display.contentWidth*0.35, display.contentHeight*0.04
+		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
 				for i=1, breadsCNT do
@@ -664,8 +665,8 @@ function scene:create( event )
 			sceneGroup:insert(text_storeIcon)
 			sceneGroup:insert(temp)
 			sceneGroup:insert(text_tempIcon)
-			sceneGroup:insert(breadRoom)
-			sceneGroup:insert(text_breadRoomIcon)
+			sceneGroup:insert(text_deco)
+			sceneGroup:insert(dia)
 			
 			sceneGroup:insert(pushIcon)
 			sceneGroup:insert(text_push)
