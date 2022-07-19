@@ -9,15 +9,14 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 
 -- JSON 파싱
-local json = require('json')
+json = require('json')
 
-function parse()
+function parseBreadInfo()
 	local filename = system.pathForFile("Content/JSON/breadInfo.json")
 	Data, pos, msg = json.decodeFile(filename)
 end
--- local UBreadInfo, pos, msg --파싱시 오류 받아옴
 -- BreadInfo는 Data
-function parseUBreadInfo() --파싱을 하는 함수
+function parseUBreadInfo()
 	local filename = system.pathForFile("Content/JSON/ubreadInfo.json")
 	UBreadInfo, pos, msg = json.decodeFile(filename)
 	-- 디버그
@@ -29,19 +28,20 @@ function parseUBreadInfo() --파싱을 하는 함수
 	end
 end
 parseUBreadInfo()
-parse()
+parseBreadInfo()
 
 -- 빵의 개수 --breadsCnt
-
 --[[breadsCnt = { {1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0}, 
 				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} 		}
 UbreadsCnt = { {1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0}, 
 				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} 		}
+
 -- 새빵 (미해금0 , 해금 -1, 확인했음 1로 변화)
 openBread = { {-1, 1, 1, 1, -1, 1, 1, 1}, {-1, 0, 0, 0, 0, 0, 0, 0}, 
 				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} }
 openUBread = { {1, 1, 1, 1, 1, 1, 1, 1}, {0, 0, 0, 0, 0, 0, 0, 0}, 
-				{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0} }		
+				{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0} }	
+
 -- 빵레벨
 Bread_level = { {1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0}, 
 				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} }	]]
@@ -96,7 +96,7 @@ function scene:create( event )
 	        horizontalScrollDisabled=true,
 	        top = 0,
 	        width = 1440,
-	        height = 2650,
+	        height = 2560,
 	        backgroundColor = { 0.894, 0.772, 0.713 }
 		}
 	)
@@ -124,24 +124,26 @@ function scene:create( event )
 	end
 
 -- 도감 오브젝트 tap이벤트에 넣기	
-	local function tapInfo(Bjson, max)
+	local function tapInfo()
 		index1, index2 = 1, 1
-		local jsc, index
-		if Bjson == Data then
-			jsc = openBread
-			index = 1
-		else
-			jsc = openUBread
-			index = 2
-		end						
-		for i = 1, max do
+		local index = 1	
+		local jsc = openBread			
+		for i = 1, 64 do
+			if i == 33 then
+				jsc = openUBread
+				index1, index2 = 1, 1
+				index = 2
+			end
+
 			lock = jsc[index1][index2]
 			if lock ~= 0 then
 				allBread[i]:addEventListener("tap", goInfo)
 			end
+
 			allBread[i].id1 = index1
 			allBread[i].id2 = index2
-			allBread[i].id = index
+			allBread[i].id = index 
+
 			index2 = index2 + 1
 			if index2 == 9 then
 				index2 = 1
@@ -160,23 +162,26 @@ function scene:create( event )
 		end
 		obj[i1].y = BackGround.y*j
 	end
-	-- local function makeAllBook(js, 64) -- 전체 도감
-	local function makeBook(js)
+
+-- makeAllBook() -- 전체 도감
+	local function makeAllBook()
 		BreadGroup = display.newGroup()
 		index1, index2 = 1, 1
 		local jul = 0.15
-		local jsc
-		if js == Data then
-			jsc = openBread
-		else
-			jsc = openUBread
-		end
-		for i = 1, 32 do
-			lock = 0
+		local jsc = openBread
+		local js = Data
+
+		for i = 1, 64 do
+			if i == 33 then
+				jsc = openUBread
+				js = UBreadInfo
+				index1, index2 = 1, 1
+			end
 			lock = jsc[index1][index2]
 			-- print(js[index1].breads[index2].image.."는 해금?"..jsc[index1][index2])
 			Bimage = js[index1].breads[index2].image
 			Bname = js[index1].breads[index2].name
+
 			if i % 3 == 1 then
 				jul = jul + 0.33
 			end
@@ -192,7 +197,7 @@ function scene:create( event )
 				BText[i]= display.newText(BreadGroup, Bname, allBread[i].x, BackGround.y*(jul+0.09), Font.font_POP, 35)
 				BText[i]:setFillColor(0)
 				BImage[i] = display.newImageRect(BreadGroup, "Content/images/"..Bimage..".png", 210, 210)
-				BImage[i].x, BImage[i].y = allBread[i].x, allBread[i].y*0.98
+				BImage[i].x, BImage[i].y = allBread[i].x, allBread[i].y
 			else
 				allBread[i] = display.newImage(BreadGroup, "Content/images/illu_book_secret.png")
 				xy(allBread, i, jul)				
@@ -203,13 +208,14 @@ function scene:create( event )
 				index2 = 1
 				index1 = index1 + 1
 			end
+
 		end	
-		tapInfo(js, 32)
+		tapInfo()
 		scrollView:insert(BreadGroup)
 		scrollView:addEventListener("touch",scroll)
 	end
 
-	makeBook(Data, 32)	
+	makeAllBook()	
 
 -- [도감 BasicGroup] 도감 메뉴
 	local illuBook_BasicGroup = display.newGroup()
@@ -238,42 +244,33 @@ function scene:create( event )
 	local menuNomal = display.newText(illuBook_BasicGroup,"일반", illuBook_menu.x, illuBook_menu.y, Font.font_POP, 65)
 	local menuRare = display.newText(illuBook_BasicGroup,"레어", illuBook_menu.x*1.55, illuBook_menu.y, Font.font_POP, 65)
 
--- 도감 이동 함수
-	local function MakeMenu (kind)
-		if kind == Data then
-			illuBook_menuC.x, illuBook_menuC.y = illuBook_menu.x, illuBook_menu.y*1.22	
-			BreadGroup:removeSelf()
-			makeBook(Data)			
-		elseif kind == UBreadInfo then
-			illuBook_menuC.x, illuBook_menuC.y = illuBook_menu.x*1.55, illuBook_menu.y*1.22
-			BreadGroup:removeSelf()
-			makeBook(UBreadInfo)			
-		else
-			illuBook_menuC.x, illuBook_menuC.y = illuBook_menu.x*0.45, illuBook_menu.y*1.22
-			BreadGroup:removeSelf()
-			makeBook(Data)		
-		end
-	end
-
-	local function NomalMenu( event )
-		audio.play(soundTable["clickSound"],  {channel=5})		
-		MakeMenu (Data)
-	end 
-
-	local function RareMenu( event )
+-- 도감 이동 함수 
+	-- Nomal
+	local function Nomal( event )
 		audio.play(soundTable["clickSound"],  {channel=5})
-		MakeMenu (UBreadInfo)
+		print("Nomal go!!")
+		composer.removeScene("bookMain")		
+		composer.gotoScene( "bookNomal" )		
 	end 
+	menuNomal:addEventListener("tap", Nomal)
 
-	local function AllMenu( event )
+	-- Rare
+	local function Rare( event )
 		audio.play(soundTable["clickSound"],  {channel=5})
-		MakeMenu (All)
+		print("Rare go!!")
+		composer.removeScene("bookMain")		
+		composer.gotoScene( "bookRare" )
 	end 
+	menuRare:addEventListener("tap", Rare)	
 
+	-- All
+	local function All( event )
+		audio.play(soundTable["clickSound"],  {channel=5})
+		BreadGroup:removeSelf()
+		makeAllBook()
+	end 
+	menuAll:addEventListener("tap", All)	
 
-	menuNomal:addEventListener("tap", NomalMenu)
-	menuRare:addEventListener("tap", RareMenu)
-	menuAll:addEventListener("tap", AllMenu)
 
 -- 레이어정리
 	sceneGroup:insert(BackGround)	

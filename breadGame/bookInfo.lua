@@ -7,7 +7,10 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 
 parseUBreadInfo()
-parse()
+parseBreadInfo()
+
+BackGround = display.newImage("Content/images/main_background.png")
+BackGround.x, BackGround.y = display.contentWidth/2, display.contentHeight/2
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -20,19 +23,23 @@ function scene:create( event )
 	print("빵번호1:"..Index1)
 	print("빵번호2:"..Index2)
 
-	local BreadJson, open, cnt
+	local BreadJson, open, cnt, lv
 	if Index == 1 then
-		BreadJson = Data
+		BreadJson = Data[Index1].breads[Index2]
 		open = openBread
-		cnt = breadsCnt
+		cnt = breadsCnt[Index1][Index2]
+		lv = Bread_level[Index1][Index2]
 	else
-		BreadJson = UBreadInfo
+		BreadJson = UBreadInfo[Index1].breads[Index2]
 		open = openUBread
-		cnt = UbreadsCnt
+		cnt = UbreadsCnt[Index1][Index2]
+		lv = 10
 	end
-	print(cnt[1][1].." cnt")
-	print(open[1][1].." open")
-	print(BreadJson[1].breads[1].name)
+
+	print(cnt.." cnt")
+	print(open[Index1][Index2].." open")
+	print(BreadJson.name)
+
 
 -- [backGroup] 도감, 홈 버튼
 	local backGroup = display.newGroup()
@@ -47,24 +54,45 @@ function scene:create( event )
 	sceneGroup:insert(BackGround)
 	sceneGroup:insert(backGroup)
 
--- [coinGroup] makeCoin 보유코인, 빵개수
-	local coinText, cntText
-	local coin = { }
+-- 도감 이동
+	local function goBook(event)
+		audio.play(soundTable["clickSound"],  {channel=5})	
+		print("다시 도감으로!!")	
+		composer.removeScene("bookInfo")
+		composer.gotoScene( "bookMain" )
+	end
+	
+	illuBook:addEventListener("tap", goBook)
+	illuBook_text:addEventListener("tap", goBook)
+
+-- 홈 이동
+	local function goHome(event)
+		audio.play(soundTable["clickSound"],  {channel=5})	
+		print("goHome!!")
+		composer.removeScene("bookInfo")
+		-------showCoin 관련 수정
+		showCoin.isVisible = true
+		showCoin.text = coinNum
+		composer.gotoScene( "home" )
+	end
+	home:addEventListener("tap",goHome)
+
+-- [coinGroup] CoinAndCnt 보유코인, 빵개수
+	local coinText, cntText, coin 
 	local coinGroup
-	local function makeCoin()
+	-- coin[2] 코인 값의 배경
+
+	local function CoinAndCnt()
 		coinGroup = display.newGroup()
-		coin[1] = display.newImage(coinGroup,"Content/images/coin.png")
-		coin[1].x, coin[1].y = BackGround.x*0.9, BackGround.y*0.1
-		-- coin[2] 코인 값의 배경
+		coin = display.newImage(coinGroup, "Content/images/coin.png")
+		coin.x, coin.y = BackGround.x*0.9, BackGround.y*0.1	
 		coinText = display.newText(coinGroup, coinNum, BackGround.x*1.1, BackGround.y*0.105, Font.font_POP, 50)
-		cntText = display.newText(coinGroup, BreadJson[Index1].breads[Index2].name.."의 개수 : "..cnt[Index1][Index2],
-				 BackGround.x*0.6, BackGround.y*0.45, Font.font_POP, 60)
+		cntText = display.newText(coinGroup, BreadJson.name.."의 개수 : "..cnt, BackGround.x*0.6, BackGround.y*0.45, Font.font_POP, 60)
 		cntText:setFillColor(0)
 		sceneGroup:insert(coinGroup)
 	end
 
 -- makeLvPrice 레벨업, 진화 비용
-	local salePrice
 	local levelPrice = { }
 	local function makeLvPrice()
 		levelPrice[1] = Data[Index1].breads[Index2].Lv1
@@ -78,37 +106,37 @@ function scene:create( event )
 		levelPrice[9] = Data[Index1].breads[Index2].Lv9
 		levelPrice[10] = Data[Index1].breads[Index2].Lv10
 	end
+	makeLvPrice()
 
 -- makeSalePrice 되팔기 비용
-	local salePrice, lv
+	local salePrice
 	local function  makeSalePrice()
-		lv = Bread_level[Index1][Index2]
-		if BreadJson == UBreadInfo then
-			lv = 10
-		end
 		salePrice = 0
 		for i=1, lv do			
 			salePrice = salePrice + levelPrice[i]
 		end
-		salePrice = salePrice * 1.5
+
+		if index == 2 then
+			salePrice = salePrice * 2
+		else
+			salePrice = salePrice * 1.5
+		end
 
 		-- 반죽만 있는 빵 가격
 		if Index1 == 1 and Index2 == 1 then 
 			salePrice = 300
 		end
-		
 	end
 
--- [upSetGroup] Up키 셋팅
+-- [upSetGroup] Up키 셋팅 -- cnt > 0 and Index == 1
 	local upgradeKey, upText, uCoin, upCoin
 	local upSetGroup
-	local function UpSet ()
-		lv = Bread_level[Index1][Index2]	
+	local function UpSet ()	
 		upSetGroup = display.newGroup()
-		if breadsCnt[Index1][Index2] > 0 and Bread_level[Index1][Index2] == 10 then
+		if lv == 10 then
 			upKey = display.newImage(upSetGroup, "Content/images/illuBook_upgrade2.png")
 			upText = display.newImage(upSetGroup, "Content/images/text_upgrade.png")
-		else			--if Bread_level[Index1][Index2] < 10 then
+		else			-- lv < 10
 			upKey = display.newImage(upSetGroup, "Content/images/illuBook_upgrade.png")
 			upText = display.newImage(upSetGroup, "Content/images/text_levelUpSmall.png")			
 		end
@@ -123,30 +151,19 @@ function scene:create( event )
 	end
 
 -- [infoGroup, lvGroup, saleC] info function (빵이름, 빵이미지, 빵소개, 빵레벨, 새빵)
-	local breadName, breadImage, breadSentence, breadLevel, new
+	local breadName, breadImage, breadSentence, new
 	local leftKey, rightKey 
-	local saleC, saleCGroup
-	local infoGroup, lvGroup
+	local saleC, infoGroup, lvGroup
 
-	local function level(js)
+-- [NameAndLv] 기본빵일때 빵이름 + 레벨
+	local function NameAndLv()  
 		lvGroup = display.newGroup()
-		breadLevel = display.newText(lvGroup, js[Index1].breads[Index2].name.."  Lv."..Bread_level[Index1][Index2], infoGround.x, infoGround.y*0.335, Font.font_POP, 70)
-		--breadLevel = display.newText(lvGroup ,"Lv."..Bread_level[Index1][Index2], infoGround.x, infoGround.y*0.335, Font.font_POP, 80)
-		--breadLevel:setFillColor(0)
+		breadName = display.newText(lvGroup, BreadJson.name.."  Lv."..lv, infoGround.x, infoGround.y*0.335, Font.font_POP, 70)
 		sceneGroup:insert(lvGroup)
 	end
 
-	-- [saleGroup] 판매키
-	local saleGroup = display.newGroup()
-	local saleKey = display.newImage(saleGroup,"Content/images/illuBook_sale.png")
-	saleKey.x, saleKey.y = infoGround.x*0.55, infoGround.y*1.5
-	local saleKeyText = display.newImage(saleGroup, "Content/images/text_sale.png")
-	saleKeyText.x, saleKeyText.y = saleKey.x*0.7, saleKey.y
-	sceneGroup:insert(saleGroup)	
-
-	local sCoin = display.newImage(saleGroup,"Content/images/coin.png")
-	sCoin.x, sCoin.y = saleKey.x*1.1, saleKey.y
-
+-- [salekey, saleCoin] 판매키, 가격 텍스트
+	local saleGroup, saleKey, saleKeyText, sCoin
 	local function saleCoin()
 		makeSalePrice()
 		saleCGroup = display.newGroup()
@@ -154,35 +171,44 @@ function scene:create( event )
 		sceneGroup:insert(saleCGroup)
 	end
 
-	local function infoBasic(js)
+	local function salekey()
+		saleGroup = display.newGroup()
+		saleKey = display.newImage(saleGroup,"Content/images/illuBook_sale.png")
+		saleKey.x, saleKey.y = infoGround.x*0.55, infoGround.y*1.5
+		saleKeyText = display.newImage(saleGroup, "Content/images/text_sale.png")
+		saleKeyText.x, saleKeyText.y = saleKey.x*0.7, saleKey.y
+		sCoin = display.newImage(saleGroup,"Content/images/coin.png")
+		sCoin.x, sCoin.y = saleKey.x*1.1, saleKey.y
+		sceneGroup:insert(saleGroup)
+		saleCoin()
+	end
+
+-- [infoBasic]
+	local function infoBasic()
 		infoGroup = display.newGroup()
-		makeCoin()
-		Bimage = js[Index1].breads[Index2].image
-		print(js[Index1].breads[Index2].name.."빵의 정보창")
-		--breadName = display.newText(infoGroup, js[Index1].breads[Index2].name, infoGround.x, infoGround.y*0.335, Font.font_POP, 70)
-		breadImage = display.newImageRect(infoGroup, "Content/images/"..Bimage..".png",900,900)
-		breadImage.x, breadImage.y = infoGround.x, infoGround.y*0.8
-		breadSentence = display.newText(infoGroup,js[Index1].breads[Index2].sentence, infoGround.x, infoGround.y*1.25, 950,350 ,Font.font_POP, 50)
-		breadSentence:setFillColor(0)
+		CoinAndCnt()
 		makeLvPrice()
-		makeSalePrice()		
-		-- BreadJson이 Data일때
-		if js == Data then 	
-			level(js)
-			UpSet()
+		makeSalePrice()
+		if Index == 1 then -- 기본 빵
+			NameAndLv()
+		else
+			breadName = display.newText(infoGroup, BreadJson.name, infoGround.x, infoGround.y*0.335, Font.font_POP, 70)
 		end
+		breadImage = display.newImageRect(infoGroup, "Content/images/"..BreadJson.image..".png",900,900)
+		breadImage.x, breadImage.y = infoGround.x, infoGround.y*0.8
+		breadSentence = display.newText(infoGroup, BreadJson.sentence, infoGround.x, infoGround.y*1.25, 950,350 ,Font.font_POP, 50)
+		breadSentence:setFillColor(0)	
 		if open[Index1][Index2] == -1 then
 			new = display.newImage(infoGroup, "Content/images/new.png")
 			new.x, new.y = BackGround.x*0.45, BackGround.y*0.55	
 			open[Index1][Index2] = 1
 		end	
 		saleCoin()	
-		open[Index1][Index2] = 1
+		-- open[Index1][Index2] = 1
 		sceneGroup:insert(infoGroup)
-		sceneGroup:insert(lvGroup)
 	end
 
-	infoBasic(BreadJson)
+	infoBasic()
 
 -- [keyGroup] 방향키
 	local keyGroup = display.newGroup()
@@ -192,31 +218,66 @@ function scene:create( event )
 	rightKey.x, rightKey.y = infoGround.x*1.9, infoGround.y	
 	sceneGroup:insert(keyGroup)	
 
--- 되팔기 작동 함수 (빵 - 1, 코인 + a, 판매완료창)	
+-- 판매 작동 함수 (빵 - 1, 코인 + a)	
 	local function sale( event )
 		audio.play(soundTable["cashSound"],  {channel=4})	
-		if cnt[Index1][Index2] > 0 then
-			cnt[Index1][Index2] = cnt[Index1][Index2] - 1
-			coinNum = coinNum + salePrice
-			-----showCoin 관련 수정
-			showCoin.text = coinNum
-			coinGroup:removeSelf()
-			makeCoin()
+		cnt = cnt - 1
+		if Index == 1 then
+			breadsCnt[Index1][Index2] = cnt
+		else
+			UbreadsCnt[Index1][Index2] = cnt
 		end
+		coinNum = coinNum + salePrice
+		coinGroup:removeSelf()
+		--upSetGroup:removeSelf()
+		saleCGroup:removeSelf()
+		saleGroup:removeSelf()
+		-- NameAndLv()
+		CoinAndCnt()
+		if Index == 1 and cnt > 0 then
+			upSetGroup:removeSelf()
+			UpSet()
+			upKey:addEventListener("tap", levelUp)
+		end	
+		if cnt > 0 then
+			salekey()
+			saleKey:addEventListener("tap", sale)
+		end
+
+
 	end
 
--- [upGroup] 업그레이드창 함수
+-- [upGroup] 업그레이드창 함수 (기본빵-1, 코인-a, 업빵+1)
 	local dark, upWindow, upSuc, upNew1, upNew2
 	local upBread, upBreadN, upBreadI
 	local upDel, upCheckI, upCheckT
 	local upGroup
 
 	local function upgradeOK (event)
+		cnt = cnt - 1
+		breadsCnt[Index1][Index2] = cnt
+		UbreadsCnt[Index1][Index2] = UbreadsCnt[Index1][Index2] + 1
+		openUBread[Index1][Index2] = -1
+
 		audio.play(soundTable["clickSound"],  {channel=5})	
+		coinGroup:removeSelf()
 		upGroup:removeSelf()
-		makeCoin()
-		level(BreadJson)	
-		saleCoin()
+		upSetGroup:removeSelf()
+		saleGroup:removeSelf()
+		saleCGroup:removeSelf()
+		CoinAndCnt()	
+
+		-- setting()
+		if Index == 1 and cnt > 0 then
+			UpSet()
+			upKey:addEventListener("tap", levelUp)
+		end	
+
+		if cnt > 0 then
+			salekey()
+			saleKey:addEventListener("tap", sale)
+		end
+
 	end
 
 	local function upgrade() 
@@ -243,9 +304,6 @@ function scene:create( event )
 		upCheckI.x, upCheckI.y = upWindow.x, upWindow.y*1.45
 		upCheckT = display.newImage(upGroup, "Content/images/text_OK.png")
 		upCheckT.x, upCheckT.y = upCheckI.x, upCheckI.y
-		-- breadsCnt[Index1][Index2] = breadsCnt[Index1][Index2] - 1
-		UbreadsCnt[Index1][Index2] = UbreadsCnt[Index1][Index2] + 1
-		openUBread[Index1][Index2] = -1
 
 		sceneGroup:insert(upGroup)
 		upDel:addEventListener("tap", upgradeOK)
@@ -254,36 +312,47 @@ function scene:create( event )
 
 -- 레벨업 함수 
 	local function levelUp( event )
-		if coinNum >= levelPrice[lv] and Bread_level[Index1][Index2] < 10 
-			and cnt[Index1][Index2] > 0 and levelPrice[lv] ~= 0 then
-			audio.play(soundTable["levelUpSound"],  {channel=6})		
-			Bread_level[Index1][Index2] = Bread_level[Index1][Index2]+ 1
+		if coinNum >= levelPrice[lv] and levelPrice[lv] ~= 0 and lv == 10 then
+			upgrade()
+		elseif coinNum >= levelPrice[lv] and levelPrice[lv] ~= 0 then
+			audio.play(soundTable["levelUpSound"],  {channel=6})
+			lv = lv + 1		
+			Bread_level[Index1][Index2] = lv
 			coinNum = coinNum - levelPrice[lv]
 			coinGroup:removeSelf()
-			upSetGroup:removeSelf()
-			breadLevel:removeSelf()
+			lvGroup:removeSelf()
 			saleCGroup:removeSelf()
-			makeLvPrice()
-			makeCoin()	
-			UpSet()				
-			level(BreadJson)			
+			saleGroup:removeSelf()
+			--upSetGroup:removeSelf()			
+			-- makeLvPrice()
+			CoinAndCnt()					
+			NameAndLv()			
 			saleCoin()
-			upKey:addEventListener("tap", levelUp)
-		elseif cnt[Index1][Index2] > 0 and Bread_level[Index1][Index2] == 10 and cnt[Index1][Index2] > 0 then
-			coinGroup:removeSelf()
-			upSetGroup:removeSelf()
-			breadLevel:removeSelf()
-			saleCGroup:removeSelf()
-			upgrade()
+			-- setting()
+			if Index == 1 and cnt > 0 then
+				upSetGroup:removeSelf()
+				UpSet()
+				upKey:addEventListener("tap", levelUp)
+			end	
+
+			if cnt > 0 then
+				salekey()
+				saleKey:addEventListener("tap", sale)
+			end
 		end
 	end
 
 -- 되팔기, 레벨업 세팅 함수
 	local function setting()
-		if BreadJson ~= UBreadInfo then
+		if Index == 1 and cnt > 0 then
+			UpSet()
 			upKey:addEventListener("tap", levelUp)
 		end	
-		saleKey:addEventListener("tap", sale)
+
+		if cnt > 0 then
+			salekey()
+			saleKey:addEventListener("tap", sale)
+		end
 	end
 
 	setting()
@@ -296,89 +365,55 @@ function scene:create( event )
 		elseif Index2 == 1 then
 			index1, index2 = Index1 - 1, 8
 			if open[index1][index2] ~= 0 then
-				Index1, Index2 = index1, index2 
-				infoGroup:removeSelf()				
-				coinGroup:removeSelf()
-				saleCGroup:removeSelf()
-				if BreadJson ~= UBreadInfo then
-					lvGroup:removeSelf()
-					upSetGroup:removeSelf()					
-				end
-				infoBasic(BreadJson)
-				setting()
+				composer.setVariable("Id1", index1)
+				composer.setVariable("Id2", index2)
+				composer.setVariable("Id", Index)
+				composer.removeScene("bookInfo")		
+				composer.gotoScene( "bookInfo" )
+				print("옆으로 쓩")
 			end
 		else
 			index1, index2 = Index1, Index2 - 1
 			if open[index1][index2] ~= 0 then
-				Index1, Index2 = index1, index2 
-				infoGroup:removeSelf()
-				coinGroup:removeSelf()	
-				saleCGroup:removeSelf()								
-				if BreadJson ~= UBreadInfo then
-					lvGroup:removeSelf()
-					upSetGroup:removeSelf()					
-				end
-				infoBasic(BreadJson)
-				setting()
+				composer.setVariable("Id1", index1)
+				composer.setVariable("Id2", index2)
+				composer.setVariable("Id", Index)
+				composer.removeScene("bookInfo")		
+				composer.gotoScene( "bookInfo" )
+				print("옆으로 쓩")
 			end
 		end
-	end 
+	end
 
 	local function moveRightKey( event )
 		audio.play(soundTable["clickSound"],  {channel=5})	
-		local index1 
-		local index2
+		local index1, index2
 		if Index1 == 4 and Index2 == 8 then
 		elseif Index2 == 8 then
 			index1, index2 = Index1 + 1, 1
 			if open[index1][index2] ~= 0 then
-				Index1, Index2 = index1, index2 
-				infoGroup:removeSelf()
-				coinGroup:removeSelf()
-				saleCGroup:removeSelf()
-				if BreadJson ~= UBreadInfo then
-					lvGroup:removeSelf()
-					upSetGroup:removeSelf()					
-				end
-				infoBasic(BreadJson)
-				setting()
+				composer.setVariable("Id1", index1)
+				composer.setVariable("Id2", index2)
+				composer.setVariable("Id", Index)
+				composer.removeScene("bookInfo")		
+				composer.gotoScene( "bookInfo" )
+				print("옆으로 쓩")
 			end
 		else
 			index1, index2 = Index1, Index2 + 1
 			if open[index1][index2] ~= 0 then
-				Index1, Index2 = index1, index2 
-				infoGroup:removeSelf()				
-				coinGroup:removeSelf()
-				saleCGroup:removeSelf()
-				if BreadJson ~= UBreadInfo then
-					lvGroup:removeSelf()
-					upSetGroup:removeSelf()					
-				end
-				infoBasic(BreadJson)
-				setting()
+				composer.setVariable("Id1", index1)
+				composer.setVariable("Id2", index2)
+				composer.setVariable("Id", Index)
+				composer.removeScene("bookInfo")		
+				composer.gotoScene( "bookInfo" )
+				print("옆으로 쓩")
 			end
 		end
 	end
+
 	leftKey:addEventListener("tap", moveLeftKey)
 	rightKey:addEventListener("tap", moveRightKey)
-
--- 도감 이동 함수
-	local function goBook(event)
-		audio.play(soundTable["clickSound"],  {channel=5})	
-		print("move!!")
-		infoGroup:removeSelf()
-		coinGroup:removeSelf()
-		saleCGroup:removeSelf()
-		if BreadJson ~= UBreadInfo then
-			upSetGroup:removeSelf()
-			breadLevel:removeSelf()	
-		end	
-		composer.removeScene("bookInfo")
-		composer.gotoScene( "bookMain" )
-	end
-	
-	illuBook:addEventListener("tap", goBook)
-	illuBook_text:addEventListener("tap", goBook)
 
 -- 레이어정리
 	--[[sceneGroup:insert(BackGround)
@@ -393,18 +428,6 @@ function scene:create( event )
 				sceneGroup:insert(upSetGroup)	
 				--sceneGroup:insert(upGroup)		
 			end	]]
-
--- 홈으로 이동
-	local function goHome(event)
-		audio.play(soundTable["clickSound"],  {channel=5})	
-		print("goHome!!")
-		composer.removeScene("bookInfo")
-		-------showCoin 관련 수정
-		showCoin.isVisible = true
-		showCoin.text = coinNum
-		composer.gotoScene( "home" )
-	end
-	home:addEventListener("tap",goHome)
 
 end
 
