@@ -3,7 +3,7 @@
 -- bookMain.lua
 --
 -----------------------------------------------------------------------------------------
--- coinNum = 10000
+--coinNum = 10000
 
 local composer = require( "composer" )
 local scene = composer.newScene()
