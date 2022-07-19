@@ -3,7 +3,6 @@
 local composer = require( "composer" )
 local scene = composer.newScene()
 local text_list
-local list
 local close
 local check
 
@@ -30,6 +29,8 @@ local breadRoom
 local text_breadRoomIcon
 local pushIcon
 local text_push
+local text_deco
+local dia
 
 local icon
 local icon_inven = {}
@@ -45,14 +46,14 @@ local breadGroup = display.newGroup()
 local k
 --local breadRoom_count = 0 		--전역변수 때문에 지웁니다!
 -- 넣은 빵의 세부정보 --
-local breadInfo_background
+--[[local breadInfo_background
 local breadInfo_profile
 
 local breadInfo_image = {}
 local breadInfo_level = {} -- 빵 도감에서 주는 Json에서는 breadInfo에 레벨 정보까지 추가하기
 local breadInfo_name = {}
 local breadInfo_text = {}
-local breadInfoGroup = display.newGroup()
+local breadInfoGroup = display.newGroup()]]
 
 local reverse
 local t1
@@ -108,15 +109,14 @@ function scene:create( event )
 	homeIcon = display.newImageRect("Content/images/home.png", display.contentWidth*0.07, display.contentHeight*0.04)
 	homeIcon.x, homeIcon.y = display.contentWidth*0.08, display.contentHeight*0.05
 
-	breadIcon = display.newImageRect("Content/images/breadIcon.png", display.contentWidth*0.1, display.contentHeight*0.05)
+	breadIcon = display.newImageRect("Content/images/breadRoom2.png", display.contentWidth*0.1, display.contentHeight*0.05)
 	breadIcon.x, breadIcon.y = display.contentWidth*0.2, display.contentHeight*0.054
 
-	text_breadRoom = display.newText("빵방", display.contentWidth*0.5, display.contentHeight*0.5,"font/ONE Mobile POP.ttf", 40)
-	text_breadRoom:setFillColor(1)
-	text_breadRoom.x, text_breadRoom.y = display.contentWidth*0.29, display.contentHeight*0.05
+	text_breadRoom = display.newImageRect("Content/images/text_breadRoom.png", display.contentWidth*0.46, display.contentHeight*0.27)
+	text_breadRoom.x, text_breadRoom.y = display.contentWidth*0.3, display.contentHeight*0.05
 
-	coinIcon = display.newImageRect("Content/images/coinIcon.png", display.contentWidth*0.2, display.contentHeight*0.035)
-	coinIcon.x, coinIcon.y = display.contentWidth*0.5, display.contentHeight*0.05
+	coinIcon = display.newImageRect("Content/images/coinIcon.png", display.contentWidth*0.22, display.contentHeight*0.035)
+	coinIcon.x, coinIcon.y = display.contentWidth*0.52, display.contentHeight*0.05
 		
 	showCoin.isVisible = true
 
@@ -136,39 +136,51 @@ function scene:create( event )
 	bookIcon = display.newImageRect("Content/images/book.png", display.contentWidth*0.11, display.contentHeight*0.06)
  	bookIcon.x, bookIcon.y = display.contentWidth*0.73, display.contentHeight*0.05
 
-	text_bookIcon = display.newText("도감",display.contentWidth*0.5, display.contentHeight*0.5,"font/ONE Mobile Bold.ttf", 23)
-    text_bookIcon:setFillColor(1)
+	text_bookIcon = display.newImage("Content/images/text_Book2.png")
 	text_bookIcon.x, text_bookIcon.y = display.contentWidth*0.73, display.contentHeight*0.081
 
 	store = display.newImageRect("Content/images/store.png", display.contentWidth*0.1, display.contentHeight*0.07)
- 	store.x, store.y = display.contentWidth*0.9, display.contentHeight*0.047
+ 	store.x, store.y = display.contentWidth*0.905, display.contentHeight*0.047
 
-	text_storeIcon = display.newText("상점",display.contentWidth*0.5, display.contentHeight*0.46,"font/ONE Mobile Bold.ttf", 23)
-	text_storeIcon:setFillColor(1)
-	text_storeIcon.x, text_storeIcon.y = display.contentWidth*0.9, display.contentHeight*0.081
-
-	temp = display.newImageRect("Content/images/temp.png", display.contentWidth*0.1, display.contentHeight*0.05)
+	text_storeIcon = display.newImage("Content/images/text_store.png")
+	text_storeIcon.x, text_storeIcon.y = display.contentWidth*0.9, display.contentHeight*0.08
+	
+	temp = display.newImageRect("Content/images/temp.png", display.contentWidth*0.08, display.contentHeight*0.05)
  	temp.x, temp.y = display.contentWidth*0.73, display.contentHeight*0.14
 
-	text_tempIcon = display.newText("업적",display.contentWidth*0.5, display.contentHeight*0.46,"font/ONE Mobile Bold.ttf", 23)
-	text_tempIcon:setFillColor(1)
+	text_tempIcon = display.newImage("Content/images/text_acheivements.png")
 	text_tempIcon.x, text_tempIcon.y = display.contentWidth*0.73, display.contentHeight*0.17
 
-	breadRoom = display.newImageRect("Content/images/breadRoom.png", display.contentWidth*0.09, display.contentHeight*0.04)
-	breadRoom.x, breadRoom.y = display.contentWidth*0.9, display.contentHeight*0.138
+	dia = display.newImageRect("Content/images/dia.png", display.contentWidth*0.09, display.contentHeight*0.04)
+	dia.x, dia.y = display.contentWidth*0.9, display.contentHeight*0.138
 
-	text_breadRoomIcon = display.newText("빵방",display.contentWidth*0.5, display.contentHeight*0.46,"font/ONE Mobile Bold.ttf", 23)
-	text_breadRoomIcon:setFillColor(1)
-	text_breadRoomIcon.x, text_breadRoomIcon.y = display.contentWidth*0.9, display.contentHeight*0.17
+	text_deco = display.newImage("Content/images/text_deco.png")
+	text_deco.x, text_deco.y = display.contentWidth*0.905, display.contentHeight*0.17
 	
 	-- 빵 넣기 아이콘 --
+	local putBreadGroup = display.newGroup()
 	pushIcon = display.newImageRect("Content/images/push.png", display.contentWidth*0.25, display.contentHeight*0.05)
 	pushIcon.x, pushIcon.y = display.contentWidth*0.24, display.contentHeight*0.15
 
-	text_push = display.newText("빵 넣기",display.contentWidth*0.5, display.contentHeight*0.5,"font/ONE Mobile Bold.ttf", 40)
-    text_push:setFillColor(1)
+	text_push = display.newImage("Content/images/text_breadPush.png")
 	text_push.x, text_push.y = display.contentWidth*0.24, display.contentHeight*0.15
     text_push:toFront()
+
+	local list
+
+	local breadRoom_image = {}
+	local breadGroup = display.newGroup()
+
+	-- 넣은 빵의 세부정보 --
+	local breadInfo_background
+	local breadInfo_profile
+
+	local breadInfo_image = {}
+	local breadInfo_level = {} -- 빵 도감에서 주는 Json에서는 breadInfo에 레벨 정보까지 추가하기
+	local breadInfo_name = {}
+	local breadInfo_text = {}
+	local breadInfoGroup = display.newGroup()
+	local breadOutGroup = display.newGroup()
 
 	local function BreadMove(obj)
 		print("빵무브")
@@ -245,9 +257,10 @@ function scene:create( event )
 
 			breadInfoGroup:toFront()
 
-			closeIcon = display.newImageRect("Content/images/close.png", display.contentWidth*0.1, display.contentHeight*0.05)
+			closeIcon = display.newImageRect(breadInfoGroup, "Content/images/close.png", display.contentWidth*0.1, display.contentHeight*0.05)
 			closeIcon.x, closeIcon.y = display.contentWidth*0.962, display.contentHeight*0.813
 
+			sceneGroup:insert(breadInfoGroup)
 			closeIcon:addEventListener("tap", infoClosed)
 		
 		elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
@@ -264,26 +277,30 @@ function scene:create( event )
 		elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
 			audio.play( soundTable["clickSound"],  {channel=5}) 
 
-			list = display.newImageRect("Content/images/list.png", display.contentWidth*0.78, display.contentHeight*0.62)
+			list = display.newImageRect(putBreadGroup, "Content/images/list.png", display.contentWidth*0.78, display.contentHeight*0.62)
 			list.x, list.y = display.contentWidth*0.5, display.contentHeight*0.54
 	   
-			text_list = display.newText("빵 목록",display.contentWidth*0.5, display.contentHeight*0.5,"font/ONE Mobile Bold.ttf", 50)
+			text_list = display.newText(putBreadGroup, "빵 목록",display.contentWidth*0.5, display.contentHeight*0.5,"font/ONE Mobile Bold.ttf", 50)
 			text_list:setFillColor(1)
 			text_list.x, text_list.y = display.contentWidth*0.5, display.contentHeight*0.27
 
-			close = display.newImageRect("Content/images/close.png", display.contentWidth*0.1, display.contentHeight*0.05)
+			close = display.newImageRect(putBreadGroup, "Content/images/close.png", display.contentWidth*0.1, display.contentHeight*0.05)
 			close.x, close.y = display.contentWidth*0.8565, display.contentHeight*0.24
 			
-			push = display.newImageRect("Content/images/push.png", display.contentWidth*0.25, display.contentHeight*0.05)
+			push = display.newImageRect(putBreadGroup, "Content/images/push.png", display.contentWidth*0.25, display.contentHeight*0.05)
 			push.x, push.y = display.contentWidth*0.5, display.contentHeight*0.79
 
-			text_push2 = display.newText("넣기",display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile Bold.ttf", 45)
+			text_push2 = display.newText(putBreadGroup, "넣기",display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile Bold.ttf", 45)
 			text_push2:setFillColor(1)
 			text_push2.x, text_push2.y = display.contentWidth*0.5, display.contentHeight*0.79
+
+			-- ***미해금까지 같이 뜨게 하여 에러 해결 중*** --
+			sceneGroup:insert(putBreadGroup)
 
 			index1, index2 = 1, 1
 			local jul = 0.15
 			
+			--[[
 			function openBreadsCNT()
 				count = count + 1
 				local index1 = 1
@@ -314,7 +331,9 @@ function scene:create( event )
 			end
 			print("총 발견한 빵은.."..openBreadsCNT())
 			breadsCNT = openBreadsCNT()
-				
+			]]
+
+			breadsCNT = 64
 			local m = 0
 			
 			local iconIndex = 1
@@ -356,35 +375,36 @@ function scene:create( event )
 
 					-- 한 줄에 3개씩 뜨게 위치 설정--
 					if(j%3 == 1 or i == 1) then
-						icon_inven[iconIndex].x = display.contentWidth*0.25
-						icon_inven[iconIndex].y = display.contentHeight*(0.38 + (0.13*m))
+						icon_inven[iconIndex].x = display.contentWidth*0.13
+						icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
 
-						bread_name[iconIndex].x = display.contentWidth*0.25
-						bread_name[iconIndex].y = display.contentHeight*(0.427 + (0.13*m))
+						bread_name[iconIndex].x = display.contentWidth*0.13
+						bread_name[iconIndex].y = display.contentHeight*(0.23 + (0.13*m))
 
-						bread_inven[iconIndex].x = display.contentWidth*0.25
-						bread_inven[iconIndex].y = display.contentHeight*(0.38 + (0.13*m))	
+						bread_inven[iconIndex].x = display.contentWidth*0.14
+						bread_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))	
 						iconIndex = iconIndex + 1	
 					end
 					if(j%3 == 2 or i == 2) then
-						icon_inven[iconIndex].x = display.contentWidth*0.5
-						icon_inven[iconIndex].y = display.contentHeight*(0.38 + (0.13*m))
+						icon_inven[iconIndex].x = display.contentWidth*0.38
+						icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
 					
-						bread_name[iconIndex].x = display.contentWidth*0.5
-						bread_name[iconIndex].y = display.contentHeight*(0.427 + (0.13*m))
+						bread_name[iconIndex].x = display.contentWidth*0.38
+						bread_name[iconIndex].y = display.contentHeight*(0.23 + (0.13*m))
 
-						bread_inven[iconIndex].x = display.contentWidth*0.5
-						bread_inven[iconIndex].y = display.contentHeight*(0.38 + (0.13*m))
+						bread_inven[iconIndex].x = display.contentWidth*0.39
+						bread_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
 						iconIndex = iconIndex + 1
 					end
 					if(j%3 ==0) then
-						icon_inven[iconIndex].x = display.contentWidth*0.75
-						icon_inven[iconIndex].y = display.contentHeight*(0.38 + (0.13*m))
-						bread_name[iconIndex].x = display.contentWidth*0.75
-						bread_name[iconIndex].y = display.contentHeight*(0.427 + (0.13*m))
+						icon_inven[iconIndex].x = display.contentWidth*0.63
+						icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
 
-						bread_inven[iconIndex].x = display.contentWidth*0.75
-						bread_inven[iconIndex].y = display.contentHeight*(0.38 + (0.13*m))
+						bread_name[iconIndex].x = display.contentWidth*0.63
+						bread_name[iconIndex].y = display.contentHeight*(0.23 + (0.13*m))
+
+						bread_inven[iconIndex].x = display.contentWidth*0.63
+						bread_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
 						iconIndex = iconIndex + 1
 						m = m + 1
 					end
@@ -393,8 +413,31 @@ function scene:create( event )
 					-- 체크표시했으면(빵방에 넣었으면) 닫기 눌렀다가 빵넣기 다시 눌러도 체크가 다시 나타나게 함
 					for i=1,  breadsCNT do 
 						if(check_list[i] == 0 and check_inven[i] ~= nill) then
-							check_inven[i]:toFront()
+							--check_inven[i]:toFront()
 						end
+					end
+				-- *** 에러 해결용 추가 코드 *** --
+				else
+					icon_inven[iconIndex] = display.newImageRect(breadGroup, "Content/images/illu_book_secret.png", display.contentWidth*0.29, display.contentHeight*0.17)
+
+					breadGroup:toFront()
+
+					-- 한 줄에 3개씩 뜨게 위치 설정--
+					if(j%3 == 1 or i == 1) then
+						icon_inven[iconIndex].x = display.contentWidth*0.13
+						icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+						iconIndex = iconIndex + 1	
+					end
+					if(j%3 == 2 or i == 2) then
+						icon_inven[iconIndex].x = display.contentWidth*0.38
+						icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+						iconIndex = iconIndex + 1
+					end
+					if(j%3 ==0) then
+						icon_inven[iconIndex].x = display.contentWidth*0.63
+						icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+						iconIndex = iconIndex + 1
+						m = m + 1
 					end
 				end
 				index2 = index2 + 1
@@ -410,6 +453,7 @@ function scene:create( event )
 			end
 
 			-- 스크롤 --
+			local widget = require( "widget" )
 			local function scroll( event )
 				if ( event.phase == "began" ) then
 					display.getCurrentStage():setFocus( event.target )
@@ -428,8 +472,26 @@ function scene:create( event )
 					end
 					display.getCurrentStage():setFocus( nil )
 					event.target.isFocus = false
-				 end
+				end
+				-- *** 에러 해결용 추가 코드 *** --
+				if ( event.limitReached ) then
+					if ( event.direction == "up" ) then print( "Reached bottom limit" )
+					 elseif ( event.direction == "down" ) then print( "Reached top limit" )
+					end
+				end
 			end
+
+			local scrollView = widget.newScrollView(
+				{
+					horizontalScrollDisabled=true,
+					left = 165,
+					top = 790,
+					width = 1115,
+					height = 1150,
+					backgroundColor = { 0, 0, 0 , 0}
+
+				}
+			)
 
 			-- 빵을 체크 클릭/해제할 때 발생하는 이벤트 --
 			function checked( event )
@@ -460,6 +522,29 @@ function scene:create( event )
 						--check_inven[k]:toFront()
 --						check_inven[k]:addEventListener("touch", scroll)
 					
+					local n1 = k % 3
+					local n2 = k / 3
+
+						if event.target.x >= 907 then
+							check_inven[k].x = event.target.x*0.85
+							if (n1 == 0) then
+								check_inven[k].y = event.target.y*0.75
+							end
+						elseif event.target.x >= 547 then
+							check_inven[k].x = event.target.x*0.77
+							if(n1 == 2) then
+								check_inven[k].y = event.target.y*0.88
+							end
+						elseif event.target.x >= 187 then
+							check_inven[k].x = event.target.x*0.33
+							if (n1 == 1) then
+								check_inven[k].y = event.target.y
+							end
+						end
+						print(idx1)
+						print(event.target.x)	
+						print(event.target.y)	
+						--[[
 						local n = k / 3
 						-- 체크 위치 설정 --
 						if(k%3 == 1 or k == 1) then
@@ -472,12 +557,12 @@ function scene:create( event )
 							check_inven[k].x = display.contentWidth*0.66
 							check_inven[k].y = display.contentHeight*(0.205 + (0.13*n))
 						end
+						]]
 						check_list[k] = 0
 
 						-- 체크와 동시에 빵방에 삽입 --
-						--image = Data[1].breads[k].image
 						image = info[index1].breads[index2].image
-						breadRoom_image[k] = display.newImageRect("Content/images/"..image..".png", display.contentWidth*0.17, display.contentHeight*0.1)
+						breadRoom_image[k] = display.newImageRect(breadOutGroup, "Content/images/"..image..".png", display.contentWidth*0.17, display.contentHeight*0.1)
 						breadRoom_image[k].x, breadRoom_image[k].y = math.random(display.contentWidth*0.12, display.contentWidth*0.9), math.random(display.contentHeight*0.31, display.contentHeight*0.71)
 						breadRoom_image[k]:toBack()
 					
@@ -492,6 +577,8 @@ function scene:create( event )
 						--BreadMove(breadRoom_image[k])
 						--breadRoom_image[k]:toBack()
 						
+						sceneGroup:insert(breadOutGroup)
+						--[[
 						list:toFront()
 						text_list:toFront()
 						close:toFront()
@@ -499,6 +586,8 @@ function scene:create( event )
 						text_push2:toFront()
 						--scrollView:toFront()
 						breadGroup:toFront()
+						]]
+						putBreadGroup:toFront()
 
 						for i=1, breadsCNT do -- 빵 개수만큼 체크 개수 생성
 							if(check_list[i] == 0 and check_inven[i] ~= nill) then
@@ -520,7 +609,11 @@ function scene:create( event )
 				event.target.isFocus = false
 			end
 
-			breadGroup:addEventListener("touch", scroll)
+			--breadGroup:addEventListener("touch", scroll)
+
+			scrollView:insert(breadGroup)
+			scrollView:addEventListener("touch", scroll)
+			putBreadGroup:insert(scrollView)
 
 			-- 창 닫기 --
 			local function closed( event )
@@ -530,25 +623,27 @@ function scene:create( event )
 				elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
 					audio.play( soundTable["clickSound"],  {channel=5}) 
 
-					display.remove(close)
+					--[[display.remove(close)
 					display.remove(list)
 					display.remove(text_list)
 					display.remove(icon1)
 					display.remove(check)
 					display.remove(push)
-					display.remove(text_push2)
+					display.remove(text_push2)]]
+					putBreadGroup:toBack()
 
 					for i=1, breadsCNT do
 						display.remove(bread_name[i])
 						display.remove(icon_inven[i])
 						display.remove(bread_inven[i])
+						display.remove(check_inven[i])
 						
 						-- 체크 잠시 사라지게 했다가 다시 뜨게 함
 						--if(check_list[i] == 0 and check_inven[i] ~= nill) then
 						if(check_inven[i] ~= nill) then
-							check_inven[i]:toBack()
+							--check_inven[i]:toBack()
 			
-							breadRoom_image[i]:toFront()
+							--breadRoom_image[i]:toFront()
 						end
 					end
 				end
@@ -560,9 +655,33 @@ function scene:create( event )
 			--scrollView:insert(breadGroup)
 			--scrollView:addEventListener("touch",scroll)
 
-			for i=1, breadsCNT do	
-				icon_inven[i].param1 = i
-				icon_inven[i]:addEventListener("touch", checked)
+			index1, index2 = 1, 1
+			local jsc, index
+			for i=1, 64 do 
+				if i <= 32 then -- '일반 빵'에서 해금된 빵 가져오기
+					jsc = openBread
+					info = Data
+				else -- '업글 빵'에서 해금된 빵 가져오기
+					jsc = openUBread
+					info = uBreadInfo
+				end
+				lock = jsc[index1][index2]
+				if lock ~= 0 then
+					icon_inven[i].param1 = i
+					--print(lock)
+					icon_inven[i]:addEventListener("touch", checked)
+				end
+
+				index2 = index2 + 1
+					if index2 == 9 then
+						index2 = 1
+						index1 = index1 + 1
+					end
+
+					if i==32 then
+						index1, index2 = 1, 1
+						info = uBreadInfo
+					end
 			end
 			push:addEventListener("touch", closed)
 
@@ -577,6 +696,8 @@ function scene:create( event )
 		print("도감으로 이동")
 		---------showCoin 관련 수정
 		showCoin.isVisible = false
+		showCoin.x, showCoin.y = display.contentWidth*0.35, display.contentHeight*0.04
+		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
 				for i=1, breadsCNT do
@@ -593,6 +714,7 @@ function scene:create( event )
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
 		showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
+		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
 				for i=1, breadsCNT do
@@ -609,6 +731,7 @@ function scene:create( event )
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
 		showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
+		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
 				for i=1, breadsCNT do
@@ -625,6 +748,7 @@ function scene:create( event )
 		------------------showCoin 관련 수정
 		showCoin.isVisible = true
 		showCoin.x, showCoin.y = display.contentWidth*0.35, display.contentHeight*0.04
+		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
 				for i=1, breadsCNT do
@@ -664,8 +788,8 @@ function scene:create( event )
 			sceneGroup:insert(text_storeIcon)
 			sceneGroup:insert(temp)
 			sceneGroup:insert(text_tempIcon)
-			sceneGroup:insert(breadRoom)
-			sceneGroup:insert(text_breadRoomIcon)
+			sceneGroup:insert(text_deco)
+			sceneGroup:insert(dia)
 			
 			sceneGroup:insert(pushIcon)
 			sceneGroup:insert(text_push)
