@@ -90,6 +90,12 @@ function scene:create( event )
 		for i=1, lv do			
 			salePrice = salePrice + levelPrice[i]
 		end
+		salePrice = salePrice * 1.5
+
+		-- 반죽만 있는 빵 가격
+		if Index1 == 1 and Index2 == 1 then 
+			salePrice = 300
+		end
 	end
 
 -- [upSetGroup] Up키 셋팅
@@ -143,7 +149,7 @@ function scene:create( event )
 	local function saleCoin()
 		makeSalePrice()
 		saleCGroup = display.newGroup()
-		saleC = display.newText(saleCGroup, salePrice/2, infoGround.x*0.75, infoGround.y*1.5 , Font.font_POP, 50)
+		saleC = display.newText(saleCGroup, salePrice, infoGround.x*0.75, infoGround.y*1.5 , Font.font_POP, 50)
 		sceneGroup:insert(saleCGroup)
 	end
 
@@ -190,7 +196,7 @@ function scene:create( event )
 		audio.play(soundTable["cashSound"],  {channel=4})	
 		if cnt[Index1][Index2] > 0 then
 			cnt[Index1][Index2] = cnt[Index1][Index2] - 1
-			coinNum = coinNum + salePrice/2
+			coinNum = coinNum + salePrice
 			-----showCoin 관련 수정
 			showCoin.text = coinNum
 			coinGroup:removeSelf()
@@ -247,7 +253,8 @@ function scene:create( event )
 
 -- 레벨업 함수 
 	local function levelUp( event )
-		if coinNum >= levelPrice[lv] and Bread_level[Index1][Index2] < 10 and cnt[Index1][Index2] > 0 then
+		if coinNum >= levelPrice[lv] and Bread_level[Index1][Index2] < 10 
+			and cnt[Index1][Index2] > 0 and levelPrice[lv] ~= 0 then
 			audio.play(soundTable["levelUpSound"],  {channel=6})		
 			Bread_level[Index1][Index2] = Bread_level[Index1][Index2]+ 1
 			coinNum = coinNum - levelPrice[lv]
