@@ -205,6 +205,45 @@ function scene:create( event )
 		end   
 		print(reverse)
 	end
+
+	-- 뒤뚱뒤뚱 걸어가기...인데 미끄러지는 것에 가까운.... (b13에 오브젝트 대입!)
+   --[[
+	local function rockRect(event)
+      local params2 = event.source.params2
+       if ( reverse == 0 ) then
+           reverse = 1
+           transition.to( params2.myObj2 , { rotation=-5, time=500, transition=easing.inOutCubic } )
+       else
+           reverse = 0
+           transition.to( params2.myObj2 , { rotation=5, time=500, transition=easing.inOutCubic } )
+       end
+   end   
+
+    local function walk(b)         
+      fun2 = timer.performWithDelay( 600, rockRect, 0 )
+      fun2.params2 = {myObj2 = b}
+      local dx = math.random( 100, 700 )
+      local dy = math.random( 000, 1100 )
+      print(dx..", "..dy)
+      distanceX = math.abs(dx-b.x)
+      distanceY = math.abs(dy-b.y)
+      transition.to( b, { time = (distanceX + distanceY) * 10,x = dx, y = dy, transition=easing.inOutBack } )
+    end
+    --walk(b13)
+
+	--클릭하면 커졌다가 작아짐 (b13에 오브젝트 대입!)
+   local function re( event )
+      local params = event.source.params
+      transition.scaleTo( params.myObj , { xScale=1, yScale=1, time=800 } )
+   end
+
+   local function taptap1( event )
+      transition.scaleTo( event.target, { xScale=1.2, yScale=1.2, time=800 } )
+      fun = timer.performWithDelay( 800, re, 1 )
+      fun.params = {myObj = b13}
+   end
+   --b13:addEventListener("tap", taptap1)
+   ]]
 		
 	local function infoClosed(event)
 	--	for i=1, 64 do
@@ -280,8 +319,7 @@ function scene:create( event )
 			list = display.newImageRect(putBreadGroup, "Content/images/list.png", display.contentWidth*0.78, display.contentHeight*0.62)
 			list.x, list.y = display.contentWidth*0.5, display.contentHeight*0.54
 	   
-			text_list = display.newText(putBreadGroup, "빵 목록",display.contentWidth*0.5, display.contentHeight*0.5,"font/ONE Mobile Bold.ttf", 50)
-			text_list:setFillColor(1)
+			text_list = display.newImage(putBreadGroup, "Content/images/text_breadList.png")
 			text_list.x, text_list.y = display.contentWidth*0.5, display.contentHeight*0.27
 
 			close = display.newImageRect(putBreadGroup, "Content/images/close.png", display.contentWidth*0.1, display.contentHeight*0.05)
@@ -290,9 +328,8 @@ function scene:create( event )
 			push = display.newImageRect(putBreadGroup, "Content/images/push.png", display.contentWidth*0.25, display.contentHeight*0.05)
 			push.x, push.y = display.contentWidth*0.5, display.contentHeight*0.79
 
-			text_push2 = display.newText(putBreadGroup, "넣기",display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile Bold.ttf", 45)
-			text_push2:setFillColor(1)
-			text_push2.x, text_push2.y = display.contentWidth*0.5, display.contentHeight*0.79
+			text_push2 = display.newImage(putBreadGroup, "Content/images/text_push2.png")
+			text_push2.x, text_push2.y = display.contentWidth*0.477, display.contentHeight*0.79
 
 			-- ***미해금까지 같이 뜨게 하여 에러 해결 중*** --
 			sceneGroup:insert(putBreadGroup)
@@ -574,6 +611,14 @@ function scene:create( event )
 
 						breadRoom_image[k].param10 = k
 						breadRoom_image[k]:addEventListener("touch", shake)
+
+						-- 새로 추가한 모션 --
+						--[[
+						breadRoom_image[k]:addEventListener("touch", rockRect)
+						breadRoom_image[k]:addEventListener("touch", walk)
+						breadRoom_image[k]:addEventListener("touch", re)
+						breadRoom_image[k]:addEventListener("tap", taptap1)
+						]]
 						--BreadMove(breadRoom_image[k])
 						--breadRoom_image[k]:toBack()
 						
