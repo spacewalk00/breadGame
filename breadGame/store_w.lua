@@ -105,7 +105,7 @@ function scene:create( event )
 
 	local wallBtn = display.newRect(display.contentWidth*0.8, display.contentHeight*0.12, 280, 150)
 	wallBtn.alpha = 0.01
-	local wallText = display.newText("벽지", display.contentWidth*0.8, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
+	local wallText = display.newText("카펫", display.contentWidth*0.8, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
 	wallText:setFillColor(0)
 	wallText.size = 60
 	
