@@ -4,8 +4,6 @@
 --
 -----------------------------------------------------------------------------------------
 -- JSON 파싱
-local composer = require( "composer" )
-local scene = composer.newScene()
 local json = require("json")
 
 local function parse()
@@ -13,6 +11,20 @@ local function parse()
 	Data, pos, msg = json.decodeFile(filename)
 end
 parse()
+----------------------경험치/레벨업 보상 관련------------------
+local function parse2()
+	filename = system.pathForFile("Content/JSON/ingredient.json")
+	ingredients, pos2, msg2 = json.decodeFile(filename)
+
+	--[[if ingredients then
+		print(ingredients[1].name)
+	else
+		print(pos2)
+		print(msg2)
+	end]]
+end
+parse2()
+
 
 ---- 새빵 (미해금0 , 해금 -1, 확인했음 1로 변화)
 --[[openBread = { {1, -1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0}, 
@@ -35,7 +47,6 @@ for i=1, 5 do
 end]]
 --
 
-
 --스크롤뷰
 local widget = require("widget")
 --[[local scrollView = widget.newScrollView(
@@ -50,21 +61,6 @@ local widget = require("widget")
 })]]
 --
 
-----------------------경험치/레벨업 보상 관련------------------
-local function parse2()
-	filename = system.pathForFile("Content/JSON/ingredient.json")
-	ingredients, pos2, msg2 = json.decodeFile(filename)
-
-	if ingredients then
-		print(ingredients[1].name)
-	else
-		print(pos2)
-		print(msg2)
-	end
-end
-parse2()
-
-
 local function ingreRandom() --시럽/재료 각각 랜덤으로 하나씩 보상--
 	audio.play( soundTable["rewardSound"] ,  {channel=7})
 	local n = math.random(2, 5) --초코시럽(2), 딸기시럽(3), 슈크림시럽(4)
@@ -73,21 +69,22 @@ local function ingreRandom() --시럽/재료 각각 랜덤으로 하나씩 보�
 	n = math.random(5, 12) -- 재료 랜덤하게
 	ingreCnt[n] = ingreCnt[n] + 1
 end
-
 ---------성공빵 비율/ level1: 50 (+ 5%) / portion = 5 (+0.5)-----------
 local function successPortion()
-		for i=1, 10 do
-			if levelNum == i then
-				portion = 5 + 0.5*(i-1)
-			end
+	for i=1, 10 do
+		if levelNum == i then
+			portion = 5 + 0.5*(i-1)
 		end
-		print(levelNum.."에서 성공비율은 "..portion)
+	end
+	print(levelNum.."에서 성공비율은 "..portion)
 end	
 successPortion()
 --
 
-
 --씬시작--
+local composer = require( "composer" )
+local scene = composer.newScene()
+
 local image, name, sentence 
 local new, newFlag = 0
 local fail = 0
@@ -124,6 +121,16 @@ function scene:create( event )
 	local coins = display.newImage("Content/images/coins.png")
 	coins.x, coins.y = display.contentWidth*0.3, display.contentHeight*0.04
 
+	--경험치 추가--
+	local expDisplay = display.newText("경험치: "..exp, display.contentWidth*0.555, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf")
+	expDisplay:setFillColor(0)
+	expDisplay.size = 50
+	
+	expHint = display.newText(1000*levelNum.."이 넘으면 레벨업!", display.contentWidth*0.555, display.contentHeight*0.07, "Content/font/ONE Mobile POP.ttf")
+	expHint:setFillColor(0.2)
+	expHint.size = 35
+	--
+
 	local function gotoStore(event)
 		coins:removeSelf()
 		composer.gotoScene("store_i")
@@ -157,6 +164,8 @@ function scene:create( event )
 	sceneGroup:insert( level )
 	sceneGroup:insert( showLevel )
 	sceneGroup:insert( coins ) 
+	sceneGroup:insert( expDisplay )
+	sceneGroup:insert( expHint )
 	sceneGroup:insert( s_book ) sceneGroup:insert( book ) sceneGroup:insert( text_book )
 	sceneGroup:insert( s_store ) sceneGroup:insert( store ) sceneGroup:insert( text_store )
 	sceneGroup:insert( s_success ) sceneGroup:insert( success ) sceneGroup:insert( text_success )
@@ -228,8 +237,8 @@ function scene:show( event )
 		displayExp()
 		]]
 
-		print(fail.."인데 1이면 실패, 0이면 성공")
-		print("초코시럽 몇개냐면"..ingreCnt[2].."  딸기시럽 몇개냐면"..ingreCnt[3])
+		--print(fail.."인데 1이면 실패, 0이면 성공")
+		--print("초코시럽 몇개냐면"..ingreCnt[2].."  딸기시럽 몇개냐면"..ingreCnt[3])
 		print(exp..": 현재 나의 경험치 값")
 
 		image = Data[syrub+1].breads[ingredient+1].image
@@ -239,10 +248,7 @@ function scene:show( event )
 		-- new 빵은 new 그림--
 		if(breadsCnt[syrub+1][ingredient+1] == 0 and syrub >= 0 and ingredient >=0) then
 			newFlag = 1
-			--new = display.newImage("Content/images/new.png")
-			--new.x, new.y = display.contentWidth*0.3, display.contentHeight*0.4
 		end
-
 		-- 빵 Cnt 증가 --
 		breadsCnt[syrub+1][ingredient+1] = breadsCnt[syrub+1][ingredient+1] + 1
 		-- 빵 해금 갱신
@@ -365,7 +371,6 @@ function scene:show( event )
 
 	 	--------------------------------버튼, x 탭 (팝업창 내리기/new빵일 때 재화지급(ex) 1000)---------------------------------------------------
 	    local function tapListener(event)
-	    	print("탭탭탭")
 	    	windowGroup:removeSelf()
 	    	if newFlag == 1 then
 	    	new:removeSelf()
@@ -373,17 +378,14 @@ function scene:show( event )
 	    	darkening:removeSelf()
 
 	    	-- new일 때 코인 지급 -- 
-	    	---deleteBeforeNum()
 	    	if(newFlag == 1 and fail == 0) then
 	    		coinNum = coinNum + 1000
-			----------showCoin 수정
-			showCoin.text = coinNum
-	    		--forCoin()
+				showCoin.text = coinNum
+
 				newFlag = 0
 				audio.play( soundTable["cashSound"] ,  {channel=4})
-			elseif (fail == 1) then
-				--forCoin()
 	    	end
+
 			audio.play( soundTable["clickSound"],  {channel=5}) 
 			composer.gotoScene("home")
 	    	levelUp()
@@ -408,9 +410,7 @@ function scene:hide( event )
 end
 
 function scene:destroy( event )
-	local sceneGroup = self.view
-		--deleteBeforeNum()
-	
+	local sceneGroup = self.view	
 end
 
 ---------------------------------------------------------------------------------

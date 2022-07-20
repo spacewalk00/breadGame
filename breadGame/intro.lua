@@ -178,22 +178,16 @@ function scene:hide( event )
 		--
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
-
-		--{**오프닝 때 초기화(정적변수기능없음) 통째로 가져가주세요--
-		--coinNum = 0 --}
-
-
-		--{**오프닝 때 초기화(정적변수기능없음) 통째로 가져가주세요--
-		exp = 0 --exp = 0
-		levelNum = 1 --levelNum = 1 
+		exp = 900 
+		levelNum = 1  
 
 		levelFirstTime = {} -- 경험치가 처음으로 일정 수준을 넘었을 때만 레벨업을 주기 위함. --
 			function levelTimeReset() 
 				for i=2, 10 do
-		 		levelFirstTime[i] = 1
-			end
-		end
-		levelTimeReset() --}
+		 		levelFirstTime[i] = 1 
+		 		end
+		 	end
+		levelTimeReset() 
 
 		ingreCnt = {} --재료카운트
 		for i=1, 11 do

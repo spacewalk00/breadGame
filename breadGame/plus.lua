@@ -43,11 +43,15 @@ function scene:create( event )
 	local coins = display.newImage("Content/images/coins.png")
 	coins.x, coins.y = display.contentWidth*0.3, display.contentHeight*0.04
 
-	local function gotoStore(event)
-		composer.gotoScene("store_i")
-	end
-	store:addEventListener("tap", gotoStore)
-
+	--경험치 추가--
+	local expDisplay = display.newText("경험치: "..exp, display.contentWidth*0.555, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf")
+	expDisplay:setFillColor(0)
+	expDisplay.size = 50
+	
+	expHint = display.newText(1000*levelNum.."이 넘으면 레벨업!", display.contentWidth*0.555, display.contentHeight*0.07, "Content/font/ONE Mobile POP.ttf")
+	expHint:setFillColor(0.2)
+	expHint.size = 35
+	--
 
 	local success = display.newImage("Content/images/success.png")
 	success.x, success.y = display.contentWidth*0.75, display.contentHeight*0.13
@@ -130,6 +134,8 @@ function scene:create( event )
 	sceneGroup:insert( level )
 	sceneGroup:insert( showLevel )
 	sceneGroup:insert( coins ) 
+	sceneGroup:insert( expDisplay )
+	sceneGroup:insert( expHint )
 	sceneGroup:insert( s_book ) sceneGroup:insert( book ) sceneGroup:insert( text_book )
 	sceneGroup:insert( s_store ) sceneGroup:insert( store ) sceneGroup:insert( text_store )
 	sceneGroup:insert( s_success ) sceneGroup:insert( success ) sceneGroup:insert( text_success )

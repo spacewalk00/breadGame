@@ -15,14 +15,12 @@ composer.setVariable("m", ingredient)
 
 function moveToBook(event)
 	print("도감으로 이동")
-	------------showCoin관련 수정
 	showCoin.isVisible = false
 	composer.gotoScene("bookMain")
 end
 
 function moveToBreadRoom(event)
 	print("빵방으로 이동")
-	-------------showCoin 관련 수정
 	showCoin.x, showCoin.y = display.contentWidth*0.58, display.contentHeight*0.05
 	showCoin:setFillColor(1)
 	composer.gotoScene("part5")
@@ -34,23 +32,7 @@ local function  gotoAchieve(event)
 	showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
 	composer.gotoScene("achieve")
 end
-------------------------------------------------
------------------------ 재화 관련 -------------------------
------------showCoin 수정
---showCoin = display.newText(coinNum, display.contentWidth*0.35, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf", 50)
---showCoin:setFillColor(0)
---[[
-function forCoin()
-	showCoin = display.newText(coinNum, display.contentWidth*0.35, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf", 50)
-	showCoin:setFillColor(0)
-end
 
-function deleteBeforeNum()
-	showCoin:removeSelf()
-end
-
---forCoin()
-]]
 ----------------- 경험치에 따른 레벨업 관련 ---------------------
 levelUpFlag = 0 
 local function levelUpPop( n ) --레벨업 창 화면에 띄우기 --
@@ -72,27 +54,20 @@ local function levelUpPop( n ) --레벨업 창 화면에 띄우기 --
 
 	
 	levelGroup:insert(showNewLevel)
-
-	---deleteBeforeLevel()
-	---forLevel()
 	
-	local message = display.newText(levelGroup, "LEVEL UP!", display.contentCenterX, display.contentCenterY, "Content/font/ONE Mobile POP.ttf", 100)
+	local message = display.newText(levelGroup, "LEVEL UP!", display.contentCenterX, display.contentHeight*0.5, "Content/font/ONE Mobile POP.ttf")
 	message:setFillColor(1)
+	message.size = 100
 
-	transition.fadeOut(levelGroup, {timer = 2000, delay = 1000})
+	local message2 = display.newText(levelGroup, "폭탄빵을 만들 확률 ".. (10-portion)*10 .."% > "..(10-(portion+0.5))*10 .."%", display.contentCenterX, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf", 100)
+	message2:setFillColor(1)
+	message2.size = 70
+
+	transition.fadeOut(levelGroup, {timer = 2000, delay = 2000})
 end
---------------------------------showLevel 수정
-	showLevel = display.newText(levelNum, display.contentWidth*0.075, display.contentHeight*0.045, "Content/font/ONE Mobile POP.ttf", 90)
-	showLevel:setFillColor(1)
-	--[[
-function forLevel() -- 레벨 숫자 다루기--
-	showLevel = display.newText(levelNum, display.contentWidth*0.075, display.contentHeight*0.045, "Content/font/ONE Mobile POP.ttf", 90)
-	showLevel:setFillColor(1)
-end
-function deleteBeforeLevel() --레벨 숫자 다루기2--
-	showLevel:removeSelf()	
-end
-	]]
+
+showLevel = display.newText(levelNum, display.contentWidth*0.075, display.contentHeight*0.045, "Content/font/ONE Mobile POP.ttf", 90)
+showLevel:setFillColor(1)
 
 function levelUp() --레벨업 --
 	print("레벨 몇이냐면..."..levelNum.."!!!!!!!")
@@ -106,13 +81,10 @@ function levelUp() --레벨업 --
 			end
 			levelFirstTime[i] = 0
 			levelUpPop(levelNum)
-			--재화 갱신--
-			---deleteBeforeNum()
-			---forCoin()
-			----------showCoin 수정
+
 			showCoin.text = coinNum
-			----------showLevel 수정
 			showLevel.text = levelNum
+			expHint.text = 1000*levelNum.."이 넘으면 레벨업!"
 			break
 		end
 	end
@@ -125,11 +97,8 @@ function scene:create( event )
 	local background = display.newImage("Content/image/main_image.png", display.contentWidth, display.contentHeight)
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2]]
 
-	----------showCoin 수정
 	showCoin.text = coinNum
-	---forCoin() -- 재화 업뎃
-	-----------showLevel 수정
-	---forLevel() -- 레벨 업뎃
+
 	local background = display.newImage("Content/images/background.png")
 	background.x, background.y = display.contentCenterX, display.contentCenterY
 
@@ -139,12 +108,19 @@ function scene:create( event )
 	local level = display.newImage("Content/images/level.png")
 	level.x, level.y = display.contentWidth*0.07, display.contentHeight*0.04
 
-	--local showLevel = display.newText(levelNum, display.contentWidth*0.075, display.contentHeight*0.045, "Content/font/ONE Mobile POP.ttf", 90)
-	--showLevel:setFillColor(1)
-
 	local coins = display.newImage("Content/images/coins.png")
 	coins.x, coins.y = display.contentWidth*0.3, display.contentHeight*0.04
 
+	--경험치 추가--
+	local expDisplay = display.newText("경험치: "..exp, display.contentWidth*0.555, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf")
+	expDisplay:setFillColor(0)
+	expDisplay.size = 50
+	
+	expHint = display.newText(1000*levelNum.."이 넘으면 레벨업!", display.contentWidth*0.555, display.contentHeight*0.07, "Content/font/ONE Mobile POP.ttf")
+	expHint:setFillColor(0.2)
+	expHint.size = 35
+	--
+	
 	local book = display.newImage("Content/images/book.png");
 	book.x, book.y = display.contentWidth*0.75, display.contentHeight*0.04
 	local s_book = display.newImage("Content/images/shadow.png")
@@ -160,9 +136,6 @@ function scene:create( event )
 	text_store.x, text_store.y = display.contentWidth*0.9, display.contentHeight*0.065
 
 	local function gotoStore(event)
-	    	--deleteBeforeNum()
-	    	--forCoin()
-	    -------------showCoin 관련 수정--------
 		showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
 		composer.gotoScene("store_i")
 	end
@@ -222,6 +195,8 @@ function scene:create( event )
 	sceneGroup:insert( level )
 	sceneGroup:insert( showLevel )
 	sceneGroup:insert( coins ) 
+	sceneGroup:insert( expDisplay )
+	sceneGroup:insert( expHint )
 	sceneGroup:insert( s_book ) sceneGroup:insert( book ) sceneGroup:insert( text_book )
 	sceneGroup:insert( s_store ) sceneGroup:insert( store ) sceneGroup:insert( text_store )
 	sceneGroup:insert( s_success ) sceneGroup:insert( success ) sceneGroup:insert( text_success )
