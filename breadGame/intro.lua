@@ -178,7 +178,7 @@ function scene:hide( event )
 		--
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
-		exp = 900 
+		exp = 0 
 		levelNum = 1  
 
 		levelFirstTime = {} -- 경험치가 처음으로 일정 수준을 넘었을 때만 레벨업을 주기 위함. --
