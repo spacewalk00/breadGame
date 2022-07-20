@@ -7,7 +7,7 @@
 		"titleImg2" : "Content/images/업적/blue_title.png",
 		"info" : " ",
 		"info1" : "튜토리얼을 완료했다.",
-		"bubble_pink" : "Content/images/업적/pink_bubble.png",
+		"bubble_pink" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_white" : "Content/images/업적/white_bubble.png",
 		"img" : "Content/images/업적/box.png",
 		"cat1" : "Content/images/업적/cat1.png",
@@ -21,8 +21,10 @@
 		"cntB3" : "/",
 		"cntB4" : "/",
 		"price" : " ",
-		"price1" : 5000
-		//"price1" : "시럽 3종"
+		//"price1" : 5000
+		"price1" : "시럽 3종"
+		//"price1" : "재료 7종"
+
 	},
 	//제빵사
 	{
@@ -55,8 +57,8 @@
 		"price1" : 2500,
 		"price2" : 5000,
 		"price3" : 10000,
-		"price4" : 15000
-		//"price4" : "카펫"
+		//"price4" : 15000
+		"price4" : "카펫"
 	},
 	//실패없음
 	{
@@ -95,7 +97,7 @@
 		"info" : "  ",
 		"info1" : "연속으로 폭탄빵이 5번 등장했다.",
 		"info2" : "연속으로 폭탄빵이 10번 등장했다.",
-		"bubble_pink" : "Content/images/업적/pink_bubble.png",
+		"bubble_pink" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_white" : "Content/images/업적/white_bubble.png",
 		"img" : "Content/images/업적/box.png",
 		"cat1" : "Content/images/업적/cat1.png",
@@ -109,10 +111,10 @@
 		"cntB3" : "/",
 		"cntB4" : "/",
 		"price" : " ",
-		"price1" : 2000,
-		"price2" : 4000
-		//"price1" : "시럽 3종",
-		//"price2" : "부재료 7종"
+		//"price1" : 2000,
+		//"price2" : 4000
+		"price1" : "시럽 3종",
+		"price2" : "재료 7종"
 	},
 	//폭탄빵 개수
 	{
@@ -145,8 +147,8 @@
 		"price1" : 500,
 		"price2" : 10000,
 		"price3" : 15000,
-		"price4" : 20000
-		//"price4" : "카펫"
+		//"price4" : 20000
+		"price4" : "카펫"
 	},
 	//도감 개수
 	{
@@ -179,8 +181,8 @@
 		"price1" : 500,
 		"price2" : 5000,
 		"price3" : 15000,
-		"price4" : 20000
-		//"price4" : "네임택"
+		//"price4" : 20000
+		"price4" : "네임택"
 	},
 	//빵방 장식
 	{

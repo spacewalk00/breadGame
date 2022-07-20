@@ -96,6 +96,7 @@ function scene:create( event )
 	local shadow = display.newImage("Content/images/업적/shadow.png")
 	shadow.x, shadow.y = display.contentWidth/2, display.contentHeight*0.86
 	local SE2 = audio.loadSound("sound/보상 획득/코드2/코드2.wav")
+	local SE3 = audio.loadSound("sound/동전/K드라마_효과음_(76)/K드라마 효과음 (76).wav")
 	
 	local questGroup = display.newGroup()
 
@@ -141,31 +142,31 @@ function scene:create( event )
 		cntBIng[i] = {}
 	end
 
---[[
+
 --------연습-------------
 
-	q[1][1] = 1
-	q[2][1] = 1
-	q[2][2] = 1
-	q[2][3] = 1
-	q[2][4] = 1
-	q[3][1] = 1
-	q[3][2] = 1
-	q[4][1] = 1
-	q[4][2] = 1
-	q[5][1] = 1
-	q[5][2] = 1
-	q[5][3] = 1
-	q[5][4] = 1
-	q[6][1] = 1
-	q[6][2] = 1
-	q[6][3] = 1
-	q[6][4] = 1
-	q[7][1] = 1
-	q[7][2] = 1
-	q[7][3] = 1
+	--quest_clear[1][1] = 1
+	--quest_clear[2][1] = 1
+	--quest_clear[2][2] = 1
+	--quest_clear[2][3] = 1
+	--quest_clear[2][4] = 1
+	--quest_clear[3][1] = 1
+	--quest_clear[3][2] = 1
+	--quest_clear[4][1] = 1
+	--quest_clear[4][2] = 1
+	--quest_clear[5][1] = 1
+	--quest_clear[5][2] = 1
+	--quest_clear[5][3] = 1
+	--quest_clear[5][4] = 1
+	--quest_clear[6][1] = 1
+	--quest_clear[6][2] = 1
+	--quest_clear[6][3] = 1
+	--quest_clear[6][4] = 1
+	--quest_clear[7][1] = 1
+	--quest_clear[7][2] = 1
+	--quest_clear[7][3] = 1
 ----------------------
-]]
+
 
 ---------홈 이동------- 
 
@@ -273,7 +274,7 @@ function scene:create( event )
 			coin[i][j].isVisible = false
 			--보상 표시
 			priceText[i][j] = display.newText(questGroup, Data[i].price, questBox[i].x - 410 + (j-1)*290, questBox[i].y - 10, "font/ONE Mobile POP.ttf")
-			priceText[i][j].size = 32
+			priceText[i][j].size = 31
 			priceText[i][j]:setFillColor(0)
 			--교육 완료!
 			finishText[i][j] = display.newText(questGroup, "교육완료!", questBox[i].x - 430 + (j-1)*290, questBox[i].y - 5, "font/ONE Mobile POP.ttf")
@@ -334,7 +335,7 @@ function scene:create( event )
 
 	----------업적 목표 도달 시---------
 
-	q[1][1] = 1
+	--q[1][1] = 1
 	quest_clear[1][1] = 1
 	for i = 2, 7 do
 		for j = 1, 4 do
@@ -348,7 +349,7 @@ function scene:create( event )
 				break
 			end
 			if flag[i] >= cntQ[i][j] then
-				q[i][j] = 1
+				--q[i][j] = 1
 				quest_clear[i][j] = 1
 			end
 		end
@@ -391,32 +392,43 @@ function scene:create( event )
 					priceText[i][j].text = price[i][j]							--보상 표시
 					if type(price[i][j]) ~= "number" then						--보상이 돈이 아니면
 						coin[i][j].isVisible = false							--동전 이미지 숨기기
-						priceText[i][j].x = questBox[i].x - 430 + (j-1)*290		--보상 글 위치 가운데로
+						priceText[i][j].x = priceText[i][j].x + 10				--보상 글 위치 더 옆으로
+						priceText[i][j].size = 32								--글씨 더 크게
 					end	
 					local function catch(event)									--보상 클릭 시
-						audio.play(SE2, {channel=7})
-						audio.stopWithDelay(420, {channel=7})
+						--audio.play(SE2, {channel=7})
+						--audio.stopWithDelay(420, {channel=7})
 						display.remove(bubble_p[i][j])							--말풍선 분홍 지우기
 						display.remove(priceText[i][j])							--보상 표시 지우기
 						price_have[i][j] = 1 									--보상받음 표시
 						if type(price[i][j]) == "number" then 					--보상이 돈이면
+							audio.play(SE3, {channel=7})
+							audio.stopWithDelay(770, {channel=7})
 							coinNum = coinNum + price[i][j]						--총 금액에 더하기
-							--goldText.text = coinNum								--화면에 총 금액 표시(임시)
-							showCoin.text = coinNum							--화면에 총 금액 표시
-						elseif price[i][j] == "시럽 3종" then					--보상이 시럽 3종이면
-							--Data2[1].cnt = Data2[1].cnt + 1					--시럽 3종 개수 각각 +1
-							--Data2[2].cnt = Data2[2].cnt + 1
-							--Data2[3].cnt = Data2[3].cnt + 1	
-						elseif price[i][j] == "부재료 7종" then					--보상이 부재료 7종이면
-							--Data2[4].cnt = Data2[4].cnt + 1 					--부재료 7종 개수 각각 +1
-							--Data2[5].cnt = Data2[5].cnt + 1
-							--Data2[6].cnt = Data2[6].cnt + 1
-							--Data2[7].cnt = Data2[7].cnt + 1
-							--Data2[8].cnt = Data2[8].cnt + 1
-							--Data2[9].cnt = Data2[9].cnt + 1
-							--Data2[10].cnt = Data2[10].cnt + 1
+							--goldText.text = coinNum							--화면에 총 금액 표시(임시)
+							showCoin.text = coinNum								--화면에 총 금액 표시
+						elseif price[i][j] == "시럽 3종" then					--보상이 시럽 3종이면	
+							audio.play(SE2, {channel=4})
+							audio.stopWithDelay(420, {channel=4})								
+							ingreCnt[2] = ingreCnt[2] + 1 						--시럽 3종 개수 각각 +1
+							ingreCnt[3] = ingreCnt[3] + 1
+							ingreCnt[4] = ingreCnt[4] + 1
+						elseif price[i][j] == "재료 7종" then					--보상이 부재료 7종이면
+							audio.play(SE2, {channel=4})
+							audio.stopWithDelay(420, {channel=4})	
+							ingreCnt[5] = ingreCnt[5] + 1 						--부재료 7종 개수 각각 +1
+							ingreCnt[6] = ingreCnt[6] + 1
+							ingreCnt[7] = ingreCnt[7] + 1
+							ingreCnt[8] = ingreCnt[8] + 1
+							ingreCnt[9] = ingreCnt[9] + 1
+							ingreCnt[10] = ingreCnt[10] + 1
+							ingreCnt[11] = ingreCnt[11] + 1
 						elseif price[i][4] == "카펫" then						--보상이 카펫이면
+							audio.play(SE2, {channel=4})
+							audio.stopWithDelay(420, {channel=4})
 						elseif price[i][4] == "네임택" then						--보상이 네임택이면
+							audio.play(SE2, {channel=4})
+							audio.stopWithDelay(420, {channel=4})
 						end
 						coin[i][j].isVisible = false							--동전 이미지 지우기
 						bubble_w[i][j].isVisible = true							--말풍선 하양 표시
@@ -459,7 +471,7 @@ function scene:create( event )
 	        horizontalScrollDisabled=true,
 	        top = 250,
 	        width = 1440,
-	        height = 2350,
+	        height = 2300,
 	        backgroundColor = { 0, 0, 0, 0 }
 		}
 	)
