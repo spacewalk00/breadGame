@@ -9,6 +9,8 @@ local scene = composer.newScene()
 
 local s_image
 local s_text
+local s_cnt
+local material_cnt
 local material_image
 local material_text
 
@@ -35,17 +37,23 @@ function scene:create( event )
 ]]
 	--미리 정한 시럽 가져오기--
 	if s == 1 then 
-		s_image =  display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.51, display.contentHeight*0.52)
+		s_image =  display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.509, display.contentHeight*0.526)
 		s_text = display.newText("초코 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		s_text:setFillColor(0)
+	    s_cnt = display.newText("보유 개수 : "..ingreCnt[2], display.contentWidth * 0.53, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+		s_cnt:setFillColor(0)
 	elseif s == 2 then 
-		s_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.513)
+		s_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.518)
 		s_text = display.newText("딸기 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		s_text:setFillColor(0)
+	    s_cnt = display.newText("보유 개수 : "..ingreCnt[3], display.contentWidth * 0.53, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+		s_cnt:setFillColor(0)
 	elseif s == 3 then 
-		s_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.49, display.contentHeight*0.52)
+		s_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.49, display.contentHeight*0.525)
 		s_text = display.newText("바닐라 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		s_text:setFillColor(0)
+	    s_cnt = display.newText("보유 개수 : "..ingreCnt[4], display.contentWidth * 0.53, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+		s_cnt:setFillColor(0)
 	end
 
 	local material_box =  display.newImage("Content/image/material_box.png", display.contentWidth*0.762, display.contentHeight*0.534)
@@ -73,7 +81,10 @@ function scene:create( event )
  		ingredient = 4
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
-	   		material_image = display.newImage("Content/image/cheese.png", display.contentWidth * 0.76, display.contentHeight * 0.508)
+	   		material_image = display.newImage("Content/image/cheese.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
+	    	display.remove(material_cnt)
+	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[8], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+			material_cnt:setFillColor(0)
 	    	display.remove(material_text)
 	    	material_text = display.newText("치즈", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -93,6 +104,9 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/bean.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
+	    	display.remove(material_cnt)
+	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[7], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+			material_cnt:setFillColor(0)
 	    	display.remove(material_text)
 	    	material_text = display.newText("팥", display.contentWidth * 0.765, display.contentHeight * 0.561, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -112,6 +126,9 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/corn.png", display.contentWidth * 0.765, display.contentHeight * 0.51)
+	    	display.remove(material_cnt)
+	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[9], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+			material_cnt:setFillColor(0)
 	    	display.remove(material_text)
 	    	material_text = display.newText("옥수수", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -130,7 +147,10 @@ function scene:create( event )
  		ingredient = 7
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
-	   		material_image = display.newImage("Content/image/sugarpowder.png", display.contentWidth * 0.764, display.contentHeight * 0.51)
+	   		material_image = display.newImage("Content/image/sugarpowder.png", display.contentWidth * 0.764, display.contentHeight * 0.515)
+	    	display.remove(material_cnt)
+	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[11], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+			material_cnt:setFillColor(0)
 	    	display.remove(material_text)
 	    	material_text = display.newText("슈가파우더", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -151,6 +171,9 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/sausage.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
+	    	display.remove(material_cnt)
+	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[6], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+			material_cnt:setFillColor(0)
 	    	display.remove(material_text)
 	    	material_text = display.newText("소세지", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -171,6 +194,9 @@ function scene:create( event )
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/glitter.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
+	    	display.remove(material_cnt)
+	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[5], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+			material_cnt:setFillColor(0)
 	    	display.remove(material_text)
 	    	material_text = display.newText("반짝이", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -189,7 +215,10 @@ function scene:create( event )
  		ingredient = 6
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
-	   		material_image = display.newImage("Content/image/oreopowder.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
+	   		material_image = display.newImage("Content/image/oreopowder.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
+	    	display.remove(material_cnt)
+	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[10], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+			material_cnt:setFillColor(0)
 	    	display.remove(material_text)
 	    	material_text = display.newText("오레오가루", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -222,8 +251,8 @@ function scene:create( event )
 	    	showCoin.isVisible = true
 			syrub = 0
 			ingredient = 0
-			composer.setVariable("m", syrub)
-			composer.setVariable("s", ingredient)
+			composer.setVariable("s", syrub)
+			composer.setVariable("m", ingredient)
 	        composer.gotoScene("home")
 		end
 	end
@@ -285,12 +314,18 @@ function scene:hide( event )
 		if s_text ~= nil then 
 			s_text:removeSelf()
 		end
+		if s_cnt ~= nil then 
+			s_cnt:removeSelf()
+		end
 		--s_image:removeSelf()
 		if material_image ~= nil then
 			material_image:removeSelf()
 		end
 		if material_text ~= nil then 
 			material_text:removeSelf()
+		end
+		if material_cnt ~= nil then 
+			material_cnt:removeSelf()
 		end
 	end
 end

@@ -9,6 +9,8 @@ local scene = composer.newScene()
 
 local m_image
 local m_text
+local m_cnt
+local syrup_cnt
 local syrup_image
 local syrup_text
 local box1 
@@ -31,30 +33,44 @@ function scene:create( event )
 		m_image = display.newImage("Content/image/glitter.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
 		m_text = display.newText("반짝이", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
+	    m_cnt = display.newText("보유 개수 : "..ingreCnt[5], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+		m_cnt:setFillColor(0)
 	elseif m == 2 then
 		m_image = display.newImage("Content/image/sausage.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
 		m_text = display.newText("소세지", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
+	    m_cnt = display.newText("보유 개수 : "..ingreCnt[6], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+		m_cnt:setFillColor(0)
 	elseif m == 3 then 
 		m_image = display.newImage("Content/image/bean.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
 		m_text = display.newText("팥", display.contentWidth * 0.765, display.contentHeight * 0.561, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
+	    m_cnt = display.newText("보유 개수 : "..ingreCnt[7], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+		m_cnt:setFillColor(0)
 	elseif m == 4 then 
-		m_image = display.newImage("Content/image/cheese.png", display.contentWidth * 0.76, display.contentHeight * 0.508)
+		m_image = display.newImage("Content/image/cheese.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
 		m_text = display.newText("치즈", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
+	    m_cnt = display.newText("보유 개수 : "..ingreCnt[8], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+		m_cnt:setFillColor(0)
 	elseif m == 5 then 
 		m_image = display.newImage("Content/image/corn.png", display.contentWidth * 0.765, display.contentHeight * 0.51)
 		m_text = display.newText("옥수수", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
+	    m_cnt = display.newText("보유 개수 : "..ingreCnt[9], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+		m_cnt:setFillColor(0)
 	elseif m == 6 then 
-		m_image= display.newImage("Content/image/oreopowder.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
+		m_image= display.newImage("Content/image/oreopowder.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
 		m_text = display.newText("오레오가루", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
+	    m_cnt = display.newText("보유 개수 : "..ingreCnt[10], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+		m_cnt:setFillColor(0)
 	elseif m == 7 then 
-		m_image= display.newImage("Content/image/sugarpowder.png", display.contentWidth * 0.764, display.contentHeight * 0.51)
+		m_image= display.newImage("Content/image/sugarpowder.png", display.contentWidth * 0.764, display.contentHeight * 0.515)
 		m_text = display.newText("슈가파우더", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
+	    m_cnt = display.newText("보유 개수 : "..ingreCnt[11], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+		m_cnt:setFillColor(0)
 	end
 
 	box1 = display.newImage("Content/image/box1.png", display.contentWidth*0.492, display.contentHeight*0.651)
@@ -83,7 +99,10 @@ function scene:create( event )
 		print("바닐라"..syrub)
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
-	   		syrup_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.49, display.contentHeight*0.52)
+	   		syrup_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.49, display.contentHeight*0.525)
+	    	display.remove(syrup_cnt)
+	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[4], display.contentWidth * 0.53, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+			syrup_cnt:setFillColor(0)
 	    	display.remove(syrup_text)
 	    	syrup_text = display.newText("바닐라 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 			syrup_text:setFillColor(0)
@@ -102,7 +121,10 @@ function scene:create( event )
  		syrub = 1
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
-	   		syrup_image = display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.51, display.contentHeight*0.52)
+	   		syrup_image = display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.509, display.contentHeight*0.526)
+	    	display.remove(syrup_cnt)
+	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[2], display.contentWidth * 0.53, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+			syrup_cnt:setFillColor(0)
 	    	display.remove(syrup_text)
 	    	syrup_text = display.newText("초코 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 			syrup_text:setFillColor(0)
@@ -121,7 +143,10 @@ function scene:create( event )
  		syrub = 2
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
-	   		syrup_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.513)
+	   		syrup_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.518)
+	    	display.remove(syrup_cnt)
+	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[3], display.contentWidth * 0.53, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
+			syrup_cnt:setFillColor(0)
 	    	display.remove(syrup_text)
 	    	syrup_text = display.newText("딸기 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 			syrup_text:setFillColor(0)
@@ -224,13 +249,18 @@ function scene:hide( event )
 		if m_text ~= nil then 
 			m_text:removeSelf()
 		end
+		if m_cnt ~= nil then 
+			m_cnt:removeSelf()
+		end
 		if syrup_image ~= nil then
 			syrup_image:removeSelf() 
 		end
 		if syrup_text ~= nil then
 			syrup_text:removeSelf() 
 		end
-		
+		if syrup_cnt ~= nil then 
+			syrup_cnt:removeSelf()
+		end
 
 		
 --[[	choco:removeSelf()
