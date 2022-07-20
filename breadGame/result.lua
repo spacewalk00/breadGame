@@ -24,8 +24,6 @@ local function parse2()
 	end]]
 end
 parse2()
-
-
 ---- 새빵 (미해금0 , 해금 -1, 확인했음 1로 변화)
 --[[openBread = { {1, -1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0}, 
 				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} }
@@ -48,8 +46,8 @@ end]]
 --
 
 --스크롤뷰
-local widget = require("widget")
---[[local scrollView = widget.newScrollView(
+--[[local widget = require("widget")
+local scrollView = widget.newScrollView(
 {
     horizontalScrollDisabled=true,
     top = 1590,
@@ -58,9 +56,8 @@ local widget = require("widget")
     height = 300
     --hideBackground = true
     --0.949, 0.839, 0.776
-})]]
---
-
+})
+]]
 local function ingreRandom() --시럽/재료 각각 랜덤으로 하나씩 보상--
 	audio.play( soundTable["rewardSound"] ,  {channel=7})
 	local n = math.random(2, 5) --초코시럽(2), 딸기시럽(3), 슈크림시럽(4)
@@ -92,11 +89,11 @@ local fail = 0
 function scene:create( event )
 	local sceneGroup = self.view
 	-- 배경 --
-	local background = display.newImage("Content/images/background.png")
+	local background = display.newImage("Content/image/인트로/face_love.png")
 	background.x, background.y = display.contentCenterX, display.contentCenterY
 
-	local oven = display.newImageRect("Content/images/oven.png", 1550, 820)
-	oven.x, oven.y = display.contentCenterX, display.contentHeight*0.9
+	--local oven = display.newImageRect("Content/images/oven.png", 1550, 820)
+	--oven.x, oven.y = display.contentCenterX, display.contentHeight*0.9
 
 	local level = display.newImage("Content/images/level.png")
 	level.x, level.y = display.contentWidth*0.07, display.contentHeight*0.04
@@ -160,7 +157,7 @@ function scene:create( event )
 	
 	sceneGroup:insert( background )
 
-	sceneGroup:insert( oven )
+	--sceneGroup:insert( oven )
 	sceneGroup:insert( level )
 	sceneGroup:insert( showLevel )
 	sceneGroup:insert( coins ) 
@@ -226,20 +223,9 @@ function scene:show( event )
 			end
 			breadBomb_count = 0 							--연속 실패빵 제작 개수
 		end
-		
-		
-		-- 임시텍스트/경험치
-		--[[function displayExp()
-			local expDisplay = display.newText("임시텍스트/경험치: "..exp, display.contentWidth*0.5, display.contentHeight*0.1, "Content/font/ONE Mobile POP.ttf")
-			expDisplay:setFillColor(0)
-		 	expDisplay.size = 50
-		end
-		displayExp()
-		]]
 
 		--print(fail.."인데 1이면 실패, 0이면 성공")
 		--print("초코시럽 몇개냐면"..ingreCnt[2].."  딸기시럽 몇개냐면"..ingreCnt[3])
-		print(exp..": 현재 나의 경험치 값")
 
 		image = Data[syrub+1].breads[ingredient+1].image
 		name = Data[syrub+1].breads[ingredient+1].name
@@ -270,7 +256,7 @@ function scene:show( event )
 			sf = "Content/images/text_success.png"
 			audio.play( soundTable["breadSound"],  {channel=3} )
 		elseif fail == 1 then
-			sf = "Content/images/text_success.png"
+			sf = "Content/images/text_fail.png"
 			audio.play( soundTable["bombSound"] ,  {channel=2})
 		end
 
@@ -320,23 +306,35 @@ function scene:show( event )
 		fixedGroup:insert( showName )
 
 		-- Text box with transparent background
-		local textBox = native.newTextBox( 720, 1740, 1080, 300)
+		--[[local textBox = native.newTextBox( 720, 1740, 1080, 300)
 		textBox.font = native.newFont( "Content/font/ONE Mobile POP.ttf", 16 )
 		textBox:setTextColor(0.5)
 		textBox.size = 60
 
 		--textBox.hasBackground = false
-		textBox.text = sentence
-		--[[	
-
+		textBox.text = sentence]]
+			
+		--[[local showBox = display.newRect(1000, 1000, 300, 300)
+		showBox:setFillColor(0)
 		local showSentence = display.newText(sentence, display.contentWidth*0.5, display.contentHeight*0.68, "Content/font/ONE Mobile POP.ttf")
 		showSentence:setFillColor(0)
 		showSentence.size = 50
+		local option = {
+			type = "text",
+			filename = "showSentence"
+		}
+		showBox.fill = option
 
-		scrollView:insert( showSentence )
+		scrollView:insert( showBox )
 
 		textGroup:insert( showSentence )
-		fixedGroup:toFront()]]
+		textGroup:insert( showBox )]]
+		local showSentence = display.newText(sentence, display.contentWidth*0.5, display.contentHeight*0.68, "Content/font/ONE Mobile POP.ttf")
+		showSentence:setFillColor(0)
+		showSentence.size = 50
+		textGroup:insert(showSentence)
+
+		fixedGroup:toFront()
 
 		local button = display.newImage("Content/images/button.png")
 		button.x, button.y = display.contentWidth*0.5, display.contentHeight*0.8
@@ -358,8 +356,9 @@ function scene:show( event )
 
 		windowGroup:insert( tempBread )
 		windowGroup:insert( showName )
-		--windowGroup:insert( showSentence )
-		windowGroup:insert( textBox )
+		--windowGroup:insert( showBox )
+		windowGroup:insert( showSentence )
+		--windowGroup:insert( textBox )
 		--windowGroup:insert( scrollView )
 
 		windowGroup:insert( button )

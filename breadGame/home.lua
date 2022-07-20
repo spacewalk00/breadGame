@@ -99,11 +99,11 @@ function scene:create( event )
 
 	showCoin.text = coinNum
 
-	local background = display.newImage("Content/images/background.png")
+	local background = display.newImage("Content/image/인트로/face_love.png")
 	background.x, background.y = display.contentCenterX, display.contentCenterY
 
-	local oven = display.newImageRect("Content/images/oven.png", 1550, 820)
-	oven.x, oven.y = display.contentCenterX, display.contentHeight*0.9
+	--local oven = display.newImageRect("Content/images/oven.png", 1550, 820)
+	--oven.x, oven.y = display.contentCenterX, display.contentHeight*0.9
 
 	local level = display.newImage("Content/images/level.png")
 	level.x, level.y = display.contentWidth*0.07, display.contentHeight*0.04
@@ -191,7 +191,7 @@ function scene:create( event )
 
 	sceneGroup:insert( background )
 
-	sceneGroup:insert( oven )
+	--sceneGroup:insert( oven )
 	sceneGroup:insert( level )
 	sceneGroup:insert( showLevel )
 	sceneGroup:insert( coins ) 
