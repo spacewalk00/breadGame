@@ -211,7 +211,7 @@ function scene:show( event )
 			ingreCnt[2] = ingreCnt[2] + 1
 			ingreCnt[3] = ingreCnt[3] + 1
 			ingreCnt[4] = ingreCnt[4] + 1
-			audio.play( soundTable["rewardSound"],  {channel=7} )
+
 			---업적 관련
 			bread_count = bread_count + 1 					--일반빵 제작 개수
 			breadNormal_count = breadNormal_count + 1  		--연속 일반빵 제작 개수
@@ -292,7 +292,7 @@ function scene:show( event )
 
 		-- 빵그룹--
 		local tempBread = display.newImageRect("Content/images/"..image..".png", 500, 500)
-		tempBread.x, tempBread.y = display.contentWidth*0.5, display.contentHeight*0.5
+		tempBread.x, tempBread.y = display.contentWidth*0.5, display.contentHeight*0.485
 
 		local showName = display.newText(name, display.contentWidth*0.5, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf")
 		showName:setFillColor(0)
@@ -376,13 +376,35 @@ function scene:show( event )
 	    	end
 	    	darkening:removeSelf()
 
-	    	-- new일 때 코인 지급 -- 
-	    	if(newFlag == 1 and fail == 0) then
-	    		coinNum = coinNum + 1000
-				showCoin.text = coinNum
+	    	if(fail == 0) then
+				--보상 표시--
+				local rewardGroup = display.newGroup()
 
-				newFlag = 0
-				audio.play( soundTable["cashSound"] ,  {channel=4})
+				local choco = display.newImage(rewardGroup, ingredients[2].image)
+				choco.x, choco.y = display.contentWidth*0.555, display.contentHeight*0.5
+
+				local straw = display.newImage(rewardGroup, ingredients[3].image)
+				straw.x, straw.y = display.contentWidth*0.555, display.contentHeight*0.55
+
+				local vanilla = display.newImage(rewardGroup, ingredients[4].image)
+				vanilla.x, vanilla.y = display.contentWidth*0.555, display.contentHeight*0.6
+
+				transition.moveTo(choco, {time = 1500, x=display.contentWidth*0.138, y=display.contentHeight*0.444} ) 
+				transition.moveTo(straw, {time = 1500, x=display.contentWidth*0.138, y=display.contentHeight*0.444} ) 
+				transition.moveTo(vanilla, {time = 1500, x=display.contentWidth*0.138, y=display.contentHeight*0.444} ) 
+
+				transition.fadeOut(rewardGroup, {timer = 1500, delay = 500})
+
+				audio.play( soundTable["rewardSound"],  {channel=7} )
+
+	    		-- new일 때 코인 지급 -- 
+				if newFlag == 1 then
+					coinNum = coinNum + 1000
+					showCoin.text = coinNum
+
+					newFlag = 0
+					audio.play( soundTable["cashSound"] ,  {channel=4})
+				end
 	    	end
 
 			audio.play( soundTable["clickSound"],  {channel=5}) 

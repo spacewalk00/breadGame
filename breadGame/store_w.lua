@@ -212,7 +212,7 @@ function scene:create( event )
 		local pictureBar = display.newImage(popGroup, "Content/images/syrup_bar.png")
 		pictureBar.x, pictureBar.y = display.contentWidth*0.25, display.contentHeight*0.5
 
-		local picture = display.newImage(popGroup, "Content/images/syrup.png")
+		local picture = display.newImage(popGroup, ingredients[i].image)
 		picture.x, picture.y = display.contentWidth*0.25, display.contentHeight*0.5
 
 		local popTextOptions = 

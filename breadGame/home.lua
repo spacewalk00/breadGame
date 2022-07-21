@@ -55,9 +55,10 @@ local function levelUpPop( n ) --레벨업 창 화면에 띄우기 --
 	
 	levelGroup:insert(showNewLevel)
 	
-	local message = display.newText(levelGroup, "LEVEL UP!", display.contentCenterX, display.contentHeight*0.5, "Content/font/ONE Mobile POP.ttf")
-	message:setFillColor(1)
-	message.size = 100
+	--local message = display.newText(levelGroup, "LEVEL UP!", display.contentCenterX, display.contentHeight*0.5, "Content/font/ONE Mobile POP.ttf")
+	--message:setFillColor(1)
+	--message.size = 100
+	local message = display.newImage(levelGroup, "Content/images/text_levelUp.png", display.contentCenterX, display.contentHeight*0.5)
 
 	local message2 = display.newText(levelGroup, "폭탄빵을 만들 확률 ".. (10-portion)*10 .."% > "..(10-(portion+0.5))*10 .."%", display.contentCenterX, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf", 100)
 	message2:setFillColor(1)
