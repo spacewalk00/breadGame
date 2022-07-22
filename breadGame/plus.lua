@@ -86,7 +86,7 @@ function scene:create( event )
 
 	-- 로딩 아이콘 --
 	local loading = display.newImageRect("Content/image/loading.png", 300, 300)
-	loading.x, loading.y = display.contentWidth * 0.45, display.contentHeight * 0.9
+	loading.x, loading.y = display.contentWidth * 0.45, display.contentHeight * 0.86
 
 	--
 
@@ -110,7 +110,7 @@ function scene:create( event )
 
 	--시간 카운트--
 	local limit = 3
-	local showLimit = display.newText(limit, display.contentWidth*0.457, display.contentHeight*0.9, "Content/font/ONE Mobile POP.ttf")
+	local showLimit = display.newText(limit, display.contentWidth*0.457, display.contentHeight*0.86, "Content/font/ONE Mobile POP.ttf")
 	showLimit:setFillColor(1)
 	showLimit.size = 100
 
