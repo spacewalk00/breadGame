@@ -50,7 +50,7 @@
 		"bubble_pink1" : "Content/images/업적/pink_bubble.png",
 		"bubble_pink2" : "Content/images/업적/pink_bubble.png",
 		"bubble_pink3" : "Content/images/업적/Lpink_bubble.png",
-		"bubble_pink4" : "Content/images/업적/Lpink_bubble.png",
+		"bubble_pink4" : "Content/images/업적/pink_bubble.png",
 		"bubble_white" : "Content/images/업적/white_bubble.png",
 		"img" : "Content/images/업적/box.png",
 		"cat1" : "Content/images/업적/cat1.png",
@@ -135,7 +135,7 @@
 		"cntB3" : "/",
 		"cntB4" : "/",
 		"priceImg1" : "Content/images/업적/syrupImg.png",
-		"priceImg2" : "Content/images/업적/materialImg.png",
+		"priceImg2" : "Content/images/업적/syrupImg.png",
 		"priceImg3" : "Content/images/업적/coin.png",
 		"priceImg4" : "Content/images/업적/coin.png",
 		"price" : " ",
@@ -161,7 +161,7 @@
 		"bubble_pink1" : "Content/images/업적/pink_bubble.png",
 		"bubble_pink2" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_pink3" : "Content/images/업적/Lpink_bubble.png",
-		"bubble_pink4" : "Content/images/업적/Lpink_bubble.png",
+		"bubble_pink4" : "Content/images/업적/pink_bubble.png",
 		"bubble_white" : "Content/images/업적/white_bubble.png",
 		"img" : "Content/images/업적/box.png",
 		"cat1" : "Content/images/업적/cat1.png",
@@ -223,8 +223,7 @@
 		"price1" : 1000,
 		"price2" : 5000,
 		"price3" : 15000,
-		//"price4" : 20000
-		"price4" : "네임택"
+		"price4" : 20000
 	},
 	//빵방 장식
 	{

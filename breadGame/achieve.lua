@@ -412,9 +412,9 @@ function scene:create( event )
 					priceText[i][j].text = price[i][j]							--보상 표시
 					if type(price[i][j]) ~= "number" then						--보상이 돈이 아니면
 						--priceImg[i][j].isVisible = false							--동전 이미지 숨기기
-						priceText[i][j].x = priceText[i][j].x + 10				--보상 글 위치 더 옆으로
-						priceText[i][j].size = 32								--글씨 더 크게
-					end	
+						priceText[i][j].x = priceText[i][j].x + 8				--보상 글 위치 더 옆으로
+						priceText[i][j].size = 35								--글씨 더 크게
+					end
 					local function catch(event)									--보상 클릭 시
 						--audio.play(SE2, {channel=7})
 						--audio.stopWithDelay(420, {channel=7})
@@ -444,9 +444,6 @@ function scene:create( event )
 							ingreCnt[10] = ingreCnt[10] + 1
 							ingreCnt[11] = ingreCnt[11] + 1
 						elseif price[i][4] == "카펫" then						--보상이 카펫이면
-							audio.play(SE2, {channel=4})
-							audio.stopWithDelay(420, {channel=4})
-						elseif price[i][4] == "네임택" then						--보상이 네임택이면
 							audio.play(SE2, {channel=4})
 							audio.stopWithDelay(420, {channel=4})
 						end

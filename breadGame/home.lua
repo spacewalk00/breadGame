@@ -203,41 +203,6 @@ function scene:create( event )
 	sceneGroup:insert( s_success ) sceneGroup:insert( success ) sceneGroup:insert( text_success )
 	sceneGroup:insert( s_breadRoom ) sceneGroup:insert( breadRoom ) sceneGroup:insert( text_breadRoom )
 	sceneGroup:insert( material_button )
-
-	-------------------엔딩보기------------
-	--빵 도감 채운 개수 전역변수
-	breadBook_count = 0
-	--업그레이드 빵 도감 채운 개수
-	breadBookUP_count = 0
-	for n = 1, 4 do
-		for m = 1, 8 do	
-			if openBread[n][m] ~= 0 then
-				breadBook_count = breadBook_count + 1
-			end
-		end
-	end
-	for n = 1, 4 do
-		for m = 1, 8 do
-			if openUBread[n][m] ~= 0 then
-				breadBookUP_count = breadBookUP_count + 1
-			end
-		end
-	end
-	if breadBook_count + breadBookUP_count >= 63 then 
-		local endingButton = display.newImage("Content/images/아웃트로/togoEnd.png", display.contentWidth*0.88, display.contentHeight*0.19)
-		local ending = display.newText("엔딩보기", display.contentWidth*0.88, display.contentHeight*0.19, "font/ONE Mobile POP.ttf", 40)
-		--ending:setFillColor(0.5)
-
-		function gotoEnding(event)
-		----------------showCoin관련 수정
-			showCoin.isVisible = false
-			composer.gotoScene("outtro")
-		end
-		endingButton:addEventListener("tap", gotoEnding)
-		sceneGroup:insert(endingButton)
-		sceneGroup:insert(ending)
-	end
-	-------------------------------------
 end
 
 function scene:show( event )
