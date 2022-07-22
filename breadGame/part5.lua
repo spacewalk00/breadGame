@@ -273,26 +273,28 @@ function scene:create( event )
 			breadInfo_background.x, breadInfo_background.y = display.contentWidth*0.5, display.contentHeight*0.9
 			
 			breadInfo_profile = display.newImageRect(breadInfoGroup, "Content/images/breadInfo_profile.png", display.contentWidth*0.25, display.contentHeight*0.15)
-			breadInfo_profile.x, breadInfo_profile.y = display.contentWidth*0.28, display.contentHeight*0.9
+			breadInfo_profile.x, breadInfo_profile.y = display.contentWidth*0.2, display.contentHeight*0.9
 
 			levelNum=2
-			breadInfo_level = display.newText(breadInfoGroup, "Lv." .. levelNum ,display.contentWidth*1.5, display.contentHeight*1.5,"font/ONE Mobile Bold.ttf", 60)
+			breadInfo_level = display.newText(breadInfoGroup, "Lv." .. levelNum ,display.contentWidth*1.5, display.contentHeight*1.5,"font/ONE Mobile POP.ttf", 75)
 			breadInfo_level:setFillColor(0)
-			breadInfo_level.x, breadInfo_level.y = display.contentWidth*0.5, display.contentHeight*0.84
+			breadInfo_level.x, breadInfo_level.y = display.contentWidth*0.41, display.contentHeight*0.84
 
 			name = info[index1].breads[index2].name
-			breadInfo_name[k] =  display.newText(breadInfoGroup, name, display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile Bold.ttf", 60)
+			breadInfo_name[k] =  display.newText(breadInfoGroup, name, display.contentWidth*0.5, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf")
 			breadInfo_name[k]:setFillColor(0)
-			breadInfo_name[k].x, breadInfo_name[k].y = display.contentWidth*0.66, display.contentHeight*0.84
+			breadInfo_name[k].size = 75	
+			breadInfo_name[k].x, breadInfo_name[k].y = display.contentWidth*0.59, display.contentHeight*0.82
 			
 			sentence = info[index1].breads[index2].sentence
-			breadInfo_text[k] =  display.newText(breadInfoGroup, sentence, display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile Bold.ttf", 40)
+			breadInfo_text[k] =  display.newText(breadInfoGroup, sentence, display.contentWidth*0.5, display.contentHeight*0.68, "Content/font/ONE Mobile POP.ttf")
 			breadInfo_text[k]:setFillColor(0)
-			breadInfo_text[k].x, breadInfo_text[k].y = display.contentWidth*0.68, display.contentHeight*0.92
+			breadInfo_text[k].size = 50
+			breadInfo_text[k].x, breadInfo_text[k].y = display.contentWidth*0.67, display.contentHeight*0.92
 
 			image = info[index1].breads[index2].image
 			breadInfo_image[k] = display.newImageRect(breadInfoGroup, "Content/images/"..image..".png", display.contentWidth*0.17, display.contentHeight*0.1)
-			breadInfo_image[k].x, breadInfo_image[k].y = display.contentWidth*0.29, display.contentHeight*0.9
+			breadInfo_image[k].x, breadInfo_image[k].y = display.contentWidth*0.2, display.contentHeight*0.9
 
 			breadInfoGroup:toFront()
 
