@@ -105,7 +105,7 @@ function scene:create( event )
 	local quest_info = {}			--설명
 	local title_red = {}			--빨간 제목 리본
 	local title_blue = {}			--파랑 제목 리본					
-	local coin = {}					--동전 그림
+	local priceImg = {}					--동전 그림
 	local price = {}				--보상
 	local title = {}				--제목
 	local info = {}					--정보
@@ -127,7 +127,7 @@ function scene:create( event )
 
 	--2차원 배열
 	for i = 1, 7 do
-		coin[i] = {}
+		priceImg[i] = {}
 		price[i] = {}
 		title[i] = {}
 		info[i] = {}
@@ -165,6 +165,7 @@ function scene:create( event )
 	--quest_clear[7][1] = 1
 	--quest_clear[7][2] = 1
 	--quest_clear[7][3] = 1
+
 ----------------------
 
 
@@ -231,6 +232,25 @@ function scene:create( event )
 			cat[i][2].isVisible = false
 			cat[i][3].isVisible = false
 			cat[i][4].isVisible = false
+			--말풍선 분홍
+			bubble_p[i][1] = display.newImage(questGroup, Data[i].bubble_pink1)
+			bubble_p[i][2] = display.newImage(questGroup, Data[i].bubble_pink2)
+			bubble_p[i][3] = display.newImage(questGroup, Data[i].bubble_pink3)
+			bubble_p[i][4] = display.newImage(questGroup, Data[i].bubble_pink4)
+			bubble_p[i][1].isVisible = false
+			bubble_p[i][2].isVisible = false
+			bubble_p[i][3].isVisible = false
+			bubble_p[i][4].isVisible = false
+			--보상 사진
+			priceImg[i][1] = display.newImage(questGroup, Data[i].priceImg1)
+			priceImg[i][2] = display.newImage(questGroup, Data[i].priceImg2)
+			priceImg[i][3] = display.newImage(questGroup, Data[i].priceImg3)
+			priceImg[i][4] = display.newImage(questGroup, Data[i].priceImg4)
+			priceImg[i][1].isVisible = false
+			priceImg[i][2].isVisible = false
+			priceImg[i][3].isVisible = false
+			priceImg[i][4].isVisible = false
+
 		--열--
 		for j = 1, 4 do
 			--줄마다 고양이 개수 조절
@@ -261,20 +281,20 @@ function scene:create( event )
 			cntBIng[i][j]:setFillColor(1)
 			cntBIng[i][j].isVisible = false
 			--말풍선 분홍
-			bubble_p[i][j] = display.newImage(questGroup, Data[i].bubble_pink)
+			--bubble_p[i][j] = display.newImage(questGroup, Data[i].bubble_pink)
 			bubble_p[i][j].x, bubble_p[i][j].y = questBox[i].x - 435 + (j-1)*290, questBox[i].y - 10
-			bubble_p[i][j].isVisible = false
+			--bubble_p[i][j].isVisible = false
 			--말풍선 하양
 			bubble_w[i][j] = display.newImage(questGroup, Data[i].bubble_white)
 			bubble_w[i][j].x, bubble_w[i][j].y = questBox[i].x - 435 + (j-1)*290, questBox[i].y - 10
 			bubble_w[i][j].isVisible = false
 			--동전 이미지
-			coin[i][j] = display.newImage(questGroup, "Content/images/업적/coin.png")
-			coin[i][j].x, coin[i][j].y = questBox[i].x - 490 + (j-1)*290, questBox[i].y - 15
-			coin[i][j].isVisible = false
+			--priceImg[i][j] = display.newImage(questGroup, "Content/images/업적/coin.png")
+			priceImg[i][j].x, priceImg[i][j].y = questBox[i].x - 490 + (j-1)*290, questBox[i].y - 15
+			--priceImg[i][j].isVisible = false
 			--보상 표시
-			priceText[i][j] = display.newText(questGroup, Data[i].price, questBox[i].x - 410 + (j-1)*290, questBox[i].y - 10, "font/ONE Mobile POP.ttf")
-			priceText[i][j].size = 31
+			priceText[i][j] = display.newText(questGroup, Data[i].price, questBox[i].x - 405 + (j-1)*290, questBox[i].y - 10, "font/ONE Mobile POP.ttf")
+			priceText[i][j].size = 33
 			priceText[i][j]:setFillColor(0)
 			--교육 완료!
 			finishText[i][j] = display.newText(questGroup, "교육완료!", questBox[i].x - 430 + (j-1)*290, questBox[i].y - 5, "font/ONE Mobile POP.ttf")
@@ -388,10 +408,10 @@ function scene:create( event )
 					finishText[i][j].isVisible = true						--교육 완료! 표시
 				else
 					bubble_p[i][j].isVisible = true								--말풍선 분홍 등장
-					coin[i][j].isVisible = true									--동전 이미지 등장
+					priceImg[i][j].isVisible = true									--동전 이미지 등장
 					priceText[i][j].text = price[i][j]							--보상 표시
 					if type(price[i][j]) ~= "number" then						--보상이 돈이 아니면
-						coin[i][j].isVisible = false							--동전 이미지 숨기기
+						--priceImg[i][j].isVisible = false							--동전 이미지 숨기기
 						priceText[i][j].x = priceText[i][j].x + 10				--보상 글 위치 더 옆으로
 						priceText[i][j].size = 32								--글씨 더 크게
 					end	
@@ -430,7 +450,7 @@ function scene:create( event )
 							audio.play(SE2, {channel=4})
 							audio.stopWithDelay(420, {channel=4})
 						end
-						coin[i][j].isVisible = false							--동전 이미지 지우기
+						priceImg[i][j].isVisible = false							--동전 이미지 지우기
 						bubble_w[i][j].isVisible = true							--말풍선 하양 표시
 						finishText[i][j].isVisible = true						--교육 완료! 표시
 					end
