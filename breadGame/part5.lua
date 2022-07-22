@@ -284,7 +284,7 @@ function scene:create( event )
 			breadInfo_name[k] =  display.newText(breadInfoGroup, name, display.contentWidth*0.5, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf")
 			breadInfo_name[k]:setFillColor(0)
 			breadInfo_name[k].size = 75	
-			breadInfo_name[k].x, breadInfo_name[k].y = display.contentWidth*0.59, display.contentHeight*0.82
+			breadInfo_name[k].x, breadInfo_name[k].y = display.contentWidth*0.59, display.contentHeight*0.84
 			
 			sentence = info[index1].breads[index2].sentence
 			breadInfo_text[k] =  display.newText(breadInfoGroup, sentence, display.contentWidth*0.5, display.contentHeight*0.68, "Content/font/ONE Mobile POP.ttf")
