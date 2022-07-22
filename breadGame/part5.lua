@@ -248,8 +248,8 @@ function scene:create( event )
 	local function infoClosed(event)
 	--	for i=1, 64 do
 			--if(breadInfo_name[i] ~= nill) then
-				breadInfoGroup:removeSelf()
-				closeIcon:removeSelf()
+				breadInfoGroup:toBack()
+				--closeIcon:removeSelf()
 		--	end
 		--end
 	end
@@ -638,7 +638,7 @@ function scene:create( event )
 
 						for i=1, breadsCNT do -- 빵 개수만큼 체크 개수 생성
 							if(check_list[i] == 0 and check_inven[i] ~= nill) then
-								check_inven[i]:toFront()
+								--check_inven[i]:toFront()
 								breadRoom_image[i].param2 = i
 							end
 						end
