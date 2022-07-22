@@ -21,8 +21,11 @@ end
 parse()
 
 wallCnt = {}
+wallFlag = {}
+
 for i=1, #wallPaper do
 	wallCnt[i] = 0
+	wallFlag[i] = 0
 end
 
 local composer = require( "composer" )
@@ -374,8 +377,15 @@ function scene:hide( event )
 		--
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
+
 	elseif phase == "did" then
 		deleteAllCnt()
+
+		for i=1, #wallPaper do
+			if wallCnt[i] >= 0 then
+				wallFlag[i] = 1
+			end
+		end
 		-- Called when the scene is now off screen
 	end
 end

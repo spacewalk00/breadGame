@@ -22,8 +22,11 @@ end
 parse()
 
 decoCnt = {}
+decoFlag = {}
+
 for i=1, #deco do
 	decoCnt[i] = 0
+	decoFlag[i] = 0
 end
 
 local composer = require( "composer" )
@@ -395,6 +398,11 @@ function scene:hide( event )
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
 		deleteAllCnt()
+		for i=1, #deco do
+			if decoCnt[i] >= 0 then
+				decoFlag[i] = 1
+			end
+		end
 		-- Called when the scene is now off screen
 	end
 end
