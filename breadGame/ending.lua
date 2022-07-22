@@ -21,7 +21,7 @@ function scene:create( event )
 
 	--돌아가기 이미지		
 	local homeButton = display.newImage("Content/images/끝/backToHome.png", display.contentWidth*0.85, display.contentHeight*0.95)
-	local hoemText = display.newText("이어하기", display.contentWidth*0.85, display.contentHeight*0.95, "font/ONE Mobile POP.ttf", 40)
+	local hoemText = display.newText("이어하기", display.contentWidth*0.85, display.contentHeight*0.95, "font/ONE Mobile POP.ttf", 50)
 
 	--home으로 이동
 	function gotoHome(event)
