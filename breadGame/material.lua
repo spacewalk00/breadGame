@@ -13,6 +13,8 @@ local s_cnt
 local material_cnt
 local material_image
 local material_text
+local mcnt = 0
+local scnt = 0
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -42,18 +44,21 @@ function scene:create( event )
 		s_text:setFillColor(0)
 	    s_cnt = display.newText("보유 개수 : "..ingreCnt[2], display.contentWidth * 0.53, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 		s_cnt:setFillColor(0)
+		scnt = ingreCnt[2]
 	elseif s == 2 then 
 		s_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.518)
 		s_text = display.newText("딸기 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		s_text:setFillColor(0)
 	    s_cnt = display.newText("보유 개수 : "..ingreCnt[3], display.contentWidth * 0.53, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 		s_cnt:setFillColor(0)
+		scnt = ingreCnt[3]
 	elseif s == 3 then 
 		s_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.49, display.contentHeight*0.525)
 		s_text = display.newText("바닐라 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		s_text:setFillColor(0)
 	    s_cnt = display.newText("보유 개수 : "..ingreCnt[4], display.contentWidth * 0.53, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 		s_cnt:setFillColor(0)
+		scnt = ingreCnt[4]
 	end
 
 	local material_box =  display.newImage("Content/image/material_box.png", display.contentWidth*0.762, display.contentHeight*0.534)
@@ -85,6 +90,7 @@ function scene:create( event )
 	    	display.remove(material_cnt)
 	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[8], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 			material_cnt:setFillColor(0)
+			mcnt = ingreCnt[8]
 	    	display.remove(material_text)
 	    	material_text = display.newText("치즈", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -107,6 +113,7 @@ function scene:create( event )
 	    	display.remove(material_cnt)
 	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[7], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 			material_cnt:setFillColor(0)
+			mcnt = ingreCnt[7]
 	    	display.remove(material_text)
 	    	material_text = display.newText("팥", display.contentWidth * 0.765, display.contentHeight * 0.561, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -129,6 +136,7 @@ function scene:create( event )
 	    	display.remove(material_cnt)
 	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[9], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 			material_cnt:setFillColor(0)
+			mcnt = ingreCnt[9]
 	    	display.remove(material_text)
 	    	material_text = display.newText("옥수수", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -151,6 +159,7 @@ function scene:create( event )
 	    	display.remove(material_cnt)
 	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[11], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 			material_cnt:setFillColor(0)
+			mcnt = ingreCnt[11]
 	    	display.remove(material_text)
 	    	material_text = display.newText("슈가파우더", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -174,6 +183,7 @@ function scene:create( event )
 	    	display.remove(material_cnt)
 	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[6], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 			material_cnt:setFillColor(0)
+			mcnt = ingreCnt[6]
 	    	display.remove(material_text)
 	    	material_text = display.newText("소세지", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -197,6 +207,7 @@ function scene:create( event )
 	    	display.remove(material_cnt)
 	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[5], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 			material_cnt:setFillColor(0)
+			mcnt = ingreCnt[5]
 	    	display.remove(material_text)
 	    	material_text = display.newText("반짝이", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -219,6 +230,7 @@ function scene:create( event )
 	    	display.remove(material_cnt)
 	    	material_cnt = display.newText("보유 개수 : "..ingreCnt[10], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 			material_cnt:setFillColor(0)
+			mcnt = ingreCnt[10]
 	    	display.remove(material_text)
 	    	material_text = display.newText("오레오가루", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 	    	material_text:setFillColor(0)
@@ -233,7 +245,7 @@ function scene:create( event )
 	local start_button = display.newImage("Content/image/start.png", display.contentWidth*0.5, display.contentHeight*0.71)
 
 	local function start( event )
-	    if ( event.phase == "began" ) then
+	    if ( mcnt + scnt > 0) then
 	    	showCoin.isVisible = true
 	        composer.gotoScene("plus")
 		end
