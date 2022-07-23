@@ -284,7 +284,7 @@ function scene:create( event )
 			breadInfo_name[k] =  display.newText(breadInfoGroup, name, display.contentWidth*0.5, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf")
 			breadInfo_name[k]:setFillColor(0)
 			breadInfo_name[k].size = 75	
-			breadInfo_name[k].x, breadInfo_name[k].y = display.contentWidth*0.59, display.contentHeight*0.84
+			breadInfo_name[k].x, breadInfo_name[k].y = display.contentWidth*0.68, display.contentHeight*0.84
 			
 			sentence = info[index1].breads[index2].sentence
 			breadInfo_text[k] =  display.newText(breadInfoGroup, sentence, display.contentWidth*0.5, display.contentHeight*0.68, "Content/font/ONE Mobile POP.ttf")
@@ -790,26 +790,6 @@ function scene:create( event )
 		composer.gotoScene("achieve")
 	end
 	
-	--* 꾸미기방 연결 -- 
-	local function moveToDeco(event)
-		print("꾸미기로 이동")
-		---------------showCoin 관련 수정
-		showCoin.isVisible = true
-		showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
-		showCoin:setFillColor(0)
-		-------수정	
-			if(count > 0) then
-				for i=1, breadsCNT do
-					if(breadRoom_image[i] ~= nill) then
-						breadRoom_image[i].isVisible = false
-					end
-				end
-			end
-		composer.gotoScene("decorationC")
-
-	end
-	--
-
 	local function moveToHome(event)
 		print("홈으로 이동")
 		------------------showCoin 관련 수정
@@ -831,7 +811,6 @@ function scene:create( event )
 	store:addEventListener("tap", moveToStore)
 	homeIcon:addEventListener("tap", moveToHome)
 	temp:addEventListener("tap", moveToAchieve)
-	dia:addEventListener("tap", moveToDeco)
 
 
 
