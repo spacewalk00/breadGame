@@ -789,6 +789,26 @@ function scene:create( event )
 			end
 		composer.gotoScene("achieve")
 	end
+
+	--* 꾸미기방 연결 -- 
+	local function moveToDeco(event)
+		print("꾸미기로 이동")
+		---------------showCoin 관련 수정
+		showCoin.isVisible = true
+		showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
+		showCoin:setFillColor(0)
+		-------수정	
+			if(count > 0) then
+				for i=1, breadsCNT do
+					if(breadRoom_image[i] ~= nill) then
+						breadRoom_image[i].isVisible = false
+					end
+				end
+			end
+		composer.gotoScene("decorationC")
+
+	end
+	--
 	
 	local function moveToHome(event)
 		print("홈으로 이동")
@@ -811,6 +831,7 @@ function scene:create( event )
 	store:addEventListener("tap", moveToStore)
 	homeIcon:addEventListener("tap", moveToHome)
 	temp:addEventListener("tap", moveToAchieve)
+	dia:addEventListener("tap", moveToDeco)
 
 
 
