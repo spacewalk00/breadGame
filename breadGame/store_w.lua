@@ -21,11 +21,11 @@ end
 parse()
 
 wallCnt = {}
-wallFlag = {}
+wallPaperFlag = {}
 
 for i=1, #wallPaper do
 	wallCnt[i] = 0
-	wallFlag[i] = 0
+	wallPaperFlag[i] = 0
 end
 
 local composer = require( "composer" )
@@ -382,8 +382,8 @@ function scene:hide( event )
 		deleteAllCnt()
 
 		for i=1, #wallPaper do
-			if wallCnt[i] >= 0 then
-				wallFlag[i] = 1
+			if wallCnt[i] == 1 then
+				wallPaperFlag[i] = 1
 			end
 		end
 		-- Called when the scene is now off screen

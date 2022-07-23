@@ -399,7 +399,7 @@ function scene:hide( event )
 	elseif phase == "did" then
 		deleteAllCnt()
 		for i=1, #deco do
-			if decoCnt[i] >= 0 then
+			if decoCnt[i] == 1 then
 				decoFlag[i] = 1
 			end
 		end
