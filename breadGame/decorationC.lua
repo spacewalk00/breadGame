@@ -181,7 +181,7 @@ function scene:create( event )
 	decoText.x, decoText.y = 990, 667
 	popGroup:insert( decoText ) 
 
-	carpetBtn:addEventListener("tap", gotoDecoC)
+	--carpetBtn:addEventListener("tap", gotoDecoC)
 	decoBtn:addEventListener("tap", gotoDecoD)
 
 	close.name = "close"

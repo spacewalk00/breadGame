@@ -186,7 +186,7 @@ function scene:create( event )
 	pushBtn.name = "pushBtn"
 	pushBtn:addEventListener("tap", gotoBreadRoomFromD)
 
-	decoBtn:addEventListener("tap", gotoDecoD)
+	--decoBtn:addEventListener("tap", gotoDecoD)
 	carpetBtn:addEventListener("tap", gotoDecoC)
 
     ------------------------
