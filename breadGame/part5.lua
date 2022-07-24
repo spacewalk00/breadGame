@@ -288,7 +288,15 @@ function scene:create( event )
 			breadInfo_name[k] =  display.newText(breadInfoGroup, name, display.contentWidth*0.5, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf")
 			breadInfo_name[k]:setFillColor(0)
 			breadInfo_name[k].size = 75	
-			breadInfo_name[k].x, breadInfo_name[k].y = display.contentWidth*0.68, display.contentHeight*0.84
+
+			length = string.len(name)
+			print("빵이름 길이는" .. length)
+
+			-- 빵 이름 길이에 상관없이 위치 잘 뜨게 --
+			mul = 0.55
+			nul = length / 3
+			mul = mul + (0.018 * (nul-2))
+			breadInfo_name[k].x, breadInfo_name[k].y = display.contentWidth*mul, display.contentHeight*0.84
 			
 			sentence = info[index1].breads[index2].sentence
 			breadInfo_text[k] =  display.newText(breadInfoGroup, sentence, display.contentWidth*0.5, display.contentHeight*0.68, "Content/font/ONE Mobile POP.ttf")
@@ -303,7 +311,7 @@ function scene:create( event )
 			breadInfoGroup:toFront()
 
 			closeIcon = display.newImageRect(breadInfoGroup, "Content/images/close.png", display.contentWidth*0.1, display.contentHeight*0.05)
-			closeIcon.x, closeIcon.y = display.contentWidth*0.962, display.contentHeight*0.813
+			closeIcon.x, closeIcon.y = display.contentWidth*0.962, display.contentHeight*0.811
 
 			sceneGroup:insert(breadInfoGroup)
 			closeIcon:addEventListener("tap", infoClosed)
