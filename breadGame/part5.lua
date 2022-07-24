@@ -275,7 +275,11 @@ function scene:create( event )
 			breadInfo_profile = display.newImageRect(breadInfoGroup, "Content/images/breadInfo_profile.png", display.contentWidth*0.25, display.contentHeight*0.15)
 			breadInfo_profile.x, breadInfo_profile.y = display.contentWidth*0.2, display.contentHeight*0.9
 
-			levelNum=lv
+			if (lv ~= nill) then
+				levelNum = lv
+			else
+				levelNum = 1
+			end
 			breadInfo_level = display.newText(breadInfoGroup, "Lv." .. levelNum ,display.contentWidth*1.5, display.contentHeight*1.5,"font/ONE Mobile POP.ttf", 75)
 			breadInfo_level:setFillColor(0)
 			breadInfo_level.x, breadInfo_level.y = display.contentWidth*0.41, display.contentHeight*0.84
