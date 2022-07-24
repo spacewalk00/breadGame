@@ -23,7 +23,7 @@ function scene:create( event )
 	print("빵번호1:"..Index1)
 	print("빵번호2:"..Index2)
 
-	local BreadJson, open, cnt, lv
+	local BreadJson, open, cnt
 	if Index == 1 then
 		BreadJson = Data[Index1].breads[Index2]
 		open = openBread
