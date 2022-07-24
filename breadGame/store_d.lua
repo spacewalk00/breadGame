@@ -7,7 +7,7 @@ local json = require('json')
 local deco, pos, msg
 --
 
-local function parse()
+local function deco_parse()
 	local filename = system.pathForFile("Content/JSON/deco.json")
 	deco, pos, msg = json.decodeFile(filename)
 
@@ -18,16 +18,15 @@ local function parse()
 		print(msg)
 	end
 end
-
-parse()
-
+deco_parse()
+--[[
 decoCnt = {}
 decoFlag = {}
 
 for i=1, #deco do
 	decoCnt[i] = 0
 	decoFlag[i] = 0
-end
+end]]
 
 local composer = require( "composer" )
 local scene = composer.newScene()
@@ -274,7 +273,8 @@ function scene:create( event )
 	    end
 
 	    local function consume( event )
-
+			-- 1개만 살 수 있게 변경 --
+	    	if decoCnt[i] == 0 then
 	    	-- 코인 차감 --
 	    	if( coinNum >= deco[i].price) then
 	    	coinNum = coinNum - deco[i].price
@@ -296,6 +296,7 @@ function scene:create( event )
 			else 
 				print("야 너 돈 없어")
 			end
+		end
 			-- 
 			popGroup:removeSelf()
 			darkening:removeSelf()
@@ -401,6 +402,7 @@ function scene:hide( event )
 		for i=1, #deco do
 			if decoCnt[i] == 1 then
 				decoFlag[i] = 1
+				print(i.."인덱스의 flag는"..decoFlag[i].."\n")
 			end
 		end
 		-- Called when the scene is now off screen

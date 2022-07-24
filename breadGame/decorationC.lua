@@ -208,16 +208,8 @@ function scene:create( event )
 	--local defaultBox 
 
 	--임시--
-	wallPaperFlag = { 1, 1, 1, 1}
-	--decoCheckFlag = {0, }
-	--[[wallPaperKindCnt = 0
-	--decoCheckFlag = {0, }
-	for i=1, #wallPaper do
-		if wallPaperFlag == 1 then
-			wallPaperKindCnt = wallPaperCnt + 1
-			print(wallPaperKindCnt)
-		end
-	end]]
+	--wallPaperFlag = { 1, 1, 1, 1}
+	
 	local overlapFlag = 0
 
 	for i=1, #wallPaper do

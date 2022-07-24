@@ -6,8 +6,7 @@
 local json = require('json')
 local wallPaper, pos, msg
 --
-
-local function parse()
+local function carpet_parse()
 	local filename = system.pathForFile("Content/JSON/wallPaper.json")
 	wallPaper, pos, msg = json.decodeFile(filename)
 
@@ -18,15 +17,15 @@ local function parse()
 		print(msg)
 	end
 end
-parse()
-
+carpet_parse()
+--[[
 wallCnt = {}
 wallPaperFlag = {}
 
 for i=1, #wallPaper do
 	wallCnt[i] = 0
 	wallPaperFlag[i] = 0
-end
+end]]
 
 local composer = require( "composer" )
 local scene = composer.newScene()
@@ -255,7 +254,8 @@ function scene:create( event )
 	    end
 
 	    local function consume( event )
-
+			-- 카펫은 1개만 --
+	    	if wallCnt[i] == 0 then
 	    	-- 코인 차감 --
 	    	if( coinNum >= wallPaper[i].price) then
 	    	coinNum = coinNum - wallPaper[i].price
@@ -281,7 +281,7 @@ function scene:create( event )
 			popGroup:removeSelf()
 			darkening:removeSelf()
 	    end
-
+	end
 	    buyingBar:addEventListener("tap", consume)
 	    close:addEventListener("tap", tapListener)
 	end
@@ -384,6 +384,7 @@ function scene:hide( event )
 		for i=1, #wallPaper do
 			if wallCnt[i] == 1 then
 				wallPaperFlag[i] = 1
+				print(i.."인덱스의 flag는"..wallPaperFlag[i].."\n")
 			end
 		end
 		-- Called when the scene is now off screen

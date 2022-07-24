@@ -35,7 +35,7 @@ function insertObj ( event )
 	-- 카펫 변경 코드 p_check[i].isVisible == true인 카펫 -- 
 end]]
 
-local decoFlag = 0
+local _decoFlag = 0
 local decoIndex 
 local function gotoBreadRoomFromD(event)
 
@@ -44,7 +44,7 @@ local function gotoBreadRoomFromD(event)
 	
 	-- 고른 아이템 변수 전달 //hide부분에 이어서--
 	if event.target.name == "pushBtn" then
-		decoFlag = 1
+		_decoFlag = 1
 
 		-- 카펫 변경 코드 p_check[i].isVisible == true인 카펫 -- 
 	end
@@ -207,16 +207,10 @@ function scene:create( event )
 	--local defaultBox 
 
 	--임시--
-	decoFlag = { 1, 1 }
-	--[[decoKindCnt = 0
-	--decoCheckFlag = {0, }
-	for i=1, #deco do
-		if decoFlag == 1 then
-			decoKindCnt = decoKindCnt + 1
-		end
-	end]]
+	--decoFlag = { 1, 1 }
 
 	for i=1, #deco do
+		print(decoFlag[i].."왜 작동 하ㅑ고")
 		if decoFlag[i] == 1 then
 			product_bar[i] = display.newImage(carpetGroup, "Content/images/deco_bar.png")
 			product_bar[i].x, product_bar[i].y = display.contentWidth*0.39, display.contentHeight*(0.06+0.13* (i-1))
@@ -347,6 +341,10 @@ function scene:show( event )
 		-- 
 		-- INSERT code here to make the scene come alive
 		-- e.g. start timers, begin animation, play audio, etc.
+
+	for i=1, #deco do
+		print(decoFlag[i].."왜 작동 하ㅑ고")
+	end
 	end	
 end
 
@@ -364,10 +362,10 @@ function scene:hide( event )
 	elseif phase == "did" then
 		composer.removeScene("decorationD")
 
-		if decoFlag == 1 then
+		if _decoFlag == 1 then
 			composer.setVariable("decoIndex", decoIndex)
 			print(decoIndex)
-			decoFlag = 0
+			_decoFlag = 0
 		end
 
 	end

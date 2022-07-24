@@ -23,11 +23,37 @@ local function parse()
 	--
 end
 parse()
+
+local function deco_parse()
+	local filename = system.pathForFile("Content/JSON/deco.json")
+	deco, pos, msg = json.decodeFile(filename)
+
+	if deco then
+		print(deco[1].name)
+	else
+		print(pos)
+		print(msg)
+	end
+end
+deco_parse()
+
+local function carpet_parse()
+	local filename = system.pathForFile("Content/JSON/wallPaper.json")
+	wallPaper, pos, msg = json.decodeFile(filename)
+
+	if wallPaper then
+		print(wallPaper[1].name)
+	else
+		print(pos)
+		print(msg)
+	end
+end
+carpet_parse()
 --
 
 -------업적 전역 변수----------
 --돈 전역 변수
-coinNum = 0
+coinNum = 1000
 --폭탄빵 제작 전역변수
 bomb_count = 0
 --연속 일반빵 제작 전역변수
@@ -194,6 +220,23 @@ function scene:hide( event )
 			ingreCnt[i] = 0
 		end
 
+		--* 상점과 꾸미기방 연결 --
+		decoCnt = {}
+		decoFlag = {}
+
+		for i=1, #deco do
+		decoCnt[i] = 0
+		decoFlag[i] = 0
+		end
+
+		wallCnt = {}
+		wallPaperFlag = {}
+
+		for i=1, #wallPaper do
+		wallCnt[i] = 0
+		wallPaperFlag[i] = 0
+		end
+		--
 	elseif phase == "did" then
 
 		
