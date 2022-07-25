@@ -58,14 +58,6 @@ local scrollView = widget.newScrollView(
     --0.949, 0.839, 0.776
 })
 ]]
-local function ingreRandom() --시럽/재료 각각 랜덤으로 하나씩 보상--
-	audio.play( soundTable["rewardSound"] ,  {channel=7})
-	local n = math.random(2, 5) --초코시럽(2), 딸기시럽(3), 슈크림시럽(4)
-	ingreCnt[n] = ingreCnt[n] + 1
-
-	n = math.random(5, 12) -- 재료 랜덤하게
-	ingreCnt[n] = ingreCnt[n] + 1
-end
 ---------성공빵 비율/ level1: 50 (+ 5%) / portion = 5 (+0.5)-----------
 local function successPortion()
 	for i=1, 10 do
@@ -208,9 +200,10 @@ function scene:show( event )
 			--
 			exp = exp + 100 -- 성공적인 빵 경험치 100 제공
 			--시럽 3개 보상 제공--
+			--[[
 			ingreCnt[2] = ingreCnt[2] + 1
 			ingreCnt[3] = ingreCnt[3] + 1
-			ingreCnt[4] = ingreCnt[4] + 1
+			ingreCnt[4] = ingreCnt[4] + 1]]
 
 			---업적 관련
 			bread_count = bread_count + 1 					--일반빵 제작 개수
@@ -378,7 +371,7 @@ function scene:show( event )
 
 	    	if(fail == 0) then
 				--보상 표시--
-				local rewardGroup = display.newGroup()
+				--[[local rewardGroup = display.newGroup()
 
 				local choco = display.newImage(rewardGroup, ingredients[2].image)
 				choco.x, choco.y = display.contentWidth*0.555, display.contentHeight*0.5
@@ -395,7 +388,7 @@ function scene:show( event )
 
 				transition.fadeOut(rewardGroup, {timer = 1500, delay = 500})
 
-				audio.play( soundTable["rewardSound"],  {channel=7} )
+				audio.play( soundTable["rewardSound"],  {channel=7} )]]
 
 	    		-- new일 때 코인 지급 -- 
 				if newFlag == 1 then

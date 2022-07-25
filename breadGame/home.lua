@@ -34,6 +34,50 @@ local function  gotoAchieve(event)
 end
 
 ----------------- 경험치에 따른 레벨업 관련 ---------------------
+local json = require("json")
+
+local function parse2()
+	filename = system.pathForFile("Content/JSON/ingredient.json")
+	ingredients, pos2, msg2 = json.decodeFile(filename)
+
+	--[[if ingredients then
+		print(ingredients[1].name)
+	else
+		print(pos2)
+		print(msg2)
+	end]]
+end
+parse2()
+
+local kindOfSyrup = 0
+local kindOfIngre = 0
+
+local function ingreRandom() --시럽/재료 각각 랜덤으로 하나씩 보상--
+	audio.play( soundTable["rewardSound"] ,  {channel=7})
+	local n = math.random(2, 4) --초코시럽(2), 딸기시럽(3), 슈크림시럽(4)
+	ingreCnt[n] = ingreCnt[n] + 1
+	kindOfSyrup = n
+
+	n = math.random(5, 11) -- 재료 랜덤하게
+	ingreCnt[n] = ingreCnt[n] + 1
+	kindOfIngre = n
+
+	--보상 표시--
+	local rewardGroup = display.newGroup()
+
+	local rewardSyrup = display.newImage(rewardGroup, ingredients[kindOfSyrup].image)
+	rewardSyrup.x, rewardSyrup.y = display.contentWidth*0.555, display.contentHeight*0.5
+
+	local rewardIngre = display.newImage(rewardGroup, ingredients[kindOfIngre].image)
+	rewardIngre.x, rewardIngre.y = display.contentWidth*0.555, display.contentHeight*0.55
+
+	transition.moveTo(rewardSyrup, {time = 2000, x=display.contentWidth*0.138, y=display.contentHeight*0.444} ) 
+	transition.moveTo(rewardIngre, {time = 2000, x=display.contentWidth*0.158, y=display.contentHeight*0.444} ) 
+
+	transition.fadeOut(rewardGroup, {timer = 1500, delay = 1500})
+	audio.play( soundTable["rewardSound"],  {channel=7} )
+end
+
 levelUpFlag = 0 
 local function levelUpPop( n ) --레벨업 창 화면에 띄우기 --
 	print("레벨업!!!!!!!!!"..n.."으로")
@@ -65,6 +109,20 @@ local function levelUpPop( n ) --레벨업 창 화면에 띄우기 --
 	message2.size = 70
 
 	transition.fadeOut(levelGroup, {timer = 2000, delay = 2000})
+
+	--시간 카운트 * 지연 고민 중--
+	--[[local limit = 100
+    --print("시럽은 " .. syrub .. "재료는" .. ingredient)
+
+	local function timeAttack(event)
+		limit = limit - 1
+		if limit == 0 then
+			print("10초 지연")
+		end
+	end
+	timer.performWithDelay(1000, timeAttack, 0) ]]
+
+	ingreRandom()
 end
 
 showLevel = display.newText(levelNum, display.contentWidth*0.075, display.contentHeight*0.045, "Content/font/ONE Mobile POP.ttf", 90)

@@ -181,7 +181,7 @@ function scene:create( event )
 	
 	local carpetBtn = display.newRect(menuGroup, 460, 667, 280, 150)
 	carpetBtn:setFillColor(0)
-	carpetBtn.alpha = 0.1
+	carpetBtn.alpha = 0.01
 	popGroup:insert( carpetBtn )
 
 	local carpetText = display.newImage(menuGroup, "Content/images/text_carpet.png")
@@ -190,7 +190,7 @@ function scene:create( event )
 
 	local decoBtn = display.newRect(990, 667, 280, 150)
 	decoBtn:setFillColor(0)
-	decoBtn.alpha = 0.1
+	decoBtn.alpha = 0.01
 	popGroup:insert( decoBtn )
 
 	local decoText = display.newImage(menuGroup, "Content/images/text_decor.png")
