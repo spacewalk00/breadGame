@@ -34,7 +34,7 @@ local dia
 
 local icon
 local icon_inven = {}
-local check_list = {0, }
+local check_list = {}
 local check_inven = {}
 local bread_name = {}
 local bread_name_text = {}
@@ -42,7 +42,7 @@ local bread_inven = {}
 local pushIcon
 local text_push2
 local breadRoom_image = {}
-local breadGroup = display.newGroup()
+--local breadGroup = display.newGroup()
 local k
 --local breadRoom_count = 0 		--전역변수 때문에 지웁니다!
 -- 넣은 빵의 세부정보 --
@@ -200,7 +200,7 @@ function scene:create( event )
 	local list
 
 	local breadRoom_image = {}
-	local breadGroup = display.newGroup()
+	breadGroup = display.newGroup()
 
 	-- 넣은 빵의 세부정보 --
 	local breadInfo_background
@@ -381,39 +381,6 @@ function scene:create( event )
 
 			index1, index2 = 1, 1
 			local jul = 0.15
-			
-			--[[
-			function openBreadsCNT()
-				count = count + 1
-				local index1 = 1
-				local index2 = 1
-				BreadsCNT = 0
-				for i=1,32 do
-				   if openBread[index1][index2] ~= 0 then
-					  BreadsCNT = BreadsCNT + 1
-				   end
-				   index2 = index2 + 1
-				   if index2 == 9 then
-					  index2 = 1
-					  index1 = index1 + 1
-				   end
-				end
-				index1, index2 = 1, 1
-				for i=1,32 do
-				   if openUBread[index1][index2] ~= 0 then
-					  BreadsCNT = BreadsCNT + 1
-				   end
-				   index2 = index2 + 1
-				   if index2 == 9 then
-					  index2 = 1
-					  index1 = index1 + 1
-				   end
-				end
-				return BreadsCNT
-			end
-			print("총 발견한 빵은.."..openBreadsCNT())
-			breadsCNT = openBreadsCNT()
-			]]
 
 			breadsCNT = 64
 			local m = 0
@@ -494,8 +461,9 @@ function scene:create( event )
 					
 					-- 체크표시했으면(빵방에 넣었으면) 닫기 눌렀다가 빵넣기 다시 눌러도 체크가 다시 나타나게 함
 					for i=1,  breadsCNT do 
-						if(check_list[i] == 0 and check_inven[i] ~= nill) then
-							--check_inven[i]:toFront()
+						--if(check_list[i] == 0 and check_inven[i] ~= nill) then
+						if(check_inven[i] ~= nill) then
+							check_inven[i].isVisible = true
 						end
 					end
 				-- *** 에러 해결용 추가 코드 *** --
@@ -599,7 +567,7 @@ function scene:create( event )
 					else
 						breadRoom_count = breadRoom_count + 1
 						print(k.."체크인벤 k값")
-						check_inven[k] = display.newImageRect("Content/images/check.png", display.contentWidth*0.04, display.contentHeight*0.02)
+						check_inven[k] = display.newImageRect(breadGroup, "Content/images/check.png", display.contentWidth*0.04, display.contentHeight*0.02)
 					--	check_inven[k] = display.newImageRect(breadGroup, "Content/images/check.png", display.contentWidth*0.04, display.contentHeight*0.02)
 						--check_inven[k]:toFront()
 --						check_inven[k]:addEventListener("touch", scroll)
@@ -726,11 +694,13 @@ function scene:create( event )
 						display.remove(bread_name[i])
 						display.remove(icon_inven[i])
 						display.remove(bread_inven[i])
-						display.remove(check_inven[i])
+						--check_inven[i].isVisible = false
+						--display.remove(check_inven[i])
 						
 						-- 체크 잠시 사라지게 했다가 다시 뜨게 함
 						--if(check_list[i] == 0 and check_inven[i] ~= nill) then
 						if(check_inven[i] ~= nill) then
+							check_inven[i].isVisible = false
 							--check_inven[i]:toBack()
 			
 							--breadRoom_image[i]:toFront()
