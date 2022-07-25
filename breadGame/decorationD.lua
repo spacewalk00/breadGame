@@ -35,17 +35,21 @@ function insertObj ( event )
 	-- 카펫 변경 코드 p_check[i].isVisible == true인 카펫 -- 
 end]]
 
-local _decoFlag = 0
-local decoIndex 
+--local _decoFlag = 0
+--local decoIndex 
 local function gotoBreadRoomFromD(event)
 
 	composer.gotoScene("part5")
 	print("빵방으로 가서 아이템 적용")
 	
-	-- 고른 아이템 변수 전달 //hide부분에 이어서--
+	-- 고른 아이템 변수 전달 --
 	if event.target.name == "pushBtn" then
-		_decoFlag = 1
-
+		--_decoFlag = 1
+		-- 고른 아이템 목록에서 삭제
+		if decoCnt[decoIndex] == 1 then
+		decoCnt[decoIndex] = decoCnt[decoIndex] - 1 
+		decoFlag[decoIndex] = 0
+		end
 		-- 카펫 변경 코드 p_check[i].isVisible == true인 카펫 -- 
 	end
 end
@@ -72,6 +76,8 @@ local text_deco
 local pushIcon
 local text_push 
 
+local carpetChange = -1
+
 function scene:create( event )
 	local sceneGroup = self.view
 
@@ -86,7 +92,18 @@ function scene:create( event )
 
 	background_carpet = display.newImageRect("Content/images/carpet.png", display.contentWidth, display.contentHeight)
 	background_carpet.x, background_carpet.y = display.contentWidth*0.5, display.contentHeight*0.5
-
+	background_carpet.isVisible = false
+	
+	carpetChange = composer.getVariable("forItemRoomBackground")
+	if carpetChange == nil then
+		carpetChange = -1
+	end
+	
+	if carpetChange > 0 then -- 배경카펫
+		background_carpet = display.newImageRect(wallPaper[carpetChange].image2, display.contentWidth, display.contentHeight)
+		background_carpet.x, background_carpet.y = display.contentWidth*0.5, display.contentHeight*0.5
+	end
+	
 	-- 홈, 빵방, 코인 --
 	homeIcon = display.newImageRect("Content/images/home.png", display.contentWidth*0.07, display.contentHeight*0.04)
 	homeIcon.x, homeIcon.y = display.contentWidth*0.08, display.contentHeight*0.05
@@ -341,10 +358,6 @@ function scene:show( event )
 		-- 
 		-- INSERT code here to make the scene come alive
 		-- e.g. start timers, begin animation, play audio, etc.
-
-	for i=1, #deco do
-		print(decoFlag[i].."왜 작동 하ㅑ고")
-	end
 	end	
 end
 
@@ -362,11 +375,11 @@ function scene:hide( event )
 	elseif phase == "did" then
 		composer.removeScene("decorationD")
 
-		if _decoFlag == 1 then
+		--[[if _decoFlag == 1 then
 			composer.setVariable("decoIndex", decoIndex)
 			print(decoIndex)
 			_decoFlag = 0
-		end
+		end]]
 
 	end
 end

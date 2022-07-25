@@ -92,6 +92,36 @@ end
 parse()
 parseUBreadInfo()
 
+---*꾸미기방 위해서------------------------------------------------------------
+local function carpet_parse()
+	local filename = system.pathForFile("Content/JSON/wallPaper.json")
+	wallPaper, pos, msg = json.decodeFile(filename)
+
+	if wallPaper then
+		print(wallPaper[1].name)
+	else
+		print(pos)
+		print(msg)
+	end
+end
+carpet_parse()
+
+local function deco_parse()
+	local filename = system.pathForFile("Content/JSON/deco.json")
+	deco, pos, msg = json.decodeFile(filename)
+
+	if deco then
+		print(deco[1].name)
+	else
+		print(pos)
+		print(msg)
+	end
+end
+deco_parse()
+
+local breadOutGroup = display.newGroup()
+----------------------------------------------------------------
+
 function scene:create( event )
 	local sceneGroup = self.view
 
@@ -104,6 +134,7 @@ function scene:create( event )
 
 	background_carpet = display.newImageRect("Content/images/carpet.png", display.contentWidth, display.contentHeight)
 	background_carpet.x, background_carpet.y = display.contentWidth*0.5, display.contentHeight*0.5
+	background_carpet.isVisible = false
 
 	-- 홈, 빵방, 코인 --
 	homeIcon = display.newImageRect("Content/images/home.png", display.contentWidth*0.07, display.contentHeight*0.04)
@@ -180,7 +211,7 @@ function scene:create( event )
 	local breadInfo_name = {}
 	local breadInfo_text = {}
 	local breadInfoGroup = display.newGroup()
-	local breadOutGroup = display.newGroup()
+	--local breadOutGroup = display.newGroup()
 
 	local function BreadMove(obj)
 		print("빵무브")
@@ -899,6 +930,38 @@ function scene:show( event )
 		homeIcon:addEventListener("tap", tapListener)
 		temp:addEventListener("tap", tapListener)
 		]]
+-----------------------------------------------------------------------------------------------
+		--빵방에 카펫, 장식 넣기
+		if carpetIndex ~= 0 then -- 배경카펫
+			print(carpetIndex .. " part5 에서")
+			background_carpet = display.newImageRect(wallPaper[carpetIndex].image2, display.contentWidth, display.contentHeight)
+			background_carpet.x, background_carpet.y = display.contentWidth*0.5, display.contentHeight*0.5
+
+			composer.setVariable("forItemRoomBackground", carpetIndex)
+			
+			sceneGroup:insert(background_carpet)
+			if breadRoom_deco ~= nil then -- intro.lua에 전역변수 확인
+				print("breadRoom_deco를 맨 앞으로 당기자")
+				breadRoom_deco:toFront()
+			end
+
+			if breadOutGroup ~= nil then
+				print("빵 아이들을 맨 앞으로 당기자")
+				breadOutGroup:toFront()
+			end
+
+			carpetIndex = 0
+		end
+
+		if decoIndex ~= 0 then
+			breadRoom_deco = display.newImageRect(deco[decoIndex].image2, display.contentWidth*0.17, display.contentHeight*0.1)
+			breadRoom_deco.x, breadRoom_deco.y = math.random(display.contentWidth*0.12, display.contentWidth*0.9), math.random(display.contentHeight*0.31, display.contentHeight*0.71)
+			
+			sceneGroup:insert(breadRoom_deco)
+
+			decoIndex = 0
+		end
+---------------------------------------------------------------------------------------------------------------------		
 	end
 	
 end

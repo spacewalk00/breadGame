@@ -26,17 +26,22 @@ local function parse()
 end
 parse()
 
-local carpetFlag = 0
-local carpetIndex 
+--local carpetFlag = 0
+--local carpetIndex 
 local function gotoBreadRoomFromC(event)
 
 	composer.gotoScene("part5")
 	print("빵방으로 가서 아이템 적용")
 	
-	-- 고른 아이템 변수 전달 //hide부분에 이어서--
+	-- 고른 아이템 변수 전달 
 	if event.target.name == "pushBtn" then
-		carpetFlag = 1
+		--carpetFlag = 1
 
+		-- 고른 아이템 목록에서 삭제
+		if wallCnt[carpetIndex] == 1 then
+		wallCnt[carpetIndex] = wallCnt[carpetIndex] - 1
+		wallPaperFlag[carpetIndex] = 0 
+		end
 		-- 카펫 변경 코드 p_check[i].isVisible == true인 카펫 -- 
 	end
 end
@@ -74,6 +79,8 @@ local text_deco
 local pushIcon
 local text_push 
 
+local carpetChange = -1
+
 function scene:create( event )
 	local sceneGroup = self.view
 	--part5.lua 동일 코드 --
@@ -87,7 +94,18 @@ function scene:create( event )
 
 	background_carpet = display.newImageRect("Content/images/carpet.png", display.contentWidth, display.contentHeight)
 	background_carpet.x, background_carpet.y = display.contentWidth*0.5, display.contentHeight*0.5
-
+	background_carpet.isVisible = false
+	
+	carpetChange = composer.getVariable("forItemRoomBackground")
+	if carpetChange == nil then
+		carpetChange = -1
+	end
+	
+	if carpetChange > 0 then -- 배경카펫
+		background_carpet = display.newImageRect(wallPaper[carpetChange].image2, display.contentWidth, display.contentHeight)
+		background_carpet.x, background_carpet.y = display.contentWidth*0.5, display.contentHeight*0.5
+	end
+	
 	-- 홈, 빵방, 코인 --
 	homeIcon = display.newImageRect("Content/images/home.png", display.contentWidth*0.07, display.contentHeight*0.04)
 	homeIcon.x, homeIcon.y = display.contentWidth*0.08, display.contentHeight*0.05
@@ -357,11 +375,11 @@ function scene:hide( event )
 	elseif phase == "did" then
 		composer.removeScene("decorationC")
 
-		if carpetFlag == 1 then
+		--[[if carpetFlag == 1 then
 			composer.setVariable("carpetIndex", carpetIndex)
 			print(carpetIndex)
 			carpetFlag = 0
-		end
+		end]]
 	end
 end
 
