@@ -149,7 +149,7 @@ function scene:create( event )
 	--quest_clear[2][1] = 1
 	--quest_clear[2][2] = 1
 	--quest_clear[2][3] = 1
-	quest_clear[2][4] = 1
+	--quest_clear[2][4] = 1
 	--quest_clear[3][1] = 1
 	--quest_clear[3][2] = 1
 	--quest_clear[4][1] = 1
@@ -157,7 +157,7 @@ function scene:create( event )
 	--quest_clear[5][1] = 1
 	--quest_clear[5][2] = 1
 	--quest_clear[5][3] = 1
-	quest_clear[5][4] = 1
+	--quest_clear[5][4] = 1
 	--quest_clear[6][1] = 1
 	--quest_clear[6][2] = 1
 	--quest_clear[6][3] = 1
