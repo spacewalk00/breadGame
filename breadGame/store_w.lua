@@ -45,7 +45,7 @@ local function displayIngreCnt(i)
 end
 
 local function printAllCnt()
-	for i=1, #wallPaper do
+	for i=1, 4 do
 		displayIngreCnt(i)
 	end
 end
@@ -55,7 +55,7 @@ local function deleteBeforeCnt(i)
 end
 
 local function deleteAllCnt()
-	for i=1, #wallPaper do
+	for i=1, 4 do
 		deleteBeforeCnt(i)
 	end
 end
@@ -149,7 +149,7 @@ function scene:create( event )
 	local defaultBox 
 
 
-	for i=1, #wallPaper do
+	for i=1, 4 do
 		product_bar[i] = display.newImage(ingreGroup, "Content/images/product_bar.png")
 		product_bar[i].x, product_bar[i].y = display.contentWidth*0.5, display.contentHeight*(0.06+0.13* (i-1))
 		p_pic_bar[i] = display.newImage(ingreGroup, "Content/images/syrup_bar.png")
@@ -381,7 +381,7 @@ function scene:hide( event )
 	elseif phase == "did" then
 		deleteAllCnt()
 
-		for i=1, #wallPaper do
+		for i=1, 4 do
 			if wallCnt[i] == 1 then
 				wallPaperFlag[i] = 1
 				print(i.."인덱스의 flag는"..wallPaperFlag[i].."\n")

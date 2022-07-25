@@ -149,7 +149,7 @@ function scene:create( event )
 	--quest_clear[2][1] = 1
 	--quest_clear[2][2] = 1
 	--quest_clear[2][3] = 1
-	--quest_clear[2][4] = 1
+	quest_clear[2][4] = 1
 	--quest_clear[3][1] = 1
 	--quest_clear[3][2] = 1
 	--quest_clear[4][1] = 1
@@ -157,7 +157,7 @@ function scene:create( event )
 	--quest_clear[5][1] = 1
 	--quest_clear[5][2] = 1
 	--quest_clear[5][3] = 1
-	--quest_clear[5][4] = 1
+	quest_clear[5][4] = 1
 	--quest_clear[6][1] = 1
 	--quest_clear[6][2] = 1
 	--quest_clear[6][3] = 1
@@ -446,6 +446,14 @@ function scene:create( event )
 						elseif price[i][4] == "카펫" then						--보상이 카펫이면
 							audio.play(SE2, {channel=4})
 							audio.stopWithDelay(420, {channel=4})
+							if i == 2 then
+								wallCnt[5] = 1
+								wallPaperFlag[5] = 1
+							end
+							if i == 5 then 
+								wallCnt[6] = 1
+								wallPaperFlag[6] = 1
+							end
 						end
 						priceImg[i][j].isVisible = false							--동전 이미지 지우기
 						bubble_w[i][j].isVisible = true							--말풍선 하양 표시
