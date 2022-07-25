@@ -17,8 +17,6 @@ local box1
 local choco
 local vanilla
 local strawberry
-local mcnt = 0
-local scnt = 0
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -37,49 +35,42 @@ function scene:create( event )
 		m_text:setFillColor(0)
 	    m_cnt = display.newText("보유 개수 : "..ingreCnt[5], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 		m_cnt:setFillColor(0)
-		mcnt = ingreCnt[5]
 	elseif m == 2 then
 		m_image = display.newImage("Content/image/sausage.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
 		m_text = display.newText("소세지", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
 	    m_cnt = display.newText("보유 개수 : "..ingreCnt[6], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 		m_cnt:setFillColor(0)
-		mcnt = ingreCnt[6]
 	elseif m == 3 then 
 		m_image = display.newImage("Content/image/bean.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
 		m_text = display.newText("팥", display.contentWidth * 0.765, display.contentHeight * 0.561, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
 	    m_cnt = display.newText("보유 개수 : "..ingreCnt[7], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 		m_cnt:setFillColor(0)
-		mcnt = ingreCnt[7]
 	elseif m == 4 then 
 		m_image = display.newImage("Content/image/cheese.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
 		m_text = display.newText("치즈", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
 	    m_cnt = display.newText("보유 개수 : "..ingreCnt[8], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 		m_cnt:setFillColor(0)
-		mcnt = ingreCnt[8]
 	elseif m == 5 then 
 		m_image = display.newImage("Content/image/corn.png", display.contentWidth * 0.765, display.contentHeight * 0.51)
 		m_text = display.newText("옥수수", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
 	    m_cnt = display.newText("보유 개수 : "..ingreCnt[9], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 		m_cnt:setFillColor(0)
-		mcnt = ingreCnt[9]
 	elseif m == 6 then 
 		m_image= display.newImage("Content/image/oreopowder.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
 		m_text = display.newText("오레오가루", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
 	    m_cnt = display.newText("보유 개수 : "..ingreCnt[10], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 		m_cnt:setFillColor(0)
-		mcnt = ingreCnt[10]
 	elseif m == 7 then 
 		m_image= display.newImage("Content/image/sugarpowder.png", display.contentWidth * 0.764, display.contentHeight * 0.515)
 		m_text = display.newText("슈가파우더", display.contentWidth * 0.765, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
 	    m_cnt = display.newText("보유 개수 : "..ingreCnt[11], display.contentWidth * 0.795, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 		m_cnt:setFillColor(0)
-		mcnt = ingreCnt[11]
 	end
 
 	box1 = display.newImage("Content/image/box1.png", display.contentWidth*0.492, display.contentHeight*0.651)
@@ -112,7 +103,6 @@ function scene:create( event )
 	    	display.remove(syrup_cnt)
 	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[4], display.contentWidth * 0.53, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 			syrup_cnt:setFillColor(0)
-			scnt = ingreCnt[4]
 	    	display.remove(syrup_text)
 	    	syrup_text = display.newText("바닐라 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 			syrup_text:setFillColor(0)
@@ -135,7 +125,6 @@ function scene:create( event )
 	    	display.remove(syrup_cnt)
 	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[2], display.contentWidth * 0.53, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 			syrup_cnt:setFillColor(0)
-			scnt = ingreCnt[2]
 	    	display.remove(syrup_text)
 	    	syrup_text = display.newText("초코 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 			syrup_text:setFillColor(0)
@@ -158,7 +147,6 @@ function scene:create( event )
 	    	display.remove(syrup_cnt)
 	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[3], display.contentWidth * 0.53, display.contentHeight * 0.484, "font/ONE Mobile POP.ttf", 23)
 			syrup_cnt:setFillColor(0)
-			scnt = ingreCnt[3]
 	    	display.remove(syrup_text)
 	    	syrup_text = display.newText("딸기 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "font/ONE Mobile POP.ttf", 33.5)
 			syrup_text:setFillColor(0)
@@ -173,11 +161,37 @@ function scene:create( event )
 	local start_button = display.newImage("Content/image/start.png", display.contentWidth*0.5, display.contentHeight*0.71)
 
 	local function start( event )
- 	
-	    if ( scnt + mcnt > 0 ) then
+
+		-- 시럽 재료 둘 다 선택x
+		if m == 0 and syrub == 0 then 
 	    	showCoin.isVisible = true
 	        composer.gotoScene("plus")
 		end
+		--시럽만 선택
+		if m == 0 and syrub ~= 0 then 
+			if ingreCnt[syrub + 1] > 0 then 
+				ingreCnt[syrub + 1] = ingreCnt[syrub + 1] - 1
+	    		showCoin.isVisible = true
+	        	composer.gotoScene("plus")
+	        end
+	    end
+	    --재료만 선택
+	    if m ~= 0 and syrub == 0 then 
+	    	if ingreCnt[m + 4] > 0 then 
+				ingreCnt[m + 4] = ingreCnt[m + 4] - 1
+	    		showCoin.isVisible = true
+	        	composer.gotoScene("plus")
+	        end
+	    end
+	    --시럽 재료 둘 다 선택
+	    if m ~= 0 and syrub ~= 0 then 
+	    	if ingreCnt[m + 4] > 0 and ingreCnt[syrub + 1] > 0 then 
+				ingreCnt[m + 4] = ingreCnt[m + 4] - 1
+				ingreCnt[syrub + 1] = ingreCnt[syrub + 1] - 1
+	    		showCoin.isVisible = true
+	        	composer.gotoScene("plus")
+	        end
+	    end
 	end
 	start_button:addEventListener("touch", start)
 
