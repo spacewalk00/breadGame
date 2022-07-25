@@ -53,7 +53,7 @@ carpet_parse()
 
 -------업적 전역 변수----------
 --돈 전역 변수
-coinNum = 0
+coinNum = 3000
 --폭탄빵 제작 전역변수
 bomb_count = 0
 --연속 일반빵 제작 전역변수
@@ -241,6 +241,9 @@ function scene:hide( event )
 		carpetIndex = 0
 
 		breadRoom_deco = nil -- 물건 놓고 카펫 깔면 물건 가려지는 문제 해결 위함
+
+
+		check_done = {0, 0, 0, 0, 0, 0}
 
 	elseif phase == "did" then
 

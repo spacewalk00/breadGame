@@ -33,15 +33,15 @@
 		"price": 0,
 		"name": "빵 카펫",
 		"image": "Content/images/syrup.png",
-		"sentence" : "빵처럼 생겼다.\n 귀엽고 보들보들하다.",
-		"image2": "Content/images/carpet_tree.png"
+		"sentence" : "빵처럼 생겼다.\n귀엽고 보들보들하다.",
+		"image2": "Content/images/carpet_bread.png"
 	},
 	{
 		"price": 0,
 		"name": "폭탄모양 카펫",
 		"image": "Content/images/syrup.png",
-		"sentence" : "폭탄처럼 생겼다.\n 잘못하면 터질 것 같다.",
-		"image2": "Content/images/carpet_tree.png"
+		"sentence" : "폭탄처럼 생겼다.\n잘못하면 터질 것 같다.",
+		"image2": "Content/images/carpet_bomb.png"
 	}
 	/*,
 	{
