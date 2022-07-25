@@ -413,12 +413,12 @@ function scene:create( event )
 					icon_inven[iconIndex].param4 = info
 
 					image = info[index1].breads[index2].image
-					bread_inven[iconIndex] = display.newImageRect(breadGroup,  "Content/images/"..image..".png", display.contentWidth*0.19, display.contentHeight*0.1)
-					bread_inven[iconIndex].x, bread_inven[iconIndex].y = display.contentWidth*0.25, display.contentHeight*0.38
+					bread_inven[iconIndex] = display.newImageRect(breadGroup,  "Content/images/"..image..".png", display.contentWidth*0.18, display.contentHeight*0.1)
+					bread_inven[iconIndex].x, bread_inven[iconIndex].y = display.contentWidth*0.25, display.contentHeight*0.37
 
 					--bread_name[i] = display.newText(breadGroup, bread_name_text[i], display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile Bold.ttf", 27)
 					breadName = info[index1].breads[index2].name
-					bread_name[iconIndex] = display.newText(breadGroup, breadName, display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile Bold.ttf", 27)
+					bread_name[iconIndex] = display.newText(breadGroup, breadName, display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile POP.ttf", 31)
 					bread_name[iconIndex]:setFillColor(0)
 					breadGroup:toFront()
 
@@ -580,12 +580,13 @@ function scene:create( event )
 						--check_inven[k]:toFront()
 --						check_inven[k]:addEventListener("touch", scroll)
 					
-					local n1 = k % 3
-					local n2 = k / 3
+						local n1 = k % 3
+						local n2 = math.floor(k / 3)
 
+						print("n2값"..n2)
 						if event.target.x >= 907 then
 							check_inven[k].x = event.target.x*0.85
-							check_inven[k].y = event.target.y * (0.75+ ((n2-1)*0.075))
+							check_inven[k].y =  math.floor(event.target.y) * (0.75+ ((n2-1)* 0.075))
 						elseif event.target.x >= 547 then
 							check_inven[k].x = event.target.x*0.77
 							check_inven[k].y = event.target.y * (0.75 + (0.075+((n2)*0.075)))
