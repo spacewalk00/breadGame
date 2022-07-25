@@ -416,7 +416,6 @@ function scene:create( event )
 					bread_inven[iconIndex] = display.newImageRect(breadGroup,  "Content/images/"..image..".png", display.contentWidth*0.18, display.contentHeight*0.1)
 					bread_inven[iconIndex].x, bread_inven[iconIndex].y = display.contentWidth*0.25, display.contentHeight*0.37
 
-					--bread_name[i] = display.newText(breadGroup, bread_name_text[i], display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile Bold.ttf", 27)
 					breadName = info[index1].breads[index2].name
 					bread_name[iconIndex] = display.newText(breadGroup, breadName, display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile POP.ttf", 31)
 					bread_name[iconIndex]:setFillColor(0)
@@ -462,10 +461,6 @@ function scene:create( event )
 					-- 체크표시했으면(빵방에 넣었으면) 닫기 눌렀다가 빵넣기 다시 눌러도 체크가 다시 나타나게 함
 					print("*****빵 개수는"..breadsCNT)
 					for i=1,  breadsCNT do 
-						--if(check_list[i] == 0 and check_inven[i] ~= nill) then
-						--if(check_inven[i] ~= nill) then
-						--z = check_list[i]
-						--print("*****체크리스트 값 뭐임?"..z)
 						if(check_list[i] ~= nill) then
 							check_inven[i].isVisible = true
 							if(check_list[i] == 0) then
@@ -567,7 +562,6 @@ function scene:create( event )
 					if(check_list[k] == 0) then
 						breadRoom_count = breadRoom_count - 1
 						display.remove(check_inven[k])
-						--check_inven[k].isVisible = false
 						display.remove(breadRoom_image[k])
 						check_list[k] = 1
 
@@ -576,41 +570,24 @@ function scene:create( event )
 						breadRoom_count = breadRoom_count + 1
 						print(k.."체크인벤 k값")
 						check_inven[k] = display.newImageRect(breadGroup, "Content/images/check.png", display.contentWidth*0.04, display.contentHeight*0.02)
-					--	check_inven[k] = display.newImageRect(breadGroup, "Content/images/check.png", display.contentWidth*0.04, display.contentHeight*0.02)
-						--check_inven[k]:toFront()
---						check_inven[k]:addEventListener("touch", scroll)
 					
 						local n1 = k % 3
 						local n2 = math.floor(k / 3)
 
-						print("n2값"..n2)
 						if event.target.x >= 907 then
 							check_inven[k].x = event.target.x*0.85
-							check_inven[k].y =  math.floor(event.target.y) * (0.75+ ((n2-1)* 0.075))
+							check_inven[k].y = display.contentHeight*(n2 * 0.13)
 						elseif event.target.x >= 547 then
 							check_inven[k].x = event.target.x*0.77
-							check_inven[k].y = event.target.y * (0.75 + (0.075+((n2)*0.075)))
+							check_inven[k].y = display.contentHeight*((n2 + 1) * 0.13)
 						elseif event.target.x >= 187 then
 							check_inven[k].x = event.target.x*0.33
-							check_inven[k].y = event.target.y * (0.75 + (0.09+((n2)*0.075)))
+							check_inven[k].y = display.contentHeight*((n2 + 1) * 0.13)
 						end
 						print(idx1)
 						print(event.target.x)	
 						print(event.target.y)	
-						--[[
-						local n = k / 3
-						-- 체크 위치 설정 --
-						if(k%3 == 1 or k == 1) then
-							check_inven[k].x = display.contentWidth*0.155
-							check_inven[k].y = display.contentHeight*(0.29 + (0.13*n))
-						elseif(k%3 == 2 or k == 2) then
-							check_inven[k].x = display.contentWidth*0.41
-							check_inven[k].y = display.contentHeight*(0.245 + (0.13*n))
-						elseif(k%3 ==0) then
-							check_inven[k].x = display.contentWidth*0.66
-							check_inven[k].y = display.contentHeight*(0.205 + (0.13*n))
-						end
-						]]
+
 						check_list[k] = 0
 
 						-- 체크와 동시에 빵방에 삽입 --
@@ -670,8 +647,6 @@ function scene:create( event )
 				event.target.isFocus = false
 			end
 
-			--breadGroup:addEventListener("touch", scroll)
-
 			scrollView:insert(breadGroup)
 			scrollView:addEventListener("touch", scroll)
 			putBreadGroup:insert(scrollView)
@@ -684,29 +659,17 @@ function scene:create( event )
 				elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
 					audio.play( soundTable["clickSound"],  {channel=5}) 
 
-					--[[display.remove(close)
-					display.remove(list)
-					display.remove(text_list)
-					display.remove(icon1)
-					display.remove(check)
-					display.remove(push)
-					display.remove(text_push2)]]
 					putBreadGroup:toBack()
 
 					for i=1, breadsCNT do
 						display.remove(bread_name[i])
 						display.remove(icon_inven[i])
 						display.remove(bread_inven[i])
-						--check_inven[i].isVisible = false
-						--display.remove(check_inven[i])
-						
+
 						-- 체크 잠시 사라지게 했다가 다시 뜨게 함
 						--if(check_list[i] == 0 and check_inven[i] ~= nill) then
 						if(check_inven[i] ~= nill) then
 							check_inven[i].isVisible = false
-							--check_inven[i]:toBack()
-			
-							--breadRoom_image[i]:toFront()
 						end
 					end
 				end
@@ -715,8 +678,6 @@ function scene:create( event )
 			end
 
 			close:addEventListener("touch", closed)
-			--scrollView:insert(breadGroup)
-			--scrollView:addEventListener("touch",scroll)
 
 			index1, index2 = 1, 1
 			local jsc, index
@@ -848,8 +809,6 @@ function scene:create( event )
 	homeIcon:addEventListener("tap", moveToHome)
 	temp:addEventListener("tap", moveToAchieve)
 	dia:addEventListener("tap", moveToDeco)
-
-
 
 	----------------에러 수정--------------------
 
