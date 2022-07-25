@@ -460,10 +460,17 @@ function scene:create( event )
 					print("icon개수는"..iconIndex)
 					
 					-- 체크표시했으면(빵방에 넣었으면) 닫기 눌렀다가 빵넣기 다시 눌러도 체크가 다시 나타나게 함
+					print("*****빵 개수는"..breadsCNT)
 					for i=1,  breadsCNT do 
 						--if(check_list[i] == 0 and check_inven[i] ~= nill) then
-						if(check_inven[i] ~= nill) then
+						--if(check_inven[i] ~= nill) then
+						--z = check_list[i]
+						--print("*****체크리스트 값 뭐임?"..z)
+						if(check_list[i] ~= nill) then
 							check_inven[i].isVisible = true
+							if(check_list[i] == 0) then
+								check_inven[i]:toFront()
+							end
 						end
 					end
 				-- *** 에러 해결용 추가 코드 *** --
@@ -471,7 +478,7 @@ function scene:create( event )
 					icon_inven[iconIndex] = display.newImageRect(breadGroup, "Content/images/illu_book_secret.png", display.contentWidth*0.29, display.contentHeight*0.17)
 
 					breadGroup:toFront()
-
+					
 					-- 한 줄에 3개씩 뜨게 위치 설정--
 					if(j%3 == 1 or i == 1) then
 						icon_inven[iconIndex].x = display.contentWidth*0.13
@@ -560,6 +567,7 @@ function scene:create( event )
 					if(check_list[k] == 0) then
 						breadRoom_count = breadRoom_count - 1
 						display.remove(check_inven[k])
+						--check_inven[k].isVisible = false
 						display.remove(breadRoom_image[k])
 						check_list[k] = 1
 
@@ -577,19 +585,13 @@ function scene:create( event )
 
 						if event.target.x >= 907 then
 							check_inven[k].x = event.target.x*0.85
-							if (n1 == 0) then
-								check_inven[k].y = event.target.y*0.75
-							end
+							check_inven[k].y = event.target.y * (0.75+ ((n2-1)*0.075))
 						elseif event.target.x >= 547 then
 							check_inven[k].x = event.target.x*0.77
-							if(n1 == 2) then
-								check_inven[k].y = event.target.y*0.88
-							end
+							check_inven[k].y = event.target.y * (0.75 + (0.075+((n2)*0.075)))
 						elseif event.target.x >= 187 then
 							check_inven[k].x = event.target.x*0.33
-							if (n1 == 1) then
-								check_inven[k].y = event.target.y
-							end
+							check_inven[k].y = event.target.y * (0.75 + (0.09+((n2)*0.075)))
 						end
 						print(idx1)
 						print(event.target.x)	
