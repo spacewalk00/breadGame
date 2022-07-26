@@ -30,7 +30,7 @@ parse()
 --local carpetIndex 
 local function gotoBreadRoomFromC(event)
 
-	composer.gotoScene("part5")
+	composer.gotoScene("breadRoom")
 	print("빵방으로 가서 아이템 적용")
 	
 	-- 고른 아이템 변수 전달 
@@ -86,7 +86,7 @@ local carpetChange = -1
 
 function scene:create( event )
 	local sceneGroup = self.view
-	--part5.lua 동일 코드 --
+	--breadRoom.lua 동일 코드 --
 
     -- 배경 --
 	background_room1 = display.newImageRect("Content/images/room1.png", display.contentWidth, display.contentHeight)
@@ -119,10 +119,12 @@ function scene:create( event )
 	text_breadRoom = display.newImageRect("Content/images/text_breadRoom.png", display.contentWidth*0.46, display.contentHeight*0.27)
 	text_breadRoom.x, text_breadRoom.y = display.contentWidth*0.3, display.contentHeight*0.05
 
-	coinIcon = display.newImageRect("Content/images/coinIcon.png", display.contentWidth*0.22, display.contentHeight*0.035)
-	coinIcon.x, coinIcon.y = display.contentWidth*0.52, display.contentHeight*0.05
+	coinIcon = display.newImage("Content/images/coins.png")
+	coinIcon.x, coinIcon.y = display.contentWidth*0.525, display.contentHeight*0.05
 		
 	showCoin.isVisible = true
+	showCoin.x, showCoin.y = display.contentWidth*0.5748, display.contentHeight*0.05
+	showCoin:setFillColor(1)
 
 	-- 다른 페이지 넘어가는 아이콘 및 회색 배경 --
 	gray_upperLeft = display.newImageRect("Content/images/gray.png", display.contentWidth*0.13, display.contentHeight*0.07)
