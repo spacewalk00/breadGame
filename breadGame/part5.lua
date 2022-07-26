@@ -168,8 +168,8 @@ function scene:create( event )
 	text_breadRoom = display.newImageRect("Content/images/text_breadRoom.png", display.contentWidth*0.46, display.contentHeight*0.27)
 	text_breadRoom.x, text_breadRoom.y = display.contentWidth*0.3, display.contentHeight*0.05
 
-	coinIcon = display.newImageRect("Content/images/coinIcon.png", display.contentWidth*0.22, display.contentHeight*0.035)
-	coinIcon.x, coinIcon.y = display.contentWidth*0.52, display.contentHeight*0.05
+	coinIcon = display.newImage("Content/images/coins.png")
+	coinIcon.x, coinIcon.y = display.contentWidth*0.525, display.contentHeight*0.05
 		
 	showCoin.isVisible = true
 
@@ -193,7 +193,7 @@ function scene:create( event )
 	text_bookIcon.x, text_bookIcon.y = display.contentWidth*0.73, display.contentHeight*0.081
 
 	store = display.newImageRect("Content/images/store.png", display.contentWidth*0.1, display.contentHeight*0.07)
- 	store.x, store.y = display.contentWidth*0.905, display.contentHeight*0.047
+ 	store.x, store.y = display.contentWidth*0.904, display.contentHeight*0.047
 
 	text_storeIcon = display.newImage("Content/images/text_store.png")
 	text_storeIcon.x, text_storeIcon.y = display.contentWidth*0.9, display.contentHeight*0.08
@@ -208,7 +208,7 @@ function scene:create( event )
 	dia.x, dia.y = display.contentWidth*0.9, display.contentHeight*0.138
 
 	text_deco = display.newImage("Content/images/text_deco.png")
-	text_deco.x, text_deco.y = display.contentWidth*0.905, display.contentHeight*0.17
+	text_deco.x, text_deco.y = display.contentWidth*0.9, display.contentHeight*0.17
 	
 	-- 빵 넣기 아이콘 --
 	local putBreadGroup = display.newGroup()
@@ -449,35 +449,35 @@ function scene:create( event )
 						-- 한 줄에 3개씩 뜨게 위치 설정--
 						if(j%3 == 1 or i == 1) then
 							icon_inven[iconIndex].x = display.contentWidth*0.13
-							icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+							icon_inven[iconIndex].y = display.contentHeight*(0.177 + (0.13*m))
 
 							bread_name[iconIndex].x = display.contentWidth*0.13
-							bread_name[iconIndex].y = display.contentHeight*(0.23 + (0.13*m))
+							bread_name[iconIndex].y = display.contentHeight*(0.227 + (0.13*m))
 
 							bread_inven[iconIndex].x = display.contentWidth*0.14
-							bread_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))	
+							bread_inven[iconIndex].y = display.contentHeight*(0.177 + (0.13*m))	
 							iconIndex = iconIndex + 1	
 						end
 						if(j%3 == 2 or i == 2) then
 							icon_inven[iconIndex].x = display.contentWidth*0.38
-							icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+							icon_inven[iconIndex].y = display.contentHeight*(0.177 + (0.13*m))
 						
 							bread_name[iconIndex].x = display.contentWidth*0.38
-							bread_name[iconIndex].y = display.contentHeight*(0.23 + (0.13*m))
+							bread_name[iconIndex].y = display.contentHeight*(0.227 + (0.13*m))
 
 							bread_inven[iconIndex].x = display.contentWidth*0.39
-							bread_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+							bread_inven[iconIndex].y = display.contentHeight*(0.177 + (0.13*m))
 							iconIndex = iconIndex + 1
 						end
 						if(j%3 ==0) then
 							icon_inven[iconIndex].x = display.contentWidth*0.63
-							icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+							icon_inven[iconIndex].y = display.contentHeight*(0.177 + (0.13*m))
 
 							bread_name[iconIndex].x = display.contentWidth*0.63
-							bread_name[iconIndex].y = display.contentHeight*(0.23 + (0.13*m))
+							bread_name[iconIndex].y = display.contentHeight*(0.227 + (0.13*m))
 
 							bread_inven[iconIndex].x = display.contentWidth*0.63
-							bread_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+							bread_inven[iconIndex].y = display.contentHeight*(0.177 + (0.13*m))
 							iconIndex = iconIndex + 1
 							m = m + 1
 						end
@@ -593,19 +593,19 @@ function scene:create( event )
 						else
 							breadRoom_count = breadRoom_count + 1
 							--print(k.."체크인벤 k값")
-							check_inven[k] = display.newImageRect(breadGroup, "Content/images/check.png", display.contentWidth*0.04, display.contentHeight*0.02)
+							check_inven[k] = display.newImageRect(breadGroup, "Content/images/check.png", display.contentWidth*0.027, display.contentHeight*0.014)
 						
 							local n1 = k % 3
 							local n2 = math.floor(k / 3)
 
 							if event.target.x >= 907 then
-								check_inven[k].x = event.target.x*0.85
+								check_inven[k].x = event.target.x*0.859
 								check_inven[k].y = display.contentHeight*(n2 * 0.13)
 							elseif event.target.x >= 547 then
-								check_inven[k].x = event.target.x*0.77
+								check_inven[k].x = event.target.x*0.762
 								check_inven[k].y = display.contentHeight*((n2 + 1) * 0.13)
 							elseif event.target.x >= 187 then
-								check_inven[k].x = event.target.x*0.33
+								check_inven[k].x = event.target.x*0.315
 								check_inven[k].y = display.contentHeight*((n2 + 1) * 0.13)
 							end
 							print(idx1)

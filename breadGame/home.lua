@@ -21,7 +21,7 @@ end
 
 function moveToBreadRoom(event)
 	print("빵방으로 이동")
-	showCoin.x, showCoin.y = display.contentWidth*0.58, display.contentHeight*0.05
+	showCoin.x, showCoin.y = display.contentWidth*0.5748, display.contentHeight*0.05
 	showCoin:setFillColor(1)
 	composer.gotoScene("part5")
 end
