@@ -146,8 +146,8 @@ function scene:create( event )
 	text_bookIcon.x, text_bookIcon.y = display.contentWidth*0.73, display.contentHeight*0.081
 
 	store = display.newImageRect("Content/images/store.png", display.contentWidth*0.1, display.contentHeight*0.07)
- 	store.x, store.y = display.contentWidth*0.905, display.contentHeight*0.047
-
+	store.x, store.y = display.contentWidth*0.904, display.contentHeight*0.047
+	
 	text_storeIcon = display.newImage("Content/images/text_store.png")
 	text_storeIcon.x, text_storeIcon.y = display.contentWidth*0.9, display.contentHeight*0.08
 	
@@ -161,7 +161,7 @@ function scene:create( event )
 	dia.x, dia.y = display.contentWidth*0.9, display.contentHeight*0.138
 
 	text_deco = display.newImage("Content/images/text_deco.png")
-	text_deco.x, text_deco.y = display.contentWidth*0.905, display.contentHeight*0.17
+	text_deco.x, text_deco.y = display.contentWidth*0.9, display.contentHeight*0.17
 
 	pushIcon = display.newImageRect("Content/images/push.png", display.contentWidth*0.25, display.contentHeight*0.05)
 	pushIcon.x, pushIcon.y = display.contentWidth*0.24, display.contentHeight*0.15
