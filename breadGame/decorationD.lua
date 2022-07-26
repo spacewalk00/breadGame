@@ -340,6 +340,13 @@ function scene:create( event )
 	sceneGroup:insert(menuGroup)
 	sceneGroup:insert(popGroup)
 
+
+	local explainText = display.newText("※장식은 터치로 회수할 수 있습니다.", display.contentWidth*0.6, 550 ,"Content/font/ONE Mobile POP.ttf")
+	explainText.size = 40
+	explainText:setFillColor(0.5)
+
+	sceneGroup:insert(explainText)
+
 	--
 end
 

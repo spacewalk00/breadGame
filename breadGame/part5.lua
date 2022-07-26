@@ -140,13 +140,7 @@ local function comebackToList( event )
 	display.getCurrentStage():setFocus( nil )
 	event.target.isFocus = false
 end
-	for i=1, #deco do
-		if breadRoom_deco[i] ~= nil then
-			print("장식 회수 가능한지.")
-			breadRoom_deco[i]:addEventListener("touch", comebackToList)
-			breadRoom_deco[i].idx = i
-		end
-	end
+	
 local breadOutGroup = display.newGroup()
 ----------------------------------------------------------------
 
@@ -923,15 +917,23 @@ function scene:show( event )
 			breadRoom_deco[decoIndex] = display.newImageRect(deco[decoIndex].image2, display.contentWidth*0.17, display.contentHeight*0.1)
 			--임시로 자리 고정
 			if decoIndex == 1 then
-			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y = display.contentWidth*0.7, display.contentHeight*0.3
+			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y = display.contentWidth*0.1, display.contentHeight*0.28
 			else
-			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y = display.contentWidth*0.9, display.contentHeight*0.3
+			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y =display.contentWidth*0.2, display.contentHeight*0.28
 			end
 			--math.random(display.contentWidth*0.12, display.contentWidth*0.9), math.random(display.contentHeight*0.31, display.contentHeight*0.71)
 			breadRoom_deco[decoIndex].name = "장식"..decoIndex
 			sceneGroup:insert(breadRoom_deco[decoIndex])
 
 			decoIndex = 0
+		end
+		
+		for i=1, #deco do
+		if breadRoom_deco[i] ~= nil then
+			print("장식 회수 가능한지.")
+			breadRoom_deco[i]:addEventListener("touch", comebackToList)
+			breadRoom_deco[i].idx = i
+		end
 		end
 
 ---------------------------------------------------------------------------------------------------------------------		
