@@ -311,65 +311,66 @@ function scene:create( event )
 	-- 빵 클릭시 세부 정보 뜨게 --
 	local function show_breadinfo(event)
 		if( event.phase == "began" ) then
-			display.getCurrentStage():setFocus( event.target )
-			event.target.isFocus = true
+			if(haveopen == 0) then
+				display.getCurrentStage():setFocus( event.target )
+				event.target.isFocus = true
 
-			audio.play( soundTable["clickSound"],  {channel=5}) 
+				audio.play( soundTable["clickSound"],  {channel=5}) 
 
-			local k = event.target.param2
-			local index1 = event.target.param12
-			local index2 = event.target.param13
-			local info = event.target.param14
+				local k = event.target.param2
+				local index1 = event.target.param12
+				local index2 = event.target.param13
+				local info = event.target.param14
 
-			--print("출력은 "..k)
-				-- 빵 정보 창 --
-			breadInfo_background = display.newImageRect(breadInfoGroup, "Content/images/breadInfo_background.png", display.contentWidth, display.contentHeight*0.2)
-			breadInfo_background.x, breadInfo_background.y = display.contentWidth*0.5, display.contentHeight*0.9
-			
-			breadInfo_profile = display.newImageRect(breadInfoGroup, "Content/images/breadInfo_profile.png", display.contentWidth*0.25, display.contentHeight*0.15)
-			breadInfo_profile.x, breadInfo_profile.y = display.contentWidth*0.2, display.contentHeight*0.9
+				--print("출력은 "..k)
+					-- 빵 정보 창 --
+				breadInfo_background = display.newImageRect(breadInfoGroup, "Content/images/breadInfo_background.png", display.contentWidth, display.contentHeight*0.2)
+				breadInfo_background.x, breadInfo_background.y = display.contentWidth*0.5, display.contentHeight*0.9
+				
+				breadInfo_profile = display.newImageRect(breadInfoGroup, "Content/images/breadInfo_profile.png", display.contentWidth*0.25, display.contentHeight*0.15)
+				breadInfo_profile.x, breadInfo_profile.y = display.contentWidth*0.2, display.contentHeight*0.9
 
-			if (lv ~= nill) then
-				levelNum = lv
-			else
-				levelNum = 1
+				if (lv ~= nill) then
+					levelNum = lv
+				else
+					levelNum = 1
+				end
+				breadInfo_level = display.newText(breadInfoGroup, "Lv." .. levelNum ,display.contentWidth*1.5, display.contentHeight*1.5,"font/ONE Mobile POP.ttf", 75)
+				breadInfo_level:setFillColor(0)
+				breadInfo_level.x, breadInfo_level.y = display.contentWidth*0.41, display.contentHeight*0.84
+
+				name = info[index1].breads[index2].name
+				breadInfo_name[k] =  display.newText(breadInfoGroup, name, display.contentWidth*0.5, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf")
+				breadInfo_name[k]:setFillColor(0)
+				breadInfo_name[k].size = 75	
+
+				length = string.len(name)
+				--print("빵이름 길이는" .. length)
+
+				-- 빵 이름 길이에 상관없이 위치 잘 뜨게 --
+				mul = 0.55
+				nul = length / 3
+				mul = mul + (0.018 * (nul-2))
+				breadInfo_name[k].x, breadInfo_name[k].y = display.contentWidth*mul, display.contentHeight*0.84
+				
+				sentence = info[index1].breads[index2].sentence
+				breadInfo_text[k] =  display.newText(breadInfoGroup, sentence, display.contentWidth*0.5, display.contentHeight*0.68, "Content/font/ONE Mobile POP.ttf")
+				breadInfo_text[k]:setFillColor(0)
+				breadInfo_text[k].size = 50
+				breadInfo_text[k].x, breadInfo_text[k].y = display.contentWidth*0.67, display.contentHeight*0.92
+
+				image = info[index1].breads[index2].image
+				breadInfo_image[k] = display.newImageRect(breadInfoGroup, "Content/images/"..image..".png", display.contentWidth*0.17, display.contentHeight*0.1)
+				breadInfo_image[k].x, breadInfo_image[k].y = display.contentWidth*0.2, display.contentHeight*0.9
+
+				breadInfoGroup:toFront()
+
+				closeIcon = display.newImageRect(breadInfoGroup, "Content/images/close.png", display.contentWidth*0.1, display.contentHeight*0.05)
+				closeIcon.x, closeIcon.y = display.contentWidth*0.962, display.contentHeight*0.811
+
+				sceneGroup:insert(breadInfoGroup)
+				closeIcon:addEventListener("tap", infoClosed)
 			end
-			breadInfo_level = display.newText(breadInfoGroup, "Lv." .. levelNum ,display.contentWidth*1.5, display.contentHeight*1.5,"font/ONE Mobile POP.ttf", 75)
-			breadInfo_level:setFillColor(0)
-			breadInfo_level.x, breadInfo_level.y = display.contentWidth*0.41, display.contentHeight*0.84
-
-			name = info[index1].breads[index2].name
-			breadInfo_name[k] =  display.newText(breadInfoGroup, name, display.contentWidth*0.5, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf")
-			breadInfo_name[k]:setFillColor(0)
-			breadInfo_name[k].size = 75	
-
-			length = string.len(name)
-			--print("빵이름 길이는" .. length)
-
-			-- 빵 이름 길이에 상관없이 위치 잘 뜨게 --
-			mul = 0.55
-			nul = length / 3
-			mul = mul + (0.018 * (nul-2))
-			breadInfo_name[k].x, breadInfo_name[k].y = display.contentWidth*mul, display.contentHeight*0.84
-			
-			sentence = info[index1].breads[index2].sentence
-			breadInfo_text[k] =  display.newText(breadInfoGroup, sentence, display.contentWidth*0.5, display.contentHeight*0.68, "Content/font/ONE Mobile POP.ttf")
-			breadInfo_text[k]:setFillColor(0)
-			breadInfo_text[k].size = 50
-			breadInfo_text[k].x, breadInfo_text[k].y = display.contentWidth*0.67, display.contentHeight*0.92
-
-			image = info[index1].breads[index2].image
-			breadInfo_image[k] = display.newImageRect(breadInfoGroup, "Content/images/"..image..".png", display.contentWidth*0.17, display.contentHeight*0.1)
-			breadInfo_image[k].x, breadInfo_image[k].y = display.contentWidth*0.2, display.contentHeight*0.9
-
-			breadInfoGroup:toFront()
-
-			closeIcon = display.newImageRect(breadInfoGroup, "Content/images/close.png", display.contentWidth*0.1, display.contentHeight*0.05)
-			closeIcon.x, closeIcon.y = display.contentWidth*0.962, display.contentHeight*0.811
-
-			sceneGroup:insert(breadInfoGroup)
-			closeIcon:addEventListener("tap", infoClosed)
-		
 		elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
 			display.getCurrentStage():setFocus( nil )
 			event.target.isFocus = false
@@ -438,11 +439,11 @@ function scene:create( event )
 						icon_inven[iconIndex].param4 = info
 
 						image = info[index1].breads[index2].image
-						bread_inven[iconIndex] = display.newImageRect(breadGroup,  "Content/images/"..image..".png", display.contentWidth*0.18, display.contentHeight*0.1)
+						bread_inven[iconIndex] = display.newImageRect(breadGroup,  "Content/images/"..image..".png", display.contentWidth*0.16, display.contentHeight*0.08)
 						bread_inven[iconIndex].x, bread_inven[iconIndex].y = display.contentWidth*0.25, display.contentHeight*0.37
 
 						breadName = info[index1].breads[index2].name
-						bread_name[iconIndex] = display.newText(breadGroup, breadName, display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile POP.ttf", 31)
+						bread_name[iconIndex] = display.newText(breadGroup, breadName, display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile POP.ttf", 34)
 						bread_name[iconIndex]:setFillColor(0)
 						breadGroup:toFront()
 
@@ -451,8 +452,8 @@ function scene:create( event )
 							icon_inven[iconIndex].x = display.contentWidth*0.13
 							icon_inven[iconIndex].y = display.contentHeight*(0.177 + (0.13*m))
 
-							bread_name[iconIndex].x = display.contentWidth*0.13
-							bread_name[iconIndex].y = display.contentHeight*(0.227 + (0.13*m))
+							bread_name[iconIndex].x = display.contentWidth*0.136
+							bread_name[iconIndex].y = display.contentHeight*(0.225 + (0.13*m))
 
 							bread_inven[iconIndex].x = display.contentWidth*0.14
 							bread_inven[iconIndex].y = display.contentHeight*(0.177 + (0.13*m))	
@@ -462,8 +463,8 @@ function scene:create( event )
 							icon_inven[iconIndex].x = display.contentWidth*0.38
 							icon_inven[iconIndex].y = display.contentHeight*(0.177 + (0.13*m))
 						
-							bread_name[iconIndex].x = display.contentWidth*0.38
-							bread_name[iconIndex].y = display.contentHeight*(0.227 + (0.13*m))
+							bread_name[iconIndex].x = display.contentWidth*0.386
+							bread_name[iconIndex].y = display.contentHeight*(0.225 + (0.13*m))
 
 							bread_inven[iconIndex].x = display.contentWidth*0.39
 							bread_inven[iconIndex].y = display.contentHeight*(0.177 + (0.13*m))
@@ -473,8 +474,8 @@ function scene:create( event )
 							icon_inven[iconIndex].x = display.contentWidth*0.63
 							icon_inven[iconIndex].y = display.contentHeight*(0.177 + (0.13*m))
 
-							bread_name[iconIndex].x = display.contentWidth*0.63
-							bread_name[iconIndex].y = display.contentHeight*(0.227 + (0.13*m))
+							bread_name[iconIndex].x = display.contentWidth*0.636
+							bread_name[iconIndex].y = display.contentHeight*(0.225 + (0.13*m))
 
 							bread_inven[iconIndex].x = display.contentWidth*0.63
 							bread_inven[iconIndex].y = display.contentHeight*(0.177 + (0.13*m))
@@ -608,16 +609,16 @@ function scene:create( event )
 								check_inven[k].x = event.target.x*0.315
 								check_inven[k].y = display.contentHeight*((n2 + 1) * 0.13)
 							end
-							print(idx1)
-							print(event.target.x)	
-							print(event.target.y)	
+							--print(idx1)
+							--print(event.target.x)	
+							--print(event.target.y)	
 
 							check_list[k] = 0
 
 							-- 체크와 동시에 빵방에 삽입 --
 							image = info[index1].breads[index2].image
 							breadRoom_image[k] = display.newImageRect(breadOutGroup, "Content/images/"..image..".png", display.contentWidth*0.17, display.contentHeight*0.1)
-							breadRoom_image[k].x, breadRoom_image[k].y = math.random(display.contentWidth*0.12, display.contentWidth*0.9), math.random(display.contentHeight*0.31, display.contentHeight*0.71)
+							breadRoom_image[k].x, breadRoom_image[k].y = math.random(display.contentWidth*0.088, display.contentWidth*0.915), math.random(display.contentHeight*0.26, display.contentHeight*0.93)
 							breadRoom_image[k]:toBack()
 						
 							breadRoom_image[k].param12 = index1

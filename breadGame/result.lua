@@ -174,8 +174,7 @@ function scene:show( event )
 	if phase == "will" then
 		--audio.play(soundTable["backgroundMusic"])
 		-- 성공빵 확률 만들기--
-		--local n = math.random(0, 10)
-		n=11
+		local n = math.random(0, 10)
 		print(n)
 
 		if n >= portion and n <= 10 then
