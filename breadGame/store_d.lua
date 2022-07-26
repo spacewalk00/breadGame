@@ -84,6 +84,10 @@ function scene:create( event )
 	coins.x, coins.y = display.contentWidth*0.5, display.contentHeight*0.05
 	showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
 
+	local explainText = display.newText("※장식과 카펫은 1개만 구매가능합니다.", display.contentWidth*0.6, display.contentHeight*0.08 ,"Content/font/ONE Mobile POP.ttf")
+	explainText.size = 40
+	explainText:setFillColor(1)
+
 	local home = display.newImage("Content/images/home.png")
 	home.x, home.y = display.contentWidth*0.9, display.contentHeight*0.05
 	home:addEventListener("tap", gotoh) 
@@ -119,6 +123,7 @@ function scene:create( event )
 	topGroup:insert(store)
 	topGroup:insert(storeText)
 	topGroup:insert(coins)
+	topGroup:insert(explainText)
 	topGroup:insert(home)
 	topGroup:insert(productType)
 	topGroup:insert(choiceMark)
@@ -159,7 +164,7 @@ function scene:create( event )
 		p_pic_bar[i] = display.newImage(ingreGroup, "Content/images/syrup_bar.png")
 	    p_pic_bar[i].x, p_pic_bar[i].y = display.contentWidth*0.22, display.contentHeight*(0.06+0.13* (i-1))
 
-	    p_pic[i] = display.newImage(ingreGroup, deco[i].image)
+	    p_pic[i] = display.newImageRect(ingreGroup, deco[i].image, 200, 200)
 		p_pic[i].x, p_pic[i].y = display.contentWidth*0.22, display.contentHeight*(0.06+0.13* (i-1))
 		p_pic[i].name = i
 
@@ -232,7 +237,7 @@ function scene:create( event )
 		local pictureBar = display.newImage(popGroup, "Content/images/syrup_bar.png")
 		pictureBar.x, pictureBar.y = display.contentWidth*0.25, display.contentHeight*0.5
 
-		local picture = display.newImage(popGroup, ingredients[i].image)
+		local picture = display.newImageRect(popGroup, deco[i].image, 200, 200)
 		picture.x, picture.y = display.contentWidth*0.25, display.contentHeight*0.5
 
 		local popTextOptions = 
@@ -278,12 +283,9 @@ function scene:create( event )
 	    	-- 코인 차감 --
 	    	if( coinNum >= deco[i].price) then
 	    	coinNum = coinNum - deco[i].price
-			----------showCoin 수정
+		
 			showCoin.text = coinNum
 			showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
-	    	---deleteBeforeNum()
-			---showCoin = display.newText(coinNum, display.contentWidth*0.55, display.contentHeight*0.05, "Content/font/ONE Mobile POP.ttf", 50)
-			---showCoin:setFillColor(0)
 
 			-- 시럽 보유 카운트--
 			decoCnt[i] = decoCnt[i] + 1
@@ -400,7 +402,7 @@ function scene:hide( event )
 	elseif phase == "did" then
 		deleteAllCnt()
 		for i=1, #deco do
-			if decoCnt[i] == 1 then
+			if decoCnt[i] == 1 and delete_deco_from_list[i] == 0 then
 				decoFlag[i] = 1
 				print(i.."인덱스의 flag는"..decoFlag[i].."\n")
 			end

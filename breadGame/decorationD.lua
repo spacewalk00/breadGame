@@ -25,32 +25,18 @@ local function parse()
 end
 parse()
 
---[[
-function insertObj ( event ) 
-	--popGroup:removeSelf()		
-	composer.removeScene("decorationC", true)
-	composer.removeScene("decorationD", true)
-	composer.gotoScene("part5")
-	print("빵방으로 다시 이동")
-	-- 카펫 변경 코드 p_check[i].isVisible == true인 카펫 -- 
-end]]
-
---local _decoFlag = 0
---local decoIndex 
 local function gotoBreadRoomFromD(event)
 
 	composer.gotoScene("part5")
 	print("빵방으로 가서 아이템 적용")
 	
-	-- 고른 아이템 변수 전달 --
 	if event.target.name == "pushBtn" then
-		--_decoFlag = 1
-		-- 고른 아이템 목록에서 삭제
-		if decoCnt[decoIndex] == 1 then
-		decoCnt[decoIndex] = decoCnt[decoIndex] - 1 
-		decoFlag[decoIndex] = 0
+		if decoIndex ~= 0 and decoFlag[decoIndex] == 1 then
+			-- 고른 아이템 목록에서 삭제
+			
+			decoFlag[decoIndex] = 0 
+			delete_deco_from_list[decoIndex] = 1
 		end
-		-- 카펫 변경 코드 p_check[i].isVisible == true인 카펫 -- 
 	end
 end
 
@@ -225,27 +211,33 @@ function scene:create( event )
 
 	--임시--
 	--decoFlag = { 1, 1 }
-
+	local overlapFlag = 0
+	local idx = 1
 	for i=1, #deco do
-		print(decoFlag[i].."왜 작동 하ㅑ고")
 		if decoFlag[i] == 1 then
 			product_bar[i] = display.newImage(carpetGroup, "Content/images/deco_bar.png")
-			product_bar[i].x, product_bar[i].y = display.contentWidth*0.39, display.contentHeight*(0.06+0.13* (i-1))
+			product_bar[i].x, product_bar[i].y = display.contentWidth*0.39, display.contentHeight*(0.06+0.13* (idx-1))
 			p_pic_bar[i] = display.newImage(carpetGroup, "Content/images/deco_box.png")
-		    p_pic_bar[i].x, p_pic_bar[i].y = display.contentWidth*0.11, display.contentHeight*(0.06+0.13* (i-1))
+		    p_pic_bar[i].x, p_pic_bar[i].y = display.contentWidth*0.11, display.contentHeight*(0.06+0.13* (idx-1))
 
-		    p_pic[i] = display.newImage(carpetGroup, deco[i].image)
-			p_pic[i].x, p_pic[i].y = display.contentWidth*0.11, display.contentHeight*(0.06+0.13* (i-1))
+		    p_pic[i] = display.newImageRect(carpetGroup, deco[i].image, 200, 200)
+			p_pic[i].x, p_pic[i].y = display.contentWidth*0.11, display.contentHeight*(0.06+0.13* (idx-1))
 			p_pic[i].name = i
 
 			p_checkBox[i] = display.newImage(carpetGroup, "Content/images/deco_checkBox.png")
-			p_checkBox[i].x, p_checkBox[i].y = display.contentWidth*0.06, display.contentHeight*(0.06+0.13* (i-1) - 0.03)
+			p_checkBox[i].x, p_checkBox[i].y = display.contentWidth*0.06, display.contentHeight*(0.06+0.13* (idx-1) - 0.03)
 
 
 			p_check[i] = display.newImage(carpetGroup, "Content/images/deco_check.png")
-			p_check[i].x, p_check[i].y = display.contentWidth*0.06, display.contentHeight*(0.06+0.13* (i-1) - 0.03)
+			p_check[i].x, p_check[i].y = display.contentWidth*0.06, display.contentHeight*(0.06+0.13* (idx-1) - 0.03)
 			p_check[i].isVisible = false
-			
+
+			--[[if check_done2[i] == 1 then	--만약 체크 했었으면
+				p_check[i].isVisible = true
+			else
+				p_check[i].isVisible = false
+			end]]
+
 			--중복 체크 불가 구현			
 			local function checked( event ) 
 				if p_check[i].isVisible == false then
@@ -258,6 +250,7 @@ function scene:create( event )
 					end
 					if overlapFlag == 0 then
 						p_check[i].isVisible = true
+						--check_done2[i] = 1
 						print("체크하겠습니다.")
 						decoIndex = i
 					else
@@ -265,6 +258,8 @@ function scene:create( event )
 					end
 				else
 					p_check[i].isVisible = false
+					--check_done2[i] = 0
+					decoIndex = 0
 					print("체크 해제하겠습니다.")
 				end
 			end
@@ -273,8 +268,8 @@ function scene:create( event )
 			local nameOptions = 
 			{
 				text = deco[i].name,
-				x = display.contentWidth*(0.41 + 0.24),
-				y = display.contentHeight*(0.04 + 0.13*(i-1)),
+				x = display.contentWidth*(0.41 + 0.24 - 0.1),
+				y = display.contentHeight*(0.04 + 0.13*(idx-1)),
 				width = 1000,
 				font = "Content/font/ONE Mobile POP.ttf",
 				fontSize = 60,
@@ -289,13 +284,14 @@ function scene:create( event )
 			local sentenceOptions = 
 			{
 				text = deco[i].sentence,
-				x = display.contentWidth*(0.41 + 0.24),
-				y = display.contentHeight*(0.04 +0.13*(i-1)+ 0.04),
+				x = display.contentWidth*(0.41 + 0.24 - 0.1),
+				y = display.contentHeight*(0.04 +0.13*(idx-1)+ 0.04),
 				width = 1000,
 				font = "Content/font/ONE Mobile POP.ttf",
 				fontSize = 45,
 				align = "left"
 			}
+			idx = idx + 1
 			ingreInfo[i] = display.newText(sentenceOptions)
 			--ingreInfo[i] = display.newText(ingreGroup, deco[i].sentence, display.contentWidth*(0.41+0.2), display.contentHeight*(0.22+0.13*(i-1)+ 0.04), "font/ONE Mobile POP.ttf")
 			ingreInfo[i]:setFillColor(0)

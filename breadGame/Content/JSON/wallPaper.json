@@ -3,28 +3,28 @@
 	{
 		"price": 100,
 		"name": "기본 카펫",
-		"image": "Content/images/syrup.png",
+		"image": "Content/images/carpet2.png",
 		"sentence" : "기본무늬다.\n때로는 기본이 제일이다.",
 		"image2": "Content/images/carpet.png"
 	},
 	{
 		"price": 500,
 		"name": "심플 화이트 카펫",
-		"image": "Content/images/syrup.png",
+		"image": "Content/images/carpet_white2.png",
 		"sentence" : "아이보리랑 헷갈릴 수 있지만\n화이트파가 선호하는 벽지.",
 		"image2": "Content/images/carpet_white.png"
 	},
 	{
 		"price": 500,
 		"name": "심플 아이보리 카펫",
-		"image": "Content/images/syrup.png",
+		"image": "Content/images/carpet_ivory2.png",
 		"sentence" : "카펫 청소를 안해도\n화이트보다 티가 나지 않는다.\n",
 		"image2": "Content/images/carpet_ivory.png"
 	},	
 	{
 		"price": 600,
 		"name": "나무무늬 카펫",
-		"image": "Content/images/syrup.png",
+		"image": "Content/images/carpet_tree2.png",
 		"sentence" : "나무향이 난다.\n주의: 딱따구리가 나무로 착각해서 \n쪼을 수 있다.",
 		"image2": "Content/images/carpet_tree.png"
 	},

@@ -240,11 +240,12 @@ function scene:hide( event )
 		decoIndex = 0
 		carpetIndex = 0
 
-		breadRoom_deco = nil -- 물건 놓고 카펫 깔면 물건 가려지는 문제 해결 위함
-
+		--decoGroup = display.newGroup()
+		breadRoom_deco = {nil, nil} -- 물건 놓고 카펫 깔면 물건 가려지는 문제 해결 위함
+		delete_deco_from_list = {0, 0}
 
 		check_done = {0, 0, 0, 0, 0, 0}
-
+		--check_done2 = {0 ,0}
 	elseif phase == "did" then
 
 		

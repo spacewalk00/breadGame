@@ -240,7 +240,7 @@ function scene:create( event )
 			p_pic_bar[i] = display.newImage(carpetGroup, "Content/images/deco_box.png")
 		    p_pic_bar[i].x, p_pic_bar[i].y = display.contentWidth*0.11, display.contentHeight*(0.06+0.13* (idx-1))
 
-		    p_pic[i] = display.newImage(carpetGroup, wallPaper[i].image)
+		    p_pic[i] = display.newImageRect(carpetGroup, wallPaper[i].image, 150, 150)
 			p_pic[i].x, p_pic[i].y = display.contentWidth*0.11, display.contentHeight*(0.06+0.13* (idx-1))
 			p_pic[i].name = i
 
@@ -285,7 +285,7 @@ function scene:create( event )
 			local nameOptions = 
 			{
 				text = wallPaper[i].name,
-				x = display.contentWidth*(0.41 + 0.24),
+				x = display.contentWidth*(0.41 + 0.24 - 0.1),
 				y = display.contentHeight*(0.04 + 0.13*(idx-1)),
 				width = 1000,
 				font = "Content/font/ONE Mobile POP.ttf",
@@ -301,7 +301,7 @@ function scene:create( event )
 			local sentenceOptions = 
 			{
 				text = wallPaper[i].sentence,
-				x = display.contentWidth*(0.41 + 0.24),
+				x = display.contentWidth*(0.41 + 0.24 - 0.1),
 				y = display.contentHeight*(0.04 +0.13*(idx-1)+ 0.04),
 				width = 1000,
 				font = "Content/font/ONE Mobile POP.ttf",

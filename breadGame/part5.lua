@@ -119,6 +119,34 @@ local function deco_parse()
 end
 deco_parse()
 
+-- 장식 회수 관련 코드: 작동은 x ----------------------------------
+local function comebackToList( event )
+	if ( event.phase == "began" ) then
+		display.getCurrentStage():setFocus( event.target )
+		event.target.isFocus = true
+	elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
+		audio.play( soundTable["clickSound"],  {channel=5}) 
+
+		local idx = event.target.idx 
+		event.target:removeSelf()
+		breadRoom_deco[idx] = nil
+
+		print(idx)
+		print(decoFlag[idx])
+		
+		decoFlag[idx] = 1
+		delete_deco_from_list[idx] = 0
+		end
+	display.getCurrentStage():setFocus( nil )
+	event.target.isFocus = false
+end
+	for i=1, #deco do
+		if breadRoom_deco[i] ~= nil then
+			print("장식 회수 가능한지.")
+			breadRoom_deco[i]:addEventListener("touch", comebackToList)
+			breadRoom_deco[i].idx = i
+		end
+	end
 local breadOutGroup = display.newGroup()
 ----------------------------------------------------------------
 
@@ -837,7 +865,6 @@ function scene:create( event )
 			sceneGroup:insert(pushIcon)
 			sceneGroup:insert(text_push)
 	    	--sceneGroup:insert(breadGroup)
-	--------------------------------------------
 end
 
 function scene:show( event )
@@ -846,6 +873,7 @@ function scene:show( event )
 
 	if phase == "will" then
 		-- Called when the scene is still off screen and is about to move on screen
+
 	elseif phase == "did" then
 		-- Called when the scene is now on screen
 		-- 
@@ -862,7 +890,7 @@ function scene:show( event )
 		homeIcon:addEventListener("tap", tapListener)
 		temp:addEventListener("tap", tapListener)
 		]]
------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
 		--빵방에 카펫, 장식 넣기
 		if carpetIndex ~= 0 then -- 배경카펫
 			print(carpetIndex .. " part5 에서")
@@ -872,9 +900,15 @@ function scene:show( event )
 			composer.setVariable("forItemRoomBackground", carpetIndex)
 			
 			sceneGroup:insert(background_carpet)
-			if breadRoom_deco ~= nil then -- intro.lua에 전역변수 확인
-				print("breadRoom_deco를 맨 앞으로 당기자")
-				breadRoom_deco:toFront()
+
+			if breadRoom_deco[1] ~= nil then -- intro.lua에 전역변수 확인
+				print("breadRoom_deco[1]를 맨 앞으로 당기자")
+				breadRoom_deco[1]:toFront()
+			end
+
+			if breadRoom_deco[2] ~= nil then 
+				print("breadRoom_deco[2]를 맨 앞으로 당기자")
+				breadRoom_deco[2]:toFront()
 			end
 
 			if breadOutGroup ~= nil then
@@ -886,13 +920,20 @@ function scene:show( event )
 		end
 
 		if decoIndex ~= 0 then
-			breadRoom_deco = display.newImageRect(deco[decoIndex].image2, display.contentWidth*0.17, display.contentHeight*0.1)
-			breadRoom_deco.x, breadRoom_deco.y = math.random(display.contentWidth*0.12, display.contentWidth*0.9), math.random(display.contentHeight*0.31, display.contentHeight*0.71)
-			
-			sceneGroup:insert(breadRoom_deco)
+			breadRoom_deco[decoIndex] = display.newImageRect(deco[decoIndex].image2, display.contentWidth*0.17, display.contentHeight*0.1)
+			--임시로 자리 고정
+			if decoIndex == 1 then
+			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y = display.contentWidth*0.7, display.contentHeight*0.3
+			else
+			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y = display.contentWidth*0.9, display.contentHeight*0.3
+			end
+			--math.random(display.contentWidth*0.12, display.contentWidth*0.9), math.random(display.contentHeight*0.31, display.contentHeight*0.71)
+			breadRoom_deco[decoIndex].name = "장식"..decoIndex
+			sceneGroup:insert(breadRoom_deco[decoIndex])
 
 			decoIndex = 0
 		end
+
 ---------------------------------------------------------------------------------------------------------------------		
 	end
 	
