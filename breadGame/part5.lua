@@ -234,6 +234,7 @@ function scene:create( event )
 	local breadInfo_text = {}
 	local breadInfoGroup = display.newGroup()
 	--local breadOutGroup = display.newGroup()
+	local haveopen = 0
 
 	local function BreadMove(obj)
 		print("빵무브")
@@ -320,7 +321,7 @@ function scene:create( event )
 			local index2 = event.target.param13
 			local info = event.target.param14
 
-			print("출력은 "..k)
+			--print("출력은 "..k)
 				-- 빵 정보 창 --
 			breadInfo_background = display.newImageRect(breadInfoGroup, "Content/images/breadInfo_background.png", display.contentWidth, display.contentHeight*0.2)
 			breadInfo_background.x, breadInfo_background.y = display.contentWidth*0.5, display.contentHeight*0.9
@@ -343,7 +344,7 @@ function scene:create( event )
 			breadInfo_name[k].size = 75	
 
 			length = string.len(name)
-			print("빵이름 길이는" .. length)
+			--print("빵이름 길이는" .. length)
 
 			-- 빵 이름 길이에 상관없이 위치 잘 뜨게 --
 			mul = 0.55
@@ -381,356 +382,356 @@ function scene:create( event )
 			display.getCurrentStage():setFocus( event.target )
 			event.target.isFocus = true
 		elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
-			audio.play( soundTable["clickSound"],  {channel=5}) 
+			if (haveopen == 0) then
+				haveopen = 1
+				audio.play( soundTable["clickSound"],  {channel=5}) 
 
-			list = display.newImageRect(putBreadGroup, "Content/images/list.png", display.contentWidth*0.78, display.contentHeight*0.62)
-			list.x, list.y = display.contentWidth*0.5, display.contentHeight*0.54
-	   
-			text_list = display.newImage(putBreadGroup, "Content/images/text_breadList.png")
-			text_list.x, text_list.y = display.contentWidth*0.5, display.contentHeight*0.27
+				list = display.newImageRect(putBreadGroup, "Content/images/list.png", display.contentWidth*0.78, display.contentHeight*0.62)
+				list.x, list.y = display.contentWidth*0.5, display.contentHeight*0.54
+		
+				text_list = display.newImage(putBreadGroup, "Content/images/text_breadList.png")
+				text_list.x, text_list.y = display.contentWidth*0.5, display.contentHeight*0.27
 
-			close = display.newImageRect(putBreadGroup, "Content/images/close.png", display.contentWidth*0.1, display.contentHeight*0.05)
-			close.x, close.y = display.contentWidth*0.8565, display.contentHeight*0.24
-			
-			push = display.newImageRect(putBreadGroup, "Content/images/push.png", display.contentWidth*0.25, display.contentHeight*0.05)
-			push.x, push.y = display.contentWidth*0.5, display.contentHeight*0.79
+				close = display.newImageRect(putBreadGroup, "Content/images/close.png", display.contentWidth*0.1, display.contentHeight*0.05)
+				close.x, close.y = display.contentWidth*0.8565, display.contentHeight*0.24
+				
+				push = display.newImageRect(putBreadGroup, "Content/images/push.png", display.contentWidth*0.25, display.contentHeight*0.05)
+				push.x, push.y = display.contentWidth*0.5, display.contentHeight*0.79
 
-			text_push2 = display.newImage(putBreadGroup, "Content/images/text_push2.png")
-			text_push2.x, text_push2.y = display.contentWidth*0.477, display.contentHeight*0.79
+				text_push2 = display.newImage(putBreadGroup, "Content/images/text_push2.png")
+				text_push2.x, text_push2.y = display.contentWidth*0.477, display.contentHeight*0.79
 
-			-- ***미해금까지 같이 뜨게 하여 에러 해결 중*** --
-			sceneGroup:insert(putBreadGroup)
+				-- ***미해금까지 같이 뜨게 하여 에러 해결 중*** --
+				sceneGroup:insert(putBreadGroup)
 
-			index1, index2 = 1, 1
-			local jul = 0.15
+				index1, index2 = 1, 1
+				local jul = 0.15
 
-			breadsCNT = 64
-			local m = 0
-			
-			local iconIndex = 1
-			-- 일반 빵 -- 
-			for i=1, 64 do 
-				if i <= 32 then -- '일반 빵'에서 해금된 빵 가져오기
-					jsc = openBread
-					info = Data
-				else -- '업글 빵'에서 해금된 빵 가져오기
-					jsc = openUBread
-					info = uBreadInfo
-				end
-
-				lock = jsc[index1][index2]
-					if i % 3 == 1 then
-						jul = jul + 0.33
-					end
-
-				local j = i + 3
-
-				-- 도감에서 미해금(0)이 아닌 경우 빵이 뜨게 하기(해금(-1), 확인(1)) --
-				if lock ~= 0 then
-					-- 흰색 네모 창 --
-					icon_inven[iconIndex] = display.newImageRect(breadGroup, "Content/images/icon.png", display.contentWidth*0.23, display.contentHeight*0.12)
-
-					icon_inven[iconIndex].param2 = index1
-					icon_inven[iconIndex].param3 = index2
-					icon_inven[iconIndex].param4 = info
-
-					image = info[index1].breads[index2].image
-					bread_inven[iconIndex] = display.newImageRect(breadGroup,  "Content/images/"..image..".png", display.contentWidth*0.18, display.contentHeight*0.1)
-					bread_inven[iconIndex].x, bread_inven[iconIndex].y = display.contentWidth*0.25, display.contentHeight*0.37
-
-					breadName = info[index1].breads[index2].name
-					bread_name[iconIndex] = display.newText(breadGroup, breadName, display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile POP.ttf", 31)
-					bread_name[iconIndex]:setFillColor(0)
-					breadGroup:toFront()
-
-					-- 한 줄에 3개씩 뜨게 위치 설정--
-					if(j%3 == 1 or i == 1) then
-						icon_inven[iconIndex].x = display.contentWidth*0.13
-						icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
-
-						bread_name[iconIndex].x = display.contentWidth*0.13
-						bread_name[iconIndex].y = display.contentHeight*(0.23 + (0.13*m))
-
-						bread_inven[iconIndex].x = display.contentWidth*0.14
-						bread_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))	
-						iconIndex = iconIndex + 1	
-					end
-					if(j%3 == 2 or i == 2) then
-						icon_inven[iconIndex].x = display.contentWidth*0.38
-						icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
-					
-						bread_name[iconIndex].x = display.contentWidth*0.38
-						bread_name[iconIndex].y = display.contentHeight*(0.23 + (0.13*m))
-
-						bread_inven[iconIndex].x = display.contentWidth*0.39
-						bread_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
-						iconIndex = iconIndex + 1
-					end
-					if(j%3 ==0) then
-						icon_inven[iconIndex].x = display.contentWidth*0.63
-						icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
-
-						bread_name[iconIndex].x = display.contentWidth*0.63
-						bread_name[iconIndex].y = display.contentHeight*(0.23 + (0.13*m))
-
-						bread_inven[iconIndex].x = display.contentWidth*0.63
-						bread_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
-						iconIndex = iconIndex + 1
-						m = m + 1
-					end
-					print("icon개수는"..iconIndex)
-					
-					-- 체크표시했으면(빵방에 넣었으면) 닫기 눌렀다가 빵넣기 다시 눌러도 체크가 다시 나타나게 함
-					print("*****빵 개수는"..breadsCNT)
-					for i=1,  breadsCNT do 
-						if(check_list[i] ~= nill) then
-							check_inven[i].isVisible = true
-							if(check_list[i] == 0) then
-								check_inven[i]:toFront()
-							end
-						end
-					end
-				-- *** 에러 해결용 추가 코드 *** --
-				else
-					icon_inven[iconIndex] = display.newImageRect(breadGroup, "Content/images/illu_book_secret.png", display.contentWidth*0.29, display.contentHeight*0.17)
-
-					breadGroup:toFront()
-					
-					-- 한 줄에 3개씩 뜨게 위치 설정--
-					if(j%3 == 1 or i == 1) then
-						icon_inven[iconIndex].x = display.contentWidth*0.13
-						icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
-						iconIndex = iconIndex + 1	
-					end
-					if(j%3 == 2 or i == 2) then
-						icon_inven[iconIndex].x = display.contentWidth*0.38
-						icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
-						iconIndex = iconIndex + 1
-					end
-					if(j%3 ==0) then
-						icon_inven[iconIndex].x = display.contentWidth*0.63
-						icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
-						iconIndex = iconIndex + 1
-						m = m + 1
-					end
-				end
-				index2 = index2 + 1
-					if index2 == 9 then
-						index2 = 1
-						index1 = index1 + 1
-					end
-
-					if i==32 then
-						index1, index2 = 1, 1
+				breadsCNT = 64
+				local m = 0
+				
+				local iconIndex = 1
+				-- 일반 빵 -- 
+				for i=1, 64 do 
+					if i <= 32 then -- '일반 빵'에서 해금된 빵 가져오기
+						jsc = openBread
+						info = Data
+					else -- '업글 빵'에서 해금된 빵 가져오기
+						jsc = openUBread
 						info = uBreadInfo
 					end
-			end
 
-			-- 스크롤 --
-			local widget = require( "widget" )
-			local function scroll( event )
-				if ( event.phase == "began" ) then
-					display.getCurrentStage():setFocus( event.target )
-					event.target.isFocus = true
-		
-					event.target.yStart = event.target.y
-		
-				elseif ( event.phase == "moved" ) then
-					if ( event.target.isFocus ) then
-						event.target.y = event.target.yStart + event.yDelta
+					lock = jsc[index1][index2]
+						if i % 3 == 1 then
+							jul = jul + 0.33
+						end
+
+					local j = i + 3
+
+					-- 도감에서 미해금(0)이 아닌 경우 빵이 뜨게 하기(해금(-1), 확인(1)) --
+					if lock ~= 0 then
+						-- 흰색 네모 창 --
+						icon_inven[iconIndex] = display.newImageRect(breadGroup, "Content/images/icon.png", display.contentWidth*0.23, display.contentHeight*0.12)
+
+						icon_inven[iconIndex].param2 = index1
+						icon_inven[iconIndex].param3 = index2
+						icon_inven[iconIndex].param4 = info
+
+						image = info[index1].breads[index2].image
+						bread_inven[iconIndex] = display.newImageRect(breadGroup,  "Content/images/"..image..".png", display.contentWidth*0.18, display.contentHeight*0.1)
+						bread_inven[iconIndex].x, bread_inven[iconIndex].y = display.contentWidth*0.25, display.contentHeight*0.37
+
+						breadName = info[index1].breads[index2].name
+						bread_name[iconIndex] = display.newText(breadGroup, breadName, display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile POP.ttf", 31)
+						bread_name[iconIndex]:setFillColor(0)
+						breadGroup:toFront()
+
+						-- 한 줄에 3개씩 뜨게 위치 설정--
+						if(j%3 == 1 or i == 1) then
+							icon_inven[iconIndex].x = display.contentWidth*0.13
+							icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+
+							bread_name[iconIndex].x = display.contentWidth*0.13
+							bread_name[iconIndex].y = display.contentHeight*(0.23 + (0.13*m))
+
+							bread_inven[iconIndex].x = display.contentWidth*0.14
+							bread_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))	
+							iconIndex = iconIndex + 1	
+						end
+						if(j%3 == 2 or i == 2) then
+							icon_inven[iconIndex].x = display.contentWidth*0.38
+							icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+						
+							bread_name[iconIndex].x = display.contentWidth*0.38
+							bread_name[iconIndex].y = display.contentHeight*(0.23 + (0.13*m))
+
+							bread_inven[iconIndex].x = display.contentWidth*0.39
+							bread_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+							iconIndex = iconIndex + 1
+						end
+						if(j%3 ==0) then
+							icon_inven[iconIndex].x = display.contentWidth*0.63
+							icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+
+							bread_name[iconIndex].x = display.contentWidth*0.63
+							bread_name[iconIndex].y = display.contentHeight*(0.23 + (0.13*m))
+
+							bread_inven[iconIndex].x = display.contentWidth*0.63
+							bread_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+							iconIndex = iconIndex + 1
+							m = m + 1
+						end
+						--print("icon개수는"..iconIndex)
+						
+						-- 체크표시했으면(빵방에 넣었으면) 닫기 눌렀다가 빵넣기 다시 눌러도 체크가 다시 나타나게 함
+						for i=1,  breadsCNT do 
+							if(check_list[i] ~= nill) then
+								check_inven[i].isVisible = true
+								if(check_list[i] == 0) then
+									check_inven[i]:toFront()
+								end
+							end
+						end
+					-- *** 에러 해결용 추가 코드 *** --
+					else
+						icon_inven[iconIndex] = display.newImageRect(breadGroup, "Content/images/illu_book_secret.png", display.contentWidth*0.29, display.contentHeight*0.17)
+
+						breadGroup:toFront()
+						
+						-- 한 줄에 3개씩 뜨게 위치 설정--
+						if(j%3 == 1 or i == 1) then
+							icon_inven[iconIndex].x = display.contentWidth*0.13
+							icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+							iconIndex = iconIndex + 1	
+						end
+						if(j%3 == 2 or i == 2) then
+							icon_inven[iconIndex].x = display.contentWidth*0.38
+							icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+							iconIndex = iconIndex + 1
+						end
+						if(j%3 ==0) then
+							icon_inven[iconIndex].x = display.contentWidth*0.63
+							icon_inven[iconIndex].y = display.contentHeight*(0.18 + (0.13*m))
+							iconIndex = iconIndex + 1
+							m = m + 1
+						end
 					end
-				elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
-					if ( event.target.isFocus ) then
+					index2 = index2 + 1
+						if index2 == 9 then
+							index2 = 1
+							index1 = index1 + 1
+						end
+
+						if i==32 then
+							index1, index2 = 1, 1
+							info = uBreadInfo
+						end
+				end
+
+				-- 스크롤 --
+				local widget = require( "widget" )
+				local function scroll( event )
+					if ( event.phase == "began" ) then
+						display.getCurrentStage():setFocus( event.target )
+						event.target.isFocus = true
+			
+						event.target.yStart = event.target.y
+			
+					elseif ( event.phase == "moved" ) then
+						if ( event.target.isFocus ) then
+							event.target.y = event.target.yStart + event.yDelta
+						end
+					elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
+						if ( event.target.isFocus ) then
+							display.getCurrentStage():setFocus( nil )
+							event.target.isFocus = false
+						end
 						display.getCurrentStage():setFocus( nil )
 						event.target.isFocus = false
+					end
+					-- *** 에러 해결용 추가 코드 *** --
+					if ( event.limitReached ) then
+						if ( event.direction == "up" ) then print( "Reached bottom limit" )
+						elseif ( event.direction == "down" ) then print( "Reached top limit" )
+						end
+					end
+				end
+
+				local scrollView = widget.newScrollView(
+					{
+						horizontalScrollDisabled=true,
+						left = 165,
+						top = 790,
+						width = 1115,
+						height = 1150,
+						backgroundColor = { 0, 0, 0 , 0}
+
+					}
+				)
+
+				-- 빵을 체크 클릭/해제할 때 발생하는 이벤트 --
+				function checked( event )
+					if ( event.phase == "began" ) then
+						print("체크했당")
+
+						audio.play( soundTable["clickSound"],  {channel=5}) 
+						
+						-- 몇 번째 아이콘인지 매개변수 전달 --
+						local k = event.target.param1
+						local index1 = event.target.param2
+						local index2 = event.target.param3
+						local info = event.target.param4
+
+						-- 0인 경우 체크 제거 --
+						if(check_list[k] == 0) then
+							breadRoom_count = breadRoom_count - 1
+							display.remove(check_inven[k])
+							display.remove(breadRoom_image[k])
+							check_list[k] = 1
+
+						-- 1인 경우 체크 추가 --
+						else
+							breadRoom_count = breadRoom_count + 1
+							--print(k.."체크인벤 k값")
+							check_inven[k] = display.newImageRect(breadGroup, "Content/images/check.png", display.contentWidth*0.04, display.contentHeight*0.02)
+						
+							local n1 = k % 3
+							local n2 = math.floor(k / 3)
+
+							if event.target.x >= 907 then
+								check_inven[k].x = event.target.x*0.85
+								check_inven[k].y = display.contentHeight*(n2 * 0.13)
+							elseif event.target.x >= 547 then
+								check_inven[k].x = event.target.x*0.77
+								check_inven[k].y = display.contentHeight*((n2 + 1) * 0.13)
+							elseif event.target.x >= 187 then
+								check_inven[k].x = event.target.x*0.33
+								check_inven[k].y = display.contentHeight*((n2 + 1) * 0.13)
+							end
+							print(idx1)
+							print(event.target.x)	
+							print(event.target.y)	
+
+							check_list[k] = 0
+
+							-- 체크와 동시에 빵방에 삽입 --
+							image = info[index1].breads[index2].image
+							breadRoom_image[k] = display.newImageRect(breadOutGroup, "Content/images/"..image..".png", display.contentWidth*0.17, display.contentHeight*0.1)
+							breadRoom_image[k].x, breadRoom_image[k].y = math.random(display.contentWidth*0.12, display.contentWidth*0.9), math.random(display.contentHeight*0.31, display.contentHeight*0.71)
+							breadRoom_image[k]:toBack()
+						
+							breadRoom_image[k].param12 = index1
+							breadRoom_image[k].param13 = index2
+							breadRoom_image[k].param14 = info
+							
+							breadRoom_image[k]:addEventListener("touch", show_breadinfo)
+
+							breadRoom_image[k].param10 = k
+							breadRoom_image[k]:addEventListener("touch", shake)
+
+							-- 새로 추가한 모션 --
+							--[[
+							breadRoom_image[k]:addEventListener("touch", rockRect)
+							breadRoom_image[k]:addEventListener("touch", walk)
+							breadRoom_image[k]:addEventListener("touch", re)
+							breadRoom_image[k]:addEventListener("tap", taptap1)
+							]]
+							--BreadMove(breadRoom_image[k])
+							--breadRoom_image[k]:toBack()
+							
+							sceneGroup:insert(breadOutGroup)
+							--[[
+							list:toFront()
+							text_list:toFront()
+							close:toFront()
+							push:toFront()
+							text_push2:toFront()
+							--scrollView:toFront()
+							breadGroup:toFront()
+							]]
+							putBreadGroup:toFront()
+
+							for i=1, breadsCNT do -- 빵 개수만큼 체크 개수 생성
+								if(check_list[i] == 0 and check_inven[i] ~= nill) then
+									--check_inven[i]:toFront()
+									breadRoom_image[i].param2 = i
+								end
+							end
+							
+						end
+						display.getCurrentStage():setFocus( event.target )
+						event.target.isFocus = true
+
+						-- 빵방에 있는 빵 개수 카운트 --
+						--print(breadRoom_count)
+					elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
 					end
 					display.getCurrentStage():setFocus( nil )
 					event.target.isFocus = false
 				end
-				-- *** 에러 해결용 추가 코드 *** --
-				if ( event.limitReached ) then
-					if ( event.direction == "up" ) then print( "Reached bottom limit" )
-					 elseif ( event.direction == "down" ) then print( "Reached top limit" )
-					end
-				end
-			end
 
-			local scrollView = widget.newScrollView(
-				{
-					horizontalScrollDisabled=true,
-					left = 165,
-					top = 790,
-					width = 1115,
-					height = 1150,
-					backgroundColor = { 0, 0, 0 , 0}
+				scrollView:insert(breadGroup)
+				scrollView:addEventListener("touch", scroll)
+				putBreadGroup:insert(scrollView)
 
-				}
-			)
+				-- 창 닫기 --
+				local function closed( event )
+					if ( event.phase == "began" ) then
+						display.getCurrentStage():setFocus( event.target )
+						event.target.isFocus = true
+					elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
+						audio.play( soundTable["clickSound"],  {channel=5}) 
+						haveopen = 0
+						putBreadGroup:toBack()
 
-			-- 빵을 체크 클릭/해제할 때 발생하는 이벤트 --
-			function checked( event )
-				if ( event.phase == "began" ) then
-					print("체크했당")
+						for i=1, breadsCNT do
+							display.remove(bread_name[i])
+							display.remove(icon_inven[i])
+							display.remove(bread_inven[i])
 
-					audio.play( soundTable["clickSound"],  {channel=5}) 
-					
-					-- 몇 번째 아이콘인지 매개변수 전달 --
-					local k = event.target.param1
-					local index1 = event.target.param2
-					local index2 = event.target.param3
-					local info = event.target.param4
-
-					-- 0인 경우 체크 제거 --
-					if(check_list[k] == 0) then
-						breadRoom_count = breadRoom_count - 1
-						display.remove(check_inven[k])
-						display.remove(breadRoom_image[k])
-						check_list[k] = 1
-
-					-- 1인 경우 체크 추가 --
-					else
-						breadRoom_count = breadRoom_count + 1
-						print(k.."체크인벤 k값")
-						check_inven[k] = display.newImageRect(breadGroup, "Content/images/check.png", display.contentWidth*0.04, display.contentHeight*0.02)
-					
-						local n1 = k % 3
-						local n2 = math.floor(k / 3)
-
-						if event.target.x >= 907 then
-							check_inven[k].x = event.target.x*0.85
-							check_inven[k].y = display.contentHeight*(n2 * 0.13)
-						elseif event.target.x >= 547 then
-							check_inven[k].x = event.target.x*0.77
-							check_inven[k].y = display.contentHeight*((n2 + 1) * 0.13)
-						elseif event.target.x >= 187 then
-							check_inven[k].x = event.target.x*0.33
-							check_inven[k].y = display.contentHeight*((n2 + 1) * 0.13)
-						end
-						print(idx1)
-						print(event.target.x)	
-						print(event.target.y)	
-
-						check_list[k] = 0
-
-						-- 체크와 동시에 빵방에 삽입 --
-						image = info[index1].breads[index2].image
-						breadRoom_image[k] = display.newImageRect(breadOutGroup, "Content/images/"..image..".png", display.contentWidth*0.17, display.contentHeight*0.1)
-						breadRoom_image[k].x, breadRoom_image[k].y = math.random(display.contentWidth*0.12, display.contentWidth*0.9), math.random(display.contentHeight*0.31, display.contentHeight*0.71)
-						breadRoom_image[k]:toBack()
-					
-						breadRoom_image[k].param12 = index1
-						breadRoom_image[k].param13 = index2
-						breadRoom_image[k].param14 = info
-						
-						breadRoom_image[k]:addEventListener("touch", show_breadinfo)
-
-						breadRoom_image[k].param10 = k
-						breadRoom_image[k]:addEventListener("touch", shake)
-
-						-- 새로 추가한 모션 --
-						--[[
-						breadRoom_image[k]:addEventListener("touch", rockRect)
-						breadRoom_image[k]:addEventListener("touch", walk)
-						breadRoom_image[k]:addEventListener("touch", re)
-						breadRoom_image[k]:addEventListener("tap", taptap1)
-						]]
-						--BreadMove(breadRoom_image[k])
-						--breadRoom_image[k]:toBack()
-						
-						sceneGroup:insert(breadOutGroup)
-						--[[
-						list:toFront()
-						text_list:toFront()
-						close:toFront()
-						push:toFront()
-						text_push2:toFront()
-						--scrollView:toFront()
-						breadGroup:toFront()
-						]]
-						putBreadGroup:toFront()
-
-						for i=1, breadsCNT do -- 빵 개수만큼 체크 개수 생성
-							if(check_list[i] == 0 and check_inven[i] ~= nill) then
-								--check_inven[i]:toFront()
-								breadRoom_image[i].param2 = i
+							-- 체크 잠시 사라지게 했다가 다시 뜨게 함
+							--if(check_list[i] == 0 and check_inven[i] ~= nill) then
+							if(check_inven[i] ~= nill) then
+								check_inven[i].isVisible = false
 							end
 						end
-						
 					end
-					display.getCurrentStage():setFocus( event.target )
-					event.target.isFocus = true
-
-					-- 빵방에 있는 빵 개수 카운트 --
-					print(breadRoom_count)
-				elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
-					print("체크체크체크")
-				end
-				display.getCurrentStage():setFocus( nil )
-				event.target.isFocus = false
-			end
-
-			scrollView:insert(breadGroup)
-			scrollView:addEventListener("touch", scroll)
-			putBreadGroup:insert(scrollView)
-
-			-- 창 닫기 --
-			local function closed( event )
-				if ( event.phase == "began" ) then
-					display.getCurrentStage():setFocus( event.target )
-					event.target.isFocus = true
-				elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
-					audio.play( soundTable["clickSound"],  {channel=5}) 
-
-					putBreadGroup:toBack()
-
-					for i=1, breadsCNT do
-						display.remove(bread_name[i])
-						display.remove(icon_inven[i])
-						display.remove(bread_inven[i])
-
-						-- 체크 잠시 사라지게 했다가 다시 뜨게 함
-						--if(check_list[i] == 0 and check_inven[i] ~= nill) then
-						if(check_inven[i] ~= nill) then
-							check_inven[i].isVisible = false
-						end
-					end
-				end
-				display.getCurrentStage():setFocus( nil )
-				event.target.isFocus = false
-			end
-
-			close:addEventListener("touch", closed)
-
-			index1, index2 = 1, 1
-			local jsc, index
-			for i=1, 64 do 
-				if i <= 32 then -- '일반 빵'에서 해금된 빵 가져오기
-					jsc = openBread
-					info = Data
-				else -- '업글 빵'에서 해금된 빵 가져오기
-					jsc = openUBread
-					info = uBreadInfo
-				end
-				lock = jsc[index1][index2]
-				if lock ~= 0 then
-					icon_inven[i].param1 = i
-					--print(lock)
-					icon_inven[i]:addEventListener("touch", checked)
+					display.getCurrentStage():setFocus( nil )
+					event.target.isFocus = false
 				end
 
-				index2 = index2 + 1
-					if index2 == 9 then
-						index2 = 1
-						index1 = index1 + 1
-					end
+				close:addEventListener("touch", closed)
 
-					if i==32 then
-						index1, index2 = 1, 1
+				index1, index2 = 1, 1
+				local jsc, index
+				for i=1, 64 do 
+					if i <= 32 then -- '일반 빵'에서 해금된 빵 가져오기
+						jsc = openBread
+						info = Data
+					else -- '업글 빵'에서 해금된 빵 가져오기
+						jsc = openUBread
 						info = uBreadInfo
 					end
-			end
-			push:addEventListener("touch", closed)
+					lock = jsc[index1][index2]
+					if lock ~= 0 then
+						icon_inven[i].param1 = i
+						--print(lock)
+						icon_inven[i]:addEventListener("touch", checked)
+					end
 
+					index2 = index2 + 1
+						if index2 == 9 then
+							index2 = 1
+							index1 = index1 + 1
+						end
+
+						if i==32 then
+							index1, index2 = 1, 1
+							info = uBreadInfo
+						end
+				end
+				push:addEventListener("touch", closed)
+			end
 		end
 		display.getCurrentStage():setFocus( nil )
 		event.target.isFocus = false
