@@ -331,7 +331,7 @@ function scene:create( event )
 				breadInfo_profile.x, breadInfo_profile.y = display.contentWidth*0.2, display.contentHeight*0.9
 
 				if (lv ~= nill) then
-					levelNum = lv
+					levelNum = Bread_level[index1][index2]
 				else
 					levelNum = 1
 				end
