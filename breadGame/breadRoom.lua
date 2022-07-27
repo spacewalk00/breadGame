@@ -334,7 +334,7 @@ function scene:create( event )
 				else
 					levelNum = 1
 				end
-				breadInfo_level = display.newText(breadInfoGroup, "Lv." .. levelNum ,display.contentWidth*1.5, display.contentHeight*1.5,"font/ONE Mobile POP.ttf", 75)
+				breadInfo_level = display.newText(breadInfoGroup, "Lv." .. levelNum ,display.contentWidth*1.5, display.contentHeight*1.5,"Content/font/ONE Mobile POP.ttf", 75)
 				breadInfo_level:setFillColor(0)
 				breadInfo_level.x, breadInfo_level.y = display.contentWidth*0.41, display.contentHeight*0.84
 
@@ -442,7 +442,7 @@ function scene:create( event )
 						bread_inven[iconIndex].x, bread_inven[iconIndex].y = display.contentWidth*0.25, display.contentHeight*0.37
 
 						breadName = info[index1].breads[index2].name
-						bread_name[iconIndex] = display.newText(breadGroup, breadName, display.contentWidth*0.2, display.contentHeight*0.2,"font/ONE Mobile POP.ttf", 34)
+						bread_name[iconIndex] = display.newText(breadGroup, breadName, display.contentWidth*0.2, display.contentHeight*0.2,"Content/font/ONE Mobile POP.ttf", 34)
 						bread_name[iconIndex]:setFillColor(0)
 						breadGroup:toFront()
 

@@ -33,7 +33,7 @@ function scene:create( event )
 	--배경화면
 	local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
 	--skip버튼
-	local skip_B = display.newText("SKIP", display.contentWidth*0.92, display.contentHeight*0.04, "font/ONE Mobile POP.ttf")
+	local skip_B = display.newText("SKIP", display.contentWidth*0.92, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf")
 	skip_B.size = 50
 	skip_B:setFillColor(0)
 	--말풍선
@@ -43,7 +43,7 @@ function scene:create( event )
 	--클릭 버튼
 	local click = display.newImage("Content/images/아웃트로/click.png", bubble.x + 550, bubble.y + 165)
 	--대사
-	local script = display.newText("더미 텍스트", bubble.x, bubble.y-20, "font/ONE Mobile POP.ttf")
+	local script = display.newText("더미 텍스트", bubble.x, bubble.y-20, "Content/font/ONE Mobile POP.ttf")
 	--script.width = display.contentWidth*0.6
 	script.size = 65
 	script:setFillColor(0)

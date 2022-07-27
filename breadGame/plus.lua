@@ -14,7 +14,7 @@ function scene:create( event )
 	
 	-- 배경 --
 	--local s_background = display.newImage("Content/image/main_image.png", display.contentWidth/2, display.contentHeight/2)
-	local background = display.newImage("Content/image/인트로/face_love.png")
+	local background = display.newImage("Content/images/인트로/face_love.png")
 	background.x, background.y = display.contentCenterX, display.contentCenterY
 
 	--local oven = display.newImageRect("Content/images/oven.png", 1550, 820)

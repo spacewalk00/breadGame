@@ -54,7 +54,7 @@ function scene:create( event )
 	--설정 이미지
 	local setting = display.newImage("Content/images/시작/setting.png", display.contentWidth*0.92, display.contentHeight*0.04)	
 	--클릭 텍스트
-	local clickText = display.newText("여기를 터치하여 시작하세요", display.contentWidth/2, display.contentHeight*0.24, "font/ONE Mobile POP.ttf", 60)
+	local clickText = display.newText("여기를 터치하여 시작하세요", display.contentWidth/2, display.contentHeight*0.24, "Content/font/ONE Mobile POP.ttf", 60)
 	transition.blink( clickText , { time=1700 })
 	--음악 설정 그룹
 	local settingGroup = display.newGroup()

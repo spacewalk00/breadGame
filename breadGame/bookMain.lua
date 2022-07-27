@@ -47,11 +47,8 @@ Bread_level = { {1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0},
 				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} }	]]
 
 -- 폰트
-Font = { 	font_Bold = native.newFont("Content/font/ONE Mobile Bold.ttf"),
-			font_Light = native.newFont("Content/font/ONE Mobile Light.ttf"),
-			font_POP = native.newFont("Content/font/ONE Mobile POP.ttf"),
-			font_Regular = native.newFont("Content/font/ONE Mobile Regular.ttf"),
-			font_Title = native.newFont("Content/font/ONE Mobile Title.ttf") 		}
+Font = { 	
+			font_POP = native.newFont("Content/font/ONE Mobile POP.ttf")		}
 
 BackGround = display.newImage("Content/images/main_background.png")
 BackGround.x, BackGround.y = display.contentWidth/2, display.contentHeight/2
@@ -314,7 +311,7 @@ function scene:create( event )
 	end
 	if breadBook_count + breadBookUP_count >= 64 then 
 		local endingButton = display.newImage("Content/images/아웃트로/togoEnd.png", display.contentWidth*0.5, display.contentHeight*0.95)
-		local ending = display.newText("엔딩보기", display.contentWidth*0.5, display.contentHeight*0.95, "font/ONE Mobile POP.ttf", 75)
+		local ending = display.newText("엔딩보기", display.contentWidth*0.5, display.contentHeight*0.95, "Content/font/ONE Mobile POP.ttf", 75)
 		--ending:setFillColor(0.5)
 
 		function gotoEnding(event)

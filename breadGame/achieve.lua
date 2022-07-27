@@ -195,11 +195,11 @@ function scene:create( event )
 			title_red[i] = display.newImage(questGroup, Data[i].titleImg1)
 			title_red[i].x, title_red[i].y = questBox[i].x, questBox[i].y - 250
 			--제목 글
-			quest_title[i] = display.newText(questGroup, Data[i].title, display.contentWidth*0.5, questBox[i].y-260, "font/ONE Mobile POP.ttf")
+			quest_title[i] = display.newText(questGroup, Data[i].title, display.contentWidth*0.5, questBox[i].y-260, "Content/font/ONE Mobile POP.ttf")
 			quest_title[i].size = 50
 			quest_title[i]:setFillColor(1)
 			--정보 글
-			quest_info[i] = display.newText(questGroup, Data[i].info, display.contentWidth*0.5, questBox[i].y-110, "font/ONE Mobile POP.ttf")
+			quest_info[i] = display.newText(questGroup, Data[i].info, display.contentWidth*0.5, questBox[i].y-110, "Content/font/ONE Mobile POP.ttf")
 			--quest_info[i].align = left
 			quest_info[i].size = 45
 			quest_info[i]:setFillColor(0)
@@ -272,11 +272,11 @@ function scene:create( event )
 			catHide[i][j] = display.newImage(questGroup, Data[i].catHide)
 			catHide[i][j].x, catHide[i][j].y = questBox[i].x - 435 + (j-1)*290, questBox[i].y + 120
 			--목표 표시
-			cntBText[i][j] = display.newText(questGroup, Data[i].cntB, questBox[i].x - 430 + (j-1)*290, questBox[i].y + 140, "font/ONE Mobile POP.ttf")
+			cntBText[i][j] = display.newText(questGroup, Data[i].cntB, questBox[i].x - 430 + (j-1)*290, questBox[i].y + 140, "Content/font/ONE Mobile POP.ttf")
 			cntBText[i][j].size = 30
 			cntBText[i][j]:setFillColor(1)
 			--목표 현황 표시
-			cntBIng[i][j] = display.newText(questGroup, "0", questBox[i].x - 465 + (j-1)*290, questBox[i].y + 140, "font/ONE Mobile POP.ttf")
+			cntBIng[i][j] = display.newText(questGroup, "0", questBox[i].x - 465 + (j-1)*290, questBox[i].y + 140, "Content/font/ONE Mobile POP.ttf")
 			cntBIng[i][j].size = 30
 			cntBIng[i][j]:setFillColor(1)
 			cntBIng[i][j].isVisible = false
@@ -293,11 +293,11 @@ function scene:create( event )
 			priceImg[i][j].x, priceImg[i][j].y = questBox[i].x - 490 + (j-1)*290, questBox[i].y - 15
 			--priceImg[i][j].isVisible = false
 			--보상 표시
-			priceText[i][j] = display.newText(questGroup, Data[i].price, questBox[i].x - 405 + (j-1)*290, questBox[i].y - 10, "font/ONE Mobile POP.ttf")
+			priceText[i][j] = display.newText(questGroup, Data[i].price, questBox[i].x - 405 + (j-1)*290, questBox[i].y - 10, "Content/font/ONE Mobile POP.ttf")
 			priceText[i][j].size = 33
 			priceText[i][j]:setFillColor(0)
 			--교육 완료!
-			finishText[i][j] = display.newText(questGroup, "교육완료!", questBox[i].x - 430 + (j-1)*290, questBox[i].y - 5, "font/ONE Mobile POP.ttf")
+			finishText[i][j] = display.newText(questGroup, "교육완료!", questBox[i].x - 430 + (j-1)*290, questBox[i].y - 5, "Content/font/ONE Mobile POP.ttf")
 			finishText[i][j].size = 35
 			finishText[i][j]:setFillColor(0.5)
 			finishText[i][j].isVisible = false
