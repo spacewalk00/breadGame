@@ -19,10 +19,6 @@ function scene:create( event )
 	Index1 = composer.getVariable( "Id1" )
 	Index2 = composer.getVariable( "Id2" )
 
-	print("빵목록"..Index)
-	print("빵번호1:"..Index1)
-	print("빵번호2:"..Index2)
-
 	local BreadJson, open, cnt
 	if Index == 1 then
 		BreadJson = Data[Index1].breads[Index2]
@@ -35,11 +31,6 @@ function scene:create( event )
 		cnt = UbreadsCnt[Index1][Index2]
 		lv = 10
 	end
-
-	print(cnt.." cnt")
-	print(open[Index1][Index2].." open")
-	print(BreadJson.name)
-
 
 -- [backGroup] 도감, 홈 버튼
 	local backGroup = display.newGroup()
@@ -208,7 +199,6 @@ function scene:create( event )
 			open[Index1][Index2] = 1
 		end	
 		saleCoin()	
-		-- open[Index1][Index2] = 1
 		sceneGroup:insert(infoGroup)
 	end
 
@@ -233,10 +223,8 @@ function scene:create( event )
 		end
 		coinNum = coinNum + salePrice
 		coinGroup:removeSelf()
-		--upSetGroup:removeSelf()
 		saleCGroup:removeSelf()
 		saleGroup:removeSelf()
-		-- NameAndLv()
 		CoinAndCnt()
 		if Index == 1 and cnt > 0 then
 			upSetGroup:removeSelf()
@@ -332,7 +320,6 @@ function scene:create( event )
 			CoinAndCnt()					
 			NameAndLv()			
 			saleCoin()
-			-- setting()
 			if Index == 1 and cnt > 0 then
 				upSetGroup:removeSelf()
 				UpSet()
@@ -419,20 +406,6 @@ function scene:create( event )
 	leftKey:addEventListener("tap", moveLeftKey)
 	rightKey:addEventListener("tap", moveRightKey)
 
--- 레이어정리
-	--[[sceneGroup:insert(BackGround)
-			sceneGroup:insert(backGroup)
-			sceneGroup:insert(infoGroup)	
-			sceneGroup:insert(coinGroup)
-			sceneGroup:insert(saleGroup)
-			sceneGroup:insert(saleCGroup)
-			sceneGroup:insert(keyGroup)
-			if BreadJson ~= UBreadInfo then
-				sceneGroup:insert(lvGroup)
-				sceneGroup:insert(upSetGroup)	
-				--sceneGroup:insert(upGroup)		
-			end	]]
-
 end
 
 function scene:show( event )
@@ -440,12 +413,7 @@ function scene:show( event )
 	local phase = event.phase
 	
 	if phase == "will" then
-		-- Called when the scene is still off screen and is about to move on screen
 	elseif phase == "did" then
-		-- Called when the scene is now on screen
-		-- 
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
 	end	
 end
 
@@ -454,22 +422,12 @@ function scene:hide( event )
 	local phase = event.phase
 	
 	if event.phase == "will" then
-		-- Called when the scene is on screen and is about to move off screen
-		--
-		-- INSERT code here to pause the scene
-		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
-		-- Called when the scene is now off screen
 	end
 end
 
 function scene:destroy( event )
 	local sceneGroup = self.view
-	
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
 
 ---------------------------------------------------------------------------------
