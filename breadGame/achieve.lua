@@ -95,8 +95,8 @@ function scene:create( event )
 	--아래 그림자
 	local shadow = display.newImage("Content/images/업적/shadow.png")
 	shadow.x, shadow.y = display.contentWidth/2, display.contentHeight*0.86
-	local SE2 = audio.loadSound("sound/보상 획득/코드2/코드2.wav")
-	local SE3 = audio.loadSound("sound/동전/K드라마_효과음_(76)/K드라마 효과음 (76).wav")
+	local SE2 = audio.loadSound("Content/audio/reward.wav")
+	local SE3 = audio.loadSound("Content/audio/cash.wav")
 	
 	local questGroup = display.newGroup()
 

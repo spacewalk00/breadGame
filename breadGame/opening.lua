@@ -94,7 +94,7 @@ function scene:create( event )
 	local BGMBar = display.newImage(settingGroup, "Content/images/시작/soundBar.png")
 	
 	--배경음악
-	local BGM = audio.loadSound("Content/sound/Cute cooking time_bgmworld.com.mp3")
+	local BGM = audio.loadSound("Content/audio/background.mp3")
 	audio.play(BGM, {channel=1, loops=-1})
 	--배경음악 설정
 	audio.setMaxVolume(1, { channel=1 })
@@ -102,7 +102,7 @@ function scene:create( event )
 	
 	--효과음
 	--버튼 클릭
-	SE1 = audio.loadSound("Content/sound/클릭/코드19/코드19.wav")
+	SE1 = audio.loadSound("Content/audio/click.wav")
 	--보상 획득
 	--SE2 = audio.loadSound("sound/보상 획득/코드2/코드2.wav")
 	--동전 소리
