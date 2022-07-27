@@ -260,24 +260,23 @@ function scene:create( event )
 		print(reverse)
 	end
 
-	-- 뒤뚱뒤뚱 걸어가기...인데 미끄러지는 것에 가까운.... (b13에 오브젝트 대입!)
-   --[[
+	-- 뒤뚱뒤뚱 걸어가기...
+	-- 예) walk(breadRoom_image[k])   
 	local function rockRect(event)
-      local params2 = event.source.params2
        if ( reverse == 0 ) then
            reverse = 1
-           transition.to( params2.myObj2 , { rotation=-5, time=500, transition=easing.inOutCubic } )
+           transition.to( event.source.obj , { rotation=-5, time=600, transition=easing.inOutCubic } )
        else
            reverse = 0
-           transition.to( params2.myObj2 , { rotation=5, time=500, transition=easing.inOutCubic } )
+           transition.to( event.source.obj , { rotation=5, time=600, transition=easing.inOutCubic } )
        end
    end   
 
     local function walk(b)         
       fun2 = timer.performWithDelay( 600, rockRect, 0 )
-      fun2.params2 = {myObj2 = b}
-      local dx = math.random( 100, 700 )
-      local dy = math.random( 000, 1100 )
+      fun2.obj = b
+      local dx = math.random( 100, 900 )
+      local dy = math.random( 600, 2000 )
       print(dx..", "..dy)
       distanceX = math.abs(dx-b.x)
       distanceY = math.abs(dy-b.y)
@@ -286,15 +285,15 @@ function scene:create( event )
     --walk(b13)
 
 	--클릭하면 커졌다가 작아짐 (b13에 오브젝트 대입!)
-   local function re( event )
-      local params = event.source.params
-      transition.scaleTo( params.myObj , { xScale=1, yScale=1, time=800 } )
+	-- 작아지지 않는 에러 발생
+   --[[local function re( event )
+      transition.scaleTo( event.source.obj , { xScale=1, yScale=1, time=800 } )
    end
 
    local function taptap1( event )
-      transition.scaleTo( event.target, { xScale=1.2, yScale=1.2, time=800 } )
-      fun = timer.performWithDelay( 800, re, 1 )
-      fun.params = {myObj = b13}
+      transition.scaleTo( event.target, { xScale=1.2, yScale=1.2, time=800 } )    
+      fun = timer.performWithDelay( 800, re, 1 ) 
+      fun.obj = event.name    
    end
    --b13:addEventListener("tap", taptap1)
    ]]
@@ -631,11 +630,11 @@ function scene:create( event )
 							breadRoom_image[k]:addEventListener("touch", shake)
 
 							-- 새로 추가한 모션 --
+							walk(breadRoom_image[k])
+							
 							--[[
-							breadRoom_image[k]:addEventListener("touch", rockRect)
-							breadRoom_image[k]:addEventListener("touch", walk)
+							breadRoom_image[k]:addEventListener("tap", taptap1)			
 							breadRoom_image[k]:addEventListener("touch", re)
-							breadRoom_image[k]:addEventListener("tap", taptap1)
 							]]
 							--BreadMove(breadRoom_image[k])
 							--breadRoom_image[k]:toBack()
