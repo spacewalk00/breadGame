@@ -56,14 +56,14 @@ local ingreGroup = display.newGroup()
 local cnt = {}
 
 local function displayIngreCnt(i)
-	cnt[i] = display.newText(ingreGroup, ingreCnt[i].."개", display.contentWidth*0.8, display.contentHeight*(0.06+0.13* (i-1)), "Content/font/ONE Mobile POP.ttf")
-	cnt[i].x, cnt[i].y = display.contentWidth*0.8, display.contentHeight*(0.06+0.13* (i-1))
+	cnt[i] = display.newText(ingreGroup, ingreCnt[i].."개", display.contentWidth*0.8, display.contentHeight*(0.06+0.13* (i-2)), "Content/font/ONE Mobile POP.ttf")
+	cnt[i].x, cnt[i].y = display.contentWidth*0.8, display.contentHeight*(0.06+0.13* (i-2))
 	cnt[i]:setFillColor( 0.894, 0.772, 0.713 )
 	cnt[i].size = 50
 end
 
 local function printAllCnt()
-	for i=1, #ingredients do
+	for i=2, #ingredients do
 		displayIngreCnt(i)
 	end
 end
@@ -73,7 +73,7 @@ local function deleteBeforeCnt(i)
 end
 
 local function deleteAllCnt()
-	for i=1, #ingredients do
+	for i=2, #ingredients do
 		deleteBeforeCnt(i)
 	end
 end
@@ -163,13 +163,13 @@ function scene:create( event )
 	local ingreInfo = {}
 	local defaultBox 
 
-	for i=1, #ingredients do
+	for i=2, #ingredients do
 		product_bar[i] = display.newImage(ingreGroup, "Content/images/product_bar.png")
-		product_bar[i].x, product_bar[i].y = display.contentWidth*0.5, display.contentHeight*(0.06+0.13* (i-1))
+		product_bar[i].x, product_bar[i].y = display.contentWidth*0.5, display.contentHeight*(0.06+0.13* (i-2))
 		p_pic_bar[i] = display.newImage(ingreGroup, "Content/images/syrup_bar.png")
-	    p_pic_bar[i].x, p_pic_bar[i].y = display.contentWidth*0.22, display.contentHeight*(0.06+0.13* (i-1))
+	    p_pic_bar[i].x, p_pic_bar[i].y = display.contentWidth*0.22, display.contentHeight*(0.06+0.13* (i-2))
 	    p_pic[i] = display.newImage(ingreGroup, ingredients[i].image)
-		p_pic[i].x, p_pic[i].y = display.contentWidth*0.22, display.contentHeight*(0.06+0.13* (i-1))
+		p_pic[i].x, p_pic[i].y = display.contentWidth*0.22, display.contentHeight*(0.06+0.13* (i-2))
 		p_pic[i].name = i
 
 		displayIngreCnt(i)
@@ -179,7 +179,7 @@ function scene:create( event )
 		{
 			text = ingredients[i].name,
 			x = display.contentWidth*(0.41 + 0.24),
-			y = display.contentHeight*(0.04 + 0.13*(i-1)),
+			y = display.contentHeight*(0.04 + 0.13*(i-2)),
 			width = 1000,
 			font = "Content/font/ONE Mobile POP.ttf",
 			fontSize = 60,
@@ -193,7 +193,7 @@ function scene:create( event )
 		{
 			text = ingredients[i].sentence,
 			x = display.contentWidth*(0.41 + 0.24),
-			y = display.contentHeight*(0.04 +0.13*(i-1)+ 0.04),
+			y = display.contentHeight*(0.04 +0.13*(i-2)+ 0.04),
 			width = 1000,
 			font = "Content/font/ONE Mobile POP.ttf",
 			fontSize = 45,
