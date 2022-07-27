@@ -275,12 +275,12 @@ function scene:create( event )
     local function walk(b)         
       fun2 = timer.performWithDelay( 600, rockRect, 0 )
       fun2.obj = b
-      local dx = math.random( 100, 1100 )
-      local dy = math.random( 600, 1600 )
+      local dx = math.random( 100, 1300 )
+      local dy = math.random( 600, 2000 )
       print(dx..", "..dy)
       distanceX = math.abs(dx-b.x)
       distanceY = math.abs(dy-b.y)
-      transition.to( b, { time = (distanceX + distanceY) * 10,x = dx, y = dy, transition=easing.linear } )
+      transition.to( b, { time = (distanceX + distanceY) * 10, x = dx, y = dy, transition=easing.linear } )
     end
     --walk(b13)
 
