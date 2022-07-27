@@ -815,7 +815,7 @@ function scene:create( event )
 		print("홈으로 이동")
 		------------------showCoin 관련 수정
 		showCoin.isVisible = true
-		showCoin.x, showCoin.y = display.contentWidth*0.35, display.contentHeight*0.04
+		showCoin.x, showCoin.y = display.contentWidth*0.545, display.contentHeight*0.04
 		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then

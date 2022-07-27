@@ -47,7 +47,7 @@ end
 --메인 씬으로 변경--
 function gotoh(event)
 	---------showCoin 관련 수정
-	showCoin.x, showCoin.y = display.contentWidth*0.35, display.contentHeight*0.04
+	showCoin.x, showCoin.y = display.contentWidth*0.545, display.contentHeight*0.04
 	composer.gotoScene("home") 
 	print("메인화면으로 가야함")
 end

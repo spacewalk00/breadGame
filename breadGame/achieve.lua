@@ -174,7 +174,7 @@ function scene:create( event )
 
 	local function start(event)
 	---------showCoin 관련 수정
-	showCoin.x, showCoin.y = display.contentWidth*0.35, display.contentHeight*0.04
+	showCoin.x, showCoin.y = display.contentWidth*0.545, display.contentHeight*0.04
 		audio.play(SE1, {channel=5})
 		composer.gotoScene("home")
 	end
