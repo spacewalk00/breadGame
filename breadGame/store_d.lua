@@ -19,14 +19,6 @@ local function deco_parse()
 	end
 end
 deco_parse()
---[[
-decoCnt = {}
-decoFlag = {}
-
-for i=1, #deco do
-	decoCnt[i] = 0
-	decoFlag[i] = 0
-end]]
 
 local composer = require( "composer" )
 local scene = composer.newScene()
@@ -67,16 +59,11 @@ function scene:create( event )
 	local topGroup = display.newGroup()
 
 	local background = display.newImage("Content/images/storeBackground.png")
-
-	--background.x = display.contentCenterX
-	--background.y = display.contentHeight * 0.08
 	background.x, background.y = display.contentCenterX, display.contentCenterY
 	
 	local store = display.newImageRect("Content/images/store.png", 200, 200)
 	store.x, store.y = display.contentWidth*0.15, display.contentHeight*0.04
-	--local storeText = display.newText("상점", display.contentWidth*0.28, display.contentHeight*0.05, "Content/font/ONE Mobile POP.ttf")
-	--storeText:setFillColor(0)
-	--storeText.size = 70
+	
 	local storeText = display.newImage("Content/images/text_store2.png")
 	storeText.x, storeText.y = display.contentWidth*0.28, display.contentHeight*0.05
 
@@ -98,13 +85,10 @@ function scene:create( event )
 	local choiceMark = display.newImage("Content/images/chosen.png")
 
 	choiceMark.x, choiceMark.y = display.contentWidth*0.5, display.contentHeight*0.14
-	--choiceMark.x, choiceMark.y = display.contentWidth*0.8, display.contentHeight*0.14
-	--choiceMark.x, choiceMark.y = display.contentWidth*0.2, display.contentHeight*0.14
 
 	local ingredientBtn = display.newRect(display.contentWidth*0.2, display.contentHeight*0.12, 280, 150)
 	ingredientBtn.alpha = 0.01
 	local ingredientText = display.newText("재료", display.contentWidth*0.2, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	--ingredientText.fill.blendMode = "srcIn"
 	ingredientText.size = 70
 
 	local decoBtn = display.newRect(display.contentWidth*0.5, display.contentHeight*0.12, 280, 150)
@@ -116,7 +100,6 @@ function scene:create( event )
 	local wallBtn = display.newRect(display.contentWidth*0.8, display.contentHeight*0.12, 280, 150)
 	wallBtn.alpha = 0.01
 	local wallText = display.newText("카펫", display.contentWidth*0.8, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	--wallText.fill.blendMode = "srcIn"
 	wallText.size = 70
 	
 	topGroup:insert(background)
@@ -135,11 +118,7 @@ function scene:create( event )
 	topGroup:insert(wallText)	
 
 	ingredientBtn:addEventListener("tap", gotoi)
-	--decoBtn:addEventListener("tap", gotod)
 	wallBtn:addEventListener("tap", gotow)
-
-
-	
 
 	-- 이 부분이 달라짐 store_i, store_d, store_w의 차이--
 	--commonFrame()
@@ -196,31 +175,13 @@ function scene:create( event )
 			align = "left"
 		}
 		ingreInfo[i] = display.newText(sentenceOptions)
-		--ingreInfo[i] = display.newText(ingreGroup, deco[i].sentence, display.contentWidth*(0.41+0.2), display.contentHeight*(0.22+0.13*(i-1)+ 0.04), "font/ONE Mobile POP.ttf")
 		ingreInfo[i]:setFillColor(0)
 		ingreGroup:insert(ingreInfo[i])
 
 	listGroup:insert(background2)
 	listGroup:insert(ingreGroup)
 
-
-	--[[sceneGroup:insert(background) sceneGroup:insert(background2)
-	sceneGroup:insert(store)
-	sceneGroup:insert(storeText)
-	sceneGroup:insert(home)
-	sceneGroup:insert(productType)
-	sceneGroup:insert(choiceMark)
-	sceneGroup:insert(decoBtn)
-	sceneGroup:insert(decoText)
-	sceneGroup:insert(decoBtn)
-	sceneGroup:insert(decoText)
-	sceneGroup:insert(wallBtn)
-	sceneGroup:insert(wallText)	
-	sceneGroup:insert(ingreGroup)]]
-
 	function pop( event )
-		-- 뒷 배경 어둡게 --
-
 		audio.play( soundTable["clickSound"],  {channel=5}) 
 		local darkening = display.newImageRect("Content/images/dark.png", 1440*2, 710*7)
 		darkening.x, darkening.y = display.contentCenterX, display.contentCenterY
@@ -344,12 +305,9 @@ function scene:create( event )
 			scrollS:removeSelf()
 		end
 	 
-	    -- In the event a scroll limit is reached...
 	    if ( event.limitReached ) then
 	        if ( event.direction == "up" ) then print( "Reached bottom limit" )
 	        elseif ( event.direction == "down" ) then print( "Reached top limit" )
-	        --elseif ( event.direction == "left" ) then print( "Reached right limit" )
-	        --elseif ( event.direction == "right" ) then print( "Reached left limit" )
 	        end
 	    end
 	 
@@ -369,7 +327,6 @@ function scene:create( event )
 		}
 	)
 	scrollView:insert(ingreGroup)
-	--scrollView:addEventListener("touch", scroll)
 	sceneGroup:insert(scrollView)
 end
 
@@ -378,15 +335,8 @@ function scene:show( event )
 	local phase = event.phase
 	
 	if phase == "will" then
-		--  coins:removeSelf()
-		-- Called when the scene is still off screen and is about to move on screen
 	elseif phase == "did" then
 		printAllCnt()
-
-		-- Called when the scene is now on screen
-		-- 
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
 	end	
 end
 
@@ -395,10 +345,6 @@ function scene:hide( event )
 	local phase = event.phase
 	
 	if event.phase == "will" then
-		-- Called when the scene is on screen and is about to move off screen
-		--
-		-- INSERT code here to pause the scene
-		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
 		deleteAllCnt()
 		for i=1, #deco do
@@ -407,17 +353,11 @@ function scene:hide( event )
 				print(i.."인덱스의 flag는"..decoFlag[i].."\n")
 			end
 		end
-		-- Called when the scene is now off screen
 	end
 end
 
 function scene:destroy( event )
 	local sceneGroup = self.view
-	
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
 
 ---------------------------------------------------------------------------------

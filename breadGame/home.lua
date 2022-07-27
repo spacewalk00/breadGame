@@ -39,13 +39,6 @@ local json = require("json")
 local function parse2()
 	filename = system.pathForFile("Content/JSON/ingredient.json")
 	ingredients, pos2, msg2 = json.decodeFile(filename)
-
-	--[[if ingredients then
-		print(ingredients[1].name)
-	else
-		print(pos2)
-		print(msg2)
-	end]]
 end
 parse2()
 
@@ -99,9 +92,6 @@ local function levelUpPop( n ) --레벨업 창 화면에 띄우기 --
 	
 	levelGroup:insert(showNewLevel)
 	
-	--local message = display.newText(levelGroup, "LEVEL UP!", display.contentCenterX, display.contentHeight*0.5, "Content/font/ONE Mobile POP.ttf")
-	--message:setFillColor(1)
-	--message.size = 100
 	local message = display.newImage(levelGroup, "Content/images/text_levelUp.png", display.contentCenterX, display.contentHeight*0.5)
 
 	local message2 = display.newText(levelGroup, "폭탄빵을 만들 확률 ".. (10-portion)*10 .."% > "..(10-(portion+0.5))*10 .."%", display.contentCenterX, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf", 100)
@@ -156,18 +146,11 @@ end
 
 function scene:create( event )
 	local sceneGroup = self.view
-	--[[
-	-- 배경 --
-	local background = display.newImage("Content/image/main_image.png", display.contentWidth, display.contentHeight)
-	background.x, background.y = display.contentWidth/2, display.contentHeight/2]]
 
 	showCoin.text = coinNum
 
 	local background = display.newImage("Content/images/인트로/face_love.png")
 	background.x, background.y = display.contentCenterX, display.contentCenterY
-
-	--local oven = display.newImageRect("Content/images/oven.png", 1550, 820)
-	--oven.x, oven.y = display.contentCenterX, display.contentHeight*0.9
 
 	local level = display.newImage("Content/images/level.png")
 	level.x, level.y = display.contentWidth*0.07, display.contentHeight*0.04
@@ -279,12 +262,7 @@ function scene:show( event )
 	local phase = event.phase
 	
 	if phase == "will" then
-		-- Called when the scene is still off screen and is about to move on screen
 	elseif phase == "did" then
-		-- Called when the scene is now on screen
-		-- 
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
 	end	
 end
 
@@ -302,10 +280,6 @@ end
 
 function scene:destroy( event )
 	local sceneGroup = self.view
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
 
 ---------------------------------------------------------------------------------

@@ -26,7 +26,6 @@ local function parse()
 end
 parse()
 
---local carpetFlag = 0
 --local carpetIndex 
 local function gotoBreadRoomFromC(event)
 
@@ -35,7 +34,6 @@ local function gotoBreadRoomFromC(event)
 	
 	-- 고른 아이템 변수 전달 
 	if event.target.name == "pushBtn" then
-		--carpetFlag = 1
 		
 		--[[
 		-- 고른 아이템 목록에서 삭제
@@ -295,9 +293,7 @@ function scene:create( event )
 				align = "left"
 			}
 			ingreName[i] = display.newText(nameOptions) 
-			--ingreName[i] = display.newText(ingreGroup, wallPaper[i].name, display.contentWidth*(0.41), display.contentHeight*(0.22+0.13*(i-1)), "font/ONE Mobile POP.ttf") 
 			ingreName[i]:setFillColor(0)
-			--ingreGroup:insert(ingreName[i])
 			carpetGroup:insert(ingreName[i])
 
 			local sentenceOptions = 
@@ -312,9 +308,7 @@ function scene:create( event )
 			}
 			idx = idx + 1
 			ingreInfo[i] = display.newText(sentenceOptions)
-			--ingreInfo[i] = display.newText(ingreGroup, wallPaper[i].sentence, display.contentWidth*(0.41+0.2), display.contentHeight*(0.22+0.13*(i-1)+ 0.04), "font/ONE Mobile POP.ttf")
 			ingreInfo[i]:setFillColor(0)
-			--ingreGroup:insert(ingreInfo[i])
 			carpetGroup:insert(ingreInfo[i])
 		end
 	end
@@ -366,12 +360,8 @@ function scene:show( event )
 	local phase = event.phase
 	
 	if phase == "will" then
-		-- Called when the scene is still off screen and is about to move on screen
 	elseif phase == "did" then
-		-- Called when the scene is now on screen
-		-- 
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
+
 	end	
 end
 
@@ -380,28 +370,13 @@ function scene:hide( event )
 	local phase = event.phase
 	
 	if event.phase == "will" then
-		-- Called when the scene is on screen and is about to move off screen
-		--
-		-- INSERT code here to pause the scene
-		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
 		composer.removeScene("decorationC")
-
-		--[[if carpetFlag == 1 then
-			composer.setVariable("carpetIndex", carpetIndex)
-			print(carpetIndex)
-			carpetFlag = 0
-		end]]
 	end
 end
 
 function scene:destroy( event )
 	local sceneGroup = self.view
-	
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
 
 ---------------------------------------------------------------------------------

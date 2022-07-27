@@ -84,9 +84,6 @@ function scene:create( event )
 	local background = display.newImage("Content/images/인트로/face_love.png")
 	background.x, background.y = display.contentCenterX, display.contentCenterY
 
-	--local oven = display.newImageRect("Content/images/oven.png", 1550, 820)
-	--oven.x, oven.y = display.contentCenterX, display.contentHeight*0.9
-
 	local level = display.newImage("Content/images/level.png")
 	level.x, level.y = display.contentWidth*0.07, display.contentHeight*0.04
 	
@@ -130,7 +127,6 @@ function scene:create( event )
 		coins:removeSelf()
 		composer.gotoScene("store_i")
 	end
-	--store:addEventListener("tap", gotoStore)
 
 	local success = display.newImage("Content/images/success.png")
 	success.x, success.y = display.contentWidth*0.77, display.contentHeight*0.13
@@ -146,17 +142,12 @@ function scene:create( event )
 	local text_breadRoom = display.newImage("Content/images/text_breadRoom.png")
 	text_breadRoom.x, text_breadRoom.y = display.contentWidth*0.92, display.contentHeight*0.155
 	
-	
-	--book:addEventListener("tap", moveToBook)
-	--breadRoom:addEventListener("tap", moveToBreadRoom)
 	--
 	darkening = display.newImageRect("Content/images/dark.png", 1440*2, 710*7)
 	darkening.x, darkening.y = display.contentCenterX, display.contentCenterY
 
 	
 	sceneGroup:insert( background )
-
-	--sceneGroup:insert( oven )
 	sceneGroup:insert( levelUp_s )
 	sceneGroup:insert( level )
 	sceneGroup:insert( showLevel )
@@ -206,11 +197,6 @@ function scene:show( event )
 			--ingredient = 0
 			--
 			exp = exp + 100 -- 성공적인 빵 경험치 100 제공
-			--시럽 3개 보상 제공--
-			--[[
-			ingreCnt[2] = ingreCnt[2] + 1
-			ingreCnt[3] = ingreCnt[3] + 1
-			ingreCnt[4] = ingreCnt[4] + 1]]
 
 			---업적 관련
 			bread_count = bread_count + 1 					--일반빵 제작 개수
@@ -233,7 +219,6 @@ function scene:show( event )
 
 		-- new 빵은 new 그림--
 		if syrub >= 0 and ingredient >=0 and openBread[syrub+1][ingredient+1] == 0 then
-			--breadsCnt[syrub+1][ingredient+1] == 0 and syrub >= 0 and ingredient >=0) then
 			newFlag = 1
 		end
 		-- 빵 Cnt 증가 --
@@ -263,9 +248,6 @@ function scene:show( event )
 
 		local text_success = display.newImage(windowGroup, sf)
 		text_success.x, text_success.y = display.contentWidth*0.5, display.contentHeight*0.27
-		--showsf = display.newText(sf, display.contentWidth*0.5, display.contentHeight*0.27, "Content/font/ONE Mobile POP.ttf")
-		--showsf:setFillColor(0)
-		--showsf.size = 100
 
 		-- 빵빠레 --
 		local halo = display.newImage("Content/images/halo.png")
@@ -282,7 +264,7 @@ function scene:show( event )
 				transition.to(halo, {rotation=45, time=1000, transition=easing.inOutCubic })
 			end
 		end
-		timer.performWithDelay(900, rock, 0) -- repeat forever
+		timer.performWithDelay(900, rock, 0)
 
 		-- new 빵은 new 그림--
 		if(newFlag == 1) then
@@ -343,9 +325,6 @@ function scene:show( event )
 		local check = "Content/images/text_OK.png"
 		local showCheck = display.newImage(check)
 		showCheck.x, showCheck.y = display.contentWidth*0.5, display.contentHeight*0.8
-		--local showCheck = display.newText(check, display.contentWidth*0.5, display.contentHeight*0.8, "Content/font/ONE Mobile POP.ttf")
-		--showCheck:setFillColor(0)
-		--showCheck.size = 80
 
 		local close = display.newImage("Content/images/close.png")
 		close.x, close.y = display.contentWidth*0.9, display.contentHeight*0.25
@@ -378,34 +357,6 @@ function scene:show( event )
 	    	darkening:removeSelf()
 
 	    	if(fail == 0) then
-				--보상 표시--
-				--[[local rewardGroup = display.newGroup()
-
-				local choco = display.newImage(rewardGroup, ingredients[2].image)
-				choco.x, choco.y = display.contentWidth*0.555, display.contentHeight*0.5
-
-				local straw = display.newImage(rewardGroup, ingredients[3].image)
-				straw.x, straw.y = display.contentWidth*0.555, display.contentHeight*0.55
-
-				local vanilla = display.newImage(rewardGroup, ingredients[4].image)
-				vanilla.x, vanilla.y = display.contentWidth*0.555, display.contentHeight*0.6
-
-				transition.moveTo(choco, {time = 1500, x=display.contentWidth*0.138, y=display.contentHeight*0.444} ) 
-				transition.moveTo(straw, {time = 1500, x=display.contentWidth*0.138, y=display.contentHeight*0.444} ) 
-				transition.moveTo(vanilla, {time = 1500, x=display.contentWidth*0.138, y=display.contentHeight*0.444} ) 
-
-				transition.fadeOut(rewardGroup, {timer = 1500, delay = 500})
-
-				audio.play( soundTable["rewardSound"],  {channel=7} )]]
-
-	    		-- new일 때 코인 지급 -- 
-				if newFlag == 1 then
-					--coinNum = coinNum + 1000
-					--showCoin.text = coinNum
-
-					--newFlag = 0
-					--audio.play( soundTable["cashSound"] ,  {channel=4})
-				end
 	    	end
 
 			audio.play( soundTable["clickSound"],  {channel=5}) 

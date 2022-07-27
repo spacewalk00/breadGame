@@ -18,14 +18,6 @@ local function carpet_parse()
 	end
 end
 carpet_parse()
---[[
-wallCnt = {}
-wallPaperFlag = {}
-
-for i=1, #wallPaper do
-	wallCnt[i] = 0
-	wallPaperFlag[i] = 0
-end]]
 
 local composer = require( "composer" )
 local scene = composer.newScene()
@@ -72,9 +64,7 @@ function scene:create( event )
 	
 	local store = display.newImageRect("Content/images/store.png", 200, 200)
 	store.x, store.y = display.contentWidth*0.15, display.contentHeight*0.04
-	--local storeText = display.newText("상점", display.contentWidth*0.28, display.contentHeight*0.05, "Content/font/ONE Mobile POP.ttf")
-	--storeText:setFillColor(0)
-	--storeText.size = 70
+
 	local storeText = display.newImage("Content/images/text_store2.png")
 	storeText.x, storeText.y = display.contentWidth*0.28, display.contentHeight*0.05
 
@@ -95,9 +85,7 @@ function scene:create( event )
 
 	local choiceMark = display.newImage("Content/images/chosen.png")
 
-	--choiceMark.x, choiceMark.y = display.contentWidth*0.5, display.contentHeight*0.14
 	choiceMark.x, choiceMark.y = display.contentWidth*0.8, display.contentHeight*0.14
-	--choiceMark.x, choiceMark.y = display.contentWidth*0.2, display.contentHeight*0.14
 
 	local ingredientBtn = display.newRect(display.contentWidth*0.2, display.contentHeight*0.12, 280, 150)
 	ingredientBtn.alpha = 0.01
@@ -132,10 +120,6 @@ function scene:create( event )
 
 	ingredientBtn:addEventListener("tap", gotoi)
 	decoBtn:addEventListener("tap", gotod)
-	--wallBtn:addEventListener("tap", gotow)
-
-
-	
 
 	-- 이 부분이 달라짐 store_i, store_d, store_w의 차이--
 	--commonFrame()
@@ -178,7 +162,6 @@ function scene:create( event )
 			align = "left"
 		}
 		ingreName[i] = display.newText(nameOptions) 
-		--ingreName[i] = display.newText(ingreGroup, wallPaper[i].name, display.contentWidth*(0.41), display.contentHeight*(0.22+0.13*(i-1)), "font/ONE Mobile POP.ttf") 
 		ingreName[i]:setFillColor(0)
 		ingreGroup:insert(ingreName[i])
 
@@ -193,7 +176,6 @@ function scene:create( event )
 			align = "left"
 		}
 		ingreInfo[i] = display.newText(sentenceOptions)
-		--ingreInfo[i] = display.newText(ingreGroup, wallPaper[i].sentence, display.contentWidth*(0.41+0.2), display.contentHeight*(0.22+0.13*(i-1)+ 0.04), "font/ONE Mobile POP.ttf")
 		ingreInfo[i]:setFillColor(0)
 		ingreGroup:insert(ingreInfo[i])
 
@@ -201,8 +183,6 @@ function scene:create( event )
 	listGroup:insert(ingreGroup)
 
 	function pop( event )
-		-- 뒷 배경 어둡게 --
-
 		audio.play( soundTable["clickSound"],  {channel=5}) 
 		local darkening = display.newImageRect("Content/images/dark.png", 1440*2, 710*7)
 		darkening.x, darkening.y = display.contentCenterX, display.contentCenterY
@@ -298,7 +278,6 @@ function scene:create( event )
 	topGroup:toFront()
 
 	local scrollS
-	-- 스크롤 만들기
 	local function scroll( event )
 		if ( event.phase == "began" ) then
 			display.getCurrentStage():setFocus( event.target )
@@ -310,9 +289,6 @@ function scene:create( event )
 
 		elseif ( event.phase == "moved" ) then
 			if ( event.target.isFocus) then
-
-				--event.target.y = event.target.yStart + event.yDelta
-
 			end
 		elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
 			if ( event.target.isFocus ) then
@@ -344,7 +320,6 @@ function scene:create( event )
 	        height = 2150,
 	        hideBackground = true
 	        --backgroundColor = { 0.894, 0.772, 0.713 }
-
 	        --0.949, 0.839, 0.776
 		}
 	)
@@ -358,15 +333,8 @@ function scene:show( event )
 	local phase = event.phase
 	
 	if phase == "will" then
-		--  coins:removeSelf()
-		-- Called when the scene is still off screen and is about to move on screen
 	elseif phase == "did" then
 		printAllCnt()
-
-		-- Called when the scene is now on screen
-		-- 
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
 	end	
 end
 
@@ -375,11 +343,6 @@ function scene:hide( event )
 	local phase = event.phase
 	
 	if event.phase == "will" then
-		-- Called when the scene is on screen and is about to move off screen
-		--
-		-- INSERT code here to pause the scene
-		-- e.g. stop timers, stop animation, unload sounds, etc.)
-
 	elseif phase == "did" then
 		deleteAllCnt()
 
@@ -389,17 +352,11 @@ function scene:hide( event )
 				print(i.."인덱스의 flag는"..wallPaperFlag[i].."\n")
 			end
 		end
-		-- Called when the scene is now off screen
 	end
 end
 
 function scene:destroy( event )
 	local sceneGroup = self.view
-	
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
 
 ---------------------------------------------------------------------------------

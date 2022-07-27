@@ -191,7 +191,6 @@ function scene:create( event )
 	pushBtn.name = "pushBtn"
 	pushBtn:addEventListener("tap", gotoBreadRoomFromD)
 
-	--decoBtn:addEventListener("tap", gotoDecoD)
 	carpetBtn:addEventListener("tap", gotoDecoC)
 
     ------------------------
@@ -234,12 +233,6 @@ function scene:create( event )
 			p_check[i].x, p_check[i].y = display.contentWidth*0.06, display.contentHeight*(0.06+0.13* (idx-1) - 0.03)
 			p_check[i].isVisible = false
 
-			--[[if check_done2[i] == 1 then	--만약 체크 했었으면
-				p_check[i].isVisible = true
-			else
-				p_check[i].isVisible = false
-			end]]
-
 			--중복 체크 불가 구현			
 			local function checked( event ) 
 				if p_check[i].isVisible == false then
@@ -252,7 +245,6 @@ function scene:create( event )
 					end
 					if overlapFlag == 0 then
 						p_check[i].isVisible = true
-						--check_done2[i] = 1
 						print("체크하겠습니다.")
 						decoIndex = i
 					else
@@ -260,7 +252,6 @@ function scene:create( event )
 					end
 				else
 					p_check[i].isVisible = false
-					--check_done2[i] = 0
 					decoIndex = 0
 					print("체크 해제하겠습니다.")
 				end
@@ -278,9 +269,7 @@ function scene:create( event )
 				align = "left"
 			}
 			ingreName[i] = display.newText(nameOptions) 
-			--ingreName[i] = display.newText(ingreGroup, deco[i].name, display.contentWidth*(0.41), display.contentHeight*(0.22+0.13*(i-1)), "font/ONE Mobile POP.ttf") 
 			ingreName[i]:setFillColor(0)
-			--ingreGroup:insert(ingreName[i])
 			carpetGroup:insert(ingreName[i])
 
 			local sentenceOptions = 
@@ -295,9 +284,7 @@ function scene:create( event )
 			}
 			idx = idx + 1
 			ingreInfo[i] = display.newText(sentenceOptions)
-			--ingreInfo[i] = display.newText(ingreGroup, deco[i].sentence, display.contentWidth*(0.41+0.2), display.contentHeight*(0.22+0.13*(i-1)+ 0.04), "font/ONE Mobile POP.ttf")
 			ingreInfo[i]:setFillColor(0)
-			--ingreGroup:insert(ingreInfo[i])
 			carpetGroup:insert(ingreInfo[i])
 		end
 	end
@@ -357,12 +344,9 @@ function scene:show( event )
 	local phase = event.phase
 	
 	if phase == "will" then
-		-- Called when the scene is still off screen and is about to move on screen
+
 	elseif phase == "did" then
-		-- Called when the scene is now on screen
-		-- 
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
+	
 	end	
 end
 
@@ -371,31 +355,15 @@ function scene:hide( event )
 	local phase = event.phase
 	
 	if event.phase == "will" then
-		
-		-- Called when the scene is on screen and is about to move off screen
-		--
-		-- INSERT code here to pause the scene
-		-- e.g. stop timers, stop animation, unload sounds, etc.)
 
 	elseif phase == "did" then
 		composer.removeScene("decorationD")
-
-		--[[if _decoFlag == 1 then
-			composer.setVariable("decoIndex", decoIndex)
-			print(decoIndex)
-			_decoFlag = 0
-		end]]
-
 	end
 end
 
 function scene:destroy( event )
 	local sceneGroup = self.view
 	
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
 
 ---------------------------------------------------------------------------------

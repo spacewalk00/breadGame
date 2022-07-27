@@ -89,9 +89,7 @@ function scene:create( event )
 	
 	local store = display.newImageRect("Content/images/store.png", 200, 200)
 	store.x, store.y = display.contentWidth*0.15, display.contentHeight*0.04
-	--local storeText = display.newText("상점", display.contentWidth*0.28, display.contentHeight*0.05, "Content/font/ONE Mobile POP.ttf")
-	--storeText:setFillColor(0)
-	--storeText.size = 70
+
 	local storeText = display.newImage("Content/images/text_store2.png")
 	storeText.x, storeText.y = display.contentWidth*0.28, display.contentHeight*0.05
 
@@ -107,8 +105,6 @@ function scene:create( event )
 	productType.x, productType.y = display.contentWidth*0.5, display.contentHeight*0.12
 
 	local choiceMark = display.newImage("Content/images/chosen.png")
-	--choiceMark.x, choiceMark.y = display.contentWidth*0.5, display.contentHeight*0.14
-	--choiceMark.x, choiceMark.y = display.contentWidth*0.8, display.contentHeight*0.14
 	choiceMark.x, choiceMark.y = display.contentWidth*0.2, display.contentHeight*0.14
 
 	local ingredientBtn = display.newRect(display.contentWidth*0.2, display.contentHeight*0.12, 280, 150)
@@ -143,7 +139,6 @@ function scene:create( event )
 	topGroup:insert(wallBtn)
 	topGroup:insert(wallText)	
 
-	--ingredientBtn:addEventListener("tap", gotoi)
 	decoBtn:addEventListener("tap", gotod)
 	wallBtn:addEventListener("tap", gotow)
 
@@ -271,8 +266,6 @@ function scene:create( event )
 		local close = display.newImage(popGroup, "Content/images/close.png")
 		close.x, close.y = display.contentWidth*0.9, display.contentHeight*0.35
 
-		--popGroup:toFront()
-
 	 	--------------------------------버튼, x 탭 (팝업창 내리기)---------------------------------------------------
 		local function tapListener( event )
 	    	print("탭탭탭")
@@ -308,8 +301,6 @@ function scene:create( event )
 	    end
 	    buyingBar:addEventListener("tap", consume)
 	    close:addEventListener("tap", tapListener)
-
-	    ------------------------------------------------------------------------------------------------------------
 	end
 	
 	p_pic[i]:addEventListener("tap", pop)
@@ -344,15 +335,8 @@ function scene:show( event )
 	local phase = event.phase
 	
 	if phase == "will" then
-		--  coins:removeSelf()
-		-- Called when the scene is still off screen and is about to move on screen
 	elseif phase == "did" then
 		printAllCnt()
-
-		-- Called when the scene is now on screen
-		-- 
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
 	end	
 end
 
@@ -361,23 +345,13 @@ function scene:hide( event )
 	local phase = event.phase
 	
 	if event.phase == "will" then
-		-- Called when the scene is on screen and is about to move off screen
-		--
-		-- INSERT code here to pause the scene
-		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
 		deleteAllCnt()
-		-- Called when the scene is now off screen
 	end
 end
 
 function scene:destroy( event )
 	local sceneGroup = self.view
-	
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
 
 ---------------------------------------------------------------------------------
