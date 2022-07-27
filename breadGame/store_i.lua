@@ -200,7 +200,12 @@ function scene:create( event )
 			align = "left"
 		}
 		ingreInfo[i] = display.newText(sentenceOptions)
+		--임시 코드 --
+		if i ~= 1 then
 		ingreInfo[i]:setFillColor(0)
+		else
+		ingreInfo[i]:setFillColor(0.5)
+		end 
 		ingreGroup:insert(ingreInfo[i])
 
 	listGroup:insert(background2)
@@ -267,6 +272,8 @@ function scene:create( event )
 	    end
 
 	    local function consume( event )
+	    	-- 반죽은 막아놓음 --
+	    	if i ~= 1 then
 	    	if( coinNum >= ingredients[i].price) then
 	    	coinNum = coinNum - ingredients[i].price
 	    	
@@ -287,6 +294,7 @@ function scene:create( event )
 			-- 
 			popGroup:removeSelf()
 			darkening:removeSelf()
+			end
 	    end
 	    buyingBar:addEventListener("tap", consume)
 	    close:addEventListener("tap", tapListener)

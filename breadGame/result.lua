@@ -115,7 +115,11 @@ function scene:create( event )
 	expDisplay:setFillColor(0)
 	expDisplay.size = 50
 	
-	expHint = display.newText(1000*levelNum.."이 넘으면 레벨업!", display.contentWidth*0.555, display.contentHeight*0.07, "Content/font/ONE Mobile POP.ttf")
+	if levelNum < 10 and levelNum >= 0 then
+	expHint = display.newText(expList[levelNum+1].."이 넘으면 레벨업!", display.contentWidth*0.555, display.contentHeight*0.07, "Content/font/ONE Mobile POP.ttf")
+	else
+	expHint = display.newText("최고레벨입니다.", display.contentWidth*0.555, display.contentHeight*0.07, "Content/font/ONE Mobile POP.ttf")
+	end
 	expHint:setFillColor(0.2)
 	expHint.size = 35
 	--
@@ -225,7 +229,8 @@ function scene:show( event )
 		sentence = Data[syrub+1].breads[ingredient+1].sentence
 
 		-- new 빵은 new 그림--
-		if(breadsCnt[syrub+1][ingredient+1] == 0 and syrub >= 0 and ingredient >=0) then
+		if syrub >= 0 and ingredient >=0 and openBread[syrub+1][ingredient+1] == 0 then
+			--breadsCnt[syrub+1][ingredient+1] == 0 and syrub >= 0 and ingredient >=0) then
 			newFlag = 1
 		end
 		-- 빵 Cnt 증가 --
@@ -392,11 +397,11 @@ function scene:show( event )
 
 	    		-- new일 때 코인 지급 -- 
 				if newFlag == 1 then
-					coinNum = coinNum + 1000
-					showCoin.text = coinNum
+					--coinNum = coinNum + 1000
+					--showCoin.text = coinNum
 
-					newFlag = 0
-					audio.play( soundTable["cashSound"] ,  {channel=4})
+					--newFlag = 0
+					--audio.play( soundTable["cashSound"] ,  {channel=4})
 				end
 	    	end
 

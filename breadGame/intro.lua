@@ -205,13 +205,24 @@ function scene:hide( event )
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 		exp = 0
-		levelNum = 1  
+		expList = { 0, 1000, 3000, 6000, 10000, 15000, 21000, 28000, 36000, 45000 }
+		levelNum = 1
 
 		levelFirstTime = {} -- 경험치가 처음으로 일정 수준을 넘었을 때만 레벨업을 주기 위함. --
 			function levelTimeReset() 
 				for i=2, 10 do
 		 		levelFirstTime[i] = 1 
 		 		end
+		 		--[[levelFirstTime[0] = 0
+		 		levelFirstTime[1] = 0
+		 		levelFirstTime[2] = 0
+		 		levelFirstTime[3] = 0
+		 		levelFirstTime[4] = 0
+		 		levelFirstTime[5] = 0
+		 		levelFirstTime[6] = 0
+		 		levelFirstTime[7] = 0
+		 		levelFirstTime[8] = 0
+		 		levelFirstTime[9] = 0]]
 		 	end
 		levelTimeReset() 
 

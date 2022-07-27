@@ -130,8 +130,9 @@ showLevel:setFillColor(1)
 
 function levelUp() --레벨업 --
 	print("레벨 몇이냐면..."..levelNum.."!!!!!!!")
+
 	for i=2, 10 do
-		if exp >= 1000 + (i-2)*1000 and levelFirstTime[i] == 1 then
+		if exp >= expList[i] and levelFirstTime[i] == 1 then
 			levelNum = i
 			if i == 10 then
 				coinNum = coinNum + 10000
@@ -143,7 +144,11 @@ function levelUp() --레벨업 --
 
 			showCoin.text = coinNum
 			showLevel.text = levelNum
-			expHint.text = 1000*levelNum.."이 넘으면 레벨업!"
+			if i ~= 10 then
+			expHint.text = expList[i+1] .."이 넘으면 레벨업!"
+			else
+			expHint.text = "최고레벨입니다"
+			end
 			break
 		end
 	end
@@ -175,7 +180,11 @@ function scene:create( event )
 	expDisplay:setFillColor(0)
 	expDisplay.size = 50
 	
-	expHint = display.newText(1000*levelNum.."이 넘으면 레벨업!", display.contentWidth*0.555, display.contentHeight*0.07, "Content/font/ONE Mobile POP.ttf")
+	if levelNum < 10 then
+	expHint = display.newText(expList[levelNum+1].."이 넘으면 레벨업!", display.contentWidth*0.555, display.contentHeight*0.07, "Content/font/ONE Mobile POP.ttf")
+	else
+	expHint = display.newText("최고레벨입니다.", display.contentWidth*0.555, display.contentHeight*0.07, "Content/font/ONE Mobile POP.ttf")
+	end
 	expHint:setFillColor(0.2)
 	expHint.size = 35
 	--

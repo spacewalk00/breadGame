@@ -47,8 +47,12 @@ function scene:create( event )
 	local expDisplay = display.newText("경험치: "..exp, display.contentWidth*0.555, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf")
 	expDisplay:setFillColor(0)
 	expDisplay.size = 50
-	
-	expHint = display.newText(1000*levelNum.."이 넘으면 레벨업!", display.contentWidth*0.555, display.contentHeight*0.07, "Content/font/ONE Mobile POP.ttf")
+
+	if levelNum < 10 and levelNum >= 0 then
+	expHint = display.newText(expList[levelNum+1].."이 넘으면 레벨업!", display.contentWidth*0.555, display.contentHeight*0.07, "Content/font/ONE Mobile POP.ttf")
+	else
+	expHint = display.newText("최고레벨입니다.", display.contentWidth*0.555, display.contentHeight*0.07, "Content/font/ONE Mobile POP.ttf")
+	end
 	expHint:setFillColor(0.2)
 	expHint.size = 35
 	--
