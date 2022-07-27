@@ -617,7 +617,7 @@ function scene:create( event )
 							-- 체크와 동시에 빵방에 삽입 --
 							image = info[index1].breads[index2].image
 							breadRoom_image[k] = display.newImageRect(breadOutGroup, "Content/images/"..image..".png", display.contentWidth*0.17, display.contentHeight*0.1)
-							breadRoom_image[k].x, breadRoom_image[k].y = math.random(display.contentWidth*0.088, display.contentWidth*0.915), math.random(display.contentHeight*0.26, display.contentHeight*0.93)
+							breadRoom_image[k].x, breadRoom_image[k].y = math.random(display.contentWidth*0.088, display.contentWidth*0.915), math.random(display.contentHeight*0.26, display.contentHeight*0.72)
 							breadRoom_image[k]:toBack()
 						
 							breadRoom_image[k].param12 = index1
