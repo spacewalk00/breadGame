@@ -92,28 +92,15 @@ function scene:create( event )
 	local loading = display.newImageRect("Content/image/loading.png", 300, 300)
 	loading.x, loading.y = display.contentWidth * 0.45, display.contentHeight * 0.86
 
-	--
-
-	--composer.gotoScene("result")
-	--[[	
 	-- 회전 넣기 --
-	loading.rotation = 0
-
-	local reverse = 1
-	local function rock()
-		if (reverse == 0) then
-			reverse = 1
-			transition.to(loading, {rotation=360, time=2000, transition=easing.inOutCubic })
-		else
-			reverse = 0
-			transition.to(loading, {rotation=-360, time=2000, transition=easing.inOutCubic })
-		end
+	local function rock1()
+		transition.to(loading, {rotation=-360, time=15000})
 	end
 	
-	timer.performWithDelay(900, rock, 1) -- repeat forever]]
+	timer.performWithDelay(900, rock1, 1)
 
 	--시간 카운트--
-	local limit = 3
+	local limit = 15
 	local showLimit = display.newText(limit, display.contentWidth*0.457, display.contentHeight*0.86, "Content/font/ONE Mobile POP.ttf")
 	showLimit:setFillColor(1)
 	showLimit.size = 100
