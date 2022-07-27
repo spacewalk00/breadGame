@@ -194,7 +194,11 @@ function scene:create( event )
 		else
 			breadName = display.newText(infoGroup, BreadJson.name, infoGround.x, infoGround.y*0.335, Font.font_POP, 70)
 		end
-		breadImage = display.newImageRect(infoGroup, "Content/images/"..BreadJson.image..".png",900,900)
+		if Index1 == 1 and Index2 == 1 then
+			breadImage = display.newImageRect(infoGroup, "Content/images/"..BreadJson.image..".png",700,700)
+		else
+			breadImage = display.newImageRect(infoGroup, "Content/images/"..BreadJson.image..".png",900,900)
+		end
 		breadImage.x, breadImage.y = infoGround.x, infoGround.y*0.8
 		breadSentence = display.newText(infoGroup, BreadJson.sentence, infoGround.x, infoGround.y*1.25, 950,350 ,Font.font_POP, 50)
 		breadSentence:setFillColor(0)	
