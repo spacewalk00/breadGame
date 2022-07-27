@@ -115,19 +115,19 @@ function scene:create( event )
 	ingredientBtn.alpha = 0.01
 	local ingredientText = display.newText("재료", display.contentWidth*0.2, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
 	ingredientText:setFillColor(0)
-	ingredientText.size = 60
+	ingredientText.size = 70
 
 	local decoBtn = display.newRect(display.contentWidth*0.5, display.contentHeight*0.12, 280, 150)
 	decoBtn:setFillColor(0)
 	decoBtn.alpha = 0.01
 	local decoText = display.newText("장식", display.contentWidth*0.5, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	decoText.size = 60
+	decoText.size = 70
 
 	local wallBtn = display.newRect(display.contentWidth*0.8, display.contentHeight*0.12, 280, 150)
 	wallBtn:setFillColor(0)
 	wallBtn.alpha = 0.01
 	local wallText = display.newText("카펫", display.contentWidth*0.8, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	wallText.size = 60
+	wallText.size = 70
 	
 	topGroup:insert(background)
 	topGroup:insert(store)
@@ -143,7 +143,7 @@ function scene:create( event )
 	topGroup:insert(wallBtn)
 	topGroup:insert(wallText)	
 
-	ingredientBtn:addEventListener("tap", gotoi)
+	--ingredientBtn:addEventListener("tap", gotoi)
 	decoBtn:addEventListener("tap", gotod)
 	wallBtn:addEventListener("tap", gotow)
 
@@ -168,8 +168,14 @@ function scene:create( event )
 		product_bar[i].x, product_bar[i].y = display.contentWidth*0.5, display.contentHeight*(0.06+0.13* (i-2))
 		p_pic_bar[i] = display.newImage(ingreGroup, "Content/images/syrup_bar.png")
 	    p_pic_bar[i].x, p_pic_bar[i].y = display.contentWidth*0.22, display.contentHeight*(0.06+0.13* (i-2))
+
 	    p_pic[i] = display.newImage(ingreGroup, ingredients[i].image)
-		p_pic[i].x, p_pic[i].y = display.contentWidth*0.22, display.contentHeight*(0.06+0.13* (i-2))
+
+		if ingredients[i].name == "초코 시럽" then
+		 p_pic[i].x, p_pic[i].y = display.contentWidth*0.235, display.contentHeight*(0.06+0.13* (i-2))
+		else 
+		 p_pic[i].x, p_pic[i].y = display.contentWidth*0.22, display.contentHeight*(0.06+0.13* (i-2))
+		end
 		p_pic[i].name = i
 
 		displayIngreCnt(i)
@@ -232,7 +238,11 @@ function scene:create( event )
 		pictureBar.x, pictureBar.y = display.contentWidth*0.25, display.contentHeight*0.5
 
 		local picture = display.newImage(popGroup, ingredients[i].image)
+		if ingredients[i].name == "초코 시럽" then
+		picture.x, picture.y = display.contentWidth*0.265, display.contentHeight*0.5
+		else 
 		picture.x, picture.y = display.contentWidth*0.25, display.contentHeight*0.5
+		end
 
 		local popTextOptions = 
 		{

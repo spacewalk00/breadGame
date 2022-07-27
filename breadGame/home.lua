@@ -219,8 +219,8 @@ function scene:create( event )
 	local text_success = display.newImage("Content/images/text_acheivements.png")
 	text_success.x, text_success.y = display.contentWidth*0.77, display.contentHeight*0.155
 
-	local breadRoom = display.newImageRect("Content/images/breadRoom.png", 170, 170)
-	breadRoom.x, breadRoom.y = display.contentWidth*0.92, display.contentHeight*0.135
+	local breadRoom = display.newImageRect("Content/images/breadRoom2.png", 130, 90)
+	breadRoom.x, breadRoom.y = display.contentWidth*0.92, display.contentHeight*0.13
 	local s_breadRoom = display.newImage("Content/images/shadow.png")
 	s_breadRoom.x, s_breadRoom.y = display.contentWidth*0.92, display.contentHeight*0.13
 	local text_breadRoom = display.newImage("Content/images/text_breadRoom.png")

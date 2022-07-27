@@ -102,18 +102,18 @@ function scene:create( event )
 	local ingredientBtn = display.newRect(display.contentWidth*0.2, display.contentHeight*0.12, 280, 150)
 	ingredientBtn.alpha = 0.01
 	local ingredientText = display.newText("재료", display.contentWidth*0.2, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	ingredientText.size = 60
+	ingredientText.size = 70
 
 	local decoBtn = display.newRect(display.contentWidth*0.5, display.contentHeight*0.12, 280, 150)
 	decoBtn.alpha = 0.01
 	local decoText = display.newText("장식", display.contentWidth*0.5, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	decoText.size = 60
+	decoText.size = 70
 
 	local wallBtn = display.newRect(display.contentWidth*0.8, display.contentHeight*0.12, 280, 150)
 	wallBtn.alpha = 0.01
 	local wallText = display.newText("카펫", display.contentWidth*0.8, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
 	wallText:setFillColor(0)
-	wallText.size = 60
+	wallText.size = 70
 	
 	topGroup:insert(background)
 	topGroup:insert(store)
@@ -132,7 +132,7 @@ function scene:create( event )
 
 	ingredientBtn:addEventListener("tap", gotoi)
 	decoBtn:addEventListener("tap", gotod)
-	wallBtn:addEventListener("tap", gotow)
+	--wallBtn:addEventListener("tap", gotow)
 
 
 	
