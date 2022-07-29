@@ -134,11 +134,12 @@ function levelUp() --레벨업 --
 
 			showCoin.text = coinNum
 			showLevel.text = levelNum
+			--[[
 			if i ~= 10 then
 			expHint.text = expList[i+1] .."이 넘으면 레벨업!"
 			else
 			expHint.text = "최고레벨입니다"
-			end
+			end]]
 			break
 		end
 	end

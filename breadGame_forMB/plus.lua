@@ -103,7 +103,7 @@ function scene:create( event )
 	timer.performWithDelay(900, rock1, 1)
 
 	--시간 카운트--
-	local limit = 15
+	local limit = 3
 	local showLimit = display.newText(limit, display.contentWidth*0.457, display.contentHeight*0.86, "Content/font/ONE Mobile POP.ttf")
 	showLimit:setFillColor(1)
 	showLimit.size = 100
