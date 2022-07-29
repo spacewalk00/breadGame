@@ -105,8 +105,7 @@ function scene:create( event )
 		
 	showCoin.isVisible = true
 	showCoin.x, showCoin.y = display.contentWidth*0.5748, display.contentHeight*0.05
-	showCoin:setFillColor(1)
-
+	
 	-- 다른 페이지 넘어가는 아이콘 및 회색 배경 --
 	gray_upperLeft = display.newImageRect("Content/images/gray.png", display.contentWidth*0.13, display.contentHeight*0.07)
 	gray_upperLeft.x, gray_upperLeft.y = display.contentWidth*0.73, display.contentHeight*0.06
