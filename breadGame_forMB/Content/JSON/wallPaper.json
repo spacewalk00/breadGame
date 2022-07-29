@@ -31,15 +31,15 @@
 	// 업적 보상
 	{
 		"price": 0,
-		"name": "빵 카펫",
-		"image": "Content/images/syrup.png",
-		"sentence" : "빵처럼 생겼다.\n귀엽고 보들보들하다.",
-		"image2": "Content/images/carpet_bread.png"
+		"name": "빅토리아풍 카펫",
+		"image": "Content/images/carpet_vic2.png",
+		"sentence" : "빅토리아풍 카펫이다.\n화려함에 빠져들 것 같다.",
+		"image2": "Content/images/carpet_vic.png"
 	},
 	{
 		"price": 0,
 		"name": "폭탄모양 카펫",
-		"image": "Content/images/syrup.png",
+		"image": "Content/images/carpet_bomb2.png",
 		"sentence" : "폭탄처럼 생겼다.\n잘못하면 터질 것 같다.",
 		"image2": "Content/images/carpet_bomb.png"
 	}
