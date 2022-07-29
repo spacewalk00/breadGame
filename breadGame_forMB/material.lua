@@ -74,10 +74,10 @@ function scene:create( event )
 	local box2 = display.newImage("Content/image/box2.png", display.contentWidth*0.495, display.contentHeight*0.489)
 
 	--치즈--
-	local cheese = display.newImage("Content/image/cheese_btn.png", display.contentWidth * 0.2, display.contentHeight * 0.623)
+	local cheese = display.newImage("Content/image/cheese_btn.png", display.contentWidth * 0.425, display.contentHeight * 0.624)
 	--cheese.x, cheese.y = display.contentWidth * 0.2, display.contentHeight * 2.31
 
-	local function cheese_button( event )
+	local function cheese_button( event ) 
  		ingredient = 4
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
@@ -96,10 +96,10 @@ function scene:create( event )
 	cheese:addEventListener( "touch", cheese_button )
 
 	--팥--
-	local bean = display.newImage("Content/image/bean_btn.png", display.contentWidth * 0.26, display.contentHeight * 0.623)
+	local bean = display.newImage("Content/image/bean_btn.png", display.contentWidth * 0.365, display.contentHeight * 0.624)
 	--bean.x, bean.y = display.contentWidth * 0.26, display.contentHeight * 2.308
 
-	local function bean_button( event )
+	local function bean_button( event ) 
  		ingredient = 3
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
@@ -118,10 +118,10 @@ function scene:create( event )
 	bean:addEventListener( "touch", bean_button )
 
 	--옥수수--
-	local corn = display.newImage("Content/image/corn_btn.png", display.contentWidth * 0.33, display.contentHeight * 0.623)
+	local corn = display.newImage("Content/image/corn_btn.png", display.contentWidth * 0.51, display.contentHeight * 0.623)
 	--corn.x, corn.y = display.contentWidth * 0.335, display.contentHeight * 2.3
 
-	local function corn_button( event )
+	local function corn_button( event ) 
  		ingredient = 5 
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
@@ -140,10 +140,10 @@ function scene:create( event )
 	corn:addEventListener( "touch", corn_button )
 
 	--슈가파우더--
-	local sugarpowder = display.newImage("Content/image/sugarpowder_btn.png", display.contentWidth * 0.45, display.contentHeight * 0.625)
+	local sugarpowder = display.newImage("Content/image/sugarpowder_btn.png", display.contentWidth * 0.77, display.contentHeight * 0.625)
 	--sugarpowder.x, sugarpowder.y = display.contentWidth * 0.45, display.contentHeight * 2.33
 
-	local function sugarpowder_button( event )
+	local function sugarpowder_button( event ) 
  		ingredient = 7
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
@@ -162,10 +162,10 @@ function scene:create( event )
 	sugarpowder:addEventListener( "touch", sugarpowder_button )
 
 	--소세지--
-	local sausage = display.newImage("Content/image/sausage_btn.png", display.contentWidth * 0.558, display.contentHeight * 0.624)
+	local sausage = display.newImage("Content/image/sausage_btn.png", display.contentWidth * 0.29, display.contentHeight * 0.624)
 	--sausage.x, sausage.y = display.contentWidth * 0.557, display.contentHeight * 2.31
 
-	local function sausage_button( event )
+	local function sausage_button( event ) 
  		ingredient = 2
  
 	    if ( event.phase == "began" ) then
@@ -185,7 +185,7 @@ function scene:create( event )
 	sausage:addEventListener( "touch", sausage_button )
 
 	--반짝이--
-	local glitter = display.newImage("Content/image/glitter_btn.png",  display.contentWidth * 0.65, display.contentHeight * 0.624)
+	local glitter = display.newImage("Content/image/glitter_btn.png",  display.contentWidth * 0.2, display.contentHeight * 0.624)
 	--glitter.x, glitter.y = display.contentWidth * 0.656, display.contentHeight * 2.31
 
 	local function glitter_button( event ) 
@@ -208,10 +208,10 @@ function scene:create( event )
 	glitter:addEventListener( "touch", glitter_button )
 
 	--오레오파우더--
-	local oreopowder = display.newImage("Content/image/oreopowder_btn.png", display.contentWidth * 0.77, display.contentHeight * 0.622)
+	local oreopowder = display.newImage("Content/image/oreopowder_btn.png", display.contentWidth * 0.63, display.contentHeight * 0.622)
 	--oreopowder.x, oreopowder.y = display.contentWidth * 0.77, display.contentHeight * 2.27
 
-	local function oreopowder_button( event )
+	local function oreopowder_button( event ) 
  		ingredient = 6
 	    if ( event.phase == "began" ) then
 	    	display.remove( material_image )
