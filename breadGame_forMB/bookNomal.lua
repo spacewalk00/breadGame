@@ -223,6 +223,7 @@ function scene:create( event )
 		composer.removeScene("bookMain")
 		---------showCoin 관련 수정
 		showCoin.isVisible = true
+		showCoin.x, showCoin.y = display.contentWidth*0.545, display.contentHeight*0.04
 		showCoin.text = coinNum
 		composer.gotoScene( "home" )
 	end
