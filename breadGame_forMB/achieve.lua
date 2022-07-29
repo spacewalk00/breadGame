@@ -412,8 +412,14 @@ function scene:create( event )
 					priceText[i][j].text = price[i][j]							--보상 표시
 					if type(price[i][j]) ~= "number" then						--보상이 돈이 아니면
 						--priceImg[i][j].isVisible = false							--동전 이미지 숨기기
-						priceText[i][j].x = priceText[i][j].x + 8				--보상 글 위치 더 옆으로
-						priceText[i][j].size = 35								--글씨 더 크게
+						priceText[i][j].x = priceText[i][j].x + 6				--보상 글 위치 더 옆으로
+						priceText[i][j].size = 34								--글씨 더 크게
+					end
+					if type(price[i][j]) == "number" then
+						if price[i][j] >= 10000 then
+							priceImg[i][j].x = priceImg[i][j].x - 7
+							priceText[i][j].x = priceText[i][j].x + 4
+						end
 					end
 					local function catch(event)									--보상 클릭 시
 						--audio.play(SE2, {channel=7})

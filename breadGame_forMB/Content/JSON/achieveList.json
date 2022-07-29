@@ -28,9 +28,7 @@
 		"priceImg3" : "Content/images/업적/coin.png",
 		"priceImg4" : "Content/images/업적/coin.png",
 		"price" : " ",
-		//"price1" : 5000
 		"price1" : "시럽 3종"
-		//"price1" : "재료 7종"
 
 	},
 	//제빵사
@@ -48,7 +46,7 @@
 		"info3" : "빵 80개를 성공적으로 구웠다.",
 		"info4" : "빵 150개를 성공적으로 구웠다.",
 		"bubble_pink1" : "Content/images/업적/pink_bubble.png",
-		"bubble_pink2" : "Content/images/업적/pink_bubble.png",
+		"bubble_pink2" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_pink3" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_pink4" : "Content/images/업적/pink_bubble.png",
 		"bubble_white" : "Content/images/업적/white_bubble.png",
@@ -68,9 +66,9 @@
 		"priceImg3" : "Content/images/업적/coin.png",
 		"priceImg4" : "Content/images/업적/carpet.png",
 		"price" : " ",
-		"price1" : 2500,
-		"price2" : 5000,
-		"price3" : 10000,
+		"price1" : 5000,
+		"price2" : 10000,
+		"price3" : 15000,
 		//"price4" : 15000
 		"price4" : "카펫"
 	},
@@ -116,8 +114,8 @@
 		"titleImg1" : "Content/images/업적/red_title.png",
 		"titleImg2" : "Content/images/업적/blue_title.png",
 		"info" : "  ",
-		"info1" : "연속으로 폭탄빵이 5번 등장했다.",
-		"info2" : "연속으로 폭탄빵이 10번 등장했다.",
+		"info1" : "연속으로 폭탄빵이 3번 등장했다.",
+		"info2" : "연속으로 폭탄빵이 5번 등장했다.",
 		"bubble_pink1" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_pink2" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_pink3" : "Content/images/업적/pink_bubble.png",
@@ -130,8 +128,8 @@
 		"cat4" : "Content/images/업적/cat1.png",
 		"catHide" : "Content/images/업적/cat4.png",
 		"cntB" : "??",
-		"cntB1" : "/  5",
-		"cntB2" : "/  10",
+		"cntB1" : "/  3",
+		"cntB2" : "/  5",
 		"cntB3" : "/",
 		"cntB4" : "/",
 		"priceImg1" : "Content/images/업적/syrupImg.png",
@@ -139,8 +137,6 @@
 		"priceImg3" : "Content/images/업적/coin.png",
 		"priceImg4" : "Content/images/업적/coin.png",
 		"price" : " ",
-		//"price1" : 2000,
-		//"price2" : 4000
 		"price1" : "시럽 3종",
 		"price2" : "재료 7종"
 	},
@@ -155,9 +151,9 @@
 		"titleImg2" : "Content/images/업적/blue_title.png",
 		"info" : "  ",
 		"info1" : "폭탄빵을 최초로 제작했다.",
-		"info2" : "폭탄빵을 20개 제작했다.",
-		"info3" : "폭탄빵을 50개 제작했다.",
-		"info4" : "폭탄빵을 100개 제작했다.",
+		"info2" : "폭탄빵을 5개 제작했다.",
+		"info3" : "폭탄빵을 10개 제작했다.",
+		"info4" : "폭탄빵을 15개 제작했다.",
 		"bubble_pink1" : "Content/images/업적/pink_bubble.png",
 		"bubble_pink2" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_pink3" : "Content/images/업적/Lpink_bubble.png",
@@ -171,18 +167,17 @@
 		"catHide" : "Content/images/업적/cat4.png",
 		"cntB" : "??",
 		"cntB1" : "/  1",
-		"cntB2" : "/  20",
-		"cntB3" : "/  50",
-		"cntB4" : "/  100",
+		"cntB2" : "/  5",
+		"cntB3" : "/  10",
+		"cntB4" : "/  15",
 		"priceImg1" : "Content/images/업적/coin.png",
 		"priceImg2" : "Content/images/업적/coin.png",
 		"priceImg3" : "Content/images/업적/coin.png",
 		"priceImg4" : "Content/images/업적/carpet.png",
 		"price" : " ",
-		"price1" : 1000,
+		"price1" : 5000,
 		"price2" : 10000,
 		"price3" : 15000,
-		//"price4" : 20000
 		"price4" : "카펫"
 	},
 	//도감 개수
@@ -200,7 +195,7 @@
 		"info3" : "도감에 빵을 31개 등록했다.",
 		"info4" : "도감에 빵을 63개 등록했다.",
 		"bubble_pink1" : "Content/images/업적/pink_bubble.png",
-		"bubble_pink2" : "Content/images/업적/pink_bubble.png",
+		"bubble_pink2" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_pink3" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_pink4" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_white" : "Content/images/업적/white_bubble.png",
@@ -220,8 +215,8 @@
 		"priceImg3" : "Content/images/업적/coin.png",
 		"priceImg4" : "Content/images/업적/coin.png",
 		"price" : " ",
-		"price1" : 1000,
-		"price2" : 5000,
+		"price1" : 5000,
+		"price2" : 10000,
 		"price3" : 15000,
 		"price4" : 20000
 	},
@@ -238,7 +233,7 @@
 		"info2" : "빵 방에 빵 5개를 장식했다.",
 		"info3" : "빵 방에 빵 15개를 장식했다.",
 		"bubble_pink1" : "Content/images/업적/pink_bubble.png",
-		"bubble_pink2" : "Content/images/업적/pink_bubble.png",
+		"bubble_pink2" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_pink3" : "Content/images/업적/Lpink_bubble.png",
 		"bubble_pink4" : "Content/images/업적/pink_bubble.png",
 		"bubble_white" : "Content/images/업적/white_bubble.png",
@@ -258,8 +253,8 @@
 		"priceImg3" : "Content/images/업적/coin.png",
 		"priceImg4" : "Content/images/업적/coin.png",
 		"price" : " ",
-		"price1" : 1000,
-		"price2" : 2500,
-		"price3" : 10000
+		"price1" : 5000,
+		"price2" : 10000,
+		"price3" : 15000
 	}
 ]

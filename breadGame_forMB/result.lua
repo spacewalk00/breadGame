@@ -183,10 +183,10 @@ function scene:show( event )
 			---업적 관련
 			bomb_count = bomb_count + 1 				--실패빵 제작 개수
 			breadBomb_count = breadBomb_count + 1 		--실패빵 연속 제작 개수
-			if breadBomb_count == 5 then
+			if breadBomb_count == 3 then
 				quest_clear[4][1] = 1 
 			end
-			if breadBomb_count == 10 then 
+			if breadBomb_count == 5 then 
 				quest_clear[4][2] = 1
 			end
 			breadNormal_count = 0 						--연속 일반빵 제작 개수
