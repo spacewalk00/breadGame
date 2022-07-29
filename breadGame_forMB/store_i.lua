@@ -165,12 +165,9 @@ function scene:create( event )
 	    p_pic_bar[i].x, p_pic_bar[i].y = display.contentWidth*0.22, display.contentHeight*(0.06+0.13* (i-2))
 
 	    p_pic[i] = display.newImage(ingreGroup, ingredients[i].image)
-
-		if ingredients[i].name == "초코 시럽" then
-		 p_pic[i].x, p_pic[i].y = display.contentWidth*0.235, display.contentHeight*(0.06+0.13* (i-2))
-		else 
-		 p_pic[i].x, p_pic[i].y = display.contentWidth*0.22, display.contentHeight*(0.06+0.13* (i-2))
-		end
+		 
+		p_pic[i].x, p_pic[i].y = display.contentWidth*0.22, display.contentHeight*(0.06+0.13* (i-2))
+		
 		p_pic[i].name = i
 
 		displayIngreCnt(i)
@@ -233,11 +230,7 @@ function scene:create( event )
 		pictureBar.x, pictureBar.y = display.contentWidth*0.25, display.contentHeight*0.5
 
 		local picture = display.newImage(popGroup, ingredients[i].image)
-		if ingredients[i].name == "초코 시럽" then
-		picture.x, picture.y = display.contentWidth*0.265, display.contentHeight*0.5
-		else 
 		picture.x, picture.y = display.contentWidth*0.25, display.contentHeight*0.5
-		end
 
 		local popTextOptions = 
 		{

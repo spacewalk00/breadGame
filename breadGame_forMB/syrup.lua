@@ -99,7 +99,7 @@ function scene:create( event )
 		print("바닐라"..syrub)
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
-	   		syrup_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.49, display.contentHeight*0.525)
+	   		syrup_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.495, display.contentHeight*0.517)
 	    	display.remove(syrup_cnt)
 	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[4], display.contentWidth * 0.53, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
 			syrup_cnt:setFillColor(0)
@@ -121,7 +121,7 @@ function scene:create( event )
  		syrub = 1
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
-	   		syrup_image = display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.509, display.contentHeight*0.526)
+	   		syrup_image = display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.495, display.contentHeight*0.517)
 	    	display.remove(syrup_cnt)
 	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[2], display.contentWidth * 0.53, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
 			syrup_cnt:setFillColor(0)
@@ -143,7 +143,7 @@ function scene:create( event )
  		syrub = 2
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
-	   		syrup_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.518)
+	   		syrup_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.517)
 	    	display.remove(syrup_cnt)
 	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[3], display.contentWidth * 0.53, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
 			syrup_cnt:setFillColor(0)

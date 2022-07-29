@@ -37,19 +37,19 @@ function scene:create( event )
 ]]
 	--미리 정한 시럽 가져오기--
 	if s == 1 then 
-		s_image =  display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.509, display.contentHeight*0.526)
+		s_image =  display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.495, display.contentHeight*0.517)
 		s_text = display.newText("초코 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "Content/font/ONE Mobile POP.ttf", 33.5)
 		s_text:setFillColor(0)
 	    s_cnt = display.newText("보유 개수 : "..ingreCnt[2], display.contentWidth * 0.53, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
 		s_cnt:setFillColor(0)
 	elseif s == 2 then 
-		s_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.518)
+		s_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.517)
 		s_text = display.newText("딸기 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "Content/font/ONE Mobile POP.ttf", 33.5)
 		s_text:setFillColor(0)
 	    s_cnt = display.newText("보유 개수 : "..ingreCnt[3], display.contentWidth * 0.53, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
 		s_cnt:setFillColor(0)
 	elseif s == 3 then 
-		s_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.49, display.contentHeight*0.525)
+		s_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.495, display.contentHeight*0.517)
 		s_text = display.newText("바닐라 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "Content/font/ONE Mobile POP.ttf", 33.5)
 		s_text:setFillColor(0)
 	    s_cnt = display.newText("보유 개수 : "..ingreCnt[4], display.contentWidth * 0.53, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
