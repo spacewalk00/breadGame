@@ -3,7 +3,6 @@
 -- bookMain.lua
 --
 -----------------------------------------------------------------------------------------
---coinNum = 10000
 
 local composer = require( "composer" )
 local scene = composer.newScene()
@@ -13,38 +12,17 @@ json = require('json')
 
 function parseBreadInfo()
 	local filename = system.pathForFile("Content/JSON/breadInfo.json")
-	Data, pos, msg = json.decodeFile(filename)
+	Data = json.decodeFile(filename)
 end
+
 -- BreadInfo는 Data
 function parseUBreadInfo()
 	local filename = system.pathForFile("Content/JSON/ubreadInfo.json")
-	UBreadInfo, pos, msg = json.decodeFile(filename)
-	-- 디버그
-	if UBreadInfo then
-		print(UBreadInfo[1].breads[1].name)
-	else
-		print(pos)
-		print(msg)
-	end
+	UBreadInfo= json.decodeFile(filename)
 end
 parseUBreadInfo()
 parseBreadInfo()
 
--- 빵의 개수 --breadsCnt
---[[breadsCnt = { {1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0}, 
-				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} 		}
-UbreadsCnt = { {1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0}, 
-				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} 		}
-
--- 새빵 (미해금0 , 해금 -1, 확인했음 1로 변화)
-openBread = { {-1, 1, 1, 1, -1, 1, 1, 1}, {-1, 0, 0, 0, 0, 0, 0, 0}, 
-				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} }
-openUBread = { {1, 1, 1, 1, 1, 1, 1, 1}, {0, 0, 0, 0, 0, 0, 0, 0}, 
-				{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0} }	
-
--- 빵레벨
-Bread_level = { {1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0}, 
-				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} }	]]
 
 -- 폰트
 Font = { 	
@@ -53,7 +31,7 @@ Font = {
 BackGround = display.newImage("Content/images/main_background.png")
 BackGround.x, BackGround.y = display.contentWidth/2, display.contentHeight/2
 
---audio.play(soundTable["backgroundMusic"], { loops = 3 })
+audio.play(soundTable["backgroundMusic"], { loops = 3 })
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -95,7 +73,6 @@ function scene:create( event )
 	        width = 1440,
 	        height = 2300,
 	        backgroundColor = { 1, 1, 1, 0 }
-	        --backgroundColor = { 0.894, 0.772, 0.713 }
 		}
 	)
 
@@ -284,6 +261,7 @@ function scene:create( event )
 		composer.removeScene("bookMain")
 		---------showCoin 관련 수정
 		showCoin.isVisible = true
+		showCoin.x, showCoin.y = display.contentWidth*0.545, display.contentHeight*0.04
 		showCoin.text = coinNum
 		composer.gotoScene( "home" )
 	end
@@ -331,12 +309,7 @@ function scene:show( event )
 	local phase = event.phase
 	
 	if phase == "will" then
-		-- Called when the scene is still off screen and is about to move on screen
 	elseif phase == "did" then
-		-- Called when the scene is now on screen
-		-- 
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
 	end	
 end
 
@@ -345,22 +318,12 @@ function scene:hide( event )
 	local phase = event.phase
 	
 	if event.phase == "will" then
-		-- Called when the scene is on screen and is about to move off screen
-		--
-		-- INSERT code here to pause the scene
-		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
-		-- Called when the scene is now off screen
 	end
 end
 
 function scene:destroy( event )
 	local sceneGroup = self.view
-	
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
 
 ---------------------------------------------------------------------------------
