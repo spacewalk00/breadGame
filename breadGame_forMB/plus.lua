@@ -72,24 +72,11 @@ function scene:create( event )
 	s_breadRoom.x, s_breadRoom.y = display.contentWidth*0.92, display.contentHeight*0.13
 	local text_breadRoom = display.newImage("Content/images/text_breadRoom.png")
 	text_breadRoom.x, text_breadRoom.y = display.contentWidth*0.92, display.contentHeight*0.155
-	
-	
-	book:addEventListener("tap", moveToBook)
-	breadRoom:addEventListener("tap", moveToBreadRoom)
 
 
 	--재료 추가 버튼--
 	local material_button = display.newImage("Content/image/material_button.png", display.contentWidth, display.contentHeight)
 	material_button.x, material_button.y = display.contentWidth * 0.138, display.contentHeight * 0.444
-
-	local function plus( event )
- 
-	    if ( event.phase == "began" ) then
-	        composer.gotoScene("syrup")
-		end
-	end
-	material_button:addEventListener("touch", plus)
-
 
 	-- 로딩 아이콘 --
 	local loading = display.newImageRect("Content/image/loading.png", 300, 300)
