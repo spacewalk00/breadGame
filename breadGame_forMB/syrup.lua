@@ -90,11 +90,11 @@ function scene:create( event )
 	material_box:addEventListener("touch", myTouchListener)
 
 	--바닐라 시럽--
-	vanilla = display.newImage("Content/image/vanilla.png", display.contentWidth * 0.37, display.contentHeight * 0.624)
+	vanilla = display.newImage("Content/image/vanilla.png", display.contentWidth * 0.63, display.contentHeight * 0.624)
 	--vanilla.fill.effect = "filter.brightness"
 	--vanilla.fill.effect.intensity = 0.4
 
-	local function vinailla_button( event )
+	local function vinailla_button( event ) 
  		syrub = 3
 		print("바닐라"..syrub)
 	    if ( event.phase == "began" ) then
@@ -114,10 +114,10 @@ function scene:create( event )
 	vanilla:addEventListener( "touch", vinailla_button )
 
 	--초코 시럽--
-	choco = display.newImage("Content/image/choco.png", display.contentWidth * 0.51, display.contentHeight * 0.624)
+	choco = display.newImage("Content/image/choco.png", display.contentWidth * 0.35, display.contentHeight * 0.624)
 	--hoco.x, choco.y = display.contentWidth * 0.505, display.contentHeight * 2.31
 
-	local function choco_button( event )
+	local function choco_button( event ) 
  		syrub = 1
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
@@ -136,10 +136,10 @@ function scene:create( event )
 	choco:addEventListener( "touch", choco_button )
 
 	--딸기 시럽--
-	strawberry = display.newImage("Content/image/strawberry.png", display.contentWidth * 0.63, display.contentHeight * 0.623)
+	strawberry = display.newImage("Content/image/strawberry.png", display.contentWidth * 0.48, display.contentHeight * 0.623)
 	--strawberry.x, strawberry.y = display.contentWidth * 0.63, display.contentHeight * 2.29
 
-	local function strawberry_button( event )
+	local function strawberry_button( event ) 
  		syrub = 2
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
