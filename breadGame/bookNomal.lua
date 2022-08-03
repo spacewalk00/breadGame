@@ -121,8 +121,8 @@ function scene:create( event )
 			lock = 0
 			lock = openBread[index1][index2]
 			-- print(js[index1].breads[index2].image.."는 해금?"..jsc[index1][index2])
-			Bimage = Data[index1].breads[index2].image
-			Bname = Data[index1].breads[index2].name
+			Bimage = BreadInfo[index1].breads[index2].image
+			Bname = BreadInfo[index1].breads[index2].name
 			if i % 3 == 1 then
 				jul = jul + 0.33
 			end

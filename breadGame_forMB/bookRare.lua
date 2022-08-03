@@ -14,8 +14,6 @@ parseUBreadInfo()
 BackGround = display.newImage("Content/images/main_background.png")
 BackGround.x, BackGround.y = display.contentWidth/2, display.contentHeight/2
 
---audio.play(soundTable["backgroundMusic"], { loops = 3 })
-
 function scene:create( event )
 	local sceneGroup = self.view
 
@@ -55,7 +53,7 @@ function scene:create( event )
 	        top = 0,
 	        width = 1440,
 	        height = 2560,
-	        backgroundColor = { 0.894, 0.772, 0.713 }
+	        backgroundColor = { 1, 1, 1, 0 }
 		}
 	)
 
@@ -71,9 +69,6 @@ function scene:create( event )
 -- 빵 정보창 이동 (빵 클릭)
 	local function goInfo(event)
 		audio.play(soundTable["clickSound"],  {channel=5})
-		print(event.target.id)
-		print(event.target.id1)
-		print(event.target.id2)
 		composer.setVariable("Id1", event.target.id1)
 		composer.setVariable("Id2", event.target.id2)
 		composer.setVariable("Id", event.target.id)
@@ -85,8 +80,7 @@ function scene:create( event )
 	local function tapInfo()
 		index1, index2 = 1, 1
 		for i = 1, 32 do
-			lock = openUBread[index1][index2]
-			if lock ~= 0 then
+			if openUBread[index1][index2] ~= 0 then
 				allBread[i]:addEventListener("tap", goInfo)
 			end
 			allBread[i].id1 = index1
@@ -112,23 +106,18 @@ function scene:create( event )
 		obj[i1].y = BackGround.y*j
 	end
 
--- local function makeRareBook(js, 64) -- 전체 도감
+-- makeRareBook() -- 레어 도감
 	local function makeRareBook()
 		BreadGroup = display.newGroup()
 		index1, index2 = 1, 1
 		local jul = 0.15
 		local jsc = openUBread
 		for i = 1, 32 do
-			lock = 0
-			lock = openUBread[index1][index2]
-			-- print(js[index1].breads[index2].image.."는 해금?"..jsc[index1][index2])
-			Bimage = UBreadInfo[index1].breads[index2].image
-			Bname = UBreadInfo[index1].breads[index2].name
 			if i % 3 == 1 then
 				jul = jul + 0.33
 			end
-			if lock ~= 0 then
-				if lock == -1 then
+			if openUBread[index1][index2] ~= 0 then
+				if openUBread[index1][index2] == -1 then
 					newBread[i] = display.newImageRect(BreadGroup, "Content/images/halo.png", 480, 480)
 					xy(newBread, i, jul)
 					allBread[i] = display.newImage(BreadGroup, "Content/images/illuGuide_new.png")
@@ -136,15 +125,14 @@ function scene:create( event )
 					allBread[i] = display.newImage(BreadGroup, "Content/images/illuGuide_nomal.png")
 				end
 				xy(allBread, i, jul)
-				BText[i]= display.newText(BreadGroup, Bname, allBread[i].x, BackGround.y*(jul+0.09), Font.font_POP, 35)
+				BText[i]= display.newText(BreadGroup, UBreadInfo[index1].breads[index2].name, allBread[i].x, BackGround.y*(jul+0.09), Font.font_POP, 35)
 				BText[i]:setFillColor(0)
-				BImage[i] = display.newImageRect(BreadGroup, "Content/images/"..Bimage..".png", 210, 210)
+				BImage[i] = display.newImageRect(BreadGroup, "Content/images/"..UBreadInfo[index1].breads[index2].image..".png", 210, 210)
 				BImage[i].x, BImage[i].y = allBread[i].x, allBread[i].y
 			else
 				allBread[i] = display.newImage(BreadGroup, "Content/images/illu_book_secret.png")
 				xy(allBread, i, jul)				
 			end
-	
 			index2 = index2 + 1
 			if index2 == 9 then
 				index2 = 1
@@ -193,16 +181,12 @@ function scene:create( event )
 		composer.removeScene("bookRare")		
 		composer.gotoScene( "bookNomal" )
 	end 
-	menuNomal:addEventListener("tap", Nomal)
-
 	-- Rare
 	local function Rare( event )
 		audio.play(soundTable["clickSound"],  {channel=5})
 		BreadGroup:removeSelf()
 		makeRareBook()	
 	end 
-	menuRare:addEventListener("tap", Rare)	
-
 	-- All
 	local function All( event )
 		audio.play(soundTable["clickSound"],  {channel=5})
@@ -210,13 +194,13 @@ function scene:create( event )
 		composer.removeScene("bookRare")		
 		composer.gotoScene( "bookMain" )
 	end 
-	menuAll:addEventListener("tap", All)
 
+	menuAll:addEventListener("tap", All)
+	menuNomal:addEventListener("tap", Nomal)
+	menuRare:addEventListener("tap", Rare)	
 
 -- 레이어정리
 	sceneGroup:insert(BackGround)	
-	-- scrollView:insert(BreadGroup)
-	-- scrollView:addEventListener("touch",scroll)
 	sceneGroup:insert(scrollView)	
 	sceneGroup:insert(illuBook_BasicGroup)
 
@@ -240,12 +224,7 @@ function scene:show( event )
 	local phase = event.phase
 	
 	if phase == "will" then
-		-- Called when the scene is still off screen and is about to move on screen
 	elseif phase == "did" then
-		-- Called when the scene is now on screen
-		-- 
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
 	end	
 end
 
@@ -254,22 +233,12 @@ function scene:hide( event )
 	local phase = event.phase
 	
 	if event.phase == "will" then
-		-- Called when the scene is on screen and is about to move off screen
-		--
-		-- INSERT code here to pause the scene
-		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
-		-- Called when the scene is now off screen
 	end
 end
 
 function scene:destroy( event )
 	local sceneGroup = self.view
-	
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
 
 ---------------------------------------------------------------------------------

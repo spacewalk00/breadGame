@@ -21,7 +21,7 @@ function scene:create( event )
 
 	local BreadJson, open, cnt
 	if Index == 1 then
-		BreadJson = Data[Index1].breads[Index2]
+		BreadJson = BreadInfo[Index1].breads[Index2]
 		open = openBread
 		cnt = breadsCnt[Index1][Index2]
 		lv = Bread_level[Index1][Index2]
@@ -87,16 +87,16 @@ function scene:create( event )
 -- makeLvPrice 레벨업, 진화 비용
 	local levelPrice = { }
 	local function makeLvPrice()
-		levelPrice[1] = Data[Index1].breads[Index2].Lv1
-		levelPrice[2] = Data[Index1].breads[Index2].Lv2
-		levelPrice[3] = Data[Index1].breads[Index2].Lv3
-		levelPrice[4] = Data[Index1].breads[Index2].Lv4
-		levelPrice[5] = Data[Index1].breads[Index2].Lv5
-		levelPrice[6] = Data[Index1].breads[Index2].Lv6
-		levelPrice[7] = Data[Index1].breads[Index2].Lv7
-		levelPrice[8] = Data[Index1].breads[Index2].Lv8
-		levelPrice[9] = Data[Index1].breads[Index2].Lv9
-		levelPrice[10] = Data[Index1].breads[Index2].Lv10
+		levelPrice[1] = BreadInfo[Index1].breads[Index2].Lv1
+		levelPrice[2] = BreadInfo[Index1].breads[Index2].Lv2
+		levelPrice[3] = BreadInfo[Index1].breads[Index2].Lv3
+		levelPrice[4] = BreadInfo[Index1].breads[Index2].Lv4
+		levelPrice[5] = BreadInfo[Index1].breads[Index2].Lv5
+		levelPrice[6] = BreadInfo[Index1].breads[Index2].Lv6
+		levelPrice[7] = BreadInfo[Index1].breads[Index2].Lv7
+		levelPrice[8] = BreadInfo[Index1].breads[Index2].Lv8
+		levelPrice[9] = BreadInfo[Index1].breads[Index2].Lv9
+		levelPrice[10] = BreadInfo[Index1].breads[Index2].Lv10
 	end
 	makeLvPrice()
 
@@ -192,7 +192,7 @@ function scene:create( event )
 			breadImage = display.newImageRect(infoGroup, "Content/images/"..BreadJson.image..".png",900,900)
 		end
 		breadImage.x, breadImage.y = infoGround.x, infoGround.y*0.8
-		breadSentence = display.newText(infoGroup, BreadJson.sentence, infoGround.x, infoGround.y*1.25, 950,350 ,Font.font_POP, 50)
+		breadSentence = display.newText(infoGroup, BreadJson.sentence, infoGround.x, infoGround.y*1.25, 950,350 ,Font.font_POP, 40)
 		breadSentence:setFillColor(0)	
 		if open[Index1][Index2] == -1 then
 			new = display.newImage(infoGroup, "Content/images/new.png")

@@ -12,7 +12,7 @@ json = require('json')
 
 function parseBreadInfo()
 	local filename = system.pathForFile("Content/JSON/breadInfo.json")
-	Data = json.decodeFile(filename)
+	BreadInfo = json.decodeFile(filename)
 end
 
 -- BreadInfo는 Data
@@ -144,7 +144,7 @@ function scene:create( event )
 		index1, index2 = 1, 1
 		local jul = 0.15
 		local jsc = openBread
-		local js = Data
+		local js = BreadInfo
 
 		for i = 1, 64 do
 			if i == 33 then
