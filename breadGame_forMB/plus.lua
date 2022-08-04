@@ -48,7 +48,7 @@ function scene:create( event )
 
 
 	gauge = display.newImageRect("Content/images/gauge.png", 300, 50)
-	gauge.x, gauge.y = 350, 100
+	gauge.x, gauge.y = 345, 100
 	gauge.isVisible = false
 	
 	--경험치 추가--
@@ -58,7 +58,7 @@ function scene:create( event )
 		expHint = exp .. " / ".. expList[levelNum+1]
 		
 		gauge = display.newImageRect("Content/images/gauge.png", 300 * exp / expList[levelNum+1], 50)
-		gauge.x, gauge.y = 350 - (300 * (expList[levelNum+1] - exp) / expList[levelNum+1]) / 2, 100
+		gauge.x, gauge.y = 345 - (300 * (expList[levelNum+1] - exp) / expList[levelNum+1]) / 2, 100
 	else
 		expHint = "최고레벨입니다."
 	end
