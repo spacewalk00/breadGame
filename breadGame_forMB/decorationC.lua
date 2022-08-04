@@ -356,17 +356,16 @@ end
 function scene:show( event )
 	local sceneGroup = self.view
 	local phase = event.phase
-	
 	if phase == "will" then
+		
 	elseif phase == "did" then
-		--[[if composer.getVariable("decoNum") == 1 then
-			breadRoom_deco[1].x, breadRoom_deco[1].y = display.contentWidth*0.43, display.contentHeight*0.18
+		if (decoFlag[1] == 0 and delete_deco_from_list[1] == 1) then
+			breadRoom_deco_ver2[1].isVisible = true
 		end
 
-		if composer.getVariable("decoNum") == 2 then
-			breadRoom_deco[2].x, breadRoom_deco[2].y = display.contentWidth*0.55, display.contentHeight*0.18
-		end]]
-
+		if (decoFlag[2] == 0 and delete_deco_from_list[2] == 1) then
+			breadRoom_deco_ver2[2].isVisible = true
+		end
 	end	
 end
 
@@ -377,6 +376,8 @@ function scene:hide( event )
 	if event.phase == "will" then
 	elseif phase == "did" then
 		composer.removeScene("decorationC")
+		breadRoom_deco_ver2[1].isVisible = false
+		breadRoom_deco_ver2[2].isVisible = false
 	end
 end
 

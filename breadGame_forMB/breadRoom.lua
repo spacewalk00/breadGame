@@ -119,8 +119,8 @@ local function deco_parse()
 end
 deco_parse()
 
--- 장식 회수 관련 코드: 작동은 x ----------------------------------
-local function comebackToList( event )
+-- 장식 회수 관련 코드----------------------------------
+function comebackToList( event )
 	if ( event.phase == "began" ) then
 		display.getCurrentStage():setFocus( event.target )
 		event.target.isFocus = true
@@ -910,19 +910,17 @@ function scene:show( event )
 				print("빵 아이들을 맨 앞으로 당기자")
 				breadOutGroup:toFront()
 			end
-
 			carpetIndex = 0
 		end
 
 		if decoIndex ~= 0 then
 			breadRoom_deco[decoIndex] = display.newImageRect(deco[decoIndex].image2, display.contentWidth*0.17, display.contentHeight*0.1)
-			--임시로 자리 고정
+			--자리 고정
 			if decoIndex == 1 then
 			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y = display.contentWidth*0.43, display.contentHeight*0.18
 			else
-			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y =display.contentWidth*0.55, display.contentHeight*0.18
+			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y = display.contentWidth*0.55, display.contentHeight*0.18
 			end
-			--composer.setVariable("decoNum", decoIndex)
 			--math.random(display.contentWidth*0.12, display.contentWidth*0.9), math.random(display.contentHeight*0.31, display.contentHeight*0.71)
 			breadRoom_deco[decoIndex].name = "장식"..decoIndex
 			sceneGroup:insert(breadRoom_deco[decoIndex])

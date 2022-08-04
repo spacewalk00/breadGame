@@ -37,6 +37,8 @@ local function gotoBreadRoomFromD(event)
 			decoFlag[decoIndex] = 0 
 			delete_deco_from_list[decoIndex] = 1
 		end
+	else
+		decoIndex = 0
 	end
 end
 
@@ -329,8 +331,8 @@ function scene:create( event )
 	sceneGroup:insert(popGroup)
 
 
-	local explainText = display.newText("※장식은 터치로 회수할 수 있습니다.", display.contentWidth*0.6, 550 ,"Content/font/ONE Mobile POP.ttf")
-	explainText.size = 40
+	local explainText = display.newText("※장식은 빵방에서 터치로 회수할 수 있습니다.", display.contentWidth*0.55, 558 ,"Content/font/ONE Mobile POP.ttf")
+	explainText.size = 37
 	explainText:setFillColor(0.5)
 
 	sceneGroup:insert(explainText)
@@ -343,9 +345,31 @@ function scene:show( event )
 	local phase = event.phase
 	
 	if phase == "will" then
-
+		
 	elseif phase == "did" then
-	
+		if decoFlag[1] == 0 and delete_deco_from_list[1] == 1 then
+			breadRoom_deco_ver2[1].isVisible = true
+		end
+
+		if decoFlag[2] == 0 and delete_deco_from_list[2] == 1 then
+			breadRoom_deco_ver2[2].isVisible = true
+		end
+		--[[if composer.getVariable("decoNum") == 1 and decoFlag[1] == 0 then
+			breadRoom_deco[1].x, breadRoom_deco[1].y = display.contentWidth*0.43, display.contentHeight*0.18
+		end
+
+		if composer.getVariable("decoNum") == 2 and decoFlag[2] == 0 then
+			breadRoom_deco[2].x, breadRoom_deco[2].y = display.contentWidth*0.55, display.contentHeight*0.18
+		end
+
+		if breadRoom_deco[1] ~= nil then
+		breadRoom_deco[1]:removeEventListener("touch", comebackToList)
+		sceneGroup:insert(breadRoom_deco[1])
+		end
+		if breadRoom_deco[2] ~= nil then
+		breadRoom_deco[2]:removeEventListener("touch", comebackToList)
+		sceneGroup:insert(breadRoom_deco[2])
+		end]]
 	end	
 end
 
@@ -357,6 +381,8 @@ function scene:hide( event )
 
 	elseif phase == "did" then
 		composer.removeScene("decorationD")
+		breadRoom_deco_ver2[1].isVisible = false
+		breadRoom_deco_ver2[2].isVisible = false
 	end
 end
 

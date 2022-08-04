@@ -253,6 +253,18 @@ function scene:hide( event )
 
 		--decoGroup = display.newGroup()
 		breadRoom_deco = {nil, nil} -- 물건 놓고 카펫 깔면 물건 가려지는 문제 해결 위함
+
+		-- 꾸미기 신에도 장식 반영
+		breadRoom_deco_ver2 = {nil, nil} 
+		breadRoom_deco_ver2[1] = display.newImageRect(deco[1].image2, display.contentWidth*0.17, display.contentHeight*0.1)
+		breadRoom_deco_ver2[1].x, breadRoom_deco_ver2[1].y = display.contentWidth*0.43, display.contentHeight*0.18
+		breadRoom_deco_ver2[2] = display.newImageRect(deco[2].image2, display.contentWidth*0.17, display.contentHeight*0.1)
+		breadRoom_deco_ver2[2].x, breadRoom_deco_ver2[2].y = display.contentWidth*0.55, display.contentHeight*0.18
+
+		breadRoom_deco_ver2[1].isVisible = false
+		breadRoom_deco_ver2[2].isVisible = false
+		-- 
+
 		delete_deco_from_list = {0, 0}
 
 		check_done = {0, 0, 0, 0, 0, 0}
