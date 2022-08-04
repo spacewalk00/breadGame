@@ -48,7 +48,7 @@ function scene:create( event )
 	    m_cnt = display.newText("보유 개수 : "..ingreCnt[7], display.contentWidth * 0.795, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
 		m_cnt:setFillColor(0)
 	elseif m == 4 then 
-		m_image = display.newImage("Content/image/cheese.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
+		m_image = display.newImage("Content/image/cheese.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
 		m_text = display.newText("치즈", display.contentWidth * 0.765, display.contentHeight * 0.562, "Content/font/ONE Mobile POP.ttf", 33.5)
 		m_text:setFillColor(0)
 	    m_cnt = display.newText("보유 개수 : "..ingreCnt[8], display.contentWidth * 0.795, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
@@ -90,14 +90,14 @@ function scene:create( event )
 	material_box:addEventListener("touch", myTouchListener)
 
 	--초코 시럽--
-	choco = display.newImage("Content/image/choco.png", display.contentWidth  * 0.35, display.contentHeight * 0.624)
+	choco = display.newImage("Content/image/choco.png", display.contentWidth * 0.35, display.contentHeight * 0.624)
 	--hoco.x, choco.y = display.contentWidth * 0.505, display.contentHeight * 2.31
 
-	local function choco_button( event )
+	local function choco_button( event ) 
  		syrub = 1
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
-	   		syrup_image = display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.509, display.contentHeight*0.526)
+	   		syrup_image = display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.495, display.contentHeight*0.517)
 	    	display.remove(syrup_cnt)
 	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[2], display.contentWidth * 0.53, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
 			syrup_cnt:setFillColor(0)
@@ -112,14 +112,14 @@ function scene:create( event )
 	choco:addEventListener( "touch", choco_button )
 
 	--딸기 시럽--
-	strawberry = display.newImage("Content/image/strawberry.png", display.contentWidth * 0.495, display.contentHeight * 0.623)
+	strawberry = display.newImage("Content/image/strawberry.png", display.contentWidth * 0.484, display.contentHeight * 0.623)
 	--strawberry.x, strawberry.y = display.contentWidth * 0.63, display.contentHeight * 2.29
 
-	local function strawberry_button( event )
+	local function strawberry_button( event ) 
  		syrub = 2
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
-	   		syrup_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth *0.496, display.contentHeight*0.518)
+	   		syrup_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.517)
 	    	display.remove(syrup_cnt)
 	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[3], display.contentWidth * 0.53, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
 			syrup_cnt:setFillColor(0)
@@ -134,16 +134,16 @@ function scene:create( event )
 	strawberry:addEventListener( "touch", strawberry_button )
 
 	--바닐라 시럽--
-	vanilla = display.newImage("Content/image/vanilla.png", display.contentWidth * 0.64, display.contentHeight * 0.624)
+	vanilla = display.newImage("Content/image/vanilla.png", display.contentWidth * 0.63, display.contentHeight * 0.624)
 	--vanilla.fill.effect = "filter.brightness"
 	--vanilla.fill.effect.intensity = 0.4
 
-	local function vinailla_button( event )
+	local function vinailla_button( event ) 
  		syrub = 3
 		print("바닐라"..syrub)
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
-	   		syrup_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.49, display.contentHeight*0.525)
+	   		syrup_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.495, display.contentHeight*0.517)
 	    	display.remove(syrup_cnt)
 	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[4], display.contentWidth * 0.53, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
 			syrup_cnt:setFillColor(0)

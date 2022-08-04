@@ -168,6 +168,7 @@ function scene:create( event )
 			effect = "crossFade",
 			time = 200
 		}
+		audio.play(SE1, {channel=5})
 		composer.gotoScene("intro", options)
 	end
 	clickText:addEventListener("tap", start)

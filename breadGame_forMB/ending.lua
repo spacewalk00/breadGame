@@ -27,6 +27,7 @@ function scene:create( event )
 	function gotoHome(event)
 		showCoin.isVisible = true
 		composer.gotoScene("home")
+		audio.play(SE1, {channel=5})
 	end
 	homeButton:addEventListener("tap", gotoHome)
 
