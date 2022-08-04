@@ -918,10 +918,11 @@ function scene:show( event )
 			breadRoom_deco[decoIndex] = display.newImageRect(deco[decoIndex].image2, display.contentWidth*0.17, display.contentHeight*0.1)
 			--임시로 자리 고정
 			if decoIndex == 1 then
-			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y = display.contentWidth*0.1, display.contentHeight*0.28
+			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y = display.contentWidth*0.43, display.contentHeight*0.18
 			else
-			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y =display.contentWidth*0.2, display.contentHeight*0.28
+			breadRoom_deco[decoIndex].x, breadRoom_deco[decoIndex].y =display.contentWidth*0.55, display.contentHeight*0.18
 			end
+			--composer.setVariable("decoNum", decoIndex)
 			--math.random(display.contentWidth*0.12, display.contentWidth*0.9), math.random(display.contentHeight*0.31, display.contentHeight*0.71)
 			breadRoom_deco[decoIndex].name = "장식"..decoIndex
 			sceneGroup:insert(breadRoom_deco[decoIndex])

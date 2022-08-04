@@ -188,7 +188,7 @@ function scene:create( event )
 	carpetBtn.alpha = 0.01
 	popGroup:insert( carpetBtn )
 
-	local carpetText = display.newImage(menuGroup, "Content/images/text_carpet.png")
+	local carpetText = display.newImage(menuGroup, "Content/images/text_carpetC.png")
 	carpetText.x, carpetText.y = 460, 667
 	popGroup:insert( carpetText )
 
@@ -201,7 +201,6 @@ function scene:create( event )
 	decoText.x, decoText.y = 990, 667
 	popGroup:insert( decoText ) 
 
-	--carpetBtn:addEventListener("tap", gotoDecoC)
 	decoBtn:addEventListener("tap", gotoDecoD)
 
 	close.name = "close"
@@ -214,7 +213,7 @@ function scene:create( event )
     local carpetGroup = display.newGroup()
 
 	local choiceMark = display.newImage(carpetGroup, "Content/images/chosen.png")
-	choiceMark.x, choiceMark.y = 430, 760
+	choiceMark.x, choiceMark.y = 440, 760
 	popGroup:insert( choiceMark )
 
 	local product_bar = {}
@@ -360,6 +359,13 @@ function scene:show( event )
 	
 	if phase == "will" then
 	elseif phase == "did" then
+		--[[if composer.getVariable("decoNum") == 1 then
+			breadRoom_deco[1].x, breadRoom_deco[1].y = display.contentWidth*0.43, display.contentHeight*0.18
+		end
+
+		if composer.getVariable("decoNum") == 2 then
+			breadRoom_deco[2].x, breadRoom_deco[2].y = display.contentWidth*0.55, display.contentHeight*0.18
+		end]]
 
 	end	
 end

@@ -180,7 +180,7 @@ function scene:create( event )
 	decoBtn.alpha = 0.01
 	popGroup:insert( decoBtn )
 
-	local decoText = display.newImage(menuGroup, "Content/images/text_decor.png")
+	local decoText = display.newImage(menuGroup, "Content/images/text_decorC.png")
 	decoText.x, decoText.y = 990, 667
 	popGroup:insert( decoText ) 
 

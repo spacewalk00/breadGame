@@ -24,7 +24,7 @@
 	{
 		//"cnt" : 0,
 		"price": 500,
-		"name": "슈크림 시럽",
+		"name": "바닐라 시럽",
 		"image": "Content/image/vanilla_syrup.png",
 		"sentence" : "부드러운 커스터드 크림과\n 신선한 생크림을 섞은 것.\n(빵 반죽과 최고로 잘 어울린다.)"
 	},

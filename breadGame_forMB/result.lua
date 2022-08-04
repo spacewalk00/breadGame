@@ -110,14 +110,22 @@ function scene:create( event )
 	local levelUp_s = display.newImageRect("Content/images/levelUp_s.png", 500, 224)
 	levelUp_s.x, levelUp_s.y = display.contentWidth*0.22, display.contentHeight*0.04
 
+	local gauge = display.newImageRect("Content/images/gauge.png", 300, 50)
+	gauge.x, gauge.y = 350, 100
+	gauge.isVisible = false
+	
 	--경험치 추가--
 	local expHint = ""
 
 	if levelNum < 10 then
 		expHint = exp .. " / ".. expList[levelNum+1]
+		
+		gauge = display.newImageRect("Content/images/gauge.png", 300 * exp / expList[levelNum+1], 50)
+		gauge.x, gauge.y = 350 - (300 * (expList[levelNum+1] - exp) / expList[levelNum+1]) / 2, 100
 	else
 		expHint = "최고레벨입니다."
 	end
+
 
 	local expDisplay = display.newText(expHint, display.contentWidth*0.24, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf")
 	expDisplay:setFillColor(1)
@@ -150,6 +158,7 @@ function scene:create( event )
 	sceneGroup:insert( background )
 	sceneGroup:insert( levelUp_s )
 	sceneGroup:insert( level )
+	sceneGroup:insert( gauge )
 	sceneGroup:insert( showLevel )
 	sceneGroup:insert( expDisplay )
 	sceneGroup:insert( coins )
