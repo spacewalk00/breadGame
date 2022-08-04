@@ -3,6 +3,7 @@
 -- view1.lua
 --
 -----------------------------------------------------------------------------------------
+local gauge, expDisplay
 
 local composer = require( "composer" )
 local scene = composer.newScene()
@@ -99,18 +100,30 @@ local function levelUpPop( n ) --레벨업 창 화면에 띄우기 --
 
 	transition.fadeOut(levelGroup, {timer = 2000, delay = 2000})
 
-	--시간 카운트 * 지연 고민 중--
-	--[[local limit = 100
-    --print("시럽은 " .. syrub .. "재료는" .. ingredient)
+	-- **레벨업 넘어갈 때 게이지와 경험치 표시 변경 코드--
+	gauge.isVisible = false
+	expDisplay.isVisible = false
 
-	local function timeAttack(event)
-		limit = limit - 1
-		if limit == 0 then
-			print("10초 지연")
-		end
+	gauge = display.newImageRect("Content/images/gauge.png", 300, 50)
+	gauge.x, gauge.y = 350, 100
+	gauge.isVisible = false
+	
+	local expHint = ""
+
+	if levelNum < 10 then
+		expHint = exp .. " / ".. expList[levelNum+1]
+		
+		gauge = display.newImageRect("Content/images/gauge.png", 300 * exp / expList[levelNum+1], 50)
+		gauge.x, gauge.y = 350 - (300 * (expList[levelNum+1] - exp) / expList[levelNum+1]) / 2, 100
+	else
+		expHint = "최고레벨입니다."
 	end
-	timer.performWithDelay(1000, timeAttack, 0) ]]
 
+	expDisplay = display.newText(expHint, display.contentWidth*0.24, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf")
+	expDisplay:setFillColor(1)
+	expDisplay.size = 40
+	--
+	
 	ingreRandom()
 end
 
@@ -133,12 +146,6 @@ function levelUp() --레벨업 --
 
 			showCoin.text = coinNum
 			showLevel.text = levelNum
-			--[[
-			if i ~= 10 then
-			expHint.text = expList[i+1] .."이 넘으면 레벨업!"
-			else
-			expHint.text = "최고레벨입니다"
-			end]]
 			break
 		end
 	end
@@ -162,7 +169,7 @@ function scene:create( event )
 	levelUp_s.x, levelUp_s.y = display.contentWidth*0.22, display.contentHeight*0.04
 
 
-	local gauge = display.newImageRect("Content/images/gauge.png", 300, 50)
+	gauge = display.newImageRect("Content/images/gauge.png", 300, 50)
 	gauge.x, gauge.y = 350, 100
 	gauge.isVisible = false
 	
@@ -178,7 +185,7 @@ function scene:create( event )
 		expHint = "최고레벨입니다."
 	end
 
-	local expDisplay = display.newText(expHint, display.contentWidth*0.24, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf")
+	expDisplay = display.newText(expHint, display.contentWidth*0.24, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf")
 	expDisplay:setFillColor(1)
 	expDisplay.size = 40
 	
@@ -251,8 +258,6 @@ function scene:create( event )
 
 
 	sceneGroup:insert( background )
-
-	--sceneGroup:insert( oven )
 	sceneGroup:insert( levelUp_s )
 	sceneGroup:insert( level )
 	sceneGroup:insert( showLevel )
@@ -284,6 +289,11 @@ function scene:hide( event )
 	elseif phase == "did" then
 		composer.removeScene("home")
 		composer.removeScene("result")
+
+		if levelUpFlag == 1 then
+			gauge.isVisible = false
+			expDisplay.isVisible = false
+		end
 	end
 end
 
