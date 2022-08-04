@@ -66,14 +66,14 @@
 	{
 		//"cnt" : 0,
 		"price": 1200,
-		"name": "오레오",
+		"name": "오레오가루",
 		"image": "Content/image/oreopowder.png",
 		"sentence" : "반죽에 넣으면\n포슬포슬한 초코쿠키 맛을 낼 수 있다."
 	},
 	{
 		//"cnt" : 0,
 		"price": 1200,
-		"name": "슈가",
+		"name": "슈가파우더",
 		"image": "Content/image/sugarpowder.png",
 		"sentence" : "입에 넣는 순간,\n순식간에 사르르 녹는다."
 	}
