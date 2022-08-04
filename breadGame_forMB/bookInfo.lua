@@ -194,8 +194,6 @@ function scene:create( event )
 		audio.play(soundTable["clickSound"],  {channel=5})	
 		coinGroup:removeSelf()
 		upGroup:removeSelf()
-		--upSetGroup:removeSelf()
-		--saleGroup:removeSelf()
 		CoinAndCnt()	
 		if cnt < 1 then
 			upSetGroup:removeSelf()
@@ -282,7 +280,7 @@ function scene:create( event )
 			breadImage = display.newImageRect(infoGroup, "Content/images/"..BreadJson.image..".png",900,900)
 		end
 		breadImage.x, breadImage.y = infoGround.x, infoGround.y*0.8
-		breadSentence = display.newText(infoGroup, BreadJson.sentence, infoGround.x, infoGround.y*1.25, 950,350 ,Font.font_POP, 55)
+		breadSentence = display.newText(infoGroup, BreadJson.sentence, infoGround.x, infoGround.y*1.26, 950,350 ,Font.font_POP, 55)
 		breadSentence:setFillColor(0)	
 		if open[Index1][Index2] == -1 then
 			new = display.newImage(infoGroup, "Content/images/new.png")
