@@ -91,26 +91,27 @@ function scene:create( event )
 	showLevel:setFillColor(1)
 
 	local book = display.newImage("Content/images/book.png");
-	book.x, book.y = display.contentWidth*0.77, display.contentHeight*0.04
+	book.x, book.y =  display.contentWidth*0.73, display.contentHeight*0.05
 	local s_book = display.newImage("Content/images/shadow.png")
-	s_book.x, s_book.y = display.contentWidth*0.77, display.contentHeight*0.04
+	s_book.x, s_book.y = display.contentWidth*0.73, display.contentHeight*0.06
 	local text_book = display.newImage("Content/images/text_Book2.png")
-	text_book.x, text_book.y = display.contentWidth*0.77, display.contentHeight*0.065
+	text_book.x, text_book.y = display.contentWidth*0.73, display.contentHeight*0.081
 
 	local store = display.newImageRect("Content/images/store.png", 170, 170)
-	store.x, store.y = display.contentWidth*0.92, display.contentHeight*0.035
+	store.x, store.y = display.contentWidth*0.904, display.contentHeight*0.047
 	local s_store = display.newImage("Content/images/shadow.png")
-	s_store.x, s_store.y = display.contentWidth*0.92, display.contentHeight*0.04
+	s_store.x, s_store.y = display.contentWidth*0.9, display.contentHeight*0.06
 	local text_store = display.newImage("Content/images/text_store.png")
-	text_store.x, text_store.y = display.contentWidth*0.92, display.contentHeight*0.065
+	text_store.x, text_store.y = display.contentWidth*0.9, display.contentHeight*0.08
 
 	local coins = display.newImage("Content/images/coins.png")
 	coins.x, coins.y = display.contentWidth*0.5, display.contentHeight*0.04
+	
+	local levelUp_s = display.newImage("Content/images/levelUp_s2.png")
+	levelUp_s.x, levelUp_s.y = display.contentWidth*0.24, display.contentHeight*0.04
 
-	local levelUp_s = display.newImageRect("Content/images/levelUp_s.png", 500, 224)
-	levelUp_s.x, levelUp_s.y = display.contentWidth*0.22, display.contentHeight*0.04
 
-	local gauge = display.newImageRect("Content/images/gauge.png", 300, 50)
+	gauge = display.newImageRect("Content/images/gauge.png", 300, 50)
 	gauge.x, gauge.y = 350, 100
 	gauge.isVisible = false
 	
@@ -126,10 +127,9 @@ function scene:create( event )
 		expHint = "최고레벨입니다."
 	end
 
-
-	local expDisplay = display.newText(expHint, display.contentWidth*0.24, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf")
+	expDisplay = display.newText(expHint, display.contentWidth*0.24, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf")
 	expDisplay:setFillColor(1)
-	expDisplay.size = 40
+	expDisplay.size = 25
 
 	local function gotoStore(event)
 		coins:removeSelf()
@@ -137,18 +137,18 @@ function scene:create( event )
 	end
 
 	local success = display.newImage("Content/images/success.png")
-	success.x, success.y = display.contentWidth*0.77, display.contentHeight*0.13
+	success.x, success.y =  display.contentWidth*0.73, display.contentHeight*0.14
 	local s_success = display.newImage("Content/images/shadow.png")
-	s_success.x, s_success.y = display.contentWidth*0.77, display.contentHeight*0.13
+	s_success.x, s_success.y = display.contentWidth*0.73, display.contentHeight*0.145
 	local text_success = display.newImage("Content/images/text_acheivements.png")
-	text_success.x, text_success.y = display.contentWidth*0.77, display.contentHeight*0.155
+	text_success.x, text_success.y = display.contentWidth*0.73, display.contentHeight*0.17
 
 	local breadRoom = display.newImageRect("Content/images/breadRoom2.png", 130, 90)
-	breadRoom.x, breadRoom.y = display.contentWidth*0.92, display.contentHeight*0.135
+	breadRoom.x, breadRoom.y =  display.contentWidth*0.9, display.contentHeight*0.138
 	local s_breadRoom = display.newImage("Content/images/shadow.png")
-	s_breadRoom.x, s_breadRoom.y = display.contentWidth*0.92, display.contentHeight*0.13
+	s_breadRoom.x, s_breadRoom.y = display.contentWidth*0.9, display.contentHeight*0.145
 	local text_breadRoom = display.newImage("Content/images/text_breadRoom.png")
-	text_breadRoom.x, text_breadRoom.y = display.contentWidth*0.92, display.contentHeight*0.155
+	text_breadRoom.x, text_breadRoom.y = display.contentWidth*0.9, display.contentHeight*0.17
 	
 	--
 	darkening = display.newImageRect("Content/images/dark.png", 1440*2, 710*7)
