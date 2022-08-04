@@ -89,32 +89,8 @@ function scene:create( event )
  
 	material_box:addEventListener("touch", myTouchListener)
 
-	--바닐라 시럽--
-	vanilla = display.newImage("Content/image/vanilla.png", display.contentWidth * 0.37, display.contentHeight * 0.624)
-	--vanilla.fill.effect = "filter.brightness"
-	--vanilla.fill.effect.intensity = 0.4
-
-	local function vinailla_button( event )
- 		syrub = 3
-		print("바닐라"..syrub)
-	    if ( event.phase == "began" ) then
-	    	display.remove( syrup_image )
-	   		syrup_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.49, display.contentHeight*0.525)
-	    	display.remove(syrup_cnt)
-	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[4], display.contentWidth * 0.53, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
-			syrup_cnt:setFillColor(0)
-	    	display.remove(syrup_text)
-	    	syrup_text = display.newText("바닐라 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "Content/font/ONE Mobile POP.ttf", 33.5)
-			syrup_text:setFillColor(0)
-	    	composer.setVariable("s", syrub)
-			--syrup_image.x, syrup_image.y = display.contentWidth * 0.49, display.contentHeight * 0.55
-		end
-	end
- 
-	vanilla:addEventListener( "touch", vinailla_button )
-
 	--초코 시럽--
-	choco = display.newImage("Content/image/choco.png", display.contentWidth * 0.51, display.contentHeight * 0.624)
+	choco = display.newImage("Content/image/choco.png", display.contentWidth  * 0.35, display.contentHeight * 0.624)
 	--hoco.x, choco.y = display.contentWidth * 0.505, display.contentHeight * 2.31
 
 	local function choco_button( event )
@@ -136,14 +112,14 @@ function scene:create( event )
 	choco:addEventListener( "touch", choco_button )
 
 	--딸기 시럽--
-	strawberry = display.newImage("Content/image/strawberry.png", display.contentWidth * 0.63, display.contentHeight * 0.623)
+	strawberry = display.newImage("Content/image/strawberry.png", display.contentWidth * 0.495, display.contentHeight * 0.623)
 	--strawberry.x, strawberry.y = display.contentWidth * 0.63, display.contentHeight * 2.29
 
 	local function strawberry_button( event )
  		syrub = 2
 	    if ( event.phase == "began" ) then
 	    	display.remove( syrup_image )
-	   		syrup_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.518)
+	   		syrup_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth *0.496, display.contentHeight*0.518)
 	    	display.remove(syrup_cnt)
 	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[3], display.contentWidth * 0.53, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
 			syrup_cnt:setFillColor(0)
@@ -156,6 +132,30 @@ function scene:create( event )
 	end
  
 	strawberry:addEventListener( "touch", strawberry_button )
+
+	--바닐라 시럽--
+	vanilla = display.newImage("Content/image/vanilla.png", display.contentWidth * 0.64, display.contentHeight * 0.624)
+	--vanilla.fill.effect = "filter.brightness"
+	--vanilla.fill.effect.intensity = 0.4
+
+	local function vinailla_button( event )
+ 		syrub = 3
+		print("바닐라"..syrub)
+	    if ( event.phase == "began" ) then
+	    	display.remove( syrup_image )
+	   		syrup_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.49, display.contentHeight*0.525)
+	    	display.remove(syrup_cnt)
+	    	syrup_cnt = display.newText("보유 개수 : "..ingreCnt[4], display.contentWidth * 0.53, display.contentHeight * 0.484, "Content/font/ONE Mobile POP.ttf", 23)
+			syrup_cnt:setFillColor(0)
+	    	display.remove(syrup_text)
+	    	syrup_text = display.newText("바닐라 시럽", display.contentWidth * 0.5, display.contentHeight * 0.562, "Content/font/ONE Mobile POP.ttf", 33.5)
+			syrup_text:setFillColor(0)
+	    	composer.setVariable("s", syrub)
+			--syrup_image.x, syrup_image.y = display.contentWidth * 0.49, display.contentHeight * 0.55
+		end
+	end
+ 
+	vanilla:addEventListener( "touch", vinailla_button )
 
 	--굽기 버튼--
 	local start_button = display.newImage("Content/image/start.png", display.contentWidth*0.5, display.contentHeight*0.71)
