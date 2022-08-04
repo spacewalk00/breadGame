@@ -204,7 +204,7 @@ function scene:hide( event )
 		--
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
-		exp = 990
+		exp = 0
 		expList = { 0, 1000, 3000, 6000, 10000, 15000, 21000, 28000, 36000, 45000 }
 		levelNum = 1
 
