@@ -62,6 +62,7 @@ function scene:create( event )
 
 	local function myTouchListener( event )
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	syrub = 0 
 	    	composer.setVariable("s", syrub)
 	    	composer.setVariable("m", ingredient)
@@ -81,6 +82,7 @@ function scene:create( event )
  		ingredient = 1
 
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/glitter.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
 	    	display.remove(material_cnt)
@@ -104,6 +106,7 @@ function scene:create( event )
  		ingredient = 2
  
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/sausage.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
 	    	display.remove(material_cnt)
@@ -126,6 +129,7 @@ function scene:create( event )
 	local function bean_button( event ) 
  		ingredient = 3
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/bean.png", display.contentWidth * 0.76, display.contentHeight * 0.51)
 	    	display.remove(material_cnt)
@@ -148,6 +152,7 @@ function scene:create( event )
 	local function cheese_button( event ) 
  		ingredient = 4
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/cheese.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
 	    	display.remove(material_cnt)
@@ -170,6 +175,7 @@ function scene:create( event )
 	local function corn_button( event ) 
  		ingredient = 5 
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/corn.png", display.contentWidth * 0.765, display.contentHeight * 0.51)
 	    	display.remove(material_cnt)
@@ -192,6 +198,7 @@ function scene:create( event )
 	local function oreopowder_button( event ) 
  		ingredient = 6
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/oreopowder.png", display.contentWidth * 0.76, display.contentHeight * 0.515)
 	    	display.remove(material_cnt)
@@ -214,6 +221,7 @@ function scene:create( event )
 	local function sugarpowder_button( event ) 
  		ingredient = 7
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	display.remove( material_image )
 	   		material_image = display.newImage("Content/image/sugarpowder.png", display.contentWidth * 0.764, display.contentHeight * 0.515)
 	    	display.remove(material_cnt)
@@ -233,6 +241,7 @@ function scene:create( event )
 	local start_button = display.newImage("Content/image/start.png", display.contentWidth*0.5, display.contentHeight*0.71)
 
 	local function start( event )
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		-- 시럽 재료 둘 다 선택x
 		if ingredient == 0 and s == 0 then 
 	    	showCoin.isVisible = true
@@ -274,6 +283,7 @@ function scene:create( event )
 	local function close( event )
  
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	showCoin.isVisible = true
 			syrub = 0
 			ingredient = 0

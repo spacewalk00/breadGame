@@ -299,6 +299,7 @@ function scene:create( event )
    ]]
 		
 	local function infoClosed(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 	--	for i=1, 64 do
 			--if(breadInfo_name[i] ~= nill) then
 				breadInfoGroup:toBack()
@@ -740,6 +741,7 @@ function scene:create( event )
 
 	-- 씬 이동 --
 	local function moveToBook(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		print("도감으로 이동")
 		---------showCoin 관련 수정
 		showCoin.isVisible = false
@@ -757,6 +759,7 @@ function scene:create( event )
 	end
 
 	local function moveToStore(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		print("상점으로 이동")
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
@@ -774,6 +777,7 @@ function scene:create( event )
 	end
 
 	local function moveToAchieve(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		print("업적으로 이동")
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
@@ -792,6 +796,7 @@ function scene:create( event )
 
 	--* 꾸미기방 연결 -- 
 	local function moveToDeco(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		print("꾸미기로 이동")
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
@@ -811,6 +816,7 @@ function scene:create( event )
 	--
 	
 	local function moveToHome(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		print("홈으로 이동")
 		------------------showCoin 관련 수정
 		showCoin.isVisible = true
