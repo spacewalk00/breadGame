@@ -25,8 +25,8 @@ local function parse()
 	end
 end
 parse()
+local tempIndex
 
---local carpetIndex 
 local function gotoBreadRoomFromC(event)
 
 	composer.gotoScene("breadRoom")
@@ -34,17 +34,29 @@ local function gotoBreadRoomFromC(event)
 	
 	-- 고른 아이템 변수 전달 
 	if event.target.name == "pushBtn" then
-		
-		--[[
-		-- 고른 아이템 목록에서 삭제
-		if wallCnt[carpetIndex] == 1 then
-		wallCnt[carpetIndex] = wallCnt[carpetIndex] - 1
-		wallPaperFlag[carpetIndex] = 0 
+		if carpetIndex ~= 0 then
+		print("카펫인덱스는"..carpetIndex.."카펫체크여부 1이면"..check_done[carpetIndex])
 		end
-		-- 카펫 변경 코드 p_check[i].isVisible == true인 카펫 -- 
-		]]
 
+		beforeCarpetIndex = carpetIndex
+	else -- 닫기할 때
+		tempIndex = carpetIndex
+		if beforeCarpetIndex ~= 0 then
+			print("이전 카펫 인덱스는" .. beforeCarpetIndex)
+			carpetIndex = beforeCarpetIndex
+
+			check_done[tempIndex] = 0
+			print(tempIndex.."의 check를 해제합니다."..check_done[tempIndex])
+			check_done[beforeCarpetIndex] = 1
+			print(beforeCarpetIndex.."의 check를 합니다"..check_done[beforeCarpetIndex])
+		else
+			check_done = {0, 0, 0, 0, 0, 0}
+		end
+		carpetIndex = 0
 	end
+	--장식과 관련되지 않게--
+	decoIndex[1] = 0
+	decoIndex[2] = 0
 end
 --
 function gotoDecoC(event)
@@ -251,6 +263,7 @@ function scene:create( event )
 			--p_check[i].isVisible = false
 			if check_done[i] == 1 then	--만약 체크 했었으면
 				p_check[i].isVisible = true
+				carpetIndex = i
 			else
 				p_check[i].isVisible = false
 			end
@@ -357,7 +370,7 @@ function scene:show( event )
 	local sceneGroup = self.view
 	local phase = event.phase
 	if phase == "will" then
-		
+
 	elseif phase == "did" then
 		if (decoFlag[1] == 0 and delete_deco_from_list[1] == 1) then
 			breadRoom_deco_ver2[1].isVisible = true

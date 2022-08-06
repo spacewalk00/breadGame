@@ -24,22 +24,40 @@ local function parse()
 	end
 end
 parse()
-
+local temp
 local function gotoBreadRoomFromD(event)
 
 	composer.gotoScene("breadRoom")
 	print("빵방으로 가서 아이템 적용")
 	
 	if event.target.name == "pushBtn" then
-		if decoIndex ~= 0 and decoFlag[decoIndex] == 1 then
+		for i=1,2 do
+			if decoIndex[i] ~= 0 and decoFlag[decoIndex[i]] == 1 then
 			-- 고른 아이템 목록에서 삭제
 			
-			decoFlag[decoIndex] = 0 
-			delete_deco_from_list[decoIndex] = 1
+			decoFlag[decoIndex[i]] = 0 
+			delete_deco_from_list[decoIndex[i]] = 1
+			end
 		end
+
 	else
-		decoIndex = 0
+		decoIndex[1] = 0
+		decoIndex[2] = 0
 	end
+	--카펫 체크와 관여되지 않게--
+	tempIndex = carpetIndex
+	if beforeCarpetIndex ~= 0 then
+		print("이전 카펫 인덱스는" .. beforeCarpetIndex)
+		carpetIndex = beforeCarpetIndex
+
+		check_done[tempIndex] = 0
+		print(tempIndex.."의 check를 해제합니다."..check_done[tempIndex])
+		check_done[beforeCarpetIndex] = 1
+		print(beforeCarpetIndex.."의 check를 합니다"..check_done[beforeCarpetIndex])
+	else
+		check_done = {0, 0, 0, 0, 0, 0}
+	end
+	carpetIndex = 0
 end
 
 local background_room1
@@ -65,6 +83,7 @@ local pushIcon
 local text_push 
 
 local carpetChange = -1
+local beforeCarpet 
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -90,6 +109,11 @@ function scene:create( event )
 	if carpetChange > 0 then -- 배경카펫
 		background_carpet = display.newImageRect(wallPaper[carpetChange].image2, display.contentWidth, display.contentHeight)
 		background_carpet.x, background_carpet.y = display.contentWidth*0.5, display.contentHeight*0.5
+		beforeCarpet = carpetChange
+	elseif carpetChange == 0 and beforeCarpet ~= nil then
+		background_carpet = display.newImageRect(wallPaper[beforeCarpet].image2, display.contentWidth, display.contentHeight)
+		background_carpet.x, background_carpet.y = display.contentWidth*0.5, display.contentHeight*0.5
+		beforeCarpet = carpetChange
 	end
 	
 	-- 홈, 빵방, 코인 --
@@ -237,6 +261,17 @@ function scene:create( event )
 			--중복 체크 불가 구현			
 			local function checked( event ) 
 				if p_check[i].isVisible == false then
+					p_check[i].isVisible = true
+					print("체크하겠습니다.")
+					decoIndex[i] = i
+				else
+					p_check[i].isVisible = false
+					decoIndex[i] = 0
+					print("체크 해제하겠습니다.")
+				end
+			end
+			--[[local function checked( event ) 
+				if p_check[i].isVisible == false then
 					for j=1, #deco do
 						if p_check[j] ~= nil and p_check[j].isVisible ~= nil and p_check[j].isVisible == true then
 							overlapFlag = 1
@@ -256,7 +291,7 @@ function scene:create( event )
 					decoIndex = 0
 					print("체크 해제하겠습니다.")
 				end
-			end
+			end]]
 			p_checkBox[i]:addEventListener("tap", checked)
 
 			local nameOptions = 

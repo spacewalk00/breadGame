@@ -919,7 +919,25 @@ function scene:show( event )
 			carpetIndex = 0
 		end
 
-		if decoIndex ~= 0 then
+		if decoIndex[1] == 1 then
+			breadRoom_deco[decoIndex[1]] = display.newImageRect(deco[decoIndex[1]].image2, display.contentWidth*0.17, display.contentHeight*0.1)
+			breadRoom_deco[decoIndex[1]].x, breadRoom_deco[decoIndex[1]].y = display.contentWidth*0.43, display.contentHeight*0.18
+			breadRoom_deco[decoIndex[1]].name = "장식"..decoIndex[1]
+			sceneGroup:insert(breadRoom_deco[decoIndex[1]])
+
+			decoIndex[1] = 0
+		end
+
+		if decoIndex[2] == 2 then
+			breadRoom_deco[decoIndex[2]] = display.newImageRect(deco[decoIndex[2]].image2, display.contentWidth*0.17, display.contentHeight*0.1)
+			breadRoom_deco[decoIndex[2]].x, breadRoom_deco[decoIndex[2]].y = display.contentWidth*0.55, display.contentHeight*0.18
+			breadRoom_deco[decoIndex[2]].name = "장식"..decoIndex[2]
+			sceneGroup:insert(breadRoom_deco[decoIndex[2]])
+
+			decoIndex[2] = 0
+		end
+
+--[[	if decoIndex ~= 0 then
 			breadRoom_deco[decoIndex] = display.newImageRect(deco[decoIndex].image2, display.contentWidth*0.17, display.contentHeight*0.1)
 			--자리 고정
 			if decoIndex == 1 then
@@ -932,7 +950,7 @@ function scene:show( event )
 			sceneGroup:insert(breadRoom_deco[decoIndex])
 
 			decoIndex = 0
-		end
+		end]]
 		
 		for i=1, #deco do
 		if breadRoom_deco[i] ~= nil then

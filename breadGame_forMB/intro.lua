@@ -53,7 +53,7 @@ carpet_parse()
 
 -------업적 전역 변수----------
 --돈 전역 변수
-coinNum = 3000
+coinNum = 6000
 --폭탄빵 제작 전역변수
 bomb_count = 0
 --연속 일반빵 제작 전역변수
@@ -248,8 +248,9 @@ function scene:hide( event )
 		wallPaperFlag[i] = 0
 		end
 		--
-		decoIndex = 0
+		decoIndex = {0, 0}
 		carpetIndex = 0
+		beforeCarpetIndex = 0
 
 		--decoGroup = display.newGroup()
 		breadRoom_deco = {nil, nil} -- 물건 놓고 카펫 깔면 물건 가려지는 문제 해결 위함
