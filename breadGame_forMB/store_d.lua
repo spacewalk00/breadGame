@@ -88,20 +88,19 @@ function scene:create( event )
 
 	local ingredientBtn = display.newRect(display.contentWidth*0.2, display.contentHeight*0.12, 280, 150)
 	ingredientBtn.alpha = 0.01
-	local ingredientText = display.newText("재료", display.contentWidth*0.2, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	ingredientText.size = 70
+	local ingredientText = display.newImage("Content/images/text_ingre.png")
+	ingredientText.x, ingredientText.y = display.contentWidth*0.2, display.contentHeight*0.12 
 
 	local decoBtn = display.newRect(display.contentWidth*0.5, display.contentHeight*0.12, 280, 150)
 	decoBtn.alpha = 0.01
-	local decoText = display.newText("장식", display.contentWidth*0.5, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	decoText.size = 70
-	decoText:setFillColor(0)
+	local decoText = display.newImage("Content/images/text_decorC.png")
+	decoText.x, decoText.y = display.contentWidth*0.5, display.contentHeight*0.12
 
 	local wallBtn = display.newRect(display.contentWidth*0.8, display.contentHeight*0.12, 280, 150)
 	wallBtn.alpha = 0.01
-	local wallText = display.newText("카펫", display.contentWidth*0.8, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	wallText.size = 70
-	
+	local wallText = display.newImage("Content/images/text_carpet.png")
+	wallText.x, wallText.y = display.contentWidth*0.8, display.contentHeight*0.12
+
 	topGroup:insert(background)
 	topGroup:insert(store)
 	topGroup:insert(storeText)
