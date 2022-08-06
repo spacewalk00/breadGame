@@ -186,19 +186,19 @@ function scene:create( event )
 	gray_lowerRight = display.newImageRect("Content/images/gray.png", display.contentWidth*0.13, display.contentHeight*0.07)
  	gray_lowerRight.x, gray_lowerRight.y = display.contentWidth*0.9, display.contentHeight*0.145
 
-	bookIcon = display.newImageRect("Content/images/book.png", display.contentWidth*0.11, display.contentHeight*0.06)
+	bookIcon = display.newImage("Content/images/book.png");
  	bookIcon.x, bookIcon.y = display.contentWidth*0.73, display.contentHeight*0.05
 
 	text_bookIcon = display.newImage("Content/images/text_Book2.png")
 	text_bookIcon.x, text_bookIcon.y = display.contentWidth*0.73, display.contentHeight*0.081
 
-	store = display.newImageRect("Content/images/store.png", display.contentWidth*0.1, display.contentHeight*0.07)
+	store = display.newImageRect("Content/images/store.png", 170, 170)
  	store.x, store.y = display.contentWidth*0.904, display.contentHeight*0.047
 
 	text_storeIcon = display.newImage("Content/images/text_store.png")
 	text_storeIcon.x, text_storeIcon.y = display.contentWidth*0.9, display.contentHeight*0.08
 	
-	temp = display.newImageRect("Content/images/temp.png", display.contentWidth*0.08, display.contentHeight*0.05)
+	temp = display.newImage("Content/images/success.png")
  	temp.x, temp.y = display.contentWidth*0.73, display.contentHeight*0.14
 
 	text_tempIcon = display.newImage("Content/images/text_acheivements.png")
