@@ -136,16 +136,16 @@ function scene:create( event )
 	showCoin.x, showCoin.y = display.contentWidth*0.5748, display.contentHeight*0.05
 
 	-- 다른 페이지 넘어가는 아이콘 및 회색 배경 --
-	gray_upperLeft = display.newImageRect("Content/images/gray.png", display.contentWidth*0.13, display.contentHeight*0.07)
+	gray_upperLeft = display.newImage("Content/images/shadow.png")
 	gray_upperLeft.x, gray_upperLeft.y = display.contentWidth*0.73, display.contentHeight*0.06
 
-	gray_upperRight = display.newImageRect("Content/images/gray.png", display.contentWidth*0.13, display.contentHeight*0.07)
+	gray_upperRight = display.newImage("Content/images/shadow.png")
 	gray_upperRight.x, gray_upperRight.y = display.contentWidth*0.9, display.contentHeight*0.06
 
-	gray_lowerLeft = display.newImageRect("Content/images/gray.png", display.contentWidth*0.13, display.contentHeight*0.07)
+	gray_lowerLeft = display.newImage("Content/images/shadow.png")
  	gray_lowerLeft.x, gray_lowerLeft.y = display.contentWidth*0.73, display.contentHeight*0.145
 
-	gray_lowerRight = display.newImageRect("Content/images/gray.png", display.contentWidth*0.13, display.contentHeight*0.07)
+	gray_lowerRight = display.newImage("Content/images/shadow.png")
  	gray_lowerRight.x, gray_lowerRight.y = display.contentWidth*0.9, display.contentHeight*0.145
 
 	bookIcon = display.newImage("Content/images/book.png");
