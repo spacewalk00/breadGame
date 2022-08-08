@@ -70,7 +70,8 @@ function scene:create( event )
 
 	coins = display.newImage("Content/images/coins.png")	
 	coins.x, coins.y = display.contentWidth*0.5, display.contentHeight*0.05
-	showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
+	coinX = 0.583 - (string.len(coinNum)-1)*0.01
+	showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.05
 	
 	local explainText = display.newText("※장식과 카펫은 1개만 구매가능합니다.", display.contentWidth*0.6, display.contentHeight*0.08 ,"Content/font/ONE Mobile POP.ttf")
 	explainText.size = 40

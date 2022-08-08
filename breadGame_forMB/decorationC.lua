@@ -133,7 +133,8 @@ function scene:create( event )
 	coinIcon.x, coinIcon.y = display.contentWidth*0.525, display.contentHeight*0.05
 		
 	showCoin.isVisible = true
-	showCoin.x, showCoin.y = display.contentWidth*0.5748, display.contentHeight*0.05
+	coinX = 0.608 - (string.len(coinNum)-1)*0.01
+	showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.05
 
 	-- 다른 페이지 넘어가는 아이콘 및 회색 배경 --
 	gray_upperLeft = display.newImage("Content/images/shadow.png")

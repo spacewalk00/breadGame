@@ -633,23 +633,7 @@ function scene:create( event )
 							-- 새로 추가한 모션 --
 							walk(breadRoom_image[k])
 							
-							--[[
-							breadRoom_image[k]:addEventListener("tap", taptap1)			
-							breadRoom_image[k]:addEventListener("touch", re)
-							]]
-							--BreadMove(breadRoom_image[k])
-							--breadRoom_image[k]:toBack()
-							
 							sceneGroup:insert(breadOutGroup)
-							--[[
-							list:toFront()
-							text_list:toFront()
-							close:toFront()
-							push:toFront()
-							text_push2:toFront()
-							--scrollView:toFront()
-							breadGroup:toFront()
-							]]
 							putBreadGroup:toFront()
 
 							for i=1, breadsCNT do -- 빵 개수만큼 체크 개수 생성
@@ -664,7 +648,6 @@ function scene:create( event )
 						event.target.isFocus = true
 
 						-- 빵방에 있는 빵 개수 카운트 --
-						--print(breadRoom_count)
 					elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
 					end
 					display.getCurrentStage():setFocus( nil )
@@ -763,7 +746,8 @@ function scene:create( event )
 		print("상점으로 이동")
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
-		showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
+		coinX = 0.583 - (string.len(coinNum)-1)*0.01
+		showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.05
 		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
@@ -781,7 +765,8 @@ function scene:create( event )
 		print("업적으로 이동")
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
-		showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
+		coinX = 0.586 - (string.len(coinNum)-1)*0.01
+		showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.053
 		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
@@ -800,7 +785,7 @@ function scene:create( event )
 		print("꾸미기로 이동")
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
-		showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
+		showCoin.x, showCoin.y = display.contentWidth*0.558, display.contentHeight*0.053
 		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
@@ -820,7 +805,8 @@ function scene:create( event )
 		print("홈으로 이동")
 		------------------showCoin 관련 수정
 		showCoin.isVisible = true
-		showCoin.x, showCoin.y = display.contentWidth*0.545, display.contentHeight*0.04
+		coinX = 0.584 - (string.len(coinNum)-1)*0.01
+		showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.04
 		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then

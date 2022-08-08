@@ -48,7 +48,8 @@ end
 function gotoh(event)
 	audio.play( soundTable["clickSound"],  {channel=5}) 
 	---------showCoin 관련 수정
-	showCoin.x, showCoin.y = display.contentWidth*0.545, display.contentHeight*0.04
+	coinX = 0.584 - (string.len(coinNum)-1)*0.01
+	showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.04
 	composer.gotoScene("home") 
 	print("메인화면으로 가야함")
 end
@@ -96,7 +97,8 @@ function scene:create( event )
 
 	coins = display.newImage("Content/images/coins.png")	
 	coins.x, coins.y = display.contentWidth*0.5, display.contentHeight*0.05
-	showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
+	coinX = 0.583 - (string.len(coinNum)-1)*0.01
+	showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.05
 
 	local home = display.newImage("Content/images/home.png")
 	home.x, home.y = display.contentWidth*0.9, display.contentHeight*0.05

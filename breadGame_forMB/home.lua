@@ -24,7 +24,8 @@ end
 function moveToBreadRoom(event)
 	audio.play( soundTable["clickSound"],  {channel=5}) 
 	print("빵방으로 이동")
-	showCoin.x, showCoin.y = display.contentWidth*0.5748, display.contentHeight*0.05
+	coinX = 0.608 - (string.len(coinNum)-1)*0.01
+	showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.05
 	composer.gotoScene("breadRoom")
 end
 ---------------업적으로 이동---------------------
@@ -32,7 +33,8 @@ local function  gotoAchieve(event)
 	audio.play( soundTable["clickSound"],  {channel=5}) 
 	print("업적으로 이동")
 	---------showCoin 관련 수정
-	showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
+	coinX = 0.53 - (string.len(coinNum)-1)*0.01
+	showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.053
 	composer.gotoScene("achieve")
 end
 
@@ -208,7 +210,8 @@ function scene:create( event )
 
 	local function gotoStore(event)
 		audio.play( soundTable["clickSound"],  {channel=5}) 
-		showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
+		coinX = 0.583 - (string.len(coinNum)-1)*0.01
+		showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.05
 		composer.gotoScene("store_i")
 	end
 	store:addEventListener("tap", gotoStore)

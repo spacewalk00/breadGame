@@ -70,10 +70,10 @@ breadBookUP_count = 0
 breadRoom_count = 0
 
 --돈 표시--
-showCoin = display.newText(coinNum, display.contentWidth*0.545, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf", 50)
+coinX = 0.584 - (string.len(coinNum)-1)*0.01
+showCoin = display.newText(coinNum, display.contentWidth*coinX, display.contentHeight*0.04, "Content/font/ONE Mobile POP.ttf", 42)
 showCoin:setFillColor(0)
 showCoin.isVisible = false
-
 
 
 local composer = require( "composer" )
