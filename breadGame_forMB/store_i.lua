@@ -46,6 +46,7 @@ end
 
 --메인 씬으로 변경--
 function gotoh(event)
+	audio.play( soundTable["clickSound"],  {channel=5}) 
 	---------showCoin 관련 수정
 	showCoin.x, showCoin.y = display.contentWidth*0.545, display.contentHeight*0.04
 	composer.gotoScene("home") 

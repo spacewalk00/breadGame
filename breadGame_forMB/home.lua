@@ -15,18 +15,21 @@ composer.setVariable("s", syrub)
 composer.setVariable("m", ingredient)
 
 function moveToBook(event)
+	audio.play( soundTable["clickSound"],  {channel=5}) 
 	print("도감으로 이동")
 	showCoin.isVisible = false
 	composer.gotoScene("bookMain")
 end
 
 function moveToBreadRoom(event)
+	audio.play( soundTable["clickSound"],  {channel=5}) 
 	print("빵방으로 이동")
 	showCoin.x, showCoin.y = display.contentWidth*0.5748, display.contentHeight*0.05
 	composer.gotoScene("breadRoom")
 end
 ---------------업적으로 이동---------------------
 local function  gotoAchieve(event)
+	audio.play( soundTable["clickSound"],  {channel=5}) 
 	print("업적으로 이동")
 	---------showCoin 관련 수정
 	showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
@@ -204,6 +207,7 @@ function scene:create( event )
 	text_store.x, text_store.y = display.contentWidth*0.9, display.contentHeight*0.08
 
 	local function gotoStore(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
 		composer.gotoScene("store_i")
 	end
@@ -250,6 +254,7 @@ function scene:create( event )
 	local function plus( event )
  
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 			showCoin.isVisible = false
 	        composer.gotoScene("syrup")
 		end

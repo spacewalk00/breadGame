@@ -204,6 +204,7 @@ function scene:create( event )
 	end
 
 	local function upgrade() 
+		audio.play( soundTable["breadSound"],  {channel=3} )
 		cnt = cnt - 1
 		breadsCnt[Index1][Index2] = cnt
 		UbreadsCnt[Index1][Index2] = UbreadsCnt[Index1][Index2] + 1

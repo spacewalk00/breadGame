@@ -292,6 +292,7 @@ function scene:create( event )
 		--ending:setFillColor(0.5)
 
 		function gotoEnding(event)
+			audio.play( soundTable["clickSound"],  {channel=5}) 
 		----------------showCoin관련 수정
 			showCoin.isVisible = false
 			composer.gotoScene("outtro")

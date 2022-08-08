@@ -28,7 +28,7 @@ parse()
 local tempIndex
 
 local function gotoBreadRoomFromC(event)
-
+	audio.play( soundTable["clickSound"],  {channel=5}) 
 	composer.gotoScene("breadRoom")
 	print("빵방으로 가서 아이템 적용")
 	
@@ -61,12 +61,12 @@ end
 --
 function gotoDecoC(event)
 	composer.gotoScene("decorationC")
-	--audio.play( soundTable["clickSound"],  {channel=5} )
+	audio.play( soundTable["clickSound"],  {channel=5} )
 	print("카펫")
 end
 function gotoDecoD(event)
 	composer.gotoScene("decorationD")
-	--audio.play( soundTable["clickSound"],  {channel=5} )
+	audio.play( soundTable["clickSound"],  {channel=5} )
 	print("장식")
 end
 
@@ -269,6 +269,7 @@ function scene:create( event )
 			end
 			--중복 체크 불가 구현			
 			local function checked( event ) 
+				audio.play( soundTable["clickSound"],  {channel=5}) 
 				if p_check[i].isVisible == false then
 					for j=1, #wallPaper do
 						if p_check[j] ~= nil and p_check[j].isVisible ~= nil and p_check[j].isVisible == true then

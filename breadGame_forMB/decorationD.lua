@@ -26,7 +26,7 @@ end
 parse()
 local temp
 local function gotoBreadRoomFromD(event)
-
+	audio.play( soundTable["clickSound"],  {channel=5}) 
 	composer.gotoScene("breadRoom")
 	print("빵방으로 가서 아이템 적용")
 	
@@ -260,6 +260,7 @@ function scene:create( event )
 
 			--중복 체크 불가 구현			
 			local function checked( event ) 
+				audio.play( soundTable["clickSound"],  {channel=5}) 
 				if p_check[i].isVisible == false then
 					p_check[i].isVisible = true
 					print("체크하겠습니다.")
