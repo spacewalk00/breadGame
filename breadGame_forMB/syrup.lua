@@ -80,6 +80,7 @@ function scene:create( event )
 	local function myTouchListener( event )
  
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	composer.setVariable("s", syrub)
 	    	ingredient = 0
 	    	composer.setVariable("m", ingredient)
@@ -96,6 +97,7 @@ function scene:create( event )
 	local function choco_button( event ) 
  		syrub = 1
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	display.remove( syrup_image )
 	   		syrup_image = display.newImage("Content/image/choco_syrup.png", display.contentWidth*0.495, display.contentHeight*0.517)
 	    	display.remove(syrup_cnt)
@@ -118,6 +120,7 @@ function scene:create( event )
 	local function strawberry_button( event ) 
  		syrub = 2
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	display.remove( syrup_image )
 	   		syrup_image = display.newImage("Content/image/strawberry_syrup.png", display.contentWidth*0.495, display.contentHeight*0.517)
 	    	display.remove(syrup_cnt)
@@ -142,6 +145,7 @@ function scene:create( event )
  		syrub = 3
 		print("바닐라"..syrub)
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	display.remove( syrup_image )
 	   		syrup_image = display.newImage("Content/image/vanilla_syrup.png", display.contentWidth*0.495, display.contentHeight*0.517)
 	    	display.remove(syrup_cnt)
@@ -161,7 +165,7 @@ function scene:create( event )
 	local start_button = display.newImage("Content/image/start.png", display.contentWidth*0.5, display.contentHeight*0.71)
 
 	local function start( event )
-
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		-- 시럽 재료 둘 다 선택x
 		if m == 0 and syrub == 0 then 
 	    	showCoin.isVisible = true
@@ -202,6 +206,7 @@ function scene:create( event )
 	local function close( event )
  
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 	    	showCoin.isVisible = true
 			syrub = 0
 			ingredient = 0

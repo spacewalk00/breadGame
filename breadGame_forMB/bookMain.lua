@@ -259,7 +259,8 @@ function scene:create( event )
 		composer.removeScene("bookMain")
 		---------showCoin 관련 수정
 		showCoin.isVisible = true
-		showCoin.x, showCoin.y = display.contentWidth*0.545, display.contentHeight*0.04
+		coinX = 0.584 - (string.len(coinNum)-1)*0.01
+		showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.04
 		showCoin.text = coinNum
 		composer.gotoScene( "home" )
 	end
@@ -291,6 +292,7 @@ function scene:create( event )
 		--ending:setFillColor(0.5)
 
 		function gotoEnding(event)
+			audio.play( soundTable["clickSound"],  {channel=5}) 
 		----------------showCoin관련 수정
 			showCoin.isVisible = false
 			composer.gotoScene("outtro")

@@ -91,7 +91,8 @@ function scene:create( event )
 	--goldText:setTextColor(0)
 	--goldText.text = coinNum
 	------------showCoin 관련 수정
-	showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
+	coinX = 0.586 - (string.len(coinNum)-1)*0.01
+	showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.052
 	--아래 그림자
 	local shadow = display.newImage("Content/images/업적/shadow.png")
 	shadow.x, shadow.y = display.contentWidth/2, display.contentHeight*0.86
@@ -174,7 +175,8 @@ function scene:create( event )
 
 	local function start(event)
 	---------showCoin 관련 수정
-	showCoin.x, showCoin.y = display.contentWidth*0.545, display.contentHeight*0.04
+		coinX = 0.584 - (string.len(coinNum)-1)*0.01
+		showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.04
 		audio.play(SE1, {channel=5})
 		composer.gotoScene("home")
 	end

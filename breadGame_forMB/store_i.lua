@@ -46,8 +46,10 @@ end
 
 --메인 씬으로 변경--
 function gotoh(event)
+	audio.play( soundTable["clickSound"],  {channel=5}) 
 	---------showCoin 관련 수정
-	showCoin.x, showCoin.y = display.contentWidth*0.545, display.contentHeight*0.04
+	coinX = 0.584 - (string.len(coinNum)-1)*0.01
+	showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.04
 	composer.gotoScene("home") 
 	print("메인화면으로 가야함")
 end
@@ -95,7 +97,8 @@ function scene:create( event )
 
 	coins = display.newImage("Content/images/coins.png")	
 	coins.x, coins.y = display.contentWidth*0.5, display.contentHeight*0.05
-	showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
+	coinX = 0.583 - (string.len(coinNum)-1)*0.01
+	showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.05
 
 	local home = display.newImage("Content/images/home.png")
 	home.x, home.y = display.contentWidth*0.9, display.contentHeight*0.05
@@ -109,21 +112,27 @@ function scene:create( event )
 
 	local ingredientBtn = display.newRect(display.contentWidth*0.2, display.contentHeight*0.12, 280, 150)
 	ingredientBtn.alpha = 0.01
-	local ingredientText = display.newText("재료", display.contentWidth*0.2, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
+	local ingredientText = display.newImage("Content/images/text_ingreC.png")
+	ingredientText.x, ingredientText.y = display.contentWidth*0.2, display.contentHeight*0.12 
+	--[[local ingredientText = display.newText("재료", display.contentWidth*0.2, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
 	ingredientText:setFillColor(0)
-	ingredientText.size = 70
+	ingredientText.size = 70]]
 
 	local decoBtn = display.newRect(display.contentWidth*0.5, display.contentHeight*0.12, 280, 150)
 	decoBtn:setFillColor(0)
 	decoBtn.alpha = 0.01
-	local decoText = display.newText("장식", display.contentWidth*0.5, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	decoText.size = 70
+	local decoText = display.newImage("Content/images/text_decor.png")
+	decoText.x, decoText.y = display.contentWidth*0.5, display.contentHeight*0.12
+	--[[local decoText = display.newText("장식", display.contentWidth*0.5, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
+	decoText.size = 70]]
 
 	local wallBtn = display.newRect(display.contentWidth*0.8, display.contentHeight*0.12, 280, 150)
 	wallBtn:setFillColor(0)
 	wallBtn.alpha = 0.01
-	local wallText = display.newText("카펫", display.contentWidth*0.8, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	wallText.size = 70
+	local wallText = display.newImage("Content/images/text_carpet.png")
+	wallText.x, wallText.y = display.contentWidth*0.8, display.contentHeight*0.12
+	--[[local wallText = display.newText("카펫", display.contentWidth*0.8, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
+	wallText.size = 70]]
 	
 	topGroup:insert(background)
 	topGroup:insert(store)

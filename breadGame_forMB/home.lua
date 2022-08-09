@@ -15,21 +15,26 @@ composer.setVariable("s", syrub)
 composer.setVariable("m", ingredient)
 
 function moveToBook(event)
+	audio.play( soundTable["clickSound"],  {channel=5}) 
 	print("도감으로 이동")
 	showCoin.isVisible = false
 	composer.gotoScene("bookMain")
 end
 
 function moveToBreadRoom(event)
+	audio.play( soundTable["clickSound"],  {channel=5}) 
 	print("빵방으로 이동")
-	showCoin.x, showCoin.y = display.contentWidth*0.5748, display.contentHeight*0.05
+	coinX = 0.608 - (string.len(coinNum)-1)*0.01
+	showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.05
 	composer.gotoScene("breadRoom")
 end
 ---------------업적으로 이동---------------------
 local function  gotoAchieve(event)
+	audio.play( soundTable["clickSound"],  {channel=5}) 
 	print("업적으로 이동")
 	---------showCoin 관련 수정
-	showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
+	coinX = 0.53 - (string.len(coinNum)-1)*0.01
+	showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.053
 	composer.gotoScene("achieve")
 end
 
@@ -105,7 +110,7 @@ local function levelUpPop( n ) --레벨업 창 화면에 띄우기 --
 	expDisplay.isVisible = false
 
 	gauge = display.newImageRect("Content/images/gauge.png", 300, 50)
-	gauge.x, gauge.y = 350, 100
+	gauge.x, gauge.y = 345, 100
 	gauge.isVisible = false
 	
 	local expHint = ""
@@ -114,7 +119,7 @@ local function levelUpPop( n ) --레벨업 창 화면에 띄우기 --
 		expHint = exp .. " / ".. expList[levelNum+1]
 		
 		gauge = display.newImageRect("Content/images/gauge.png", 300 * exp / expList[levelNum+1], 50)
-		gauge.x, gauge.y = 350 - (300 * (expList[levelNum+1] - exp) / expList[levelNum+1]) / 2, 100
+		gauge.x, gauge.y = 345 - (300 * (expList[levelNum+1] - exp) / expList[levelNum+1]) / 2, 100
 	else
 		expHint = "최고레벨입니다."
 	end
@@ -170,7 +175,7 @@ function scene:create( event )
 
 
 	gauge = display.newImageRect("Content/images/gauge.png", 300, 50)
-	gauge.x, gauge.y = 350, 100
+	gauge.x, gauge.y = 345, 100
 	gauge.isVisible = false
 	
 	--경험치 추가--
@@ -180,7 +185,7 @@ function scene:create( event )
 		expHint = exp .. " / ".. expList[levelNum+1]
 		
 		gauge = display.newImageRect("Content/images/gauge.png", 300 * exp / expList[levelNum+1], 50)
-		gauge.x, gauge.y = 350 - (300 * (expList[levelNum+1] - exp) / expList[levelNum+1]) / 2, 100
+		gauge.x, gauge.y = 345 - (300 * (expList[levelNum+1] - exp) / expList[levelNum+1]) / 2, 100
 	else
 		expHint = "최고레벨입니다."
 	end
@@ -204,7 +209,9 @@ function scene:create( event )
 	text_store.x, text_store.y = display.contentWidth*0.9, display.contentHeight*0.08
 
 	local function gotoStore(event)
-		showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
+		audio.play( soundTable["clickSound"],  {channel=5}) 
+		coinX = 0.583 - (string.len(coinNum)-1)*0.01
+		showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.05
 		composer.gotoScene("store_i")
 	end
 	store:addEventListener("tap", gotoStore)
@@ -250,6 +257,7 @@ function scene:create( event )
 	local function plus( event )
  
 	    if ( event.phase == "began" ) then
+	    	audio.play( soundTable["clickSound"],  {channel=5}) 
 			showCoin.isVisible = false
 	        composer.gotoScene("syrup")
 		end

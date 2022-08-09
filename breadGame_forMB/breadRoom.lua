@@ -174,31 +174,31 @@ function scene:create( event )
 	showCoin.isVisible = true
 
 	-- 다른 페이지 넘어가는 아이콘 및 회색 배경 --
-	gray_upperLeft = display.newImageRect("Content/images/gray.png", display.contentWidth*0.13, display.contentHeight*0.07)
+	gray_upperLeft = display.newImage("Content/images/shadow.png")
 	gray_upperLeft.x, gray_upperLeft.y = display.contentWidth*0.73, display.contentHeight*0.06
 
-	gray_upperRight = display.newImageRect("Content/images/gray.png", display.contentWidth*0.13, display.contentHeight*0.07)
+	gray_upperRight = display.newImage("Content/images/shadow.png")
 	gray_upperRight.x, gray_upperRight.y = display.contentWidth*0.9, display.contentHeight*0.06
 
-	gray_lowerLeft = display.newImageRect("Content/images/gray.png", display.contentWidth*0.13, display.contentHeight*0.07)
+	gray_lowerLeft = display.newImage("Content/images/shadow.png")
  	gray_lowerLeft.x, gray_lowerLeft.y = display.contentWidth*0.73, display.contentHeight*0.145
 
-	gray_lowerRight = display.newImageRect("Content/images/gray.png", display.contentWidth*0.13, display.contentHeight*0.07)
+	gray_lowerRight = display.newImage("Content/images/shadow.png")
  	gray_lowerRight.x, gray_lowerRight.y = display.contentWidth*0.9, display.contentHeight*0.145
 
-	bookIcon = display.newImageRect("Content/images/book.png", display.contentWidth*0.11, display.contentHeight*0.06)
+	bookIcon = display.newImage("Content/images/book.png");
  	bookIcon.x, bookIcon.y = display.contentWidth*0.73, display.contentHeight*0.05
 
 	text_bookIcon = display.newImage("Content/images/text_Book2.png")
 	text_bookIcon.x, text_bookIcon.y = display.contentWidth*0.73, display.contentHeight*0.081
 
-	store = display.newImageRect("Content/images/store.png", display.contentWidth*0.1, display.contentHeight*0.07)
+	store = display.newImageRect("Content/images/store.png", 170, 170)
  	store.x, store.y = display.contentWidth*0.904, display.contentHeight*0.047
 
 	text_storeIcon = display.newImage("Content/images/text_store.png")
 	text_storeIcon.x, text_storeIcon.y = display.contentWidth*0.9, display.contentHeight*0.08
 	
-	temp = display.newImageRect("Content/images/temp.png", display.contentWidth*0.08, display.contentHeight*0.05)
+	temp = display.newImage("Content/images/success.png")
  	temp.x, temp.y = display.contentWidth*0.73, display.contentHeight*0.14
 
 	text_tempIcon = display.newImage("Content/images/text_acheivements.png")
@@ -299,6 +299,7 @@ function scene:create( event )
    ]]
 		
 	local function infoClosed(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 	--	for i=1, 64 do
 			--if(breadInfo_name[i] ~= nill) then
 				breadInfoGroup:toBack()
@@ -632,23 +633,7 @@ function scene:create( event )
 							-- 새로 추가한 모션 --
 							walk(breadRoom_image[k])
 							
-							--[[
-							breadRoom_image[k]:addEventListener("tap", taptap1)			
-							breadRoom_image[k]:addEventListener("touch", re)
-							]]
-							--BreadMove(breadRoom_image[k])
-							--breadRoom_image[k]:toBack()
-							
 							sceneGroup:insert(breadOutGroup)
-							--[[
-							list:toFront()
-							text_list:toFront()
-							close:toFront()
-							push:toFront()
-							text_push2:toFront()
-							--scrollView:toFront()
-							breadGroup:toFront()
-							]]
 							putBreadGroup:toFront()
 
 							for i=1, breadsCNT do -- 빵 개수만큼 체크 개수 생성
@@ -663,7 +648,6 @@ function scene:create( event )
 						event.target.isFocus = true
 
 						-- 빵방에 있는 빵 개수 카운트 --
-						--print(breadRoom_count)
 					elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
 					end
 					display.getCurrentStage():setFocus( nil )
@@ -740,6 +724,7 @@ function scene:create( event )
 
 	-- 씬 이동 --
 	local function moveToBook(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		print("도감으로 이동")
 		---------showCoin 관련 수정
 		showCoin.isVisible = false
@@ -757,10 +742,12 @@ function scene:create( event )
 	end
 
 	local function moveToStore(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		print("상점으로 이동")
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
-		showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
+		coinX = 0.583 - (string.len(coinNum)-1)*0.01
+		showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.05
 		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
@@ -774,10 +761,12 @@ function scene:create( event )
 	end
 
 	local function moveToAchieve(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		print("업적으로 이동")
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
-		showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
+		coinX = 0.586 - (string.len(coinNum)-1)*0.01
+		showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.053
 		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
@@ -792,10 +781,11 @@ function scene:create( event )
 
 	--* 꾸미기방 연결 -- 
 	local function moveToDeco(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		print("꾸미기로 이동")
 		---------------showCoin 관련 수정
 		showCoin.isVisible = true
-		showCoin.x, showCoin.y = display.contentWidth*0.54, display.contentHeight*0.053
+		showCoin.x, showCoin.y = display.contentWidth*0.558, display.contentHeight*0.053
 		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
@@ -811,10 +801,12 @@ function scene:create( event )
 	--
 	
 	local function moveToHome(event)
+		audio.play( soundTable["clickSound"],  {channel=5}) 
 		print("홈으로 이동")
 		------------------showCoin 관련 수정
 		showCoin.isVisible = true
-		showCoin.x, showCoin.y = display.contentWidth*0.545, display.contentHeight*0.04
+		coinX = 0.584 - (string.len(coinNum)-1)*0.01
+		showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.04
 		showCoin:setFillColor(0)
 		-------수정	
 			if(count > 0) then
@@ -913,7 +905,25 @@ function scene:show( event )
 			carpetIndex = 0
 		end
 
-		if decoIndex ~= 0 then
+		if decoIndex[1] == 1 then
+			breadRoom_deco[decoIndex[1]] = display.newImageRect(deco[decoIndex[1]].image2, display.contentWidth*0.17, display.contentHeight*0.1)
+			breadRoom_deco[decoIndex[1]].x, breadRoom_deco[decoIndex[1]].y = display.contentWidth*0.43, display.contentHeight*0.18
+			breadRoom_deco[decoIndex[1]].name = "장식"..decoIndex[1]
+			sceneGroup:insert(breadRoom_deco[decoIndex[1]])
+
+			decoIndex[1] = 0
+		end
+
+		if decoIndex[2] == 2 then
+			breadRoom_deco[decoIndex[2]] = display.newImageRect(deco[decoIndex[2]].image2, display.contentWidth*0.17, display.contentHeight*0.1)
+			breadRoom_deco[decoIndex[2]].x, breadRoom_deco[decoIndex[2]].y = display.contentWidth*0.55, display.contentHeight*0.18
+			breadRoom_deco[decoIndex[2]].name = "장식"..decoIndex[2]
+			sceneGroup:insert(breadRoom_deco[decoIndex[2]])
+
+			decoIndex[2] = 0
+		end
+
+--[[	if decoIndex ~= 0 then
 			breadRoom_deco[decoIndex] = display.newImageRect(deco[decoIndex].image2, display.contentWidth*0.17, display.contentHeight*0.1)
 			--자리 고정
 			if decoIndex == 1 then
@@ -926,7 +936,7 @@ function scene:show( event )
 			sceneGroup:insert(breadRoom_deco[decoIndex])
 
 			decoIndex = 0
-		end
+		end]]
 		
 		for i=1, #deco do
 		if breadRoom_deco[i] ~= nil then
