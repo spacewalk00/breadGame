@@ -78,7 +78,22 @@ function scene:create( event )
 		coinGroup = display.newGroup()		
 		coin = display.newImage(coinGroup, "Content/images/coins.png")
 		coin.x, coin.y = BackGround.x*1.01, BackGround.y*0.1	
-		coinText = display.newText(coinGroup, coinNum, BackGround.x*1.1, BackGround.y*0.1, Font.font_POP, 50)
+		--[[local options = 
+		{
+		    text = 1234,     
+		    x = BackGround.x*1.05,
+		    y = BackGround.y*0.1,
+		    width = 250,
+		    font = Font.font_POP,   
+		    fontSize = 50,
+		    align = "right"  -- Alignment parameter
+		}
+			
+		coinText = display.newText(options)
+		coinGroup:insert(coinText)]]--
+		coinX = 0.584 - (string.len(coinNum)-1)*0.01
+		coinText = display.newText(coinGroup, coinNum, display.contentWidth*coinX, BackGround.y*0.1, Font.font_POP, 50 )
+    	--align = "right" 
 		coinText:setFillColor(0)
 		cntText = display.newText(coinGroup, BreadJson.name.."의 개수 : "..cnt, BackGround.x*0.6, BackGround.y*0.45, Font.font_POP, 60)
 		cntText:setFillColor(0)
@@ -132,14 +147,31 @@ function scene:create( event )
 	local saleGroup, saleC, saleKey, saleKeyText, sCoin
 	local function salekey()
 		makeSalePrice()
+		--salePrice = 12345678
 		saleGroup = display.newGroup()
 		saleKey = display.newImage(saleGroup,"Content/images/illuBook_sale.png")
 		saleKey.x, saleKey.y = infoGround.x*0.55, infoGround.y*1.5
 		saleKeyText = display.newImage(saleGroup, "Content/images/text_sale.png")
 		saleKeyText.x, saleKeyText.y = saleKey.x*0.7, saleKey.y
+		sCoinX = (string.len(salePrice)-1)*10	
 		sCoin = display.newImage(saleGroup,"Content/images/coin.png")
-		sCoin.x, sCoin.y = saleKey.x*1.1, saleKey.y
-		saleC = display.newText(saleGroup, salePrice, infoGround.x*0.75, infoGround.y*1.5 , Font.font_POP, 50)
+		sCoin.x, sCoin.y = infoGround.x*0.65-sCoinX, saleKey.y
+		saleC_options = 
+		{
+		    text = salePrice,     
+		    x = infoGround.x*0.65,
+		    y = infoGround.y*1.5,
+		    width = 300,
+		    height = 50,
+		    font = Font.font_POP,   
+		    fontSize = 50,
+		    align = "right"  -- Alignment parameter
+		}
+
+		print(salePrice)
+		--saleC = display.newText(saleGroup, salePrice, sCoin.x*1.32, infoGround.y*1.5, 200, 50, Font.font_POP, 50)
+		saleC = display.newText(saleC_options)
+		saleGroup:insert(saleC)
 		sceneGroup:insert(saleGroup)
 	end
 
@@ -196,15 +228,15 @@ function scene:create( event )
 		coinGroup:removeSelf()
 		upGroup:removeSelf()
 		CoinAndCnt()	
-		if cnt < 1 then
-			upSetGroup:removeSelf()
-			saleGroup:removeSelf()
-		end	
 	end
 
 	local function upgrade() 
 		audio.play( soundTable["breadSound"],  {channel=3} )
 		cnt = cnt - 1
+		if cnt < 1 then
+			upSetGroup:removeSelf()
+			saleGroup:removeSelf()
+		end		
 		breadsCnt[Index1][Index2] = cnt
 		UbreadsCnt[Index1][Index2] = UbreadsCnt[Index1][Index2] + 1
 		openUBread[Index1][Index2] = -1
@@ -218,21 +250,48 @@ function scene:create( event )
 		upSuc = display.newText(upGroup, "빵 진화 성공", upWindow.x, upWindow.y*0.5, Font.font_POP, 100)
 		upNew1 = display.newImage(upGroup, "Content/images/new.png")
 		upNew1.x, upNew1.y = upWindow.x*0.6, upWindow.y*0.7
-		upNew2 = display.newImage(upGroup, "Content/images/halo.png")
-		upNew2.x, upNew2.y = upWindow.x, upWindow.y*0.9
-		upBread = display.newImageRect(upGroup, "Content/images/"..Uimage..".png", 650, 650)
+
+		halo = display.newImage(upGroup, "Content/images/halo.png")
+		halo.x, halo.y = upWindow.x, upWindow.y*0.9
+			halo.rotation = -45
+		local reverse = 1
+		local function rock()
+			if (reverse == 0) then
+				reverse = 1
+				transition.to(halo, {rotation=-45, time=1000, transition=easing.inOutCubic })
+			else
+				reverse = 0
+				transition.to(halo, {rotation=45, time=1000, transition=easing.inOutCubic })
+			end
+		end
+
+		timer.performWithDelay(900, rock, 0)
+		upBread = display.newImageRect(upGroup, "Content/images/"..Uimage..".png", 620, 620)
 		upBread.x, upBread.y = upWindow.x, upWindow.y*0.9
-		upBreadN = display.newText(upGroup, UBreadInfo[Index1].breads[Index2].name, upWindow.x, upWindow.y*1.15, Font.font_POP, 80)
-		upBreadI = display.newText(upGroup, UBreadInfo[Index1].breads[Index2].sentence, upWindow.x, upWindow.y*1.27, 890, 210, Font.font_POP, 50)
+
+		upBreadN = display.newText(upGroup, UBreadInfo[Index1].breads[Index2].name, upWindow.x, upWindow.y*1.12, Font.font_POP, 80)
+		upBread_options = 
+		{
+		    text = UBreadInfo[Index1].breads[Index2].sentence,     
+		    x = upWindow.x,
+		    y = upWindow.y*1.235,
+		    width = 890,
+		    height = 240,
+		    font = Font.font_POP,   
+		    fontSize = 50,
+		    align = "center"  -- Alignment parameter
+		}		
+		upBreadI = display.newText(upBread_options)
 		upBreadN:setFillColor(0)
 		upBreadI:setFillColor(0)
+		upGroup:insert(upBreadI)
 		upDel = display.newImage(upGroup, "Content/images/delete.png")
 		upDel.x, upDel.y = upWindow.x*1.77, upWindow.y*0.46
 		upCheckI = display.newImage(upGroup, "Content/images/button.png")
 		upCheckI.x, upCheckI.y = upWindow.x, upWindow.y*1.45
 		upCheckT = display.newImage(upGroup, "Content/images/text_OK.png")
 		upCheckT.x, upCheckT.y = upCheckI.x, upCheckI.y
-
+	
 		sceneGroup:insert(upGroup)
 		upDel:addEventListener("tap", upgradeOK)
 		upCheckI:addEventListener("tap", upgradeOK)
@@ -265,7 +324,7 @@ function scene:create( event )
 -- [infoGroup, lvGroup, saleC] info function (빵이름, 빵이미지, 빵소개, 빵레벨, 새빵)
 	
 -- [infoBasic]
-	local breadImage, breadSentence, new
+	local breadImage, breadSentence, new, bread_options
 	local infoGroup
 	local function infoBasic()
 		infoGroup = display.newGroup()
@@ -282,7 +341,19 @@ function scene:create( event )
 			breadImage = display.newImageRect(infoGroup, "Content/images/"..BreadJson.image..".png",900,900)
 		end
 		breadImage.x, breadImage.y = infoGround.x, infoGround.y*0.8
-		breadSentence = display.newText(infoGroup, BreadJson.sentence, infoGround.x, infoGround.y*1.26, 950,350 ,Font.font_POP, 55)
+		bread_options = 
+		{
+		    text = BreadJson.sentence,     
+		    x = infoGround.x,
+		    y = infoGround.y*1.26,
+		    width = 950,
+		    height = 350,
+		    font = Font.font_POP,   
+		    fontSize = 55,
+		    align = "center"  -- Alignment parameter
+		}
+		breadSentence = display.newText(bread_options)
+		infoGroup:insert(breadSentence)
 		breadSentence:setFillColor(0)	
 		if open[Index1][Index2] == -1 then
 			new = display.newImage(infoGroup, "Content/images/new.png")

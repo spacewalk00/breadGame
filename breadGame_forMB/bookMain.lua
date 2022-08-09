@@ -22,7 +22,7 @@ parseUBreadInfo()
 parseBreadInfo()
 
 -- 빵의 개수 --breadsCnt
-breadsCnt = { {1, 1, 1, 1, 1, 1, 1, 1}, {5, 5, 5, 5, 5, 5, 5, 5}, 
+--[[breadsCnt = { {1, 1, 1, 1, 1, 1, 1, 1}, {5, 5, 5, 5, 5, 5, 5, 5}, 
 				{1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1} 		}
 UbreadsCnt = { {1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0}, 
 				{1, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0} 		}
@@ -35,7 +35,7 @@ openUBread = { {1, 1, 1, 1, 1, 1, 1, 1}, {0, 0, 0, 0, 0, 0, 0, 0},
 
 -- 빵레벨
 Bread_level = { {1, 9, 9, 1, 1, 9, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1}, 
-				{1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1} }	
+				{1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1} }	]]--	
 -- 폰트
 Font = { 	
 			font_POP = native.newFont("Content/font/ONE Mobile POP.ttf")		}
@@ -46,6 +46,35 @@ BackGround.x, BackGround.y = display.contentWidth/2, display.contentHeight/2
 
 function scene:create( event )
 	local sceneGroup = self.view
+
+	-- [도감 BasicGroup] 도감 메뉴
+	local illuBook_BasicGroup = display.newGroup()
+	local illuBook_back = display.newImage(illuBook_BasicGroup,"Content/images/main_background1.png")
+	illuBook_back.x, illuBook_back.y = BackGround.x, BackGround.y*0.1
+
+	-- 도감, 홈 버튼
+	local illuBook_book = display.newImage(illuBook_BasicGroup,"Content/images/book.png")
+	illuBook_book.x, illuBook_book.y = BackGround.x*0.25, BackGround.y*0.1
+	local illuBook_home = display.newImage(illuBook_BasicGroup,"Content/images/home.png")
+	illuBook_home.x, illuBook_home.y = BackGround.x*1.75, BackGround.y*0.1
+	local illuBook_bookText = display.newImage(illuBook_BasicGroup,"Content/images/text_Book.png")
+	illuBook_bookText.x, illuBook_bookText.y = BackGround.x*0.53, BackGround.y*0.1
+
+	-- 메뉴바
+	local illuBook_menu = display.newImage(illuBook_BasicGroup,"Content/images/illuGuide_manu.png")
+	illuBook_menu.x, illuBook_menu.y = BackGround.x, BackGround.y/5
+
+	-- 메뉴 선택	
+	illuBook_menuC = display.newImage(illuBook_BasicGroup,"Content/images/illuGuide_manuchoice.png")
+	illuBook_menuC.x, illuBook_menuC.y = illuBook_menu.x*0.45, illuBook_menu.y*1.22
+
+	-- 메뉴 이름
+	local menuAll = display.newImage(illuBook_BasicGroup, "Content/images/text_allW.png")
+	menuAll.x, menuAll.y = illuBook_menu.x*0.45, illuBook_menu.y
+	local menuNomal = display.newImage(illuBook_BasicGroup, "Content/images/text_nomalP.png")
+	menuNomal.x, menuNomal.y = illuBook_menu.x, illuBook_menu.y
+	local menuRare = display.newImage(illuBook_BasicGroup, "Content/images/text_rareP.png")
+	menuRare.x, menuRare.y = illuBook_menu.x*1.55, illuBook_menu.y	
 
 -- 도감 스크롤
 	local widget = require( "widget" )
@@ -97,12 +126,14 @@ function scene:create( event )
 
 -- 빵 정보창 이동 (빵 클릭)
 	local function goInfo(event)
-		audio.play(soundTable["clickSound"],  {channel=5})
-		composer.setVariable("Id1", event.target.id1)
-		composer.setVariable("Id2", event.target.id2)
-		composer.setVariable("Id", event.target.id)
-		composer.removeScene("bookMain")		
-		composer.gotoScene( "bookInfo" )
+		if event.y > illuBook_menu.y*1.1  then
+			audio.play(soundTable["clickSound"],  {channel=5})
+			composer.setVariable("Id1", event.target.id1)
+			composer.setVariable("Id2", event.target.id2)
+			composer.setVariable("Id", event.target.id)
+			composer.removeScene("bookMain")		
+			composer.gotoScene( "bookInfo" )
+		end
 	end
 
 -- 도감 오브젝트 tap이벤트에 넣기	
@@ -194,31 +225,10 @@ function scene:create( event )
 
 	makeAllBook()	
 
--- [도감 BasicGroup] 도감 메뉴
-	local illuBook_BasicGroup = display.newGroup()
-	local illuBook_back = display.newImage(illuBook_BasicGroup,"Content/images/main_background1.png")
-	illuBook_back.x, illuBook_back.y = BackGround.x, BackGround.y*0.1
-
-	-- 도감, 홈 버튼
-	local illuBook_book = display.newImage(illuBook_BasicGroup,"Content/images/book.png")
-	illuBook_book.x, illuBook_book.y = BackGround.x*0.25, BackGround.y*0.1
-	local illuBook_home = display.newImage(illuBook_BasicGroup,"Content/images/home.png")
-	illuBook_home.x, illuBook_home.y = BackGround.x*1.75, BackGround.y*0.1
-	local illuBook_bookText = display.newImage(illuBook_BasicGroup,"Content/images/text_Book.png")
-	illuBook_bookText.x, illuBook_bookText.y = BackGround.x*0.53, BackGround.y*0.1
-
-	-- 메뉴바
-	local illuBook_menu = display.newImage(illuBook_BasicGroup,"Content/images/illuGuide_manu.png")
-	illuBook_menu.x, illuBook_menu.y = BackGround.x, BackGround.y/5
-
-	-- 메뉴 선택	
-	illuBook_menuC = display.newImage(illuBook_BasicGroup,"Content/images/illuGuide_manuchoice.png")
-	illuBook_menuC.x, illuBook_menuC.y = illuBook_menu.x*0.45, illuBook_menu.y*1.22
-
-	-- 메뉴 이름
-	local menuAll = display.newText(illuBook_BasicGroup,"전체", illuBook_menu.x*0.45, illuBook_menu.y, Font.font_POP, 65)
-	local menuNomal = display.newText(illuBook_BasicGroup,"일반", illuBook_menu.x, illuBook_menu.y, Font.font_POP, 65)
-	local menuRare = display.newText(illuBook_BasicGroup,"레어", illuBook_menu.x*1.55, illuBook_menu.y, Font.font_POP, 65)
+-- 레이어정리
+	sceneGroup:insert(BackGround)	
+	sceneGroup:insert(scrollView)	
+	sceneGroup:insert(illuBook_BasicGroup)
 
 -- 도감 이동 함수 
 	-- Nomal
@@ -234,23 +244,16 @@ function scene:create( event )
 		print("Rare go!!")
 		composer.removeScene("bookMain")		
 		composer.gotoScene( "bookRare" )
-	end 
+	end 	
 	-- All
 	local function All( event )
 		audio.play(soundTable["clickSound"],  {channel=5})
-		BreadGroup:removeSelf()
+		BreadGroup:removeSelf()		
 		makeAllBook()
 	end 
-
-	menuAll:addEventListener("tap", All)	
 	menuNomal:addEventListener("tap", Nomal)
-	menuRare:addEventListener("tap", Rare)	
-
-
--- 레이어정리
-	sceneGroup:insert(BackGround)	
-	sceneGroup:insert(scrollView)	
-	sceneGroup:insert(illuBook_BasicGroup)
+	menuRare:addEventListener("tap", Rare)
+	menuAll:addEventListener("tap", All)
 
 -- 홈으로 이동
 	local function goHome(event)
