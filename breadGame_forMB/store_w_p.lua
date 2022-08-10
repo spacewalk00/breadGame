@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- store_w.lua
+-- store_w_p.lua
 --
 -----------------------------------------------------------------------------------------
 local json = require('json')
@@ -79,7 +79,6 @@ function scene:create( event )
 
 	local home = display.newImage("Content/images/home.png")
 	home.x, home.y = display.contentWidth*0.9, display.contentHeight*0.05
-	home:addEventListener("tap", gotoh) 
 
 	local productType = display.newImage("Content/images/top_bar.png")
 	productType.x, productType.y = display.contentWidth*0.5, display.contentHeight*0.12
@@ -118,9 +117,6 @@ function scene:create( event )
 	topGroup:insert(wallBtn)
 	topGroup:insert(wallText)	
 
-	ingredientBtn:addEventListener("tap", gotoi)
-	decoBtn:addEventListener("tap", gotod)
-
 	-- 이 부분이 달라짐 store_i, store_d, store_w의 차이--
 	--commonFrame()
 
@@ -132,7 +128,6 @@ function scene:create( event )
 	local product_bar = {}
 	local p_pic_bar = {}
 	local p_pic = {}
-	--local cnt = {}
 	local ingreName = {}
 	local ingreInfo = {}
 	local defaultBox 
@@ -181,25 +176,12 @@ function scene:create( event )
 
 	listGroup:insert(background2)
 	listGroup:insert(ingreGroup)
-
-	local function pop(event)
-		audio.play( soundTable["clickSound"] ,  {channel=5})
-		composer.setVariable("pickedIndex_w", i)
-		composer.gotoScene("store_w_p")
-	end
-
-	p_pic[i]:addEventListener("tap", pop)
-
 	end
 
 	sceneGroup:insert(topGroup)
 	sceneGroup:insert(listGroup)
 
 	topGroup:toFront()
-
-	local scrollS
-	scrollS = display.newImage("Content/images/scrollShadow.png")
-	scrollS.x, scrollS.y =  display.contentCenterX, display.contentHeight*0.99
 
 	local scrollView = widget.newScrollView(
 		{
@@ -212,8 +194,97 @@ function scene:create( event )
 	)
 	scrollView:insert(ingreGroup)
 	sceneGroup:insert(scrollView)
-	sceneGroup:insert(scrollS)
+
+	local darkening = display.newImageRect("Content/images/dark.png", 1440*2, 710*7)
+	darkening.x, darkening.y = display.contentCenterX, display.contentCenterY
+
+	local idx = composer.getVariable("pickedIndex_w")
+
+	local popGroup = display.newGroup()
+
+	local window = display.newImage(popGroup, "Content/images/syrup_window.png")
+	window.x, window.y = display.contentCenterX, display.contentCenterY
+
+	local title = display.newText(popGroup, wallPaper[idx].name, display.contentCenterX, display.contentHeight*0.37, "Content/font/ONE Mobile POP.ttf")
+	title:setFillColor(0)
+	title.size = 90
+
+	local pictureBar = display.newImage(popGroup, "Content/images/syrup_bar.png")
+	pictureBar.x, pictureBar.y = display.contentWidth*0.25, display.contentHeight*0.5
+
+	local picture = display.newImageRect(popGroup, wallPaper[idx].image, 150, 150)
+	picture.x, picture.y = display.contentWidth*0.25, display.contentHeight*0.5
+
+	local popTextOptions = 
+	{
+		text = wallPaper[idx].sentence,
+		x = display.contentWidth*0.7,
+		y = display.contentHeight*0.5,
+		width = 1000,
+		font = "Content/font/ONE Mobile POP.ttf",
+		fontSize = 45,
+		align = "left"
+	}
+	local info = display.newText(popTextOptions)
+	info:setFillColor(0)
+	info.size = 50
+	popGroup:insert(info)
+
+	local buyingBar = display.newImage(popGroup, "Content/images/buying.png")
+	buyingBar.x, buyingBar.y = display.contentWidth*0.75, display.contentHeight*0.6
+	local coinShape = display.newImage(popGroup, "Content/images/coin.png")
+	coinShape.x, coinShape.y = display.contentWidth*0.65, display.contentHeight*0.6
+
+	local buyingText = display.newText(popGroup, "         " .. wallPaper[idx].price ..  "    구매", display.contentWidth*0.78, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf")
+	buyingText:setFillColor(0) 
+	buyingText.size = 50
+
+	local close = display.newImage(popGroup, "Content/images/close.png")
+	close.x, close.y = display.contentWidth*0.9, display.contentHeight*0.35
+
+	--popGroup:toFront()
+
+	local function tapListener( event )
+    	print("탭탭탭")
+		audio.play( soundTable["clickSound"] ,  {channel=5})
+
+    	popGroup:removeSelf()
+    	darkening:removeSelf()
+		composer.gotoScene("store_w")
+    end
+
+    local function consume( event )
+		-- 카펫은 1개만 --
+    	if wallCnt[idx] == 0 then
+    	-- 코인 차감 --
+    	if( coinNum >= wallPaper[idx].price) then
+    	coinNum = coinNum - wallPaper[idx].price
+
+		showCoin.text = coinNum
+		showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
+	    	
+		-- 시럽 보유 카운트--
+		wallCnt[idx] = wallCnt[idx] + 1
+
+   		deleteBeforeCnt(idx)
+    	displayIngreCnt(idx)
+
+		print(wallPaper[idx].name .."시럽 산 뒤에" .. wallCnt[idx])
+		audio.play( soundTable["cashSound"] ,  {channel=4})
+		else 
+			print("야 너 돈 없어")
+		end
+		-- 
+		popGroup:removeSelf()
+		darkening:removeSelf()
+		composer.gotoScene("store_w")
+    	end
+	end
+
+	    buyingBar:addEventListener("tap", consume)
+	    close:addEventListener("tap", tapListener)
 end
+
 
 function scene:show( event )
 	local sceneGroup = self.view
@@ -240,7 +311,7 @@ function scene:hide( event )
 			end
 		end
 
-		composer.removeScene("store_w")
+		composer.removeScene("store_w_p")
 	end
 end
 

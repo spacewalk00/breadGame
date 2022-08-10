@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- store_i.lua
+-- store_d.lua
 --
 -----------------------------------------------------------------------------------------
 local json = require('json')
@@ -181,92 +181,10 @@ function scene:create( event )
 	listGroup:insert(background2)
 	listGroup:insert(ingreGroup)
 
-	function pop( event )
-		audio.play( soundTable["clickSound"],  {channel=5}) 
-		local darkening = display.newImageRect("Content/images/dark.png", 1440*2, 710*7)
-		darkening.x, darkening.y = display.contentCenterX, display.contentCenterY
-
-		local popGroup = display.newGroup()
-
-		local window = display.newImage(popGroup, "Content/images/syrup_window.png")
-		window.x, window.y = display.contentCenterX, display.contentCenterY
-
-		local title = display.newText(popGroup, deco[i].name, display.contentCenterX, display.contentHeight*0.37, "Content/font/ONE Mobile POP.ttf")
-		title:setFillColor(0)
-		title.size = 90
-
-		local pictureBar = display.newImage(popGroup, "Content/images/syrup_bar.png")
-		pictureBar.x, pictureBar.y = display.contentWidth*0.25, display.contentHeight*0.5
-
-		local picture = display.newImageRect(popGroup, deco[i].image, 200, 200)
-		picture.x, picture.y = display.contentWidth*0.25, display.contentHeight*0.5
-
-		local popTextOptions = 
-		{
-			text = deco[i].sentence,
-			x = display.contentWidth*0.7,
-			y = display.contentHeight*0.5,
-			width = 1000,
-			font = "Content/font/ONE Mobile POP.ttf",
-			fontSize = 45,
-			align = "left"
-		}
-		local info = display.newText(popTextOptions)
-		info:setFillColor(0)
-		info.size = 50
-		popGroup:insert(info)
-
-		local buyingBar = display.newImage(popGroup, "Content/images/buying.png")
-		buyingBar.x, buyingBar.y = display.contentWidth*0.75, display.contentHeight*0.6
-		local coinShape = display.newImage(popGroup, "Content/images/coin.png")
-		coinShape.x, coinShape.y = display.contentWidth*0.65, display.contentHeight*0.6
-
-		-- 정확한 가격 책정은 나중에 --
-		local buyingText = display.newText(popGroup, "         " .. deco[i].price ..  "    구매", display.contentWidth*0.78, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf")
-		buyingText:setFillColor(0) 
-		buyingText.size = 50
-
-		local close = display.newImage(popGroup, "Content/images/close.png")
-		close.x, close.y = display.contentWidth*0.9, display.contentHeight*0.35
-
-		popGroup:toFront()
-
-		local function tapListener( event )
-	    	print("탭탭탭")
-			audio.play( soundTable["clickSound"],  {channel=5} )
-	    	popGroup:removeSelf()
-	    	darkening:removeSelf()
-	    end
-
-	    local function consume( event )
-			-- 1개만 살 수 있게 변경 --
-	    	if decoCnt[i] == 0 then
-	    	-- 코인 차감 --
-	    	if( coinNum >= deco[i].price) then
-	    	coinNum = coinNum - deco[i].price
-		
-			showCoin.text = coinNum
-			showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
-
-			-- 시럽 보유 카운트--
-			decoCnt[i] = decoCnt[i] + 1
-
-	   		deleteBeforeCnt(i)
-	    	displayIngreCnt(i)
-
-			print(deco[i].name .."시럽 산 뒤에" .. decoCnt[i])
-			audio.play( soundTable["cashSound"] ,  {channel=4})
-			else 
-				print("야 너 돈 없어")
-			end
-		end
-			-- 
-			popGroup:removeSelf()
-			darkening:removeSelf()
-	    end
-
-	    buyingBar:addEventListener("tap", consume)
-	    close:addEventListener("tap", tapListener)
+	local function pop( event )
+		audio.play( soundTable["clickSound"] ,  {channel=5})
+		composer.setVariable("pickedIndex_d", i)
+		composer.gotoScene("store_d_p")
 	end
 
 	p_pic[i]:addEventListener("tap", pop)
@@ -279,40 +197,8 @@ function scene:create( event )
 	topGroup:toFront()
 
 	local scrollS
-	-- 스크롤 만들기
-	local function scroll( event )
-		if ( event.phase == "began" ) then
-			display.getCurrentStage():setFocus( event.target )
-			event.target.isFocus = true
-
-			event.target.yStart = event.target.y
-			scrollS = display.newImage("Content/images/scrollShadow.png")
-			scrollS.x, scrollS.y =  display.contentCenterX, display.contentHeight*0.99
-
-		elseif ( event.phase == "moved" ) then
-			if ( event.target.isFocus) then
-
-				event.target.y = event.target.yStart + event.yDelta
-
-			end
-		elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
-			if ( event.target.isFocus ) then
-			display.getCurrentStage():setFocus( nil )
-			event.target.isFocus = false
-			end
-			display.getCurrentStage():setFocus( nil )
-			event.target.isFocus = false
-			scrollS:removeSelf()
-		end
-	 
-	    if ( event.limitReached ) then
-	        if ( event.direction == "up" ) then print( "Reached bottom limit" )
-	        elseif ( event.direction == "down" ) then print( "Reached top limit" )
-	        end
-	    end
-	 
-	    return true
-	end
+	scrollS = display.newImage("Content/images/scrollShadow.png")
+	scrollS.x, scrollS.y =  display.contentCenterX, display.contentHeight*0.99
 
 	local scrollView = widget.newScrollView(
 		{
@@ -321,13 +207,11 @@ function scene:create( event )
 	        width = 1440,
 	        height = 2150,
 	        hideBackground = true
-	        --backgroundColor = { 0.894, 0.772, 0.713 }
-
-	        --0.949, 0.839, 0.776
 		}
 	)
 	scrollView:insert(ingreGroup)
 	sceneGroup:insert(scrollView)
+	sceneGroup:insert(scrollS)
 end
 
 function scene:show( event )
@@ -353,7 +237,9 @@ function scene:hide( event )
 				print(i.."인덱스의 flag는"..decoFlag[i].."\n")
 			end
 		end
+		composer.removeScene("store_d")
 	end
+
 end
 
 function scene:destroy( event )

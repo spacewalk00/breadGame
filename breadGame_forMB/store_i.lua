@@ -114,25 +114,17 @@ function scene:create( event )
 	ingredientBtn.alpha = 0.01
 	local ingredientText = display.newImage("Content/images/text_ingreC.png")
 	ingredientText.x, ingredientText.y = display.contentWidth*0.2, display.contentHeight*0.12 
-	--[[local ingredientText = display.newText("재료", display.contentWidth*0.2, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	ingredientText:setFillColor(0)
-	ingredientText.size = 70]]
 
 	local decoBtn = display.newRect(display.contentWidth*0.5, display.contentHeight*0.12, 280, 150)
 	decoBtn:setFillColor(0)
 	decoBtn.alpha = 0.01
 	local decoText = display.newImage("Content/images/text_decor.png")
 	decoText.x, decoText.y = display.contentWidth*0.5, display.contentHeight*0.12
-	--[[local decoText = display.newText("장식", display.contentWidth*0.5, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	decoText.size = 70]]
-
 	local wallBtn = display.newRect(display.contentWidth*0.8, display.contentHeight*0.12, 280, 150)
 	wallBtn:setFillColor(0)
 	wallBtn.alpha = 0.01
 	local wallText = display.newImage("Content/images/text_carpet.png")
 	wallText.x, wallText.y = display.contentWidth*0.8, display.contentHeight*0.12
-	--[[local wallText = display.newText("카펫", display.contentWidth*0.8, display.contentHeight*0.12, "Content/font/ONE Mobile POP.ttf")
-	wallText.size = 70]]
 	
 	topGroup:insert(background)
 	topGroup:insert(store)
@@ -162,7 +154,6 @@ function scene:create( event )
 	local product_bar = {}
 	local p_pic_bar = {}
 	local p_pic = {}
-	--local cnt = {}
 	local ingreName = {}
 	local ingreInfo = {}
 	local defaultBox 
@@ -217,98 +208,15 @@ function scene:create( event )
 
 	listGroup:insert(background2)
 	listGroup:insert(ingreGroup)
-
-
-	function pop( event )
+	
+	local function pop( event )
 		audio.play( soundTable["clickSound"] ,  {channel=5})
-
-		local darkening = display.newImageRect("Content/images/dark.png", 1440*2, 710*7)
-		darkening.x, darkening.y = display.contentCenterX, display.contentCenterY
-		darkening:toFront()
-
-		local popGroup = display.newGroup()
-
-		local window = display.newImage(popGroup, "Content/images/syrup_window.png")
-		window.x, window.y = display.contentCenterX, display.contentCenterY
-
-		local title = display.newText(popGroup, ingredients[i].name, display.contentCenterX, display.contentHeight*0.37, "Content/font/ONE Mobile POP.ttf")
-		title:setFillColor(0)
-		title.size = 90
-
-		local pictureBar = display.newImage(popGroup, "Content/images/syrup_bar.png")
-		pictureBar.x, pictureBar.y = display.contentWidth*0.25, display.contentHeight*0.5
-
-		local picture = display.newImage(popGroup, ingredients[i].image)
-		picture.x, picture.y = display.contentWidth*0.25, display.contentHeight*0.5
-
-		local popTextOptions = 
-		{
-			text = ingredients[i].sentence,
-			x = display.contentWidth*0.7,
-			y = display.contentHeight*0.5,
-			width = 1000,
-			font = "Content/font/ONE Mobile POP.ttf",
-			fontSize = 45,
-			align = "left"
-		}
-		local info = display.newText(popTextOptions)
-		info:setFillColor(0)
-		info.size = 50
-		popGroup:insert(info)
-
-		local buyingBar = display.newImage(popGroup, "Content/images/buying.png")
-		buyingBar.x, buyingBar.y = display.contentWidth*0.75, display.contentHeight*0.6
-		local coinShape = display.newImage(popGroup, "Content/images/coin.png")
-		coinShape.x, coinShape.y = display.contentWidth*0.65, display.contentHeight*0.6
-
-		local buyingText = display.newText(popGroup, "         " .. ingredients[i].price ..  "    구매", display.contentWidth*0.78, display.contentHeight*0.6, "Content/font/ONE Mobile POP.ttf")
-		buyingText:setFillColor(0) 
-		buyingText.size = 50
-
-		local close = display.newImage(popGroup, "Content/images/close.png")
-		close.x, close.y = display.contentWidth*0.9, display.contentHeight*0.35
-
-	 	--------------------------------버튼, x 탭 (팝업창 내리기)---------------------------------------------------
-		local function tapListener( event )
-	    	print("탭탭탭")
-			audio.play( soundTable["clickSound"] ,  {channel=5})
-	    	popGroup:removeSelf()
-	    	darkening:removeSelf()
-	    end
-
-	    local function consume( event )
-	    	-- 반죽은 막아놓음 --
-	    	if i ~= 1 then
-	    	if( coinNum >= ingredients[i].price) then
-	    	coinNum = coinNum - ingredients[i].price
-	    	
-			showCoin.text = coinNum
-			showCoin.x, showCoin.y = display.contentWidth*0.55, display.contentHeight*0.05
-
-			-- 시럽 보유 카운트--
-			ingreCnt[i] = ingreCnt[i] + 1
-
-	   		deleteBeforeCnt(i)
-	    	displayIngreCnt(i)
-
-			print("json에서 i몇번째 인"..ingredients[i].name.."를 고른다음에" .. ingreCnt[i] .."개 인것을 확인함.")
-			audio.play( soundTable["cashSound"] ,  {channel=4})
-			else 
-				print("돈이 없습니다!!!!!!!!!!!!!!!!!비상~~")
-			end
-			-- 
-			popGroup:removeSelf()
-			darkening:removeSelf()
-			end
-	    end
-	    buyingBar:addEventListener("tap", consume)
-	    close:addEventListener("tap", tapListener)
+		composer.setVariable("pickedIndex", i)
+		composer.gotoScene("store_i_p")
 	end
-	
+
 	p_pic[i]:addEventListener("tap", pop)
-	
 	end
-
 	--------------------------스크롤--------------------------
 	sceneGroup:insert(topGroup)
 	sceneGroup:insert(listGroup)
@@ -330,6 +238,7 @@ function scene:create( event )
 	)
 	scrollView:insert(ingreGroup)
 	sceneGroup:insert(scrollView)
+	sceneGroup:insert(scrollS)
 end
 
 function scene:show( event )
@@ -349,6 +258,7 @@ function scene:hide( event )
 	if event.phase == "will" then
 	elseif phase == "did" then
 		deleteAllCnt()
+		composer.removeScene("store_i")
 	end
 end
 
