@@ -188,7 +188,7 @@ function scene:show( event )
 			fail = 1
 			syrub = 4
 			ingredient = 0 --폭탄빵 [5][1]
-			exp = exp + 20 -- 폭탄빵 경험치 20 제공
+			exp = exp + 100 -- 폭탄빵 경험치 100 제공
 			---업적 관련
 			bomb_count = bomb_count + 1 				--실패빵 제작 개수
 			breadBomb_count = breadBomb_count + 1 		--실패빵 연속 제작 개수
@@ -205,7 +205,7 @@ function scene:show( event )
 			--syrub = 1 
 			--ingredient = 0
 			--
-			exp = exp + 100 -- 성공적인 빵 경험치 100 제공
+			exp = exp + 300 -- 성공적인 빵 경험치 300 제공
 
 			---업적 관련
 			bread_count = bread_count + 1 					--일반빵 제작 개수
