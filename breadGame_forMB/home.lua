@@ -150,6 +150,8 @@ function levelUp() --레벨업 --
 			levelUpPop(levelNum)
 
 			showCoin.text = coinNum
+			coinX = 0.584 - (string.len(coinNum)-1)*0.01
+			showCoin.x = display.contentWidth*coinX
 			showLevel.text = levelNum
 			break
 		end
@@ -160,6 +162,8 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	showCoin.text = coinNum
+	coinX = 0.584 - (string.len(coinNum)-1)*0.01
+	showCoin.x = display.contentWidth*coinX
 
 	local background = display.newImage("Content/images/인트로/face_love.png")
 	background.x, background.y = display.contentCenterX, display.contentCenterY
