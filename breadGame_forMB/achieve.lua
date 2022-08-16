@@ -435,6 +435,8 @@ function scene:create( event )
 							coinNum = coinNum + price[i][j]						--총 금액에 더하기
 							--goldText.text = coinNum							--화면에 총 금액 표시(임시)
 							showCoin.text = coinNum								--화면에 총 금액 표시
+							coinX = 0.586 - (string.len(coinNum)-1)*0.01
+							showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.052
 						elseif price[i][j] == "시럽 3종" then					--보상이 시럽 3종이면	
 							audio.play(SE2, {channel=4})
 							audio.stopWithDelay(420, {channel=4})								
