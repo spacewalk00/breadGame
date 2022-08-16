@@ -36,7 +36,7 @@ function scene:create( event )
 	local backGroup = display.newGroup()
 	local infoGround = display.newImage(backGroup, "Content/images/illuBook_info.png")
 	infoGround.x, infoGround.y = display.contentWidth/2, display.contentHeight/2
-	local illuBook = display.newImage(backGroup, "Content/images/book.png")
+	local illuBook = display.newImage(backGroup, "Content/images/back.png")
 	illuBook.x, illuBook.y = BackGround.x*0.25, BackGround.y*0.1
 	local illuBook_text = display.newImage(backGroup ,"Content/images/text_Book.png")
 	illuBook_text.x, illuBook_text.y = infoGround.x*0.53, infoGround.y*0.1
@@ -78,22 +78,8 @@ function scene:create( event )
 		coinGroup = display.newGroup()		
 		coin = display.newImage(coinGroup, "Content/images/coins.png")
 		coin.x, coin.y = BackGround.x*1.01, BackGround.y*0.1	
-		--[[local options = 
-		{
-		    text = 1234,     
-		    x = BackGround.x*1.05,
-		    y = BackGround.y*0.1,
-		    width = 250,
-		    font = Font.font_POP,   
-		    fontSize = 50,
-		    align = "right"  -- Alignment parameter
-		}
-			
-		coinText = display.newText(options)
-		coinGroup:insert(coinText)]]--
-		coinX = 0.584 - (string.len(coinNum)-1)*0.01
-		coinText = display.newText(coinGroup, coinNum, display.contentWidth*coinX, BackGround.y*0.1, Font.font_POP, 50 )
-    	--align = "right" 
+		coinX = 0.590 - (string.len(coinNum)-1)*0.01
+		coinText = display.newText(coinGroup, coinNum, display.contentWidth*coinX, BackGround.y*0.1, Font.font_POP, 42 )
 		coinText:setFillColor(0)
 		cntText = display.newText(coinGroup, BreadJson.name.."의 개수 : "..cnt, BackGround.x*0.6, BackGround.y*0.45, Font.font_POP, 60)
 		cntText:setFillColor(0)
@@ -147,31 +133,22 @@ function scene:create( event )
 	local saleGroup, saleC, saleKey, saleKeyText, sCoin
 	local function salekey()
 		makeSalePrice()
-		--salePrice = 12345678
 		saleGroup = display.newGroup()
 		saleKey = display.newImage(saleGroup,"Content/images/illuBook_sale.png")
 		saleKey.x, saleKey.y = infoGround.x*0.55, infoGround.y*1.5
 		saleKeyText = display.newImage(saleGroup, "Content/images/text_sale.png")
-		saleKeyText.x, saleKeyText.y = saleKey.x*0.7, saleKey.y
-		sCoinX = (string.len(salePrice)-1)*10	
-		sCoin = display.newImage(saleGroup,"Content/images/coin.png")
-		sCoin.x, sCoin.y = infoGround.x*0.65-sCoinX, saleKey.y
-		saleC_options = 
-		{
-		    text = salePrice,     
-		    x = infoGround.x*0.65,
-		    y = infoGround.y*1.5,
-		    width = 300,
-		    height = 50,
-		    font = Font.font_POP,   
-		    fontSize = 50,
-		    align = "right"  -- Alignment parameter
-		}
+		saleKeyText.x, saleKeyText.y = saleKey.x*0.72, saleKey.y*1.002
 
-		print(salePrice)
-		--saleC = display.newText(saleGroup, salePrice, sCoin.x*1.32, infoGround.y*1.5, 200, 50, Font.font_POP, 50)
-		saleC = display.newText(saleC_options)
-		saleGroup:insert(saleC)
+		salePriceLen = string.len(salePrice)
+		sCoin = display.newImage(saleGroup,"Content/images/coin.png")
+		sCoin.y = saleKey.y
+		if salePriceLen <= 3 then 
+			sCoin.x = saleKey.x*1.2
+		else
+			sCoin.x = saleKey.x*1.2 - (salePriceLen-3)*25
+		end		
+		saleC = display.newText(saleGroup, salePrice, sCoin.x+135, infoGround.y*1.5, 
+			200, 50, Font.font_POP, 50)
 		sceneGroup:insert(saleGroup)
 	end
 
@@ -183,17 +160,26 @@ function scene:create( event )
 		if lv == 10 then
 			upKey = display.newImage(upSetGroup, "Content/images/illuBook_upgrade2.png")
 			upText = display.newImage(upSetGroup, "Content/images/text_upgrade.png")
+			upKey.x, upKey.y = infoGround.x*1.45, infoGround.y*1.5	
+			upText.x, upText.y = upKey.x*0.9, upKey.y						
 		else			-- lv < 10
 			upKey = display.newImage(upSetGroup, "Content/images/illuBook_upgrade.png")
-			upText = display.newImage(upSetGroup, "Content/images/text_levelUpSmall.png")			
+			upText = display.newImage(upSetGroup, "Content/images/text_levelUpSmall.png")
+			upKey.x, upKey.y = infoGround.x*1.45, infoGround.y*1.5	
+			upText.x, upText.y = upKey.x*0.9, upKey.y*1.003			
 		end
-		upText.x, upText.y = infoGround.x*1.3, infoGround.y*1.5	
-		upKey.x, upKey.y = infoGround.x*1.45, infoGround.y*1.5	
-		print(levelPrice[lv])	
-		upCoin = display.newText(upSetGroup, levelPrice[lv], upKey.x*1.15, upKey.y, Font.font_POP, 50)
-		upCoin.x, upCoin.y = infoGround.x*1.65, infoGround.y*1.5
-		uCoin = display.newImage(upSetGroup, "Content/images/coin.png")	
-		uCoin.x, uCoin.y = infoGround.x*1.5, infoGround.y*1.5
+
+		levelPriceLen = string.len(levelPrice[lv])
+		uCoin = display.newImage(upSetGroup, "Content/images/coin.png")
+		uCoin.y = infoGround.y*1.5
+		if levelPriceLen <= 3 then 
+			uCoin.x = upKey.x*1.08
+		else
+			uCoin.x = upKey.x*1.08 - (levelPriceLen-3)*25
+		end		
+		upCoin = display.newText(upSetGroup, levelPrice[lv], uCoin.x+135, upKey.y, 
+			200, 50, Font.font_POP, 50)
+		
 		sceneGroup:insert(upSetGroup)
 	end
 
