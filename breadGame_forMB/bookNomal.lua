@@ -66,21 +66,7 @@ function scene:create( event )
 	end 
 	menuAll:addEventListener("tap", All)
 	menuNomal:addEventListener("tap", Nomal)
-	menuRare:addEventListener("tap", Rare)	
-
--- 홈으로 이동
-	local function goHome(event)
-		audio.play(soundTable["clickSound"],  {channel=5})	
-		print("goHome!!")
-		composer.removeScene("bookMain")
-		---------showCoin 관련 수정
-		showCoin.isVisible = true
-		coinX = 0.584 - (string.len(coinNum)-1)*0.01
-		showCoin.x, showCoin.y = display.contentWidth*coinX, display.contentHeight*0.04
-		showCoin.text = coinNum
-		composer.gotoScene( "home" )
-	end
-	illuBook_home:addEventListener("tap",goHome)	
+	menuRare:addEventListener("tap", Rare)		
 
 -- 도감 스크롤
 	local widget = require( "widget" )
